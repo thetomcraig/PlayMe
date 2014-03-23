@@ -16,15 +16,12 @@
 {
 	[super drawRect:dirtyRect];
     
-	
-    //[[NSColor colorWithCalibratedRed:.443137255 green:.749019608 blue:.309803922 alpha:1.0] setFill];
-    //NSRectFill(dirtyRect);
-    
+    [[NSColor colorWithCalibratedRed:.02734375 green:.5234375 blue:0 alpha:1.0] setFill];
+    NSRectFill(dirtyRect);
+
     NSRect creditsArea = NSMakeRect(dirtyRect.origin.x, dirtyRect.origin.y, dirtyRect.size.width, 35);
     [[NSColor grayColor] setFill];
     NSRectFill(creditsArea);
-    
-    [super drawRect:dirtyRect];
 }
 
 @end

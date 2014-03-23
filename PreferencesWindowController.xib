@@ -41,7 +41,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="Bsi-wQ-uiu">
                                     <font key="font" size="64" name="AirstreamNF"/>
-                                    <color key="textColor" red="0.2650737176974029" green="0.80249521683673475" blue="0.4091953561741184" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                 </textFieldCell>
                             </textField>
