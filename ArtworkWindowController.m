@@ -265,7 +265,7 @@
 {
     //This gets hit when we want the default colors
     NSColor *back = [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    NSColor *front = [NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1.0];
+    NSColor *front = [NSColor colorWithCalibratedRed:0.30 green:0.30 blue:0.30 alpha:1.0];
     backgroundColor = back;
     primaryColor =  front;
     secondaryColor = front;
@@ -688,7 +688,6 @@
     [preferencesWinowController showWindow:nil];
      
 }
-
 
 //############################################################################
 //Closes PlayMe and goes to the song in iTunes
