@@ -88,7 +88,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Boz-ht-cbc"/>
                             </imageView>
                             <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sn-h3-2A5">
-                                <rect key="frame" x="172" y="148" width="48" height="17"/>
+                                <rect key="frame" x="172" y="148" width="52" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="v. 0.0.0" id="VCs-2k-w2a">
                                     <font key="font" metaFont="system"/>

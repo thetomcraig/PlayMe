@@ -38,7 +38,7 @@
 {
     ///Nothing here because handled via bdingins in NIB
     NSLog(@"ALPHA");
-    [aboutViewController.view setNeedsDisplay:YES];
+    [preferencesBackdrop setNeedsDisplay:YES];
 }
 
 -(IBAction)toggleShowSongName:(id)sender

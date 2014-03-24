@@ -25,7 +25,7 @@
      NSRect creditsArea = NSMakeRect(dirtyRect.origin.x, dirtyRect.origin.y, dirtyRect.size.width, 35);
     [[NSColor grayColor] setFill];
     NSRectFill(creditsArea);
-
+     [super drawRect:dirtyRect];
      
 }
 
