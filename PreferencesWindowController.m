@@ -34,10 +34,6 @@
     [preferencesBackdrop setNeedsDisplay:YES];
 }
 
--(IBAction)toggleOpenAtLogin:(id)sender
-{
-    ///Nothing here because handled via bdingins in NIB
-}
 
 -(IBAction)toggleShowSongName:(id)sender
 {
