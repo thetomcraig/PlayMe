@@ -37,8 +37,6 @@
 -(IBAction)toggleOpenAtLogin:(id)sender
 {
     ///Nothing here because handled via bdingins in NIB
-    NSLog(@"ALPHA");
-    [preferencesBackdrop setNeedsDisplay:YES];
 }
 
 -(IBAction)toggleShowSongName:(id)sender

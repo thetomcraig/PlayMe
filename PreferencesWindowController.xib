@@ -50,7 +50,7 @@
                             <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-5N-wxL">
                                 <rect key="frame" x="18" y="93" width="155" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Open PlayMe at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jqO-3m-hR9">
+                                <buttonCell key="cell" type="check" title="Open PlayMe at login" bezelStyle="regularSquare" imagePosition="left" alignment="center" inset="2" id="jqO-3m-hR9">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

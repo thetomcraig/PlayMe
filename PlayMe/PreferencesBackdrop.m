@@ -19,14 +19,12 @@
     float blue = 57.0/256.0;
     
     [[NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1.0] setFill];
-    NSRectFill(dirtyRect);
-
+    NSRectFill([self bounds]);
     
-     NSRect creditsArea = NSMakeRect(dirtyRect.origin.x, dirtyRect.origin.y, dirtyRect.size.width, 35);
+    NSRect creditsArea = NSMakeRect([self bounds].origin.x, [self bounds].origin.y, [self bounds].size.width, 35);
     [[NSColor grayColor] setFill];
     NSRectFill(creditsArea);
-     [super drawRect:dirtyRect];
-     
+    [super drawRect:[self bounds]];
 }
 
 @end
