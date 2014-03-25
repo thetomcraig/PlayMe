@@ -13,10 +13,12 @@
 @property (strong) IBOutlet NSButton *openAtLogin;
 @property (strong) IBOutlet NSButton *quitWithiTunes;
 @property (strong) IBOutlet NSButton *showSongName;
+@property (strong) IBOutlet NSButton *websiteButton;
 @property (strong) IBOutlet NSImageView *logo;
 
 -(IBAction)toggleOpenAtLogin:(id)sender;
 -(IBAction)toggleQuitWheniTunesQuits:(id)sender;
 -(IBAction)toggleShowSongName:(id)sender;
+- (IBAction)openWebsite:(id)sender;
 
 @end

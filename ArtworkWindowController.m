@@ -23,7 +23,7 @@
 
 @synthesize iTunesController;
 @synthesize imageController;
-@synthesize preferencesWinowController;
+@synthesize preferencesWindowController;
 
 @synthesize artworkWindow;
 
@@ -364,16 +364,15 @@
     double totalSecsLeft = ([iTunesController currentLength] -
                             [iTunesController currentProgress]);
     int numMinsLeft = (floor(totalSecsLeft/60));
-    double numSecsLeft = (totalSecsLeft - numMinsLeft*60);
+    int numSecsLeft = (totalSecsLeft - numMinsLeft*60);
     
     //It needlessly showes 60's so we can just replace it
-    if ((int)numSecsLeft == 60)
+    if (numSecsLeft == 60)
     {
-     
         numMinsLeft = 0;
         numSecsLeft = 0;
     }
-    [songTimeLeft setStringValue:[NSString stringWithFormat:@"-%i:%02.f",
+    [songTimeLeft setStringValue:[NSString stringWithFormat:@"-%i:%02d",
                                   numMinsLeft, numSecsLeft]];
     
     [songSlider setDoubleValue:[iTunesController currentProgress]];
@@ -671,21 +670,21 @@
     //Positioning the window
     //------------------------------------------------------------------------
     //preferencesWinowController = [[NSWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
-    preferencesWinowController = [[PreferencesWindowController alloc] init];
+    preferencesWindowController = [[PreferencesWindowController alloc] init];
 
     NSScreen *mainScreen = [NSScreen mainScreen];
     CGPoint center = CGPointMake(mainScreen.frame.size.width/2, mainScreen.frame.size.height/2);
     //This perfectly centers the window
-    CGPoint topLeftPos = CGPointMake(center.x - [preferencesWinowController window].frame.size.width/2,
-                                     center.y + [preferencesWinowController window].frame.size.height/2);
+    CGPoint topLeftPos = CGPointMake(center.x - [preferencesWindowController window].frame.size.width/2,
+                                     center.y + [preferencesWindowController window].frame.size.height/2);
     
     //-------------------------------------------------------------------------
     //Setting the window position, and opening it
     //-------------------------------------------------------------------------
-    [[preferencesWinowController window] setFrameTopLeftPoint:topLeftPos];
+    [[preferencesWindowController window] setFrameTopLeftPoint:topLeftPos];
     
-    [[preferencesWinowController window] setLevel:kCGFloatingWindowLevel];
-    [preferencesWinowController showWindow:nil];
+    [[preferencesWindowController window] setLevel:kCGFloatingWindowLevel];
+    [preferencesWindowController showWindow:nil];
      
 }
 
@@ -827,9 +826,9 @@
 {
     [[self window] close];
     
-    if ([[preferencesWinowController window] isVisible])
+    if ([[preferencesWindowController window] isVisible])
     {
-        [[preferencesWinowController window] close];
+        [[preferencesWindowController window] close];
     }
 }
 

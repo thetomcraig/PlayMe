@@ -44,9 +44,20 @@
     ///Nothing here because handled via bdingins in NIB
 }
 
+
 -(IBAction)toggleQuitWheniTunesQuits:(id)sender
 {
     ///Nothing here because handled via bdingins in NIB
+}
+
+- (IBAction)openWebsite:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"http://about.me/tomcraig/"]];
+    NSNotification *iTunesButtonNotification = [NSNotification
+                                                notificationWithName:@"websiteButtonClicked"
+                                                object:nil];
+    [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
+
 }
 
 

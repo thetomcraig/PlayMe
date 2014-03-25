@@ -516,6 +516,17 @@ struct DangerZone
         return;
     }
     
+    //This comes from the preferences window, because the website button has
+    //been clicked, and the windows need to be closed, and everything else
+    //needs to be update appropriately
+    else if ([note.name rangeOfString:@"websiteButtonClicked"].location != NSNotFound)
+    {
+        [artworkWindowController closeWindowWithButton:nil];
+        [self update:NO];
+        [self updateIcon:NO];
+        return;
+    }
+    
     //This makes sure we only worry about the notification from iTunes
     if ([note.name rangeOfString:@"iTunes"].location == NSNotFound) return;
     //If the notification looks like this, iTunes has just

@@ -15,6 +15,7 @@
                 <outlet property="showSongName" destination="7pm-AV-J7Q" id="LRM-Fr-jk6"/>
                 <outlet property="title" destination="GFV-gy-vuP" id="B7c-Bn-vsl"/>
                 <outlet property="versionText" destination="7sn-h3-2A5" id="mUW-pE-eRz"/>
+                <outlet property="websiteButton" destination="SkZ-L1-fAo" id="vay-l7-Gis"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
         </customObject>
@@ -23,14 +24,14 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="331" height="290"/>
+            <rect key="contentRect" x="196" y="240" width="331" height="296"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" appearanceType="lightContent" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="331" height="290"/>
+                <rect key="frame" x="0.0" y="0.0" width="331" height="296"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pov-XD-JyQ" customClass="PreferencesBackdrop">
-                        <rect key="frame" x="0.0" y="0.0" width="331" height="290"/>
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="296"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-MJ-qra">
@@ -39,7 +40,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="xpX-ov-fzi"/>
                             </imageView>
                             <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GFV-gy-vuP">
-                                <rect key="frame" x="-2" y="131" width="335" height="74"/>
+                                <rect key="frame" x="-2" y="137" width="335" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="PlayMe" id="Bsi-wQ-uiu">
                                     <font key="font" size="40" name="AirstreamNF"/>
@@ -48,7 +49,7 @@
                                 </textFieldCell>
                             </textField>
                             <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-5N-wxL">
-                                <rect key="frame" x="18" y="93" width="155" height="18"/>
+                                <rect key="frame" x="18" y="110" width="155" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Open PlayMe at login" bezelStyle="regularSquare" imagePosition="left" alignment="center" inset="2" id="jqO-3m-hR9">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -59,7 +60,7 @@
                                 </connections>
                             </button>
                             <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12u-Al-5yd">
-                                <rect key="frame" x="18" y="53" width="214" height="18"/>
+                                <rect key="frame" x="18" y="70" width="214" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Quit PlayMe when iTunes quits" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZQ9-hJ-nnj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -71,7 +72,7 @@
                                 </connections>
                             </button>
                             <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7pm-AV-J7Q">
-                                <rect key="frame" x="18" y="73" width="205" height="18"/>
+                                <rect key="frame" x="18" y="90" width="205" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Show song name in menubar" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9Hg-fY-xlT">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -83,12 +84,12 @@
                                 </connections>
                             </button>
                             <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLm-Ak-QzE">
-                                <rect key="frame" x="113" y="190" width="100" height="100"/>
+                                <rect key="frame" x="113" y="196" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Boz-ht-cbc"/>
                             </imageView>
                             <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sn-h3-2A5">
-                                <rect key="frame" x="172" y="148" width="52" height="17"/>
+                                <rect key="frame" x="172" y="154" width="52" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="v. 0.0.0" id="VCs-2k-w2a">
                                     <font key="font" metaFont="system"/>
@@ -96,6 +97,17 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button appearanceType="lightContent" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkZ-L1-fAo">
+                                <rect key="frame" x="121" y="40" width="88" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="squareTextured" title="My Website" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zOy-9I-P8C">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openWebsite:" target="-2" id="SHZ-51-XwR"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </customView>
                 </subviews>
@@ -105,6 +117,14 @@
             </connections>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="TeG-Vt-Wyj"/>
+        <button verticalHuggingPriority="750" id="roW-w7-mMX">
+            <rect key="frame" x="0.0" y="0.0" width="116" height="25"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="roundTextured" title="Round Textured" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FHE-PV-adX">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+        </button>
     </objects>
     <resources>
         <image name="icon" width="512" height="512"/>

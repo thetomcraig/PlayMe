@@ -15,7 +15,7 @@
 
 @property (retain, nonatomic) ITunesController *iTunesController;
 @property (retain, nonatomic) ImageController *imageController;
-@property (retain, nonatomic) NSWindowController *preferencesWinowController;
+@property (retain, nonatomic) NSWindowController *preferencesWindowController;
 
 @property (strong) IBOutlet ArtworkWindow *artworkWindow;
 
@@ -70,6 +70,7 @@
 -(void)closeWindow;
 -(void)showPreferences:(id)sender;
 -(void)quitPlayMe:(id)sender;
+-(IBAction)closeWindowWithButton:(id)sender;
 -(NSString *)trimString:(NSString *)longString :(CGFloat)targetWidth :(NSFont *)font :(NSString *)elipseToBeFilled;
 -(BOOL)iTunesIsRunning;
 
