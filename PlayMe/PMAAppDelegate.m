@@ -30,6 +30,13 @@ struct DangerZone
 //############################################################################
 -(void)awakeFromNib
 {
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"YES", @"showSongName",
+                                 @"NO", @"quitWheniTunesQuits",
+                                 nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
+    
     self.statusBar = [[NSStatusBar systemStatusBar]
                       statusItemWithLength:NSVariableStatusItemLength];
     self.statusBar.highlightMode = YES;
@@ -592,13 +599,13 @@ struct DangerZone
     {
        [artworkWindowController.iTunesController destroyiTunes];
        [self stoppedUpdate];
-    }
     
-    //If the UserDefaults option for quitting playme when
-    //itunes quits IS ENABLED, quit.  Otherwise do not
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"quitWheniTunesQuits"])
-    {
-        [artworkWindowController quitPlayMe:nil];
+        //If the UserDefaults option for quitting playme when
+        //itunes quits IS ENABLED, quit.  Otherwise do not
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"quitWheniTunesQuits"])
+        {
+            [artworkWindowController quitPlayMe:nil];
+        }
     }
 }
 
