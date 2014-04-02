@@ -9,24 +9,35 @@
 @synthesize versionText;
 @synthesize logo;
 
+//############################################################################
+//Initialize with the nib
+//############################################################################
 -(id)init
 {
     self = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
     return self;
 }
 
-
-- (void)windowDidLoad
+//############################################################################
+//Whenever the window opens, we arrane the elemtns properly, by calling the
+//setUpUIElements method.
+//############################################################################
+-(void)windowDidLoad
 {
     [super windowDidLoad];
     [self setUpUIElements];
 }
 
+//############################################################################
+//Arrange the elements.  Here I set the version number and logos
+//and arrange them.
+//############################################################################
 -(void)setUpUIElements
 {
     float width = 200;
     float height = 25;
-    [title setStringValue:@"PlayMe"];
+    [title setImageFrameStyle:NSImageFrameNone];
+    [title setImage:[NSImage imageNamed:@"appNameLogo"]];
     [versionText setStringValue:@"v. 1.0.5"];
     [logo setImage:[NSImage imageNamed:@"companyLogo"]];
     [logo setImageFrameStyle:0];
@@ -34,18 +45,28 @@
     [preferencesBackdrop setNeedsDisplay:YES];
 }
 
-
+//############################################################################
+//This is here to remember that it is connected to the nib, but its
+//functionality is handled through the nib, setup with IB.
+//############################################################################
 -(IBAction)toggleShowSongName:(id)sender
 {
-    ///Nothing here because handled via bdingins in NIB
+    //pass
 }
 
-
+//############################################################################
+//This is here to remember that it is connected to the nib, but its
+//functionality is handled through the nib, setup with IB.
+//############################################################################
 -(IBAction)toggleQuitWheniTunesQuits:(id)sender
 {
-    ///Nothing here because handled via bdingins in NIB
+    //pass
 }
 
+//############################################################################
+//Opens my website when that button is clicked.  Also sends a notification
+//that the delegate picks up to close the windows.
+//############################################################################
 - (IBAction)openWebsite:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"http://about.me/tomcraig/"]];
@@ -53,7 +74,6 @@
                                                 notificationWithName:@"websiteButtonClicked"
                                                 object:nil];
     [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
-
 }
 
 

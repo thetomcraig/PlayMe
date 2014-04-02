@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		830F785018D2097C00C13B0D /* companyLogo.psd in Resources */ = {isa = PBXBuildFile; fileRef = 830F784E18D2097C00C13B0D /* companyLogo.psd */; };
-		830F785218D20ADB00C13B0D /* companyLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 830F785118D20ADB00C13B0D /* companyLogo.png */; };
 		831001ED17CC684C0055A5CB /* OpenWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 831001EA17CC684C0055A5CB /* OpenWhite.png */; };
 		831001EE17CC684C0055A5CB /* PausedWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 831001EB17CC684C0055A5CB /* PausedWhite.png */; };
 		831001EF17CC684C0055A5CB /* StoppedWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 831001EC17CC684C0055A5CB /* StoppedWhite.png */; };
@@ -66,7 +65,6 @@
 		838800A417F230A8002EC9C7 /* Stopped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 838800A217F230A8002EC9C7 /* Stopped@2x.png */; };
 		838800A517F230A8002EC9C7 /* StoppedWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 838800A317F230A8002EC9C7 /* StoppedWhite@2x.png */; };
 		838C439218B7B333005AADA4 /* icon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 838C439118B7B333005AADA4 /* icon1024.png */; };
-		838E0A6918E781C7007FCEC5 /* appNameLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 838E0A6718E781C7007FCEC5 /* appNameLogo.png */; };
 		838E0A6A18E781C7007FCEC5 /* appNameLogo.psd in Resources */ = {isa = PBXBuildFile; fileRef = 838E0A6818E781C7007FCEC5 /* appNameLogo.psd */; };
 		8392AAC817CBF1B200EEF193 /* Paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 8392AAC717CBF1B200EEF193 /* Paused.png */; };
 		8392AACA17CBF1C200EEF193 /* Stopped.png in Resources */ = {isa = PBXBuildFile; fileRef = 8392AAC917CBF1C200EEF193 /* Stopped.png */; };
@@ -99,7 +97,6 @@
 
 /* Begin PBXFileReference section */
 		830F784E18D2097C00C13B0D /* companyLogo.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = companyLogo.psd; sourceTree = "<group>"; };
-		830F785118D20ADB00C13B0D /* companyLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = companyLogo.png; sourceTree = "<group>"; };
 		831001EA17CC684C0055A5CB /* OpenWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpenWhite.png; sourceTree = "<group>"; };
 		831001EB17CC684C0055A5CB /* PausedWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PausedWhite.png; sourceTree = "<group>"; };
 		831001EC17CC684C0055A5CB /* StoppedWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoppedWhite.png; sourceTree = "<group>"; };
@@ -179,7 +176,6 @@
 		838800A217F230A8002EC9C7 /* Stopped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stopped@2x.png"; sourceTree = "<group>"; };
 		838800A317F230A8002EC9C7 /* StoppedWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StoppedWhite@2x.png"; sourceTree = "<group>"; };
 		838C439118B7B333005AADA4 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1024.png; sourceTree = "<group>"; };
-		838E0A6718E781C7007FCEC5 /* appNameLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appNameLogo.png; sourceTree = "<group>"; };
 		838E0A6818E781C7007FCEC5 /* appNameLogo.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = appNameLogo.psd; sourceTree = "<group>"; };
 		8392AAC717CBF1B200EEF193 /* Paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paused.png; sourceTree = "<group>"; };
 		8392AAC917CBF1C200EEF193 /* Stopped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stopped.png; sourceTree = "<group>"; };
@@ -421,13 +417,11 @@
 		838C439318B7B339005AADA4 /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
-				838E0A6718E781C7007FCEC5 /* appNameLogo.png */,
 				838E0A6818E781C7007FCEC5 /* appNameLogo.psd */,
 				833B4CDA1868E6CB000DB59A /* icon1024.psd */,
 				838C439118B7B333005AADA4 /* icon1024.png */,
 				8310E584186B82B100510804 /* icon.icns */,
 				830F784E18D2097C00C13B0D /* companyLogo.psd */,
-				830F785118D20ADB00C13B0D /* companyLogo.png */,
 			);
 			name = "App Icons";
 			sourceTree = "<group>";
@@ -583,14 +577,12 @@
 				8388009C17F22FB4002EC9C7 /* Playing@2x.png in Resources */,
 				8310E585186B82B100510804 /* icon.icns in Resources */,
 				8388009D17F22FB4002EC9C7 /* PlayingWhite@2x.png in Resources */,
-				830F785218D20ADB00C13B0D /* companyLogo.png in Resources */,
 				8392AAC817CBF1B200EEF193 /* Paused.png in Resources */,
 				83101A2617D9819B006E6CA8 /* PauseButton.png in Resources */,
 				838E0A6A18E781C7007FCEC5 /* appNameLogo.psd in Resources */,
 				833B4CDC1868E6CB000DB59A /* icon1024.psd in Resources */,
 				838800A517F230A8002EC9C7 /* StoppedWhite@2x.png in Resources */,
 				83F0B61217E963EF009BF1E1 /* quitButtonDepressed.png in Resources */,
-				838E0A6918E781C7007FCEC5 /* appNameLogo.png in Resources */,
 				83131A5817C898DC00D50029 /* Images.xcassets in Resources */,
 				8388009517F223AA002EC9C7 /* bgTopArrow@2x.png in Resources */,
 				83131A8517C89A3400D50029 /* ArtworkWindowController.xib in Resources */,

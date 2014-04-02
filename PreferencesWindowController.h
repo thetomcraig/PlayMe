@@ -8,7 +8,7 @@
 
 @property (strong) IBOutlet PreferencesBackdrop *preferencesBackdrop;
 @property (strong) IBOutlet NSImageView *applicationIcon;
-@property (strong) IBOutlet NSTextField *title;
+@property (strong) IBOutlet NSImageView *title;
 @property (strong) IBOutlet NSTextField *versionText;
 @property (strong) IBOutlet NSButton *quitWithiTunes;
 @property (strong) IBOutlet NSButton *showSongName;

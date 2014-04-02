@@ -591,7 +591,10 @@ struct DangerZone
 
 //############################################################################
 //This is called when iTune quits, and it destorys the iTunes object, and it
-//calls the stopped update to zero out tags and other info.
+//calls the stopped update to zero out tags and other info.  Not that when ANY
+//progarm quits, this method pick it up and we filter to just get the iTunes
+//notifications.  There is a check with an if statement to quit the entire app
+//if that optin was checked in the preferences.
 //############################################################################
 -(void)iTunesQuit:(NSNotification *)note
 {

@@ -12,15 +12,14 @@
                 <outlet property="preferencesBackdrop" destination="pov-XD-JyQ" id="XhM-5Y-KLq"/>
                 <outlet property="quitWithiTunes" destination="12u-Al-5yd" id="Khk-fm-4UD"/>
                 <outlet property="showSongName" destination="7pm-AV-J7Q" id="LRM-Fr-jk6"/>
-                <outlet property="title" destination="GFV-gy-vuP" id="B7c-Bn-vsl"/>
+                <outlet property="title" destination="cdr-BI-TMp" id="YNI-75-1d3"/>
                 <outlet property="versionText" destination="7sn-h3-2A5" id="mUW-pE-eRz"/>
                 <outlet property="websiteButton" destination="SkZ-L1-fAo" id="vay-l7-Gis"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="1">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="331" height="276"/>
@@ -34,19 +33,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-MJ-qra">
-                                <rect key="frame" x="62" y="-3" width="206" height="47"/>
+                                <rect key="frame" x="62" y="-8" width="206" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="xpX-ov-fzi"/>
                             </imageView>
-                            <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GFV-gy-vuP">
-                                <rect key="frame" x="-2" y="117" width="335" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="PlayMe" id="Bsi-wQ-uiu">
-                                    <font key="font" size="40" name="AirstreamNF"/>
-                                    <color key="textColor" white="0.14749657846715328" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
-                                </textFieldCell>
-                            </textField>
                             <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12u-Al-5yd">
                                 <rect key="frame" x="18" y="70" width="214" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -76,15 +66,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Boz-ht-cbc"/>
                             </imageView>
-                            <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sn-h3-2A5">
-                                <rect key="frame" x="172" y="134" width="52" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="v. 0.0.0" id="VCs-2k-w2a">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button appearanceType="lightContent" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkZ-L1-fAo">
                                 <rect key="frame" x="121" y="40" width="88" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -96,6 +77,20 @@
                                     <action selector="openWebsite:" target="-2" id="SHZ-51-XwR"/>
                                 </connections>
                             </button>
+                            <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-BI-TMp">
+                                <rect key="frame" x="67" y="122" width="197" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="H19-jq-HJz"/>
+                            </imageView>
+                            <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sn-h3-2A5">
+                                <rect key="frame" x="194" y="125" width="52" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="v. 0.0.0" id="VCs-2k-w2a">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </customView>
                 </subviews>
@@ -104,6 +99,7 @@
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
         </window>
+        <customObject id="-3" userLabel="Application"/>
         <userDefaultsController representsSharedInstance="YES" id="TeG-Vt-Wyj"/>
         <button verticalHuggingPriority="750" id="roW-w7-mMX">
             <rect key="frame" x="0.0" y="0.0" width="116" height="25"/>
