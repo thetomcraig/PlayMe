@@ -10,23 +10,8 @@
 		83131A4017C898DC00D50029 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83131A3F17C898DC00D50029 /* Cocoa.framework */; };
 		83131A5F17C898DC00D50029 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83131A5E17C898DC00D50029 /* XCTest.framework */; };
 		83131A6017C898DC00D50029 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83131A3F17C898DC00D50029 /* Cocoa.framework */; };
-		83131A6817C898DC00D50029 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83131A6617C898DC00D50029 /* InfoPlist.strings */; };
-		83131A6A17C898DC00D50029 /* PlayMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A6917C898DC00D50029 /* PlayMeTests.m */; };
-		83229733190357F100879188 /* ButtonsBackdrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296C5190357F100879188 /* ButtonsBackdrop.m */; };
-		83229734190357F100879188 /* ControlButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296C7190357F100879188 /* ControlButtonsCell.m */; };
-		83229735190357F100879188 /* SongSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296C9190357F100879188 /* SongSlider.m */; };
-		83229736190357F100879188 /* SongSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296CB190357F100879188 /* SongSliderCell.m */; };
-		8322973A190357F100879188 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296D2190357F100879188 /* main.m */; };
-		8322973B190357F100879188 /* ArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296D5190357F100879188 /* ArtworkView.m */; };
-		8322973C190357F100879188 /* ArtworkWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296D7190357F100879188 /* ArtworkWindow.m */; };
-		8322973D190357F100879188 /* ArtworkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296D9190357F100879188 /* ArtworkWindowController.m */; };
 		8322973E190357F100879188 /* ArtworkWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832296DA190357F100879188 /* ArtworkWindowController.xib */; };
-		8322973F190357F100879188 /* ColorOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296DC190357F100879188 /* ColorOperation.m */; };
 		83229740190357F100879188 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832296DD190357F100879188 /* MainMenu.xib */; };
-		83229741190357F100879188 /* PMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296DF190357F100879188 /* PMAAppDelegate.m */; };
-		83229742190357F100879188 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 832296E5190357F100879188 /* InfoPlist.strings */; };
-		83229743190357F100879188 /* PlayMeTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 832296E7190357F100879188 /* PlayMeTests-Info.plist */; };
-		83229744190357F100879188 /* PlayMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 832296E8190357F100879188 /* PlayMeTests.m */; };
 		83229745190357F100879188 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 832296E9190357F100879188 /* README.md */; };
 		83229746190357F100879188 /* appNameLogo.psd in Resources */ = {isa = PBXBuildFile; fileRef = 832296EB190357F100879188 /* appNameLogo.psd */; };
 		83229747190357F100879188 /* bgTopArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 832296EC190357F100879188 /* bgTopArrow.png */; };
@@ -72,19 +57,9 @@
 		8322976F190357F100879188 /* StoppedWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 83229714190357F100879188 /* StoppedWhite.png */; };
 		83229770190357F100879188 /* StoppedWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83229715190357F100879188 /* StoppedWhite@2x.png */; };
 		83229771190357F100879188 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83229717190357F100879188 /* AboutView.xib */; };
-		83229772190357F100879188 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83229719190357F100879188 /* AboutViewController.m */; };
 		83229773190357F100879188 /* GeneralView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8322971A190357F100879188 /* GeneralView.xib */; };
-		83229774190357F100879188 /* GeneralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322971C190357F100879188 /* GeneralViewController.m */; };
 		83229775190357F100879188 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8322971E190357F100879188 /* MASPreferencesWindow.xib */; };
-		83229776190357F100879188 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83229720190357F100879188 /* MASPreferencesWindowController.m */; };
-		83229777190357F100879188 /* PreferencesBackdrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 83229722190357F100879188 /* PreferencesBackdrop.m */; };
-		83229778190357F100879188 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83229724190357F100879188 /* PreferencesWindowController.m */; };
 		83229779190357F100879188 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83229725190357F100879188 /* PreferencesWindowController.xib */; };
-		8322977A190357F100879188 /* AlbumColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83229728190357F100879188 /* AlbumColorPicker.m */; };
-		8322977B190357F100879188 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322972A190357F100879188 /* ImageController.m */; };
-		8322977C190357F100879188 /* ITunesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322972D190357F100879188 /* ITunesController.m */; };
-		8322977D190357F100879188 /* NCController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322972F190357F100879188 /* NCController.m */; };
-		8322977E190357F100879188 /* PlayMe-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83229730190357F100879188 /* PlayMe-Info.plist */; };
 		8322977F190357F100879188 /* revealTrack.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 83229731190357F100879188 /* revealTrack.scpt */; };
 		832297811903584300879188 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 832297801903584300879188 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -107,9 +82,6 @@
 		83131A4417C898DC00D50029 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83131A5D17C898DC00D50029 /* PlayMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlayMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83131A5E17C898DC00D50029 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		83131A6517C898DC00D50029 /* PlayMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayMeTests-Info.plist"; sourceTree = "<group>"; };
-		83131A6717C898DC00D50029 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		83131A6917C898DC00D50029 /* PlayMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayMeTests.m; sourceTree = "<group>"; };
 		832296C4190357F100879188 /* ButtonsBackdrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsBackdrop.h; sourceTree = "<group>"; };
 		832296C5190357F100879188 /* ButtonsBackdrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsBackdrop.m; sourceTree = "<group>"; };
 		832296C6190357F100879188 /* ControlButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlButtonsCell.h; sourceTree = "<group>"; };
@@ -131,8 +103,6 @@
 		832296DD190357F100879188 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		832296DE190357F100879188 /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
 		832296DF190357F100879188 /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
-		832296E6190357F100879188 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		832296E7190357F100879188 /* PlayMeTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlayMeTests-Info.plist"; sourceTree = "<group>"; };
 		832296E8190357F100879188 /* PlayMeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayMeTests.m; sourceTree = "<group>"; };
 		832296E9190357F100879188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		832296EB190357F100879188 /* appNameLogo.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = appNameLogo.psd; sourceTree = "<group>"; };
@@ -240,7 +210,6 @@
 				832296EA190357F100879188 /* Resources */,
 				83229716190357F100879188 /* SettingsWindow */,
 				83229726190357F100879188 /* Utilities */,
-				83131A6317C898DC00D50029 /* PlayMeTests */,
 				83131A3E17C898DC00D50029 /* Frameworks */,
 				83131A3D17C898DC00D50029 /* Products */,
 			);
@@ -273,24 +242,6 @@
 				83131A4417C898DC00D50029 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		83131A6317C898DC00D50029 /* PlayMeTests */ = {
-			isa = PBXGroup;
-			children = (
-				83131A6917C898DC00D50029 /* PlayMeTests.m */,
-				83131A6417C898DC00D50029 /* Supporting Files */,
-			);
-			path = PlayMeTests;
-			sourceTree = "<group>";
-		};
-		83131A6417C898DC00D50029 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				83131A6517C898DC00D50029 /* PlayMeTests-Info.plist */,
-				83131A6617C898DC00D50029 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		832296C3190357F100879188 /* ControlsAndButtons */ = {
@@ -330,8 +281,6 @@
 		832296E4190357F100879188 /* PlayMeTests */ = {
 			isa = PBXGroup;
 			children = (
-				832296E5190357F100879188 /* InfoPlist.strings */,
-				832296E7190357F100879188 /* PlayMeTests-Info.plist */,
 				832296E8190357F100879188 /* PlayMeTests.m */,
 			);
 			path = PlayMeTests;
@@ -474,7 +423,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PMA;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Tom Craig";
 				TargetAttributes = {
 					83131A5C17C898DC00D50029 = {
@@ -538,13 +487,10 @@
 				83229761190357F100879188 /* PausedWhite.png in Resources */,
 				83229746190357F100879188 /* appNameLogo.psd in Resources */,
 				8322974D190357F100879188 /* icon.icns in Resources */,
-				83229742190357F100879188 /* InfoPlist.strings in Resources */,
 				8322976B190357F100879188 /* quitButton.png in Resources */,
 				8322974B190357F100879188 /* closeButtonDepressed.png in Resources */,
 				83229767190357F100879188 /* PlayingWhite.png in Resources */,
-				83229743190357F100879188 /* PlayMeTests-Info.plist in Resources */,
 				83229745190357F100879188 /* README.md in Resources */,
-				8322977E190357F100879188 /* PlayMe-Info.plist in Resources */,
 				83229762190357F100879188 /* PausedWhite@2x.png in Resources */,
 				83229773190357F100879188 /* GeneralView.xib in Resources */,
 				83229740190357F100879188 /* MainMenu.xib in Resources */,
@@ -568,7 +514,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83131A6817C898DC00D50029 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,26 +524,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83229776190357F100879188 /* MASPreferencesWindowController.m in Sources */,
-				8322973A190357F100879188 /* main.m in Sources */,
-				83229774190357F100879188 /* GeneralViewController.m in Sources */,
-				8322977A190357F100879188 /* AlbumColorPicker.m in Sources */,
-				8322973B190357F100879188 /* ArtworkView.m in Sources */,
-				83229777190357F100879188 /* PreferencesBackdrop.m in Sources */,
-				8322973D190357F100879188 /* ArtworkWindowController.m in Sources */,
-				83229778190357F100879188 /* PreferencesWindowController.m in Sources */,
-				83229733190357F100879188 /* ButtonsBackdrop.m in Sources */,
-				83229736190357F100879188 /* SongSliderCell.m in Sources */,
-				8322977D190357F100879188 /* NCController.m in Sources */,
-				83229735190357F100879188 /* SongSlider.m in Sources */,
-				8322977B190357F100879188 /* ImageController.m in Sources */,
-				83229772190357F100879188 /* AboutViewController.m in Sources */,
-				8322973C190357F100879188 /* ArtworkWindow.m in Sources */,
-				83229744190357F100879188 /* PlayMeTests.m in Sources */,
-				83229741190357F100879188 /* PMAAppDelegate.m in Sources */,
-				83229734190357F100879188 /* ControlButtonsCell.m in Sources */,
-				8322977C190357F100879188 /* ITunesController.m in Sources */,
-				8322973F190357F100879188 /* ColorOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +531,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83131A6A17C898DC00D50029 /* PlayMeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,25 +543,6 @@
 			targetProxy = 83131A6117C898DC00D50029 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		83131A6617C898DC00D50029 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				83131A6717C898DC00D50029 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		832296E5190357F100879188 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				832296E6190357F100879188 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		83131A6B17C898DC00D50029 /* Debug */ = {
@@ -716,9 +621,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayMe/PlayMe-Prefix.pch";
-				INFOPLIST_FILE = "PlayMe/PlayMe-Info.plist";
+				INFOPLIST_FILE = "Utilities/PlayMe-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -729,9 +635,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayMe/PlayMe-Prefix.pch";
-				INFOPLIST_FILE = "PlayMe/PlayMe-Info.plist";
+				INFOPLIST_FILE = "Utilities/PlayMe-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
