@@ -75,6 +75,14 @@
                                                 object:nil];
     [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
 }
+- (IBAction)openTwitter:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"https://twitter.com/thetomcraig"]];
+    NSNotification *iTunesButtonNotification = [NSNotification
+                                                notificationWithName:@"websiteButtonClicked"
+                                                object:nil];
+    [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
+}
 
 
 @end

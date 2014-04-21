@@ -13,6 +13,7 @@
 @property (strong) IBOutlet NSButton *quitWithiTunes;
 @property (strong) IBOutlet NSButton *showSongName;
 @property (strong) IBOutlet NSButton *websiteButton;
+@property (strong) IBOutlet NSButton *twitterButton;
 @property (strong) IBOutlet NSImageView *logo;
 
 -(IBAction)toggleQuitWheniTunesQuits:(id)sender;
