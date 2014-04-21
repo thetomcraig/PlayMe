@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1DB46FA4-755E-4AA5-AF77-D7C9A6F9EAE1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PlayMe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</key>
+		<string>https://github.com/thetomcraig/PlayMe.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PlayMe.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/thetomcraig/PlayMe.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PlayMe</string>
+		</dict>
+	</array>
+</dict>
+</plist>
