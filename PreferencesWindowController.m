@@ -71,7 +71,7 @@
 {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"http://about.me/tomcraig/"]];
     NSNotification *iTunesButtonNotification = [NSNotification
-                                                notificationWithName:@"websiteButtonClicked"
+                                                notificationWithName:@"preferencesWindowButtonClicked"
                                                 object:nil];
     [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
 }
@@ -79,7 +79,7 @@
 {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"https://twitter.com/thetomcraig"]];
     NSNotification *iTunesButtonNotification = [NSNotification
-                                                notificationWithName:@"websiteButtonClicked"
+                                                notificationWithName:@"preferencesWindowButtonClicked"
                                                 object:nil];
     [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
 }

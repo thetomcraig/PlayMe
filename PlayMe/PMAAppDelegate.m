@@ -526,7 +526,7 @@ struct DangerZone
     //This comes from the preferences window, because the website button has
     //been clicked, and the windows need to be closed, and everything else
     //needs to be update appropriately
-    else if ([note.name rangeOfString:@"websiteButtonClicked"].location != NSNotFound)
+    else if ([note.name rangeOfString:@"preferencesWindowButtonClicked"].location != NSNotFound)
     {
         [artworkWindowController closeWindowWithButton:nil];
         [self update:NO];
