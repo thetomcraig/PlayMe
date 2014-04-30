@@ -15,11 +15,16 @@
 //############################################################################
 -(id)init
 {
-    self.albumColors = [[NSDictionary alloc] initWithObjectsAndKeys:@"backgroundColor",
-                   @"primaryColor", @"secondaryColor", @"detailColor",
-                   nil, nil, nil, nil, nil];
-    
-    self.lastArtCalculated = @"";
+    self = [super init];
+    if (self)
+    {
+        self.albumColors = [[NSDictionary alloc] initWithObjectsAndKeys:@"backgroundColor",
+                            @"primaryColor", @"secondaryColor", @"detailColor",
+                            nil, nil, nil, nil, nil];
+        
+        self.lastArtCalculated = @"";
+
+    }
     return self;
 }
 
@@ -146,11 +151,11 @@
     //The size that will be used for the back background
     NSSize newSquareSize = NSMakeSize(targetWidth, targetWidth);
     //The new size of a non-square artwork
-    NSSize newRectangularSize = NSMakeSize(0.0, 0.0);
+    NSSize newRectangularSize;// = NSMakeSize(0.0, 0.0);
     //The new rectangle in which to draw the artwork
-    NSRect smallRect = NSMakeRect(0.0, 0.0, 0.0, 0.0);
+    NSRect smallRect;// = NSMakeRect(0.0, 0.0, 0.0, 0.0);
     //The new point at which to draw the artwork
-    NSPoint centerPoint = NSMakePoint(0.0, 0.0);
+    NSPoint centerPoint;// = NSMakePoint(0.0, 0.0);
     
     //-------------------------------------------------------------------------
     //There are three main cases to worry about with "square" images.

@@ -622,7 +622,7 @@
 }
 
 //############################################################################
-//When the menuButton is pressed, this method is called to present the optins
+//When the menuButton is pressed, this method is called to present the options
 //menu
 //############################################################################
 - (IBAction)openMenu:(id)sender
@@ -637,8 +637,7 @@
     //Finding the position for the menu
     
     int menuXPos = [menuButton frame].origin.x - [menuButtonMenu size].width + [menuButton frame].size.width;
-    int menuYPos = [menuButton frame].origin.y;
-    menuYPos = buttonsBackdrop.frame.origin.y;
+    int menuYPos = menuYPos = buttonsBackdrop.frame.origin.y;
     if (artworkWindow.frame.size.height == SMALL_HEIGHT)
     {
         menuYPos = 0;
