@@ -455,9 +455,20 @@ struct DangerZone
 //paused.  Because of this, it may actually have to do the paused update,
 //so I check for that.  In this case, we may actually need to update some
 //info, so we check if iTunes is running, then do that
+//
+//Recently put in the very first if statement, which says that if the player
+//state was stopped, then update to stopped again, then itunes must be
+//quitting.  If it went from playing or paused to stopped we can assume it
+//actually did just stop playback.  But if it goe sfrom stopped to stopped,
+//its a false positive - iTunes sends out a stopped updated when it quits...
 //############################################################################
 -(void)stoppedUpdate
 {
+    if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Stopped"])
+    {
+        return;
+    }
+    
     if (![artworkWindowController iTunesIsRunning])
     {
         [artworkWindowController.iTunesController updateWithNill];
@@ -599,7 +610,7 @@ struct DangerZone
 -(void)iTunesQuit:(NSNotification *)note
 {
     if ([[note.userInfo objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
-    {
+    {        
        [artworkWindowController.iTunesController destroyiTunes];
        [self stoppedUpdate];
     
