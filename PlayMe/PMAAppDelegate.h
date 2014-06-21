@@ -4,7 +4,7 @@
 
 @interface PMAAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (nonatomic, retain) NSStatusItem *statusBar;
+@property (nonatomic, retain) NSStatusItem *statusItem;
 @property (nonatomic, retain) NCController *ncController;
 @property (nonatomic, retain) ArtworkWindowController *artworkWindowController;
 

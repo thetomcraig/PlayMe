@@ -8,7 +8,8 @@
 
 @implementation PMAAppDelegate
 
-@synthesize statusBar;
+@synthesize statusItem;
+
 @synthesize ncController;
 @synthesize artworkWindowController;
 
@@ -35,12 +36,12 @@ struct DangerZone
                                  @"NO", @"quitWheniTunesQuits",
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+
+    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
-    
-    self.statusBar = [[NSStatusBar systemStatusBar]
-                      statusItemWithLength:NSVariableStatusItemLength];
-    self.statusBar.highlightMode = YES;
-    [self.statusBar setTarget:self];
+    [statusItem setAction:@selector(clicked:)];
+    [statusItem setHighlightMode: YES];
+     [statusItem setTarget:self];
 }
 
 //############################################################################
@@ -67,8 +68,10 @@ struct DangerZone
     //-------------------------------------------------------------------------
     //Set up observers and methods
     //-------------------------------------------------------------------------
-    [self.statusBar setAction:@selector(clicked:)];
     
+    ///[self.statusBar setAction:@selector(clicked:)];
+    ///[statusBar setTarget:self];
+   
     //For when iTunes plays/pauses/stops
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesStatusChange:)
@@ -86,6 +89,7 @@ struct DangerZone
                  selector:@selector(iTunesQuit:)
                      name:NSWorkspaceDidTerminateApplicationNotification
                    object:nil];
+    
 }
 
 #
@@ -118,7 +122,7 @@ struct DangerZone
     //the name.  Otherwise there shuold be no title
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        self.statusBar.title = titleForBar;
+        self.statusItem.title = titleForBar;
     }
 }
 
@@ -131,25 +135,25 @@ struct DangerZone
 {
     if (windowIsOpen)
     {
-        self.statusBar.image = [NSImage imageNamed:@"Open"];
-        self.statusBar.alternateImage = [NSImage imageNamed:@"OpenWhite"];
+        self.statusItem.image = [NSImage imageNamed:@"Open"];
+        self.statusItem.alternateImage = [NSImage imageNamed:@"OpenWhite"];
     }
     else
     {
         if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Stopped"])
         {
-            self.statusBar.image = [NSImage imageNamed:@"Stopped"];
-            self.statusBar.alternateImage = [NSImage imageNamed:@"StoppedWhite"];
+            self.statusItem.image = [NSImage imageNamed:@"Stopped"];
+            self.statusItem.alternateImage = [NSImage imageNamed:@"StoppedWhite"];
         }
         else if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Paused"])
         {
-            self.statusBar.image = [NSImage imageNamed:@"Paused"];
-            self.statusBar.alternateImage = [NSImage imageNamed:@"PausedWhite"];
+            self.statusItem.image = [NSImage imageNamed:@"Paused"];
+            self.statusItem.alternateImage = [NSImage imageNamed:@"PausedWhite"];
         }
         else if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Playing"])
         {
-            self.statusBar.image = [NSImage imageNamed:@"Playing"];
-            self.statusBar.alternateImage = [NSImage imageNamed:@"PlayingWhite"];
+            self.statusItem.image = [NSImage imageNamed:@"Playing"];
+            self.statusItem.alternateImage = [NSImage imageNamed:@"PlayingWhite"];
         }
     }
 }
@@ -291,7 +295,7 @@ struct DangerZone
     //Find the location for the window
     //-------------------------------------------------------------------------
     //The frame of the menu bar icon, and location for the arrow
-    NSRect statusItemWindowframe = [[self.statusBar valueForKey:@"window"] frame];
+    NSRect statusItemWindowframe = [[self.statusItem valueForKey:@"window"] frame];
     //Finding the origin
     CGPoint origin = statusItemWindowframe.origin;
     //The size of the window we want to open
@@ -358,11 +362,27 @@ struct DangerZone
 
 //############################################################################
 //Called when the icon is clicked.
-//If the window is opened, it gets closed, and vise versa.
-//We make sure to ipdate either way, so the icon and menu bar title are correct
+//If the window is opened, it gets closed, and vice versa.
+//We make sure to update either way, so the icon and menu bar title are correct
 //############################################################################
 -(void)clicked:(id)sender
 {
+    
+    
+    NSEvent *event = [NSApp currentEvent];
+    
+    NSLog(@"%lu", (unsigned long)[event modifierFlags]);
+    
+    if([event modifierFlags] & NSControlKeyMask)
+    {
+        NSLog(@"Right click");
+        //[self openRightWindow:nil];
+    } else
+    {
+        NSLog(@"Left click");
+        //[self openLeftWindow:nil];
+    }
+    
     //-------------------------------------------------------------------------
     //Toggle: if the window is open, close it.  Otherwise open it.
     //-------------------------------------------------------------------------
@@ -390,6 +410,15 @@ struct DangerZone
         [[artworkWindowController window] setLevel:kCGFloatingWindowLevel];
         [NSApp activateIgnoringOtherApps:YES];
     }
+    
+}
+
+- (void)openWindow:(id)sender
+{
+    
+        NSLog(@"Left click");
+       
+
 }
 
 //############################################################################
@@ -472,7 +501,7 @@ struct DangerZone
     if (![artworkWindowController iTunesIsRunning])
     {
         [artworkWindowController.iTunesController updateWithNill];
-        self.statusBar.title = @"";
+        self.statusItem.title = @"";
     }
     
     if ([[artworkWindowController window] isVisible])

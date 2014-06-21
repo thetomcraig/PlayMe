@@ -625,6 +625,8 @@
 //When the menuButton is pressed, this method is called to present the options
 //menu
 //############################################################################
+///Moving this to the delegate so it can be a right click menu
+/**
 - (IBAction)openMenu:(id)sender
 {
     //The menu we are going to open
@@ -659,6 +661,7 @@
     //Open the menu
     [NSMenu popUpContextMenu:menuButtonMenu withEvent:menuMouseEvent forView:sender];
 }
+ */
 
 //############################################################################
 //Opens the preferences window
