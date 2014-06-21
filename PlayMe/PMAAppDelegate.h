@@ -1,10 +1,12 @@
 #import <Cocoa/Cocoa.h>
 #import "NCController.h"
 #import "ArtworkWindowController.h"
+#import "MenubarController.h"
 
 @interface PMAAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (nonatomic, retain) NSStatusItem *statusItem;
+///@property (nonatomic, retain) NSStatusItem *statusItem;
+@property (nonatomic, strong) MenubarController *menubarController;
 @property (nonatomic, retain) NCController *ncController;
 @property (nonatomic, retain) ArtworkWindowController *artworkWindowController;
 

@@ -8,7 +8,7 @@
 
 @implementation PMAAppDelegate
 
-@synthesize statusItem;
+///@synthesize statusItem;
 
 @synthesize ncController;
 @synthesize artworkWindowController;
@@ -37,11 +37,13 @@ struct DangerZone
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 
+    /**
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
     [statusItem setAction:@selector(clicked:)];
     [statusItem setHighlightMode: YES];
-     [statusItem setTarget:self];
+    [statusItem setTarget:self];
+     */
 }
 
 //############################################################################
@@ -122,7 +124,7 @@ struct DangerZone
     //the name.  Otherwise there shuold be no title
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        self.statusItem.title = titleForBar;
+        ///self.statusItem.title = titleForBar;
     }
 }
 
@@ -131,6 +133,7 @@ struct DangerZone
 //Otherswise, update according to the state of iTunes.
 //We need windowIsOpen to determine what kind of things we need to update
 //############################################################################
+/**
 -(void)updateIcon:(BOOL)windowIsOpen
 {
     if (windowIsOpen)
@@ -157,6 +160,7 @@ struct DangerZone
         }
     }
 }
+ */
 
 //############################################################################
 //Sets the window to the appropriate frame.  Small size for iTunes stopped,
@@ -282,7 +286,7 @@ struct DangerZone
     if (shouldReDisplay)
     {
         [artworkWindowController closeWindow];
-        [self clicked:nil];
+        ///[self clicked:nil];
     }
 }
 
@@ -295,7 +299,10 @@ struct DangerZone
     //Find the location for the window
     //-------------------------------------------------------------------------
     //The frame of the menu bar icon, and location for the arrow
-    NSRect statusItemWindowframe = [[self.statusItem valueForKey:@"window"] frame];
+    ///NSRect statusItemWindowframe = [[self.statusItem valueForKey:@"window"] frame];
+    ///
+    NSRect statusItemWindowframe = NSMakeRect(0.0, 0.0, 10.0, 10.0);
+    ///
     //Finding the origin
     CGPoint origin = statusItemWindowframe.origin;
     //The size of the window we want to open
@@ -365,9 +372,9 @@ struct DangerZone
 //If the window is opened, it gets closed, and vice versa.
 //We make sure to update either way, so the icon and menu bar title are correct
 //############################################################################
+/**
 -(void)clicked:(id)sender
 {
-    
     
     NSEvent *event = [NSApp currentEvent];
     
@@ -419,6 +426,11 @@ struct DangerZone
         NSLog(@"Left click");
        
 
+}
+     */
+-(void)newClickedMethodForWindow:(id)sender
+{
+    NSLog(@"Entered the new method for toggling the main window!");
 }
 
 //############################################################################
@@ -501,7 +513,7 @@ struct DangerZone
     if (![artworkWindowController iTunesIsRunning])
     {
         [artworkWindowController.iTunesController updateWithNill];
-        self.statusItem.title = @"";
+        ///self.statusItem.title = @"";
     }
     
     if ([[artworkWindowController window] isVisible])

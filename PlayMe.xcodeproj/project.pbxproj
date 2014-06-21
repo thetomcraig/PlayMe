@@ -71,6 +71,8 @@
 		83A131F71872822200BB0DD2 /* NothingPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 83A131F61872822200BB0DD2 /* NothingPlaying.png */; };
 		83A3409018C6A46700B7F4C4 /* PreferencesBackdrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */; };
 		83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AE0FC517E2B93A00AE8282 /* SongSlider.m */; };
+		83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6419561160009D4FE2 /* MenubarController.m */; };
+		83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6719561231009D4FE2 /* StatusItemView.m */; };
 		83DA970917DBEB2F007531E4 /* NextButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */; };
 		83DA970A17DBEB2F007531E4 /* PauseButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */; };
 		83DA970B17DBEB2F007531E4 /* PlayButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */; };
@@ -185,6 +187,10 @@
 		83AE0FC417E2B93A00AE8282 /* SongSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSlider.h; sourceTree = "<group>"; };
 		83AE0FC517E2B93A00AE8282 /* SongSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSlider.m; sourceTree = "<group>"; };
 		83B2E9991863CF2900C5896F /* NothingPlaying.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = NothingPlaying.psd; sourceTree = "<group>"; };
+		83CB8D6319561160009D4FE2 /* MenubarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenubarController.h; sourceTree = "<group>"; };
+		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
+		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
+		83CB8D6719561231009D4FE2 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonDepressed.png; sourceTree = "<group>"; };
@@ -339,6 +345,10 @@
 				835A69AF18BCFB9A0080CEA3 /* PreferencesWindowController.xib */,
 				83131A5117C898DC00D50029 /* PMAAppDelegate.h */,
 				83131A5217C898DC00D50029 /* PMAAppDelegate.m */,
+				83CB8D6319561160009D4FE2 /* MenubarController.h */,
+				83CB8D6419561160009D4FE2 /* MenubarController.m */,
+				83CB8D6619561231009D4FE2 /* StatusItemView.h */,
+				83CB8D6719561231009D4FE2 /* StatusItemView.m */,
 				83131A9017C8A99000D50029 /* ITunesController.h */,
 				83131A9117C8A99000D50029 /* ITunesController.m */,
 				83131A9417C8A99F00D50029 /* ImageController.h */,
@@ -628,7 +638,9 @@
 				83131A8B17C89AE600D50029 /* ArtworkView.m in Sources */,
 				8342CB5F1892FD0E000CA6AE /* GeneralViewController.m in Sources */,
 				83131A8817C89A9F00D50029 /* ArtworkWindow.m in Sources */,
+				83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */,
 				83131A9817C8AD3200D50029 /* ImageController.m in Sources */,
+				83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */,
 				8342CB681892FD2E000CA6AE /* MASPreferencesWindowController.m in Sources */,
 				83131A8417C89A3400D50029 /* ArtworkWindowController.m in Sources */,
 				83E1A7E217E272C700BC94B8 /* SongSliderCell.m in Sources */,
