@@ -63,7 +63,7 @@ struct DangerZone
     [artworkWindowController.iTunesController createiTunesObjectIfNeeded];
     
     [self update:NO];
-    [self updateIcon:NO];
+    ///[self updateIcon:NO];
     [self updateUIElements];
     [self updateWindowPosition];
 
@@ -73,6 +73,10 @@ struct DangerZone
     
     ///[self.statusBar setAction:@selector(clicked:)];
     ///[statusBar setTarget:self];
+    
+    ///
+    self.menubarController = [[MenubarController alloc] init];
+    ///
    
     //For when iTunes plays/pauses/stops
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
@@ -448,12 +452,12 @@ struct DangerZone
     if ([[artworkWindowController window] isVisible])
     {
         [self update:YES];
-        [self updateIcon:YES];
+        ///[self updateIcon:YES];
     }
     else
     {
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
         
         //Post notification after clearing any existing ones
         [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
@@ -478,9 +482,9 @@ struct DangerZone
     
     if ([[artworkWindowController window] isVisible])
     {
-        [self updateIcon:YES];
+        ///[self updateIcon:YES];
     }
-    else [self updateIcon:NO];
+    else ///[self updateIcon:NO];
 
     [self updateUIElements];
 }
@@ -519,12 +523,12 @@ struct DangerZone
     if ([[artworkWindowController window] isVisible])
     {
         [self update:YES];
-        [self updateIcon:YES];
+        ///[self updateIcon:YES];
     }
     else
     {
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
     }
    
     [self updateUIElements];
@@ -553,7 +557,7 @@ struct DangerZone
     if ([note.name rangeOfString:@"iTunesButtonClicked"].location != NSNotFound)
     {
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
         return;
     }
     
@@ -562,7 +566,7 @@ struct DangerZone
     else if ([note.name rangeOfString:@"closeButtonClicked"].location != NSNotFound)
     {
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
         return;
     }
     
@@ -571,7 +575,7 @@ struct DangerZone
     else if ([note.name rangeOfString:@"ESCKeyHit"].location != NSNotFound)
     {
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
         return;
     }
     
@@ -582,7 +586,7 @@ struct DangerZone
     {
         [artworkWindowController closeWindowWithButton:nil];
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
         return;
     }
     
