@@ -110,6 +110,9 @@ struct DangerZone
                                  :@""];
     }
     
+    
+    [menubarController.statusItemView setTitle: titleForBar];
+    
     //If the UserDefaults option for showing
     //the name in the menubar IS ENABLED, then we show
     //the name.  Otherwise there shuold be no title

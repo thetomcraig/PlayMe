@@ -5,6 +5,7 @@
 @synthesize statusItem = _statusItem;
 @synthesize image = _image;
 @synthesize alternateImage = _alternateImage;
+@synthesize title = _title;
 @synthesize isHighlighted = _isHighlighted;
 @synthesize leftaction = _leftaction;
 @synthesize rightaction = _rightaction;
@@ -36,11 +37,14 @@
     NSImage *icon = self.isHighlighted ? self.alternateImage : self.image;
     NSSize iconSize = [icon size];
     NSRect bounds = self.bounds;
-    CGFloat iconX = roundf((NSWidth(bounds) - iconSize.width) / 2);
+    CGFloat iconX = 3;
     CGFloat iconY = roundf((NSHeight(bounds) - iconSize.height) / 2);
     NSPoint iconPoint = NSMakePoint(iconX, iconY);
     
     [icon drawAtPoint:iconPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    
+    NSPoint textPoint = NSMakePoint(iconX + iconSize.width + 3, iconY);
+    [_title drawAtPoint:textPoint withAttributes:nil];
 }
 
 #pragma mark -
@@ -93,6 +97,11 @@
             [self setNeedsDisplay:YES];
         }
     }
+}
+
+- (void)setTitle:(NSString *)newTitle
+{
+    _title = newTitle;
 }
 
 #pragma mark -
