@@ -16,7 +16,7 @@
 
 @optional
 
-- (StatusItemView *)statusItemViewForPanelController:(ArtworkWindowController *)controller;
+- (StatusItemView *)statusItemViewForArtworkWindowController:(ArtworkWindowController *)controller;
 
 @end
 

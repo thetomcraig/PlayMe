@@ -21,13 +21,11 @@
 		83131A4A17C898DC00D50029 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83131A4817C898DC00D50029 /* InfoPlist.strings */; };
 		83131A4C17C898DC00D50029 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A4B17C898DC00D50029 /* main.m */; };
 		83131A5017C898DC00D50029 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 83131A4E17C898DC00D50029 /* Credits.rtf */; };
-		83131A5317C898DC00D50029 /* PMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A5217C898DC00D50029 /* PMAAppDelegate.m */; };
 		83131A5817C898DC00D50029 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83131A5717C898DC00D50029 /* Images.xcassets */; };
 		83131A5F17C898DC00D50029 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83131A5E17C898DC00D50029 /* XCTest.framework */; };
 		83131A6017C898DC00D50029 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83131A3F17C898DC00D50029 /* Cocoa.framework */; };
 		83131A6817C898DC00D50029 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83131A6617C898DC00D50029 /* InfoPlist.strings */; };
 		83131A6A17C898DC00D50029 /* PlayMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A6917C898DC00D50029 /* PlayMeTests.m */; };
-		83131A8417C89A3400D50029 /* ArtworkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A8217C89A3400D50029 /* ArtworkWindowController.m */; };
 		83131A8517C89A3400D50029 /* ArtworkWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83131A8317C89A3400D50029 /* ArtworkWindowController.xib */; };
 		83131A8817C89A9F00D50029 /* ArtworkWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A8717C89A9F00D50029 /* ArtworkWindow.m */; };
 		83131A8B17C89AE600D50029 /* ArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A8A17C89AE600D50029 /* ArtworkView.m */; };
@@ -73,6 +71,8 @@
 		83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AE0FC517E2B93A00AE8282 /* SongSlider.m */; };
 		83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6419561160009D4FE2 /* MenubarController.m */; };
 		83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6719561231009D4FE2 /* StatusItemView.m */; };
+		83D532E51956B8B100E3EEAA /* ArtworkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */; };
+		83D532E61956B8B100E3EEAA /* PMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */; };
 		83DA970917DBEB2F007531E4 /* NextButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */; };
 		83DA970A17DBEB2F007531E4 /* PauseButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */; };
 		83DA970B17DBEB2F007531E4 /* PlayButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */; };
@@ -118,16 +118,12 @@
 		83131A4B17C898DC00D50029 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83131A4D17C898DC00D50029 /* PlayMe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlayMe-Prefix.pch"; sourceTree = "<group>"; };
 		83131A4F17C898DC00D50029 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		83131A5117C898DC00D50029 /* PMAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
-		83131A5217C898DC00D50029 /* PMAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
 		83131A5717C898DC00D50029 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		83131A5D17C898DC00D50029 /* PlayMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlayMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83131A5E17C898DC00D50029 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		83131A6517C898DC00D50029 /* PlayMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayMeTests-Info.plist"; sourceTree = "<group>"; };
 		83131A6717C898DC00D50029 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83131A6917C898DC00D50029 /* PlayMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayMeTests.m; sourceTree = "<group>"; };
-		83131A8117C89A3400D50029 /* ArtworkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtworkWindowController.h; path = ../ArtworkWindowController.h; sourceTree = "<group>"; };
-		83131A8217C89A3400D50029 /* ArtworkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArtworkWindowController.m; path = ../ArtworkWindowController.m; sourceTree = "<group>"; };
 		83131A8317C89A3400D50029 /* ArtworkWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkWindowController.xib; path = ../ArtworkWindowController.xib; sourceTree = "<group>"; };
 		83131A8617C89A9F00D50029 /* ArtworkWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindow.h; sourceTree = "<group>"; };
 		83131A8717C89A9F00D50029 /* ArtworkWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindow.m; sourceTree = "<group>"; };
@@ -191,6 +187,10 @@
 		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
 		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		83CB8D6719561231009D4FE2 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
+		83D532E11956B8B100E3EEAA /* ArtworkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindowController.h; sourceTree = "<group>"; };
+		83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindowController.m; sourceTree = "<group>"; };
+		83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
+		83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
 		83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonDepressed.png; sourceTree = "<group>"; };
@@ -343,8 +343,6 @@
 				835A69AD18BCFB9A0080CEA3 /* PreferencesWindowController.h */,
 				835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */,
 				835A69AF18BCFB9A0080CEA3 /* PreferencesWindowController.xib */,
-				83131A5117C898DC00D50029 /* PMAAppDelegate.h */,
-				83131A5217C898DC00D50029 /* PMAAppDelegate.m */,
 				83CB8D6319561160009D4FE2 /* MenubarController.h */,
 				83CB8D6419561160009D4FE2 /* MenubarController.m */,
 				83CB8D6619561231009D4FE2 /* StatusItemView.h */,
@@ -361,8 +359,10 @@
 		83131A9617C8A9BA00D50029 /* Main Window */ = {
 			isa = PBXGroup;
 			children = (
-				83131A8117C89A3400D50029 /* ArtworkWindowController.h */,
-				83131A8217C89A3400D50029 /* ArtworkWindowController.m */,
+				83D532E11956B8B100E3EEAA /* ArtworkWindowController.h */,
+				83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */,
+				83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */,
+				83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */,
 				83131A8317C89A3400D50029 /* ArtworkWindowController.xib */,
 				835CA99A1870A87600CE42A8 /* ColorOperation.h */,
 				835CA99B1870A87600CE42A8 /* ColorOperation.m */,
@@ -637,18 +637,18 @@
 			files = (
 				83131A8B17C89AE600D50029 /* ArtworkView.m in Sources */,
 				8342CB5F1892FD0E000CA6AE /* GeneralViewController.m in Sources */,
+				83D532E51956B8B100E3EEAA /* ArtworkWindowController.m in Sources */,
 				83131A8817C89A9F00D50029 /* ArtworkWindow.m in Sources */,
 				83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */,
 				83131A9817C8AD3200D50029 /* ImageController.m in Sources */,
 				83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */,
 				8342CB681892FD2E000CA6AE /* MASPreferencesWindowController.m in Sources */,
-				83131A8417C89A3400D50029 /* ArtworkWindowController.m in Sources */,
+				83D532E61956B8B100E3EEAA /* PMAAppDelegate.m in Sources */,
 				83E1A7E217E272C700BC94B8 /* SongSliderCell.m in Sources */,
 				83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */,
 				83131A4C17C898DC00D50029 /* main.m in Sources */,
 				8342CB6C1892FF60000CA6AE /* AboutViewController.m in Sources */,
 				83E5A98D17D0441900CDC2F7 /* AlbumColorPicker.m in Sources */,
-				83131A5317C898DC00D50029 /* PMAAppDelegate.m in Sources */,
 				835CA99C1870A87600CE42A8 /* ColorOperation.m in Sources */,
 				83131A9B17C8AE0C00D50029 /* NCController.m in Sources */,
 				837631A517DB186A00B51CBC /* ButtonsBackdrop.m in Sources */,

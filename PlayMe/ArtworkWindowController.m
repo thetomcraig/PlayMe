@@ -637,9 +637,9 @@
     NSRect statusRect = NSZeroRect;
     
     StatusItemView *statusItemView = nil;
-    if ([self.delegate respondsToSelector:@selector(statusItemViewForPanelController:)])
+    if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
     {
-        statusItemView = [self.delegate statusItemViewForPanelController:self];
+        statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
     }
     
     if (statusItemView)

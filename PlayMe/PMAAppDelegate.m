@@ -12,6 +12,7 @@
 
 @synthesize ncController;
 @synthesize artworkWindowController;
+@synthesize menubarController;
 
 #
 #pragma mark - Struct for positioning the window properly
@@ -263,7 +264,7 @@ struct DangerZone
     //The frame of the menu bar icon, and location for the arrow
     ///NSRect statusItemWindowframe = [[self.statusItem valueForKey:@"window"] frame];
     ///
-    NSRect statusItemWindowframe = NSMakeRect(100.0, 500.0, 10.0, 10.0);
+    ///NSRect statusItemWindowframe = NSMakeRect(100.0, 500.0, 10.0, 10.0);
     ///
     
 }
@@ -310,6 +311,21 @@ struct DangerZone
     NSLog(@"Entered the new method for toggling the preferences menu!");
 }
 
+- (ArtworkWindowController *)artworkWindowController
+{
+    if (artworkWindowController == nil) {
+        artworkWindowController = [[ArtworkWindowController alloc] initWithDelegate:self];
+
+    }
+    return artworkWindowController;
+}
+
+#pragma mark - PanelControllerDelegate
+
+- (StatusItemView *)statusItemViewForArtworkWindowController:(ArtworkWindowController *)controller
+{
+    return self.menubarController.statusItemView;
+}
 
 
 

@@ -18,7 +18,6 @@
         _statusItemView.image = [NSImage imageNamed:@"Stopped"];
         _statusItemView.alternateImage = [NSImage imageNamed:@"StoppedWhite"];
         _statusItemView.leftaction = @selector(toggleMainWindow:);
-        _statusItemView.rightaction = @selector(togglePreferencesMenu:);
     }
     return self;
 }
