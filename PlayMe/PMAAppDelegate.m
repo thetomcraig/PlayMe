@@ -57,7 +57,8 @@ struct DangerZone
     //Initialize stuff
     //-------------------------------------------------------------------------
     ncController = [[NCController alloc] init];
-    artworkWindowController = [[ArtworkWindowController alloc] init];
+    ///artworkWindowController = [[ArtworkWindowController alloc] init];
+    artworkWindowController = [[ArtworkWindowController alloc] initWithDelegate:self];
     [artworkWindowController closeWindow];
     
     [artworkWindowController.iTunesController createiTunesObjectIfNeeded];
@@ -182,52 +183,7 @@ struct DangerZone
     //It essentualy cleans up the window, because there were residuce images from
     //when iTunes stats changes
     BOOL shouldReDisplay = false;
-    
-    //Create a frame to be the new one
-    NSRect tempFrame = [artworkWindowController window].frame;
-    
-    //-------------------------------------------------------------------------
-    //Set dimensions and then set the frame.  Bear in mind, it will only
-    //set the frame if is a different size from the current frame
-    //-------------------------------------------------------------------------
-    //Is iTunes is stopped?
-    if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Stopped"])
-    {
-        //Does it have the small frame?
-        if ([artworkWindowController window].frame.size.height != SMALL_HEIGHT)
-        {
-            //If not, set the small frame
-            tempFrame.size.width = SMALL_WIDTH;
-            tempFrame.size.height = SMALL_HEIGHT;
-            
-            if ([[artworkWindowController window] isVisible])
-            {
-                shouldReDisplay = true;
-            }
-        }
-    }
-    //Else it should have the large frame
-    else
-    {
-        //Does it have the large frame?
-        if ([artworkWindowController window].frame.size.height != LARGE_HEIGHT)
-        {
-            //If not, set the large frame
-            tempFrame.size.width = LARGE_WIDTH;
-            tempFrame.size.height = LARGE_HEIGHT;
-            
-            if ([[artworkWindowController window] isVisible])
-            {
-                shouldReDisplay = true;
-            }
-        }
-    }
-    
-    //-------------------------------------------------------------------------
-    //Set the frame
-    //-------------------------------------------------------------------------
-    [[artworkWindowController window] setFrame:tempFrame display:shouldReDisplay];
-    
+  
     //-------------------------------------------------------------------------
     //Updating every other element
     //-------------------------------------------------------------------------
@@ -297,118 +253,45 @@ struct DangerZone
 //############################################################################
 //Fids the actual location on screen for the window to be.
 //############################################################################
--(void)updateWindowPosition
+
+ -(void)updateWindowPosition
 {
+ 
     //-------------------------------------------------------------------------
     //Find the location for the window
     //-------------------------------------------------------------------------
     //The frame of the menu bar icon, and location for the arrow
     ///NSRect statusItemWindowframe = [[self.statusItem valueForKey:@"window"] frame];
     ///
-    NSRect statusItemWindowframe = NSMakeRect(0.0, 0.0, 10.0, 10.0);
+    NSRect statusItemWindowframe = NSMakeRect(100.0, 500.0, 10.0, 10.0);
     ///
-    //Finding the origin
-    CGPoint origin = statusItemWindowframe.origin;
-    //The size of the window we want to open
-    CGSize statusItemWindowSize = [artworkWindowController window].frame.size;
-    //Calculations...
-    double halfOfIcon = statusItemWindowframe.size.width/2.f;
-    double halfOfWindow = statusItemWindowSize.width/2.f;
-    //Getting the position for the window
-    CGPoint windowTopLeftPosition = CGPointMake(origin.x + halfOfIcon - halfOfWindow, origin.y);
     
-    //-------------------------------------------------------------------------
-    //Checking to make sure it is not hanging off the screen
-    //This block sets up an array of "danger zones" which are bounds of x
-    //positions.  If the left position of the window is between the higher and
-    //lower numbers of any of the danger zones in the array, we know that window
-    //will be hanging off the edge of one of the screens.  This means we have
-    //to reposition the window so it is just on the right edge of the screen
-    //-------------------------------------------------------------------------
-    //Creating the danger zones
-    NSArray *screens = [NSScreen screens];
-    struct DangerZone dangerZones[[screens count]];
-    for (int i = 0; i < [screens count]; i++)
-    {
-        struct DangerZone dangerZone;
-        double rightEdge = [screens[i] frame].origin.x + [screens[i] frame].size.width;
-        dangerZone.lowerBound = rightEdge - [artworkWindowController window].frame.size.width;
-        dangerZone.upperBound = rightEdge - [artworkWindowController window].frame.size.width/2;
-        dangerZones[i] = dangerZone;
-    }
-    
-    //-------------------------------------------------------------------------
-    //Now, checking the topLeftPosition against all the danger zones.  This
-    //could probably be put in with the above code but it is seperated for
-    //clarity and because I may want to recalculate the window positions
-    //differently at a later time
-    //-------------------------------------------------------------------------
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
-    //This has to start as zero, (arrow in the middle = 0)
-    double arrowLocation = 0;
-    
-    for (int i = 0; i < [screens count]; i++)
-    {
-        //If this gets hit, the point is in the danger zone!
-        if ((dangerZones[i].lowerBound < windowTopLeftPosition.x) &&
-            (windowTopLeftPosition.x < dangerZones[i].upperBound))
-        {
-            double rightBuffer = bgTopArrow.size.height;
-            //Here, we reset the arrow location
-            double postionOfRightSideOfWindow = windowTopLeftPosition.x + [artworkWindowController window].frame.size.width;
-            double xPositionOfRightSideOfScreen = [screens[i] frame].origin.x + [screens[i] frame].size.width;
-            arrowLocation = (postionOfRightSideOfWindow - xPositionOfRightSideOfScreen) + rightBuffer;
-            
-            //Here, we reset the window location
-            windowTopLeftPosition.x = dangerZones[i].lowerBound - rightBuffer;
-        }
-    }
-    
-    //-------------------------------------------------------------------------
-    //Finally, Setting the window position and arrow location
-    //-------------------------------------------------------------------------
-    [[artworkWindowController window] setFrameTopLeftPoint:windowTopLeftPosition];
-    artworkWindowController.artworkWindow.artworkView.topArrowLocation = arrowLocation;
 }
+
 
 //############################################################################
 //Called when the icon is clicked.
 //If the window is opened, it gets closed, and vice versa.
 //We make sure to update either way, so the icon and menu bar title are correct
 //############################################################################
-/**
--(void)clicked:(id)sender
+-(IBAction)toggleMainWindow:(id)sender
 {
-    
-    NSEvent *event = [NSApp currentEvent];
-    
-    NSLog(@"%lu", (unsigned long)[event modifierFlags]);
-    
-    if([event modifierFlags] & NSControlKeyMask)
-    {
-        NSLog(@"Right click");
-        //[self openRightWindow:nil];
-    } else
-    {
-        NSLog(@"Left click");
-        //[self openLeftWindow:nil];
-    }
-    
-    //-------------------------------------------------------------------------
-    //Toggle: if the window is open, close it.  Otherwise open it.
-    //-------------------------------------------------------------------------
+    //this shoudl only call the artworkwindowcontrller
+
+
     if ([[artworkWindowController window] isVisible])
     {
         [artworkWindowController closeWindow];
         [self update:NO];
-        [self updateIcon:NO];
+        ///[self updateIcon:NO];
     }
     
     else
     {
+
         //Find out the window size and location
         [self update:YES];
-        [self updateIcon:YES];
+        ///[self updateIcon:YES];
         [self updateUIElements];
         [artworkWindowController updateCurrentArtworkFrame];
         
@@ -417,25 +300,18 @@ struct DangerZone
         
         [artworkWindowController.artworkWindow.artworkView setNeedsDisplay:YES];
         //Open the window
-        [[artworkWindowController window] makeKeyAndOrderFront:self];
-        [[artworkWindowController window] setLevel:kCGFloatingWindowLevel];
-        [NSApp activateIgnoringOtherApps:YES];
+        [artworkWindowController openWindow];
+
     }
-    
 }
 
-- (void)openWindow:(id)sender
+-(IBAction)togglePreferencesMenu:(id)sender
 {
-    
-        NSLog(@"Left click");
-       
+    NSLog(@"Entered the new method for toggling the preferences menu!");
+}
 
-}
-     */
--(void)newClickedMethodForWindow:(id)sender
-{
-    NSLog(@"Entered the new method for toggling the main window!");
-}
+
+
 
 //############################################################################
 //These three functions seperated from the above for clarity.

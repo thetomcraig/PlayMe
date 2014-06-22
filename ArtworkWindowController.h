@@ -5,13 +5,26 @@
 #import "ButtonsBackdrop.h"
 #import "ControlButtonsCell.h"
 #import "SongSliderCell.h"
-
 #import "GeneralViewController.h"
 #import "AboutViewController.h"
-
 #import "PreferencesWindowController.h"
+#import "StatusItemView.h"
 
-@interface ArtworkWindowController : NSWindowController
+@class ArtworkWindowController;
+
+@protocol ArtworkWindowControllerDelegate <NSObject>
+
+@optional
+
+- (StatusItemView *)statusItemViewForPanelController:(ArtworkWindowController *)controller;
+
+@end
+
+@interface ArtworkWindowController : NSWindowController <NSWindowDelegate>
+{
+    __unsafe_unretained id<ArtworkWindowControllerDelegate> _delegate;
+}
+
 
 @property (retain, nonatomic) ITunesController *iTunesController;
 @property (retain, nonatomic) ImageController *imageController;
@@ -48,6 +61,13 @@
 
 @property (nonatomic, retain) NSTimer *countdownTimer;
 
+
+
+@property (nonatomic, unsafe_unretained, readonly) id<ArtworkWindowControllerDelegate> delegate;
+-(id)initWithDelegate:(id<ArtworkWindowControllerDelegate>)delegate;
+
+
+
 -(void)update:(BOOL)windowIsOpen;
 -(void)updateArtwork;
 -(void)updateLabels;
@@ -58,6 +78,10 @@
 -(void)updateWindowElementsWithiTunesStopped;
 -(void)updateCurrentArtworkFrame;
 -(void)updateTrackingAreas;
+
+///
+-(void)openWindow;
+///
 
 -(void)advanceProgress:(NSTimer *)timer;
 -(IBAction)playpause:(id)sender;

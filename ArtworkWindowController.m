@@ -11,6 +11,7 @@
 #define LARGE_ARTWORK_HEIGHT 400
 
 #import "ArtworkWindowController.h"
+#import "MenubarController.h"
 
 @implementation ArtworkWindowController
 {
@@ -56,6 +57,8 @@
 
 @synthesize countdownTimer;
 
+@synthesize delegate = _delegate;
+
 #
 #pragma mark - Initalizing Method
 #
@@ -65,13 +68,16 @@
 //We set the defualt colors here, which are black and white.  If it gets
 //opened before the color algorithm is done, it can just show black and white.
 //############################################################################
--(id)init
+- (id)initWithDelegate:(id<ArtworkWindowControllerDelegate>)delegate
 {
-    self = [[ArtworkWindowController alloc]
-            initWithWindowNibName:@"ArtworkWindowController"];
+    self = [super initWithWindowNibName:@"ArtworkWindowController"];
     
     iTunesController = [[ITunesController alloc] init];
     
+    if (self != nil)
+    {
+        _delegate = delegate;
+    }
     return self;
 }
 
@@ -625,6 +631,107 @@
 //When the menuButton is pressed, this method is called to present the options
 //menu
 //############################################################################
+-(void)openWindow
+{
+    NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] frame];
+    NSRect statusRect = NSZeroRect;
+    
+    StatusItemView *statusItemView = nil;
+    if ([self.delegate respondsToSelector:@selector(statusItemViewForPanelController:)])
+    {
+        statusItemView = [self.delegate statusItemViewForPanelController:self];
+    }
+    
+    if (statusItemView)
+    {
+        statusRect = statusItemView.globalRect;
+        statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
+    }
+    else
+    {
+        statusRect.size = NSMakeSize(STATUS_ITEM_VIEW_WIDTH, [[NSStatusBar systemStatusBar] thickness]);
+        statusRect.origin.x = roundf((NSWidth(screenRect) - NSWidth(statusRect)) / 2);
+        statusRect.origin.y = NSHeight(screenRect) - NSHeight(statusRect) * 2;
+    }
+    
+    NSRect windowRect = [[self window] frame];
+    windowRect.size.width = LARGE_WIDTH;
+    windowRect.size.height = LARGE_HEIGHT;
+    windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect) / 2);
+    windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
+    
+    
+    
+    /**
+     //Finding the origin
+     CGPoint origin = statusItemWindowframe.origin;
+     //The size of the window we want to open
+     CGSize statusItemWindowSize = [artworkWindowController window].frame.size;
+     //Calculations...
+     double halfOfIcon = statusItemWindowframe.size.width/2.f;
+     double halfOfWindow = statusItemWindowSize.width/2.f;
+     //Getting the position for the window
+     CGPoint windowTopLeftPosition = CGPointMake(origin.x + halfOfIcon - halfOfWindow, origin.y);
+     
+     //-------------------------------------------------------------------------
+     //Checking to make sure it is not hanging off the screen
+     //This block sets up an array of "danger zones" which are bounds of x
+     //positions.  If the left position of the window is between the higher and
+     //lower numbers of any of the danger zones in the array, we know that window
+     //will be hanging off the edge of one of the screens.  This means we have
+     //to reposition the window so it is just on the right edge of the screen
+     //-------------------------------------------------------------------------
+     //Creating the danger zones
+     NSArray *screens = [NSScreen screens];
+     struct DangerZone dangerZones[[screens count]];
+     for (int i = 0; i < [screens count]; i++)
+     {
+     struct DangerZone dangerZone;
+     double rightEdge = [screens[i] frame].origin.x + [screens[i] frame].size.width;
+     dangerZone.lowerBound = rightEdge - [artworkWindowController window].frame.size.width;
+     dangerZone.upperBound = rightEdge - [artworkWindowController window].frame.size.width/2;
+     dangerZones[i] = dangerZone;
+     }
+     
+     //-------------------------------------------------------------------------
+     //Now, checking the topLeftPosition against all the danger zones.  This
+     //could probably be put in with the above code but it is seperated for
+     //clarity and because I may want to recalculate the window positions
+     //differently at a later time
+     //-------------------------------------------------------------------------
+     NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
+     //This has to start as zero, (arrow in the middle = 0)
+     double arrowLocation = 0;
+     
+     for (int i = 0; i < [screens count]; i++)
+     {
+     //If this gets hit, the point is in the danger zone!
+     if ((dangerZones[i].lowerBound < windowTopLeftPosition.x) &&
+     (windowTopLeftPosition.x < dangerZones[i].upperBound))
+     {
+     double rightBuffer = bgTopArrow.size.height;
+     //Here, we reset the arrow location
+     double postionOfRightSideOfWindow = windowTopLeftPosition.x + [artworkWindowController window].frame.size.width;
+     double xPositionOfRightSideOfScreen = [screens[i] frame].origin.x + [screens[i] frame].size.width;
+     arrowLocation = (postionOfRightSideOfWindow - xPositionOfRightSideOfScreen) + rightBuffer;
+     
+     //Here, we reset the window location
+     windowTopLeftPosition.x = dangerZones[i].lowerBound - rightBuffer;
+     }
+     }
+     
+     //-------------------------------------------------------------------------
+     //Finally, Setting the window position and arrow location
+     //-------------------------------------------------------------------------
+     [[artworkWindowController window] setFrameTopLeftPoint:windowTopLeftPosition];
+     artworkWindowController.artworkWindow.artworkView.topArrowLocation = arrowLocation;
+     */
+    [[self window] setFrame:windowRect display:YES];
+    
+    [[self window] makeKeyAndOrderFront:self];
+    [[self window] setLevel:kCGFloatingWindowLevel];
+    [NSApp activateIgnoringOtherApps:YES];
+}
 ///Moving this to the delegate so it can be a right click menu
 /**
 - (IBAction)openMenu:(id)sender

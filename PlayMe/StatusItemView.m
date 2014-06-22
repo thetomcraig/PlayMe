@@ -6,7 +6,8 @@
 @synthesize image = _image;
 @synthesize alternateImage = _alternateImage;
 @synthesize isHighlighted = _isHighlighted;
-@synthesize action = _action;
+@synthesize leftaction = _leftaction;
+@synthesize rightaction = _rightaction;
 @synthesize target = _target;
 
 #pragma mark -
@@ -49,18 +50,18 @@
 {
     if ([theEvent modifierFlags] & NSControlKeyMask)
     {
-        NSLog(@"ALPHA");
+        [NSApp sendAction:self.rightaction to:self.target from:self];
     }
     else
     {
-        [NSApp sendAction:self.action to:self.target from:self];
+        [NSApp sendAction:self.leftaction to:self.target from:self];
     }
     
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-    NSLog(@"ALPHA");
+    [NSApp sendAction:self.rightaction to:self.target from:self];
 }
 
 
@@ -98,6 +99,7 @@
 
 - (NSRect)globalRect
 {
+    NSLog(@"globalRect");
     NSRect frame = [self frame];
     frame.origin = [self.window convertBaseToScreen:frame.origin];
     return frame;

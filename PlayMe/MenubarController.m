@@ -5,6 +5,8 @@
 
 @synthesize statusItemView = _statusItemView;
 
+#pragma mark -
+
 - (id)init
 {
     self = [super init];
@@ -15,7 +17,8 @@
         _statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
         _statusItemView.image = [NSImage imageNamed:@"Stopped"];
         _statusItemView.alternateImage = [NSImage imageNamed:@"StoppedWhite"];
-        _statusItemView.action = @selector(togglePanel:);
+        _statusItemView.leftaction = @selector(toggleMainWindow:);
+        _statusItemView.rightaction = @selector(togglePreferencesMenu:);
     }
     return self;
 }
