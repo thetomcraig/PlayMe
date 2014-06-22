@@ -9,7 +9,7 @@
 @property (nonatomic, retain) NCController *ncController;
 
 - (IBAction)toggleMainWindow:(id)sender;
--(IBAction)togglePreferencesMenu:(id)sender;
+-(IBAction)toggleMenu:(id)sender;
 -(void)update:(BOOL)windowIsOpen;
 -(void)updateIcon:(BOOL)windowIsOpen;
 -(void)updateUIElements;

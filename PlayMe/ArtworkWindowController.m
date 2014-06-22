@@ -732,7 +732,7 @@
     [[self window] setLevel:kCGFloatingWindowLevel];
     [NSApp activateIgnoringOtherApps:YES];
 }
-///Moving this to the delegate so it can be a right click menu
+///Moving this to the delegate so it can be a right click meun
 /**
 - (IBAction)openMenu:(id)sender
 {

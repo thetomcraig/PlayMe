@@ -79,9 +79,9 @@
 -(void)updateCurrentArtworkFrame;
 -(void)updateTrackingAreas;
 
-///
+
 -(void)openWindow;
-///
+
 
 -(void)advanceProgress:(NSTimer *)timer;
 -(IBAction)playpause:(id)sender;

@@ -8,8 +8,6 @@
 
 @implementation PMAAppDelegate
 
-///@synthesize statusItem;
-
 @synthesize ncController;
 @synthesize artworkWindowController;
 @synthesize menubarController;
@@ -38,13 +36,6 @@ struct DangerZone
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 
-    /**
-    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    
-    [statusItem setAction:@selector(clicked:)];
-    [statusItem setHighlightMode: YES];
-    [statusItem setTarget:self];
-     */
 }
 
 //############################################################################
@@ -58,7 +49,7 @@ struct DangerZone
     //Initialize stuff
     //-------------------------------------------------------------------------
     ncController = [[NCController alloc] init];
-    ///artworkWindowController = [[ArtworkWindowController alloc] init];
+
     artworkWindowController = [[ArtworkWindowController alloc] initWithDelegate:self];
     [artworkWindowController closeWindow];
     
@@ -72,14 +63,8 @@ struct DangerZone
     //-------------------------------------------------------------------------
     //Set up observers and methods
     //-------------------------------------------------------------------------
-    
-    ///[self.statusBar setAction:@selector(clicked:)];
-    ///[statusBar setTarget:self];
-    
-    ///
     self.menubarController = [[MenubarController alloc] init];
-    ///
-   
+
     //For when iTunes plays/pauses/stops
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesStatusChange:)
@@ -278,7 +263,7 @@ struct DangerZone
 -(IBAction)toggleMainWindow:(id)sender
 {
     //this shoudl only call the artworkwindowcontrller
-
+self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
 
     if ([[artworkWindowController window] isVisible])
     {
@@ -306,8 +291,9 @@ struct DangerZone
     }
 }
 
--(IBAction)togglePreferencesMenu:(id)sender
+-(IBAction)toggleMenu:(id)sender
 {
+    self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     NSLog(@"Entered the new method for toggling the preferences menu!");
 }
 
