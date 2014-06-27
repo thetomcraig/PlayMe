@@ -49,10 +49,6 @@
 @synthesize nextButtonCell;
 @synthesize previousButton;
 @synthesize previousButtonCell;
-@synthesize menuButton;
-@synthesize moreButtonCell;
-@synthesize closeButton;
-@synthesize closeButtonCell;
 @synthesize trackingArea;
 
 @synthesize countdownTimer;
@@ -101,9 +97,6 @@
     currentArtwork.frame.size.height - bgTopArrow.size.height;
     [currentArtwork setFrame:artworkFrame];
     
-    [menuButton setToolTip:@"Open menu"];
-    [closeButton setToolTip:@"Close window"];
-    
     preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(showPreferences:) keyEquivalent:@""];
     openIniTunes = [[NSMenuItem alloc] initWithTitle:@"Go to song in iTunes" action:@selector(openIniTunes:) keyEquivalent:@""];
     quitApp = [[NSMenuItem alloc] initWithTitle:@"Quit PlayMe" action:@selector(quitPlayMe:) keyEquivalent:@""];
@@ -111,8 +104,6 @@
     [playPauseButton setBordered:NO];
     [nextButton setBordered:NO];
     [previousButton setBordered:NO];
-    [menuButton setBordered:NO];
-    [closeButton setBordered:NO];
 
     //Hiding this because I have not implemented it yet
     [currentLyrics setHidden:YES];
@@ -302,18 +293,12 @@
     nextButtonCell.buttonsColor = secondaryColor;
     playPauseButtonCell.buttonsColor = secondaryColor;
     previousButtonCell.buttonsColor = secondaryColor;
-    moreButtonCell.buttonsColor = secondaryColor;
-    closeButtonCell.buttonsColor = secondaryColor;
     songSliderCell.progressColor = secondaryColor;
     
     [nextButton setImage:[NSImage imageNamed:@"NextButton"]];
     [nextButton setAlternateImage:[NSImage imageNamed:@"NextButtonDepressed"]];
     [previousButton setImage:[NSImage imageNamed:@"PreviousButton"]];
     [previousButton setAlternateImage:[NSImage imageNamed:@"PreviousButtonDepressed"]];
-    [menuButton setImage:[NSImage imageNamed:@"moreButton"]];
-    [menuButton setAlternateImage:[NSImage imageNamed:@"moreButtonDepressed"]];
-    [closeButton setImage:[NSImage imageNamed:@"closeButton"]];
-    [closeButton setAlternateImage:[NSImage imageNamed:@"closeButtonDepressed"]];
 }
 
 //############################################################################
@@ -405,8 +390,6 @@
     int bottomOfBar = [songSlider frame].origin.y;
     //Buffer in a third the button's height, for making them equidistant
     int controlButtonsSideBufer = playPauseButton.frame.size.width/4;
-    //Buffer for the menu and close buttons
-    double outerButtonsSiderBuffer = playPauseButton.frame.size.width/2.5;
     //Buffer in a fifth the button's height
     int controlButtonsTopBuffer = playPauseButton.frame.size.width/5;
     //Height of the knob (and bar) for positioning
@@ -448,14 +431,6 @@
                                       bottomOfArt + controlButtonsTopBuffer,
                                       [previousButton frame].size.width,
                                       [previousButton frame].size.height);
-    menuButton.frame = CGRectMake([nextButton frame].origin.x + nextButton.frame.size.width + outerButtonsSiderBuffer,
-                                    bottomOfArt + controlButtonsTopBuffer,
-                                    [menuButton frame].size.width,
-                                    [menuButton frame].size.height);
-    closeButton.frame = CGRectMake([previousButton frame].origin.x - previousButton.frame.size.width - outerButtonsSiderBuffer,
-                                  bottomOfArt + controlButtonsTopBuffer,
-                                  [closeButton frame].size.width,
-                                  [closeButton frame].size.height);
     
     //Using the edge buffer in both dimensions because we want the art to be the same distance in x and y from the bottom of the art
     //Note: NOT the same as being in line with the botton of the button images, that would look weird
@@ -502,60 +477,10 @@
                                        currentArtwork.frame.origin.y,
                                        [currentArtwork frame].size.width,
                                        [playPauseButton frame].size.height + controlButtonsBuffer*2);
-    closeButton.frame = CGRectMake(currentArtwork.frame.size.width/2 - [closeButton frame].size.width - controlButtonsBuffer,
-                                       bottomOfArt + controlButtonsBuffer,
-                                       [closeButton frame].size.width,
-                                       [closeButton frame].size.height);
-    menuButton.frame = CGRectMake(currentArtwork.frame.size.width/2 + controlButtonsBuffer,
-                                  bottomOfArt + controlButtonsBuffer,
-                                  [menuButton frame].size.width,
-                                  [menuButton frame].size.height);
     
     [self updateTrackingAreas];
 }
 
-//############################################################################
-//This method fixes the currentArtwork frame.
-//This was confusing to me.  It works, but some of the position is awkward
-//and confusing
-//############################################################################
--(void)updateCurrentArtworkFrame
-{
-    //Make it the correct dimensions
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
-    NSRect tempFrame = NSMakeRect(0.0, 0.0, 0.0, 0.0);
-    if ([[iTunesController currentStatus] isEqualToString:@"Stopped"] || !([self iTunesIsRunning]))
-    {
-        [buttonsBackdrop setHidden:YES];
-        playPauseButton.hidden = YES;
-        nextButton.hidden = YES;
-        previousButton.hidden = YES;
-        [songTimeLeft setHidden:YES];
-        closeButton.hidden = NO;
-        menuButton.hidden = NO;
-        
-        tempFrame.size.height = SMALL_ARTWORK_HEIGHT - bgTopArrow.size.height;
-        tempFrame.size.width = SMALL_ARTWORK_WIDTH;
-        tempFrame.origin.y =  LARGE_HEIGHT - SMALL_ARTWORK_HEIGHT;
-    }
-    else
-    {
-        //Hits this statement if the size of the window is changing
-        //From small to big
-        if (currentArtwork.frame.size.height != LARGE_ARTWORK_HEIGHT)
-        {
-
-            menuButton.hidden = YES;
-            closeButton.hidden = YES;
-        }
-        
-        tempFrame.size.width = LARGE_ARTWORK_WIDTH;
-        tempFrame.size.height = LARGE_ARTWORK_HEIGHT;
-        tempFrame.origin.y =  tempFrame.size.height - bgTopArrow.size.height;
-    }
-    
-    [currentArtwork setFrame:tempFrame];
-}
 
 //############################################################################
 //Used to make sure the tracking are is the same size as the artwork frame.
@@ -628,38 +553,99 @@
 }
 
 //############################################################################
-//When the menuButton is pressed, this method is called to present the options
-//menu
+//When iTunes status changes, we need to update the positioning of everything
+//in the window.  This is done if the window is open.
 //############################################################################
--(void)openWindow
+-(void)updateUIElements
 {
-    NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] frame];
-    NSRect statusRect = NSZeroRect;
+    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
+    NSRect tempFrame = NSMakeRect(0.0, 0.0, 0.0, 0.0);
+    tempFrame.size.width = LARGE_ARTWORK_WIDTH;
+    tempFrame.size.height = LARGE_ARTWORK_HEIGHT;
+    tempFrame.origin.y =  tempFrame.size.height - bgTopArrow.size.height;
+    [currentArtwork setFrame:tempFrame];
     
-    StatusItemView *statusItemView = nil;
-    if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
-    {
-        statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
-    }
+    [self updateArtwork];
     
-    if (statusItemView)
+    if (![self iTunesIsRunning] ||
+        ([[self iTunesController].currentStatus isEqualToString:@"Stopped"]))
     {
-        statusRect = statusItemView.globalRect;
-        statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
+        [self updateWindowElementsWithiTunesStopped];
     }
     else
     {
-        statusRect.size = NSMakeSize(STATUS_ITEM_VIEW_WIDTH, [[NSStatusBar systemStatusBar] thickness]);
-        statusRect.origin.x = roundf((NSWidth(screenRect) - NSWidth(statusRect)) / 2);
-        statusRect.origin.y = NSHeight(screenRect) - NSHeight(statusRect) * 2;
+        [self updateWindowElements];
+    }
+    [self updateControlButtons];
+  
+}
+
+//############################################################################
+//Opening and closing the window with the menubar icon is clicked.
+//Called from the delegate most of the time, via the menubar controller.
+//############################################################################
+-(void)toggleWindow
+{
+    //If the window is open, close it
+    if ([[self window] isVisible])
+    {
+        [[self window] close];
+        [self update:NO];
     }
     
-    NSRect windowRect = [[self window] frame];
-    windowRect.size.width = LARGE_WIDTH;
-    windowRect.size.height = LARGE_HEIGHT;
-    windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect) / 2);
-    windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
+    //Otherwise its closed, so open it
+    else
+    {
+        [self update:YES];
+
+        [self updateUIElements];
+
+        
+        //Clear notifications from the screen,
+        [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+        
+        [self.artworkWindow.artworkView setNeedsDisplay:YES];
+  
+        
+        struct DangerZone
+        {
+            double lowerBound;
+            double upperBound;
+        };
+        
+        NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] frame];
+        NSRect statusRect = NSZeroRect;
+        
+        StatusItemView *statusItemView = nil;
+        if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
+        {
+            statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
+        }
     
+        if (statusItemView)
+        {
+            statusRect = statusItemView.globalRect;
+            statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
+        }
+        else
+        {
+            statusRect.size = NSMakeSize(STATUS_ITEM_VIEW_WIDTH, [[NSStatusBar systemStatusBar] thickness]);
+            statusRect.origin.x = roundf((NSWidth(screenRect) - NSWidth(statusRect)) / 2);
+            statusRect.origin.y = NSHeight(screenRect) - NSHeight(statusRect) * 2;
+        }
+        
+        NSRect windowRect = [[self window] frame];
+        windowRect.size.width = LARGE_WIDTH;
+        windowRect.size.height = LARGE_HEIGHT;
+        windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect) / 2);
+        windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
+        
+            [[self window] setFrame:windowRect display:YES];
+            
+            [[self window] makeKeyAndOrderFront:self];
+            [[self window] setLevel:kCGFloatingWindowLevel];
+            [NSApp activateIgnoringOtherApps:YES];
+    }
     
     
     /**
@@ -726,12 +712,10 @@
      [[artworkWindowController window] setFrameTopLeftPoint:windowTopLeftPosition];
      artworkWindowController.artworkWindow.artworkView.topArrowLocation = arrowLocation;
      */
-    [[self window] setFrame:windowRect display:YES];
     
-    [[self window] makeKeyAndOrderFront:self];
-    [[self window] setLevel:kCGFloatingWindowLevel];
-    [NSApp activateIgnoringOtherApps:YES];
 }
+    
+    
 ///Moving this to the delegate so it can be a right click meun
 /**
 - (IBAction)openMenu:(id)sender
@@ -830,18 +814,7 @@
     [NSApp terminate:self];
 }
 
-//############################################################################
-//This closes the window
-//############################################################################
-- (IBAction)closeWindowWithButton:(id)sender
-{
-    [self mouseExited:nil];
-    [self closeWindow];
-    NSNotification *iTunesButtonNotification = [NSNotification
-                                                notificationWithName:@"closeButtonClicked"
-                                                object:nil];
-    [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
-}
+
 
 //############################################################################
 //Triggered when the cursor is hovering over the artwork
@@ -856,11 +829,6 @@
         previousButton.hidden = NO;
         [songTimeLeft setHidden:NO];
     }
-
-    //We don't ever want to hide these
-    //we want to see the when nothing is playing
-    closeButton.hidden = NO;
-    menuButton.hidden = NO;
 }
 
 //############################################################################
@@ -868,19 +836,6 @@
 //############################################################################
 -(void)mouseExited:(NSEvent *)theEvent
 {
-    //This first if makes sure that if nothing is playing, the buttons don't
-    //autohide and just show up statically
-    if ((![self iTunesIsRunning]) || ([currentSong.stringValue isEqualToString:@""]))
-    {
-        menuButton.hidden = NO;
-        closeButton.hidden = NO;
-    }
-    else
-    {
-        menuButton.hidden = YES;
-        closeButton.hidden = YES;
-    }
-
     [buttonsBackdrop setHidden:YES];
     playPauseButton.hidden = YES;
     nextButton.hidden = YES;
@@ -928,18 +883,6 @@
     }
 }
 
-//############################################################################
-//Closes the active PlayMe window, and does a few other related tasks
-//############################################################################
--(void)closeWindow
-{
-    [[self window] close];
-    
-    if ([[preferencesWindowController window] isVisible])
-    {
-        [[preferencesWindowController window] close];
-    }
-}
 
 //############################################################################
 //This function trims tags that are too long for their containers.  It finds

@@ -12,7 +12,5 @@
 -(IBAction)toggleMenu:(id)sender;
 -(void)update:(BOOL)windowIsOpen;
 -(void)updateIcon:(BOOL)windowIsOpen;
--(void)updateUIElements;
--(void)updateWindowPosition;
 
 @end

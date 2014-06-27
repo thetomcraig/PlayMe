@@ -13,10 +13,10 @@
     if (self != nil)
     {
         // Install status item into the menu bar
-        NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:STATUS_ITEM_VIEW_WIDTH];
+        NSStatusItem *statusItem =[[NSStatusBar systemStatusBar]
+                                   statusItemWithLength:STATUS_ITEM_VIEW_WIDTH];
         _statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
-        _statusItemView.image = [NSImage imageNamed:@"Stopped"];
-        _statusItemView.alternateImage = [NSImage imageNamed:@"StoppedWhite"];
+        [_statusItemView update:@"" :@"Stopped"];
         _statusItemView.leftaction = @selector(toggleMainWindow:);
         _statusItemView.rightaction = @selector(toggleMenu:);
     }
@@ -26,6 +26,11 @@
 - (void)dealloc
 {
     [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
+}
+
+-(void)updateSatusItemView:(NSString *)songTitle iTunesStatus:(NSString *)iTunesStatusString
+{
+    [_statusItemView update:songTitle :iTunesStatusString];
 }
 
 #pragma mark -

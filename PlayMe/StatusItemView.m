@@ -27,24 +27,41 @@
     return self;
 }
 
+- (void)update:(NSString *)songTitle :(NSString *)iTunesStatus
+{
+    _title = songTitle;
+    _image = [NSImage imageNamed:iTunesStatus];
+    _alternateImage = [NSImage imageNamed:[iTunesStatus stringByAppendingString:@"White"]];
+    [self setNeedsDisplay:YES];
+    
+
+}
 
 #pragma mark -
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    NSLog(@"drawrect");
     [self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.isHighlighted];
     
     NSImage *icon = self.isHighlighted ? self.alternateImage : self.image;
     NSSize iconSize = [icon size];
     NSRect bounds = self.bounds;
-    CGFloat iconX = 3;
+    CGFloat iconX = 0;
     CGFloat iconY = roundf((NSHeight(bounds) - iconSize.height) / 2);
     NSPoint iconPoint = NSMakePoint(iconX, iconY);
     
     [icon drawAtPoint:iconPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
     
-    NSPoint textPoint = NSMakePoint(iconX + iconSize.width + 3, iconY);
-    [_title drawAtPoint:textPoint withAttributes:nil];
+    NSPoint textPoint = NSMakePoint(40, 0);
+
+    //Getting the default menubar font attributes
+    //0 means default size
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName: [NSFont menuBarFontOfSize: 0],
+                       NSParagraphStyleAttributeName: [NSParagraphStyle defaultParagraphStyle]
+                                  };
+    [_title drawAtPoint:textPoint withAttributes:attributes];
 }
 
 #pragma mark -

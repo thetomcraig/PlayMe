@@ -8,14 +8,12 @@
             <connections>
                 <outlet property="artworkWindow" destination="1" id="sXf-4J-dFn"/>
                 <outlet property="buttonsBackdrop" destination="w2N-yB-o87" id="wmb-6t-QQ9"/>
-                <outlet property="currentArtist" destination="N9x-KN-p5V" id="B4o-Rn-9pN"/>
                 <outlet property="currentArtistAndAlbum" destination="N9x-KN-p5V" id="Csv-tS-ZPS"/>
                 <outlet property="currentArtwork" destination="mKh-S4-TUn" id="B54-RH-c8b"/>
                 <outlet property="currentLyrics" destination="ld5-QJ-Mtg" id="92f-Lo-ANz"/>
                 <outlet property="currentSong" destination="t6z-pT-M7Z" id="3Su-co-88f"/>
                 <outlet property="nextButton" destination="Asy-Rh-8oS" id="b4w-2D-qG8"/>
                 <outlet property="nextButtonCell" destination="8Pf-qu-WCk" id="krl-sU-Pnn"/>
-                <outlet property="playPauseButtom" destination="a0y-eo-F2N" id="FHD-Ix-Xi7"/>
                 <outlet property="playPauseButton" destination="a0y-eo-F2N" id="ifA-ha-ddq"/>
                 <outlet property="playPauseButtonCell" destination="M8D-zP-HC9" id="f3H-rz-MB5"/>
                 <outlet property="previousButton" destination="Slc-aA-wDk" id="PM0-47-Rq1"/>
@@ -23,7 +21,6 @@
                 <outlet property="songSlider" destination="FQh-Ha-XUs" id="1FE-aZ-4G9"/>
                 <outlet property="songSliderCell" destination="Kov-bR-RBc" id="G6T-Vd-0M4"/>
                 <outlet property="songTimeLeft" destination="UiF-ep-TFT" id="8Sl-Tv-Hvq"/>
-                <outlet property="testLabel" destination="t6z-pT-M7Z" id="WvQ-zn-Q2C"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
         </customObject>
@@ -33,7 +30,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="374" y="60" width="400" height="800"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
                 <autoresizingMask key="autoresizingMask"/>

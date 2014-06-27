@@ -53,10 +53,6 @@
 @property (weak) IBOutlet ControlButtonsCell *nextButtonCell;
 @property (weak) IBOutlet NSButton *previousButton;
 @property (weak) IBOutlet ControlButtonsCell *previousButtonCell;
-@property (weak) IBOutlet NSButton *menuButton;
-@property (weak) IBOutlet ControlButtonsCell *moreButtonCell;
-@property (weak) IBOutlet NSButton *closeButton;
-@property (weak) IBOutlet ControlButtonsCell *closeButtonCell;
 @property (retain, nonatomic) NSTrackingArea *trackingArea;
 
 @property (nonatomic, retain) NSTimer *countdownTimer;
@@ -79,7 +75,8 @@
 -(void)updateCurrentArtworkFrame;
 -(void)updateTrackingAreas;
 
-
+-(void)updateUIElements;
+-(void)toggleWindow;
 -(void)openWindow;
 
 

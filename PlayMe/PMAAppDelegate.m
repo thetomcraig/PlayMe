@@ -13,15 +13,6 @@
 @synthesize menubarController;
 
 #
-#pragma mark - Struct for positioning the window properly
-#
-struct DangerZone
-{
-    double lowerBound;
-    double upperBound;
-};
-
-#
 #pragma mark - Initalizing Methods
 #
 //############################################################################
@@ -51,14 +42,12 @@ struct DangerZone
     ncController = [[NCController alloc] init];
 
     artworkWindowController = [[ArtworkWindowController alloc] initWithDelegate:self];
-    [artworkWindowController closeWindow];
     
     [artworkWindowController.iTunesController createiTunesObjectIfNeeded];
     
     [self update:NO];
-    ///[self updateIcon:NO];
-    [self updateUIElements];
-    [self updateWindowPosition];
+    [artworkWindowController updateUIElements];
+
 
     //-------------------------------------------------------------------------
     //Set up observers and methods
@@ -109,9 +98,9 @@ struct DangerZone
                                  :[NSFont menuBarFontOfSize:0]
                                  :@""];
     }
+   
+    [menubarController updateSatusItemView:titleForBar iTunesStatus:artworkWindowController.iTunesController.currentStatus];
     
-    
-    [menubarController.statusItemView setTitle: titleForBar];
     
     //If the UserDefaults option for showing
     //the name in the menubar IS ENABLED, then we show
@@ -122,141 +111,6 @@ struct DangerZone
     }
 }
 
-//############################################################################
-//Update the menu bar icon.  If the window is open we can use the opened icon
-//Otherswise, update according to the state of iTunes.
-//We need windowIsOpen to determine what kind of things we need to update
-//############################################################################
-/**
--(void)updateIcon:(BOOL)windowIsOpen
-{
-    if (windowIsOpen)
-    {
-        self.statusItem.image = [NSImage imageNamed:@"Open"];
-        self.statusItem.alternateImage = [NSImage imageNamed:@"OpenWhite"];
-    }
-    else
-    {
-        if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Stopped"])
-        {
-            self.statusItem.image = [NSImage imageNamed:@"Stopped"];
-            self.statusItem.alternateImage = [NSImage imageNamed:@"StoppedWhite"];
-        }
-        else if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Paused"])
-        {
-            self.statusItem.image = [NSImage imageNamed:@"Paused"];
-            self.statusItem.alternateImage = [NSImage imageNamed:@"PausedWhite"];
-        }
-        else if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Playing"])
-        {
-            self.statusItem.image = [NSImage imageNamed:@"Playing"];
-            self.statusItem.alternateImage = [NSImage imageNamed:@"PlayingWhite"];
-        }
-    }
-}
- */
-
-//############################################################################
-//Sets the window to the appropriate frame.  Small size for iTunes stopped,
-//large size otherwise.
-//
-//It only takes the width and height information, because it does not always
-//correspond to a window reposition.
-//
-//There is some extra logic about when the window is open, because setting the
-//frame when the window is open can result in flicker
-//############################################################################
--(void)updateUIElements
-{
-    //This tells us if we should redisplay the window or not
-    //It essentualy cleans up the window, because there were residuce images from
-    //when iTunes stats changes
-    BOOL shouldReDisplay = false;
-  
-    //-------------------------------------------------------------------------
-    //Updating every other element
-    //-------------------------------------------------------------------------
-    [self updateWindowPosition];
-    [artworkWindowController updateCurrentArtworkFrame];
-    [artworkWindowController updateArtwork];
-    
-    if (![artworkWindowController iTunesIsRunning] ||
-        ([[artworkWindowController iTunesController].currentStatus isEqualToString:@"Stopped"]))
-    {
-        [artworkWindowController updateWindowElementsWithiTunesStopped];
-    }
-    else
-    {
-        [artworkWindowController updateWindowElements];
-    }
-    [artworkWindowController updateControlButtons];
-    
-    
-    //-------------------------------------------------------------------------
-    //Last thing - need to know when the window changes size if we want to have
-    //the buttons be visible.  We consrtuct a rect for the actual screen
-    //location of the currentArtwork image and check this against the mouse
-    //location
-    //-------------------------------------------------------------------------
-    NSPoint mouseLoc = [NSEvent mouseLocation];
-    
-    NSRect currentArtworkFrame = [artworkWindowController artworkWindow].frame;
-    currentArtworkFrame.size.height = [artworkWindowController trackingArea].rect.size.height;
-    currentArtworkFrame.origin.y += [artworkWindowController artworkWindow].frame.size.height;
-    currentArtworkFrame.origin.y -= MENU_BAR_HEIGHT;
-    
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
-    currentArtworkFrame.origin.y -= bgTopArrow.size.height;
-    currentArtworkFrame.origin.y -= [artworkWindowController trackingArea].rect.size.width;
-    
-    //If the mouse is inside the window bounds
-    if ((currentArtworkFrame.origin.x < mouseLoc.x) &&
-        (mouseLoc.x < currentArtworkFrame.origin.x + currentArtworkFrame.size.width) &&
-        (currentArtworkFrame.origin.y < mouseLoc.y) &&
-        (mouseLoc.y < currentArtworkFrame.origin.y + currentArtworkFrame.size.height))
-    {
-        if ([[artworkWindowController window] isVisible])
-        {
-            [artworkWindowController mouseEntered:nil];
-        }
-    }
-    
-    else
-    {
-        [artworkWindowController mouseExited:nil];
-    }
-    
-    //-------------------------------------------------------------------------
-    //If the window was open when we had to change its size, we close it
-    //then open it again by simulating a click.  This worked better than trying
-    //to update certain elements in a certain element.  This flushes everyting
-    //out nicely
-    //-------------------------------------------------------------------------
-    if (shouldReDisplay)
-    {
-        [artworkWindowController closeWindow];
-        ///[self clicked:nil];
-    }
-}
-
-//############################################################################
-//Fids the actual location on screen for the window to be.
-//############################################################################
-
- -(void)updateWindowPosition
-{
- 
-    //-------------------------------------------------------------------------
-    //Find the location for the window
-    //-------------------------------------------------------------------------
-    //The frame of the menu bar icon, and location for the arrow
-    ///NSRect statusItemWindowframe = [[self.statusItem valueForKey:@"window"] frame];
-    ///
-    ///NSRect statusItemWindowframe = NSMakeRect(100.0, 500.0, 10.0, 10.0);
-    ///
-    
-}
-
 
 //############################################################################
 //Called when the icon is clicked.
@@ -265,40 +119,18 @@ struct DangerZone
 //############################################################################
 -(IBAction)toggleMainWindow:(id)sender
 {
-    //this shoudl only call the artworkwindowcontrller
-self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
+    self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
 
-    if ([[artworkWindowController window] isVisible])
-    {
-        [artworkWindowController closeWindow];
-        [self update:NO];
-        ///[self updateIcon:NO];
-    }
-    
-    else
-    {
-
-        //Find out the window size and location
-        [self update:YES];
-        ///[self updateIcon:YES];
-        [self updateUIElements];
-        [artworkWindowController updateCurrentArtworkFrame];
-        
-        //Clear notifications from the screen,
-        [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
-        
-        [artworkWindowController.artworkWindow.artworkView setNeedsDisplay:YES];
-        //Open the window
-        [artworkWindowController openWindow];
-
-    }
+    [artworkWindowController toggleWindow];
 }
+
 
 -(IBAction)toggleMenu:(id)sender
 {
     self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
-    NSLog(@"Entered the new method for toggling the preferences menu!");
+    NSLog(@"Stub menu needs to toggle");
 }
+
 
 - (ArtworkWindowController *)artworkWindowController
 {
@@ -333,12 +165,10 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     if ([[artworkWindowController window] isVisible])
     {
         [self update:YES];
-        ///[self updateIcon:YES];
     }
     else
     {
         [self update:NO];
-        ///[self updateIcon:NO];
         
         //Post notification after clearing any existing ones
         [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
@@ -348,7 +178,7 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
                                       :artworkWindowController.iTunesController.currentArtwork];
     }
 
-    [self updateUIElements];
+    [artworkWindowController updateUIElements];
 }
 
 //############################################################################
@@ -360,14 +190,12 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
 -(void)pausedUpdate
 {
     artworkWindowController.iTunesController.currentStatus = @"Paused";
-    
-    if ([[artworkWindowController window] isVisible])
-    {
-        ///[self updateIcon:YES];
-    }
-    else ///[self updateIcon:NO];
 
-    [self updateUIElements];
+
+    [artworkWindowController updateUIElements];
+    
+    ///make sure this is opdating properly, dont poll itunes, just update the icon
+    [menubarController updateSatusItemView:nil iTunesStatus:artworkWindowController.iTunesController.currentStatus];
 }
 
 //############################################################################
@@ -404,15 +232,13 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     if ([[artworkWindowController window] isVisible])
     {
         [self update:YES];
-        ///[self updateIcon:YES];
     }
     else
     {
         [self update:NO];
-        ///[self updateIcon:NO];
     }
    
-    [self updateUIElements];
+    [artworkWindowController updateUIElements];
     
     [artworkWindowController.artworkWindow.artworkView setNeedsDisplay:NO];
 }
@@ -438,7 +264,6 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     if ([note.name rangeOfString:@"iTunesButtonClicked"].location != NSNotFound)
     {
         [self update:NO];
-        ///[self updateIcon:NO];
         return;
     }
     
@@ -447,7 +272,6 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     else if ([note.name rangeOfString:@"closeButtonClicked"].location != NSNotFound)
     {
         [self update:NO];
-        ///[self updateIcon:NO];
         return;
     }
     
@@ -456,7 +280,6 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     else if ([note.name rangeOfString:@"ESCKeyHit"].location != NSNotFound)
     {
         [self update:NO];
-        ///[self updateIcon:NO];
         return;
     }
     
@@ -467,7 +290,6 @@ self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     {
         [artworkWindowController closeWindowWithButton:nil];
         [self update:NO];
-        ///[self updateIcon:NO];
         return;
     }
     
