@@ -10,7 +10,7 @@
 #import "StatusItemView.h"
 #import "MenubarController.h"
 
-#import "Glue.h"
+
 
 @interface ArtworkWindowController : NSWindowController <GlueDelegate>
 {

@@ -1,14 +1,14 @@
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
+#import "ImageController.h"
+#import "NCController.h"
 
-@class ITunesController;
-@protocol ITunesControllerDelegate <NSObject>
-@end
 
 @interface ITunesController :NSObject
 {
-    __unsafe_unretained id<ITunesControllerDelegate> _delegate;
     iTunesApplication *_iTunes;
+    ImageController *_imageController;
+    NCController *_ncController;
     NSString *_currentStatus;
     NSString *_currentSong;
     NSString *_currentArtist;
@@ -21,6 +21,8 @@
 }
 
 @property (nonatomic, strong) iTunesApplication *iTunes;
+@property (nonatomic, strong) ImageController *imageController;
+@property (nonatomic, strong) NCController *ncController;
 @property (nonatomic, strong) NSString *currentStatus;
 @property (nonatomic, strong) NSString *currentSong;
 @property (nonatomic, strong) NSString *currentArtist;
@@ -31,12 +33,6 @@
 @property (nonatomic) double currentLength;
 @property (nonatomic) bool iTunesRunning;
 
-
-///
-- (void)iTunesControllerDelegateTest;
-///
-
-- (id)initWithDelegate:(id<ITunesControllerDelegate>)delegate;
 - (void)update;
 - (void)updateWithNill;
 - (void)updateArtwork;
@@ -45,8 +41,5 @@
 - (bool)createiTunesObjectIfNeeded;
 - (bool)destroyiTunes;
 - (void)setPlayerPosition:(double)newPosition;
-- (void)playpause;
-- (void)nextSong;
-- (void)previousSong;
 
 @end
