@@ -1,25 +1,16 @@
-#define SMALL_WIDTH 130
-#define SMALL_HEIGHT 70
-#define LARGE_WIDTH 400
-#define LARGE_HEIGHT 800
-#define MENU_BAR_HEIGHT 22
-#define NSFloatingWindowLevel kCGFloatingWindowLevel
 #import "PMAAppDelegate.h"
 
 @implementation PMAAppDelegate
 
-@synthesize ncController;
-@synthesize artworkWindowController;
-@synthesize menubarController;
+@synthesize iTunesController = _iTunesController;
+@synthesize menubarController = _menubarController;
+@synthesize artworkWindowController = _artworkWindowController;
 
-#
-#pragma mark - Initalizing Methods
-#
-//############################################################################
-//Set up statusbar stuff.  Because awakeFromNib is called before
-//applicationDidFinish, it needs only user interface stuff
-//############################################################################
--(void)awakeFromNib
+//##############################################################################
+//Setting up the default settings for the app.  Because awakeFromNib is called
+//before applicationDidFinish, it needs only user interface stuff
+//##############################################################################
+- (void)awakeFromNib
 {
     NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
                                  @"YES", @"showSongName",
@@ -29,31 +20,29 @@
 
 }
 
-//############################################################################
+//##############################################################################
 //Sets up the method for when the icon is clicked
 //Sets up the method or when iTunes sends a status change notification
 //Sets up methods for when iTunes quit or launches
-//############################################################################
--(void)applicationDidFinishLaunching:(NSNotification *)notification
+//##############################################################################
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     //-------------------------------------------------------------------------
     //Initialize stuff
     //-------------------------------------------------------------------------
-    ncController = [[NCController alloc] init];
-
-    artworkWindowController = [[ArtworkWindowController alloc] initWithDelegate:self];
+    _iTunesController = [[ITunesController alloc] init];
+    _menubarController = [[MenubarController alloc] init];
+    _artworkWindowController = [[ArtworkWindowController alloc] init];
     
-    [artworkWindowController.iTunesController createiTunesObjectIfNeeded];
+    ///r
+    /**
+    [_iTunesController createiTunesObjectIfNeeded];
     
     [self update:NO];
-    [artworkWindowController updateUIElements];
-
-
-    //-------------------------------------------------------------------------
-    //Set up observers and methods
-    //-------------------------------------------------------------------------
-    self.menubarController = [[MenubarController alloc] init];
-
+    [_artworkWindowController updateUIElements];
+    */
+    ///r
+    /**
     //For when iTunes plays/pauses/stops
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesStatusChange:)
@@ -71,98 +60,89 @@
                  selector:@selector(iTunesQuit:)
                      name:NSWorkspaceDidTerminateApplicationNotification
                    object:nil];
+     */
     
 }
 
 #
 #pragma mark - Updating Methods
 #
-//############################################################################
-//This method updates the window controller and menu bar icon
-//############################################################################
--(void)update:(BOOL)windowIsOpen
+//##############################################################################
+//For updating the artworkWindowController and menubarController with new
+//info form iTunes
+//##############################################################################
+- (void)update:(BOOL)windowIsOpen
 {
     //Update the iTunes Controller
-    [artworkWindowController update:windowIsOpen];
+    [_artworkWindowController update:windowIsOpen];
     
-    //-------------------------------------------------------------------------
-    //Update the text in the menubar.  It should be nothing if the window is
-    //closed, but if the window is open, it should be the song title
-    //-------------------------------------------------------------------------
-    NSString *titleForBar = @"";
-    if (!windowIsOpen)
+    ///r
+    if ([_iTunesController iTunesRunning])
     {
-        titleForBar= [artworkWindowController
-                                 trimString:artworkWindowController.iTunesController.currentSong
-                                 :250.0 //This number is the amount of menubar space we dedicate the the title
-                                 :[NSFont menuBarFontOfSize:0]
-                                 :@""];
+        [_iTunesController update];
     }
-   
-    [menubarController updateSatusItemView:titleForBar iTunesStatus:artworkWindowController.iTunesController.currentStatus];
-    
+
     
     //If the UserDefaults option for showing
     //the name in the menubar IS ENABLED, then we show
     //the name.  Otherwise there shuold be no title
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        ///self.statusItem.title = titleForBar;
+        [_menubarController updateSatusItemView:_iTunesController.currentSong
+                                   iTunesStatus:_iTunesController.currentStatus];
     }
 }
 
 
-//############################################################################
+
+
+
+
+
+
+///r move
+//##############################################################################
 //Called when the icon is clicked.
 //If the window is opened, it gets closed, and vice versa.
-//We make sure to update either way, so the icon and menu bar title are correct
-//############################################################################
--(IBAction)toggleMainWindow:(id)sender
+//##############################################################################
+/**
+- (IBAction)toggleMainWindow:(id)sender
 {
-    self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
-
-    [artworkWindowController toggleWindow];
+    _menubarController.hasActiveIcon = !_menubarController.hasActiveIcon;
+    [_artworkWindowController toggleWindow];
 }
 
 
--(IBAction)toggleMenu:(id)sender
+- (IBAction)toggleMenu:(id)sender
 {
-    self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
+    _menubarController.hasActiveIcon = !_menubarController.hasActiveIcon;
     NSLog(@"Stub menu needs to toggle");
 }
-
-
-- (ArtworkWindowController *)artworkWindowController
-{
-    if (artworkWindowController == nil) {
-        artworkWindowController = [[ArtworkWindowController alloc] initWithDelegate:self];
-
-    }
-    return artworkWindowController;
-}
-
-#pragma mark - PanelControllerDelegate
-
-- (StatusItemView *)statusItemViewForArtworkWindowController:(ArtworkWindowController *)controller
-{
-    return self.menubarController.statusItemView;
-}
+*/
 
 
 
-//############################################################################
+
+
+
+
+
+
+//##############################################################################
 //These three functions seperated from the above for clarity.
 //They are only called by the receive method.
 //This one gets the information from iTunes and updates it accordingly
 //If the small window is open, it replaces this with the large window
 //At the end it makes sure all the UI elements are arranged properly
-//############################################################################
--(void)playingUpdate
+//##############################################################################
+///r move
+/**
+- (void)playingUpdate
 {
-
-    [artworkWindowController.iTunesController createiTunesObjectIfNeeded];
+    ///r
+    [_iTunesController createiTunesObjectIfNeeded];
     
-    if ([[artworkWindowController window] isVisible])
+    if ([[_artworkWindowController window] isVisible])
     {
         [self update:YES];
     }
@@ -172,33 +152,40 @@
         
         //Post notification after clearing any existing ones
         [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
-        [ncController sendNotification:artworkWindowController.iTunesController.currentSong
-                                      :artworkWindowController.iTunesController.currentArtist
-                                      :artworkWindowController.iTunesController.currentAlbum
-                                      :artworkWindowController.iTunesController.currentArtwork];
+        [_ncController sendNotification:_iTunesController.currentSong
+                                      :_iTunesController.currentArtist
+                                      :_iTunesController.currentAlbum
+                                      :_iTunesController.currentArtwork];
     }
 
-    [artworkWindowController updateUIElements];
-}
+    [_artworkWindowController updateUIElements];
 
-//############################################################################
+    [_artworkWindowController startTimer];
+    [_artworkWindowController.openIniTunes setTitle:@"Go to song in iTunes"];
+}
+*/
+//##############################################################################
 //This function sets paused information, mkaing sure to only update the
 //menubar icon if the window is closed
 //If the small window is open, it replaces this with the large window
 //At the end it makes sure all the UI elements are arranged properly
-//############################################################################
--(void)pausedUpdate
+//##############################################################################
+///r move
+/**
+- (void)pausedUpdate
 {
-    artworkWindowController.iTunesController.currentStatus = @"Paused";
+    _iTunesController.currentStatus = @"Paused";
 
 
-    [artworkWindowController updateUIElements];
+    [_artworkWindowController updateUIElements];
     
+    ///r
     ///make sure this is opdating properly, dont poll itunes, just update the icon
-    [menubarController updateSatusItemView:nil iTunesStatus:artworkWindowController.iTunesController.currentStatus];
+    [_menubarController updateSatusItemView:nil iTunesStatus:_iTunesController.currentStatus];
 }
+ */
 
-//############################################################################
+//##############################################################################
 //Essentially the same as the paused one
 //If the large window is open, it replaces this with the small window.
 //Putting the frame and window position updates at the end make sure
@@ -215,21 +202,23 @@
 //quitting.  If it went from playing or paused to stopped we can assume it
 //actually did just stop playback.  But if it goe sfrom stopped to stopped,
 //its a false positive - iTunes sends out a stopped updated when it quits...
-//############################################################################
--(void)stoppedUpdate
+//##############################################################################
+///r move
+/**
+- (void)stoppedUpdate
 {
-    if ([artworkWindowController.iTunesController.currentStatus isEqualToString:@"Stopped"])
+    if ([_iTunesController.currentStatus isEqualToString:@"Stopped"])
     {
         return;
     }
-    
-    if (![artworkWindowController iTunesIsRunning])
-    {
+ 
+    //if (![artworkWindowController iTunesIsRunning])
+    //{
         [artworkWindowController.iTunesController updateWithNill];
-        ///self.statusItem.title = @"";
-    }
-    
-    if ([[artworkWindowController window] isVisible])
+        //self.statusItem.title = @"";
+    //}
+ 
+    if ([[_artworkWindowController window] isVisible])
     {
         [self update:YES];
     }
@@ -238,23 +227,26 @@
         [self update:NO];
     }
    
-    [artworkWindowController updateUIElements];
-    
-    [artworkWindowController.artworkWindow.artworkView setNeedsDisplay:NO];
+    [_artworkWindowController updateUIElements];
+    [_artworkWindowController.artworkWindow.artworkView setNeedsDisplay:NO];
+    [_artworkWindowController.openIniTunes setTitle:@"Go to iTunes"];
 }
+*/
 
 #
 #pragma mark - iTunes utilities
 #
-//############################################################################
+//##############################################################################
 //Receives system notifications from the nsnotifcaion center.
 //Called when iTunes' status changes.  It is actually called whenever there
 //is a notification sent, but I filter out the non-iTunes ones.  When the
 //iTunes button it clicked, it sends a notification picked up here as well,
 //to make sure the menubar is updated.
 //we filter notifications that tell if iTunes has played, paused, or stopped
-//############################################################################
--(void)iTunesStatusChange:(NSNotification *)note
+//##############################################################################
+///r move
+/**
+- (void)iTunesStatusChange:(NSNotification *)note
 {
     //-------------------------------------------------------------------------
     //FILTERING....
@@ -288,7 +280,7 @@
     //needs to be update appropriately
     else if ([note.name rangeOfString:@"preferencesWindowButtonClicked"].location != NSNotFound)
     {
-        [artworkWindowController closeWindowWithButton:nil];
+        [_artworkWindowController closeWindowWithButton:nil];
         [self update:NO];
         return;
     }
@@ -332,43 +324,49 @@
         [self pausedUpdate];
     }
 }
-
-//############################################################################
+*/
+//##############################################################################
 //This method is called when iTunes launches, and it tells the iTunesController
 //to create an iTunes object if it has not already.
 //Really, this is tripped whenever any application is launched, and I do a
 //double check to make sure it was iTunes,  This is mimicked in the quitting
 //function as well
-//############################################################################
--(void)iTunesLaunched:(NSNotification *)note
+//##############################################################################
+///r move
+/**
+- (void)iTunesLaunched:(NSNotification *)note
 {
     if ([artworkWindowController iTunesIsRunning])
     {
         [artworkWindowController.iTunesController createiTunesObjectIfNeeded];
     }
 }
+*/
 
-//############################################################################
+//##############################################################################
 //This is called when iTune quits, and it destorys the iTunes object, and it
 //calls the stopped update to zero out tags and other info.  Not that when ANY
 //progarm quits, this method pick it up and we filter to just get the iTunes
 //notifications.  There is a check with an if statement to quit the entire app
 //if that optin was checked in the preferences.
-//############################################################################
--(void)iTunesQuit:(NSNotification *)note
+//##############################################################################
+///r move
+/**
+- (void)iTunesQuit:(NSNotification *)note
 {
     if ([[note.userInfo objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
     {        
-       [artworkWindowController.iTunesController destroyiTunes];
+       [_iTunesController destroyiTunes];
        [self stoppedUpdate];
     
         //If the UserDefaults option for quitting playme when
         //itunes quits IS ENABLED, quit.  Otherwise do not
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"quitWheniTunesQuits"])
         {
-            [artworkWindowController quitPlayMe:nil];
+            [_artworkWindowController quitPlayMe:nil];
         }
     }
 }
+*/
 
 @end

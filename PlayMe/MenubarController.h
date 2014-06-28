@@ -6,7 +6,7 @@
 
 @interface MenubarController : NSObject
 {
-@private
+    @private
     StatusItemView *_statusItemView;
 }
 
@@ -14,6 +14,7 @@
 @property (nonatomic, strong, readonly) NSStatusItem *statusItem;
 @property (nonatomic, strong, readonly) StatusItemView *statusItemView;
 
--(void)updateSatusItemView:(NSString *)songTitle iTunesStatus:(NSString *)iTunesStatusString;
+-(void)updateSatusItemView:(NSString *)songTitle
+              iTunesStatus:(NSString *)iTunesStatusString;
 
 @end

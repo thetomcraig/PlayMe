@@ -1,16 +1,17 @@
 #import "NCController.h"
 #import "MenubarController.h"
 #import "ArtworkWindowController.h"
+#import "ITunesController.h"
 
-@interface PMAAppDelegate : NSObject <NSApplicationDelegate, ArtworkWindowControllerDelegate>
+@interface PMAAppDelegate : NSObject
+{
+    ITunesController *_iTunesController;
+    MenubarController *_menubarController;
+    ArtworkWindowController *_artworkWindowController;
+}
 
-@property (nonatomic, strong) MenubarController *menubarController;
-@property (nonatomic, strong, readonly) ArtworkWindowController *artworkWindowController;
-@property (nonatomic, retain) NCController *ncController;
-
-- (IBAction)toggleMainWindow:(id)sender;
--(IBAction)toggleMenu:(id)sender;
--(void)update:(BOOL)windowIsOpen;
--(void)updateIcon:(BOOL)windowIsOpen;
-
+@property (nonatomic, strong, readonly) ITunesController *iTunesController;
+@property (nonatomic, strong, readonly) MenubarController *menubarController;
+@property (nonatomic, strong, readonly)
+                            ArtworkWindowController *artworkWindowController;
 @end

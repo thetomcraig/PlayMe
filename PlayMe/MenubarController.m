@@ -17,8 +17,10 @@
                                    statusItemWithLength:STATUS_ITEM_VIEW_WIDTH];
         _statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
         [_statusItemView update:@"" :@"Stopped"];
-        _statusItemView.leftaction = @selector(toggleMainWindow:);
-        _statusItemView.rightaction = @selector(toggleMenu:);
+        
+        _statusItemView.leftaction = NSSelectorFromString(@"toggleMainWindow:");
+        _statusItemView.rightaction = NSSelectorFromString(@"toggleMenu:");
+        
     }
     return self;
 }
@@ -28,7 +30,8 @@
     [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
 }
 
--(void)updateSatusItemView:(NSString *)songTitle iTunesStatus:(NSString *)iTunesStatusString
+-(void)updateSatusItemView:(NSString *)songTitle
+              iTunesStatus:(NSString *)iTunesStatusString
 {
     [_statusItemView update:songTitle :iTunesStatusString];
 }

@@ -1,17 +1,13 @@
-//From the Delegate, window sizes
-#define SMALL_WIDTH 130
-#define SMALL_HEIGHT 70
 #define LARGE_WIDTH 400
 #define LARGE_HEIGHT 800
 #define SMALL_BUFFER 15
 //For this class, artwork sizes
-#define SMALL_ARTWORK_WIDTH 130
-#define SMALL_ARTWORK_HEIGHT 70
 #define LARGE_ARTWORK_WIDTH 400
 #define LARGE_ARTWORK_HEIGHT 400
+#define NSFloatingWindowLevel kCGFloatingWindowLevel
 
 #import "ArtworkWindowController.h"
-#import "MenubarController.h"
+
 
 @implementation ArtworkWindowController
 {
@@ -58,33 +54,44 @@
 #
 #pragma mark - Initalizing Method
 #
-//############################################################################
+//##############################################################################
 //We initialize with the nib that has everything on it
 //The iTunesController gives us access to iTunes info
 //We set the defualt colors here, which are black and white.  If it gets
 //opened before the color algorithm is done, it can just show black and white.
-//############################################################################
-- (id)initWithDelegate:(id<ArtworkWindowControllerDelegate>)delegate
+//##############################################################################
+- (id)init
 {
-    self = [super initWithWindowNibName:@"ArtworkWindowController"];
+    Glue *glue = [[Glue alloc] init];
+
+    glue.delegate = self;
+    [glue takeGlueTest];
     
-    iTunesController = [[ITunesController alloc] init];
+    self = [super init];
+    return self;
+}
+- (id)initWithDelegate:(id<GlueDelegate>)outSideDelegate
+{
+    
+    self = [super initWithWindowNibName:@"ArtworkWindowController"];
     
     if (self != nil)
     {
-        _delegate = delegate;
+        _delegate = outSideDelegate;
     }
+    
+ 
     return self;
 }
 
-//############################################################################
+//##############################################################################
 //After the window has loaded, we make sure everything is aligned
 //The artwork is positioned just below the top arrow.  We call the mouseExited
 //function to make sure the buttons are hidden when the window opens.
 //We call updateWindowElements to position everything else.
 //The observers atthe top are for the color algorithm; they are called when
 //the algorithm comes up woith new colors or times out
-//############################################################################
+//##############################################################################
 -(void)windowDidLoad
 {
     [super windowDidLoad];
@@ -114,7 +121,7 @@
 #
 #pragma mark - Updating Methods
 #
-//############################################################################
+//##############################################################################
 //Updating everything in the window from the iTunesController object
 //If windowIsOpen is TRUE we do more work that if it is FALSE
 //First, we start and stop the timer accordingly
@@ -123,13 +130,9 @@
 //In the first if statement, we intialize the imageController if is hasn't
 //been done before, and analyze the album playing for colors.
 //This is the main function that calls smaller updater methods
-//############################################################################
+//##############################################################################
 -(void)update:(BOOL)windowIsOpen
 {
-    if ([self iTunesIsRunning])
-    {
-        [iTunesController update];
-    }
     if (!windowIsOpen)
     {
         [self stopTimer];
@@ -137,17 +140,6 @@
     
     else
     {
-        if ([[iTunesController currentStatus] isEqualToString:@"Playing"])
-        {
-            [self startTimer];
-            [openIniTunes setTitle:@"Go to song in iTunes"];
-        }
-        
-        else if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
-        {
-            [openIniTunes setTitle:@"Go to iTunes"];
-        }
-        
         [self updateLabels];
         [self updateControlButtons];
         
@@ -160,6 +152,7 @@
         //Bear in mind it will run on a sperate thread
         //-------------------------------------------------------------------------
         [self updateColors:YES];
+        ///b
         /**
         if (([[iTunesController currentStatus] isEqualToString:@"Playing"]) ||
             ([[iTunesController currentStatus] isEqualToString:@"Paused"]))
@@ -176,15 +169,18 @@
     
 }
 
-//############################################################################
+//################################################################################
 //If iTunes is stopped, we have the small window showing, and get the small
 //artwork for it.
 //Otherwise, if the window is open, we resize the artwork, bevel its edges,
 //and put it in the view.
 //If there was NO artwork, we put in the black artwork image
-//############################################################################
+//################################################################################
 -(void)updateArtwork
 {
+    ///r
+    ///take out resizenothingplaying stuff too
+    /**
     //If it is stopped, we want the small window with logo
     if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
     {
@@ -195,44 +191,44 @@
         [currentArtwork setImage:newArtwork];
         
     }
+     */
     
-    //Else, we have artwork to work with
-    else
+    
+    
+    ///_statusItemView.leftaction = NSSelectorFromString(@"toggleMainWindow:");
+ 
+    //If we HAVE artwork tagged.....
+    if ([iTunesController currentArtwork].size.width != 0.0)
     {
-        //If we HAVE artwork tagged.....
-        if ([iTunesController currentArtwork].size.width != 0.0)
+        NSImage *newArtwork = [imageController resizeArt:[iTunesController currentArtwork]
+                                                        :currentArtwork.frame];
+        
+        //Make sure to mask it if the song is pasued
+        if ([[iTunesController currentStatus] isEqualToString:@"Paused"])
         {
-            NSImage *newArtwork = [imageController resizeArt:[iTunesController currentArtwork]
-                                                            :currentArtwork.frame];
-            
-            //Make sure to mask it if the song is pasued
-            if ([[iTunesController currentStatus] isEqualToString:@"Paused"])
-            {
-                [imageController putOnPausedMask:newArtwork];
-            }
-            
-            //Finalize and put in the image
-            newArtwork = [imageController roundCorners:newArtwork];
-            [currentArtwork setImage:newArtwork];
+            [imageController putOnPausedMask:newArtwork];
         }
         
-        //There was no artwork :(
-        else
-        {
-            iTunesController.currentArtwork = [NSImage imageNamed:@"BlankArtwork"];
-        }
+        //Finalize and put in the image
+        newArtwork = [imageController roundCorners:newArtwork];
+        [currentArtwork setImage:newArtwork];
     }
+    
+    //There was no artwork :(
+    else
+    {
+        iTunesController.currentArtwork = [NSImage imageNamed:@"BlankArtwork"];
+    }
+    
 }
 
-//############################################################################
+//##############################################################################
 //Updating the labels with the song name, artist and album name.
 //It calls the trimString method to make sure they're clipped properly
-//############################################################################
+//##############################################################################
 -(void)updateLabels
 {
-    [currentSong setStringValue:[self trimString:[iTunesController currentSong]
-                                                :currentSong.frame.size.width
-                                                :currentSong.font :@""]];
+    [currentSong setStringValue:[iTunesController currentSong]];
     
     if ([[iTunesController currentArtist] isEqualToString:@""])
     {
@@ -243,21 +239,22 @@
                                          [iTunesController currentArtist],
                                            [iTunesController currentAlbum]];
         
-        [currentArtistAndAlbum setStringValue:[self trimString:combinedString
-                                                              :currentArtistAndAlbum.frame.size.width
-                                                              :currentArtistAndAlbum.font :@""]];
+        [currentArtistAndAlbum setStringValue:
+                                    [NSString stringWithFormat:@"%@ - %@",
+                                    [iTunesController currentArtist],
+                                    [iTunesController currentAlbum]]];
     }
   
 }
 
-//############################################################################
+//##############################################################################
 //Updates everything that needs to be colored, colors come from the color
 //algorithm carried ou by the imageController.  The control buttons are white,
 //and we adjust their hue so it matches the calculated color.
 //Currently, only the names of the resource images matter, not their actual
 //color.  This is because the actual resource image is used like a mask, and
 //the depressed color is created programatically.
-//############################################################################
+//##############################################################################
 -(void)updateColors:(BOOL)defaultColors
 {
     //This gets hit when we want the default colors
@@ -301,12 +298,12 @@
     [previousButton setAlternateImage:[NSImage imageNamed:@"PreviousButtonDepressed"]];
 }
 
-//############################################################################
+//##############################################################################
 //This method used to update the control buttons when the status changes.
 //Called when they're clicked, and in by the app delegate.  If this update was
 //called when the last song in the iTunes cue finished, we hide everything and
 //are done.  Otherwise, we need to update the buttons.
-//############################################################################
+//##############################################################################
 -(void)updateControlButtons
 {
     if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
@@ -329,12 +326,12 @@
     }
 }
 
-//############################################################################
+//##############################################################################
 //Here, we make sure the progress bar values are calculated.  We set the
 //max value to the song length.  This reflects what the bar looks like right
 //when the window opens.  We want to make sure it is at the right place right
 //off the bat, before the timer even starts
-//############################################################################
+//##############################################################################
 -(void)updateMaxValue
 {
     [songSlider setDoubleValue:0.0];
@@ -342,12 +339,12 @@
     [self advanceProgress:nil];
 }
 
-//############################################################################
+//##############################################################################
 //This is called by the timer, to update the progress bar and countdown label.
 //Updated because we need to  account for the position moving independent of a
 //state change ie. user moves the scrubber bar when iTunes paused
 //In the last line, we redraw the view.
-//############################################################################
+//##############################################################################
 -(void)advanceProgress:(NSTimer *)timer
 {
     [iTunesController updateProgress];
@@ -370,13 +367,13 @@
     [self.artworkWindow.artworkView display];
 }
 
-//############################################################################
+//##############################################################################
 //This makes sure the labels and progess bar just below the artwork.
 //The bottomOfArtBuffer is the distance from the bottom of the artwork to the
 //progress bar.  The leftEdgeBuffer is how far the labels are from the left
 //side of the window.  The controlButtons buffers are used to position the
 //control buttons.  Also updates the tracking area w/ artwork size
-//############################################################################
+//##############################################################################
 -(void)updateWindowElements
 {
     //-------------------------------------------------------------------------
@@ -390,6 +387,7 @@
     int bottomOfBar = [songSlider frame].origin.y;
     //Buffer in a third the button's height, for making them equidistant
     int controlButtonsSideBufer = playPauseButton.frame.size.width/4;
+    //Buffer for the menu and close buttons
     //Buffer in a fifth the button's height
     int controlButtonsTopBuffer = playPauseButton.frame.size.width/5;
     //Height of the knob (and bar) for positioning
@@ -459,10 +457,10 @@
     [self updateTrackingAreas];
 }
 
-//############################################################################
+//##############################################################################
 //This is essentually the same as the upper method, but for when iTunes is
 //stopped and we have no artwork.  In this case, we just want to show 3 buttons
-//############################################################################
+//##############################################################################
 -(void)updateWindowElementsWithiTunesStopped
 {
     //-------------------------------------------------------------------------
@@ -482,11 +480,11 @@
 }
 
 
-//############################################################################
+//##############################################################################
 //Used to make sure the tracking are is the same size as the artwork frame.
 //It's used to detect when the cursor is hovering over the artwork, to bring
 //up buttons
-//############################################################################
+//##############################################################################
 -(void)updateTrackingAreas
 {
     if(trackingArea != nil)
@@ -509,10 +507,10 @@
 #
 #pragma mark - Window Actions
 #
-//############################################################################
+//##############################################################################
 //This action taken out by the play/pause button, pauses and plays iTunes
 //accordingly
-//############################################################################
+//##############################################################################
 -(IBAction)playpause:(id)sender
 {
     [iTunesController playpause];
@@ -526,19 +524,19 @@
     [self updateControlButtons];
 }
 
-//############################################################################
+//##############################################################################
 //This action taken out by the next button, going to the next song
-//############################################################################
+//##############################################################################
 -(IBAction)next:(id)sender
 {
     [iTunesController nextSong];
 }
 
-//############################################################################
+//##############################################################################
 //This action taken out by the previous button, going to the previous song.
 //If the song has progressed past the threshold, it instead skips to the be-
 //geinning of the current song
-//############################################################################
+//##############################################################################
 -(IBAction)previous:(id)sender
 {
     double goToPreviousThreshold = 2.0;
@@ -552,10 +550,10 @@
 
 }
 
-//############################################################################
+//##############################################################################
 //When iTunes status changes, we need to update the positioning of everything
 //in the window.  This is done if the window is open.
-//############################################################################
+//##############################################################################
 -(void)updateUIElements
 {
     NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
@@ -580,10 +578,10 @@
   
 }
 
-//############################################################################
+//##############################################################################
 //Opening and closing the window with the menubar icon is clicked.
 //Called from the delegate most of the time, via the menubar controller.
-//############################################################################
+//##############################################################################
 -(void)toggleWindow
 {
     //If the window is open, close it
@@ -617,10 +615,12 @@
         NSRect statusRect = NSZeroRect;
         
         StatusItemView *statusItemView = nil;
+        /**
         if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
         {
             statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
         }
+         */
     
         if (statusItemView)
         {
@@ -754,9 +754,9 @@
 }
  */
 
-//############################################################################
+//##############################################################################
 //Opens the preferences window
-//############################################################################
+//##############################################################################
 -(void)showPreferences:(id)sender
 {
     //-------------------------------------------------------------------------
@@ -781,11 +781,11 @@
      
 }
 
-//############################################################################
+//##############################################################################
 //Closes PlayMe and goes to the song in iTunes
 //It also closes the window that's open and it sends a notification
 //so the delegate knows to update the menubar.
-//############################################################################
+//##############################################################################
 -(void)openIniTunes:(id)sender
 {
      [self mouseExited:nil];
@@ -806,9 +806,9 @@
      [script executeAndReturnError:nil];
 }
 
-//############################################################################
+//##############################################################################
 //This quits the application.
-//############################################################################
+//##############################################################################
 -(void)quitPlayMe:(id)sender
 {
     [NSApp terminate:self];
@@ -816,9 +816,9 @@
 
 
 
-//############################################################################
+//##############################################################################
 //Triggered when the cursor is hovering over the artwork
-//############################################################################
+//##############################################################################
 -(void)mouseEntered:(NSEvent *)theEvent
 {
     if (!([[iTunesController currentStatus] isEqualToString:@"Stopped"]))
@@ -831,9 +831,9 @@
     }
 }
 
-//############################################################################
+//##############################################################################
 //Triggered when the cursor stops hovering over the artwork
-//############################################################################
+//##############################################################################
 -(void)mouseExited:(NSEvent *)theEvent
 {
     [buttonsBackdrop setHidden:YES];
@@ -843,10 +843,10 @@
     [songTimeLeft setHidden:YES];
 }
 
-//############################################################################
+//##############################################################################
 //This is invoked when the used manually moves the progress slider.  It moves
 //the player position in iTunes to the corresponding location.
-//############################################################################
+//##############################################################################
 -(IBAction)sliderDidMove:(id)sender
 {
     [iTunesController setPlayerPosition:[songSlider doubleValue]];
@@ -856,10 +856,10 @@
 #
 #pragma mark -Utilities
 #
-//############################################################################
+//##############################################################################
 //Starts the timer used for the progress bar.  We seperate this because we
 //want to stop the timer when the window closes
-//############################################################################
+//##############################################################################
 -(void)startTimer
 {
     countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -868,11 +868,11 @@
                                                     userInfo:nil repeats:YES];
 }
 
-//############################################################################
+//##############################################################################
 //This is used to invalidate the timer when it does not need to be running.
 //We do this when the window is closed because the progress bar is not
 //visible if that happens
-//############################################################################
+//##############################################################################
 -(void)stopTimer
 {
     if (countdownTimer != nil)
@@ -883,31 +883,16 @@
     }
 }
 
-
-//############################################################################
-//This function trims tags that are too long for their containers.  It finds
-//the width of the string with the given font, and keeps removing charaters
-//until it is short enough, then adds an elipsis, and returns the short string.
-//The elipseToBeFilled is an empty string passed to the function that is appen
-//-ded to the output.  If the string was shortened, this is made into an elipse
-//otherwise, it remains empty.
-//############################################################################
--(NSString *)trimString:(NSString *)longString :(CGFloat)targetWidth :(NSFont *)font :(NSString *)elipseToBeFilled
+//##############################################################################
+//Returns true when the iTunesController says iTunes is running.
+//##############################################################################
+-(BOOL)iTunesIsRunning
 {
-    NSDictionary *attributes = [NSDictionary
-                                dictionaryWithObjectsAndKeys:font,
-                                NSFontAttributeName, nil];
-    CGFloat elipsisWidth = [@"..." sizeWithAttributes:attributes].width;
-    
-    CGFloat widthOfLongString = [longString sizeWithAttributes:attributes].width;
-    
-    if (widthOfLongString + elipsisWidth >= targetWidth)
+    if ([iTunesController iTunesRunning])
     {
-        elipseToBeFilled = @"...";
-        return [self trimString:[longString substringToIndex:longString.length - 1] :targetWidth :font: elipseToBeFilled];
+        return true;
     }
-
-    return [NSString stringWithFormat:@"%@%@", longString, elipseToBeFilled];
+    return false;
 }
 
 @end

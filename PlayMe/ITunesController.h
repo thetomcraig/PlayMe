@@ -1,33 +1,52 @@
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
 
-@interface ITunesController : NSObject
+@class ITunesController;
+@protocol ITunesControllerDelegate <NSObject>
+@end
+
+@interface ITunesController :NSObject
 {
-    iTunesApplication *iTunes;
+    __unsafe_unretained id<ITunesControllerDelegate> _delegate;
+    iTunesApplication *_iTunes;
+    NSString *_currentStatus;
+    NSString *_currentSong;
+    NSString *_currentArtist;
+    NSString *_currentAlbum;
+    NSString *_currentLyrics;
+    NSImage *_currentArtwork;
+    double _currentProgress;
+    double _currentLength;
+    bool _iTunesRunning;
 }
 
-//@property (nonatomic, assign) iTunesApplication *iTunes;
-@property (nonatomic, assign) bool iTunesRunning;
-@property (nonatomic, assign) NSString *currentStatus;
-@property (nonatomic, assign) NSString *currentSong;
-@property (nonatomic, assign) NSString *currentArtist;
-@property (nonatomic, assign) NSString *currentAlbum;
-@property (nonatomic, assign) NSString *currentLyrics;
-@property (nonatomic, assign) double currentProgress;
-@property (nonatomic, assign) double currentLength;
+@property (nonatomic, strong) iTunesApplication *iTunes;
+@property (nonatomic, strong) NSString *currentStatus;
+@property (nonatomic, strong) NSString *currentSong;
+@property (nonatomic, strong) NSString *currentArtist;
+@property (nonatomic, strong) NSString *currentAlbum;
+@property (nonatomic, strong) NSString *currentLyrics;
 @property (nonatomic, retain) NSImage  *currentArtwork;
+@property (nonatomic) double currentProgress;
+@property (nonatomic) double currentLength;
+@property (nonatomic) bool iTunesRunning;
 
--(id)init;
--(void)update;
--(void)updateWithNill;
--(void)updateArtwork;
--(void)updateProgress;
--(void)updateLyrics;
--(bool)createiTunesObjectIfNeeded;
--(bool)destroyiTunes;
--(void)setPlayerPosition:(double)newPosition;
--(void)playpause;
--(void)nextSong;
--(void)previousSong;
+
+///
+- (void)iTunesControllerDelegateTest;
+///
+
+- (id)initWithDelegate:(id<ITunesControllerDelegate>)delegate;
+- (void)update;
+- (void)updateWithNill;
+- (void)updateArtwork;
+- (void)updateProgress;
+- (void)updateLyrics;
+- (bool)createiTunesObjectIfNeeded;
+- (bool)destroyiTunes;
+- (void)setPlayerPosition:(double)newPosition;
+- (void)playpause;
+- (void)nextSong;
+- (void)previousSong;
 
 @end

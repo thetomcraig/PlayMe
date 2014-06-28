@@ -41,7 +41,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSLog(@"drawrect");
     [self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.isHighlighted];
     
     NSImage *icon = self.isHighlighted ? self.alternateImage : self.image;
