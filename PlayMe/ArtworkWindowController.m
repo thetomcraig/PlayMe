@@ -910,16 +910,4 @@
     return [NSString stringWithFormat:@"%@%@", longString, elipseToBeFilled];
 }
 
-//############################################################################
-//Returns true when the iTunesController says iTunes is running.
-//############################################################################
--(BOOL)iTunesIsRunning
-{
-    if ([iTunesController iTunesRunning])
-    {
-        return true;
-    }
-    return false;
-}
-
 @end

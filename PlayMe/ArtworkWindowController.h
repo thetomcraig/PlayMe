@@ -93,6 +93,5 @@
 -(void)quitPlayMe:(id)sender;
 -(IBAction)closeWindowWithButton:(id)sender;
 -(NSString *)trimString:(NSString *)longString :(CGFloat)targetWidth :(NSFont *)font :(NSString *)elipseToBeFilled;
--(BOOL)iTunesIsRunning;
 
 @end
