@@ -12,9 +12,7 @@
 
 
 
-@interface ArtworkWindowController : NSWindowController <GlueDelegate>
-{
-}
+@interface ArtworkWindowController : NSWindowController
 
 @property (retain, nonatomic) ITunesController *iTunesController;
 @property (retain, nonatomic) ImageController *imageController;
@@ -46,9 +44,6 @@
 @property (retain, nonatomic) NSTrackingArea *trackingArea;
 
 @property (nonatomic, retain) NSTimer *countdownTimer;
-
-@property (nonatomic, unsafe_unretained, readonly) id<GlueDelegate> delegate;
-- (id)initWithDelegate:(id<GlueDelegate>)outSideDelegate;
 
 - (void)update:(BOOL)windowIsOpen;
 - (void)updateArtwork;

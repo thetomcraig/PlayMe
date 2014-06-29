@@ -49,7 +49,6 @@
 
 @synthesize countdownTimer;
 
-@synthesize delegate = _delegate;
 
 #
 #pragma mark - Initalizing Method
@@ -62,25 +61,7 @@
 //##############################################################################
 - (id)init
 {
-    Glue *glue = [[Glue alloc] init];
-
-    glue.delegate = self;
-    [glue takeGlueTest];
-    
-    self = [super init];
-    return self;
-}
-- (id)initWithDelegate:(id<GlueDelegate>)outSideDelegate
-{
-    
     self = [super initWithWindowNibName:@"ArtworkWindowController"];
-    
-    if (self != nil)
-    {
-        _delegate = outSideDelegate;
-    }
-    
- 
     return self;
 }
 
@@ -255,6 +236,7 @@
 //color.  This is because the actual resource image is used like a mask, and
 //the depressed color is created programatically.
 //##############################################################################
+///b
 -(void)updateColors:(BOOL)defaultColors
 {
     //This gets hit when we want the default colors
@@ -347,7 +329,7 @@
 //##############################################################################
 -(void)advanceProgress:(NSTimer *)timer
 {
-    [iTunesController updateProgress];
+    ///[iTunesController updateProgress];
     
     double totalSecsLeft = ([iTunesController currentLength] -
                             [iTunesController currentProgress]);
@@ -513,9 +495,9 @@
 //##############################################################################
 -(IBAction)playpause:(id)sender
 {
-    [iTunesController playpause];
+    ///[iTunesController playpause];
     //This is so it knows the correct status
-    [iTunesController update];
+    ///[iTunesController update];
     if ([[iTunesController currentStatus] isEqualToString:@"Playing"])
     {
         [self mouseExited:nil];
@@ -529,7 +511,7 @@
 //##############################################################################
 -(IBAction)next:(id)sender
 {
-    [iTunesController nextSong];
+    ///[iTunesController nextSong];
 }
 
 //##############################################################################
@@ -542,10 +524,10 @@
     double goToPreviousThreshold = 2.0;
     if ([iTunesController currentProgress] > goToPreviousThreshold)
     {
-        [iTunesController setPlayerPosition:0.0];
+        ///[iTunesController setPlayerPosition:0.0];
     } else
     {
-        [iTunesController previousSong];
+        ///[iTunesController previousSong];
     }
 
 }
@@ -849,8 +831,8 @@
 //##############################################################################
 -(IBAction)sliderDidMove:(id)sender
 {
-    [iTunesController setPlayerPosition:[songSlider doubleValue]];
-    [iTunesController updateProgress];
+    ///[iTunesController setPlayerPosition:[songSlider doubleValue]];
+    ///[iTunesController updateProgress];
 }
 
 #

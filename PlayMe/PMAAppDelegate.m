@@ -55,14 +55,7 @@
 {
     //Update the iTunes Controller
     [_artworkWindowController update:windowIsOpen];
-    
-    ///r
-    if ([_iTunesController iTunesRunning])
-    {
-        [_iTunesController update];
-    }
-
-    
+        
     //If the UserDefaults option for showing
     //the name in the menubar IS ENABLED, then we show
     //the name.  Otherwise there shuold be no title

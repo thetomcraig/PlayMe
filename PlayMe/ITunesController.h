@@ -33,13 +33,6 @@
 @property (nonatomic) double currentLength;
 @property (nonatomic) bool iTunesRunning;
 
-- (void)update;
-- (void)updateWithNill;
-- (void)updateArtwork;
-- (void)updateProgress;
-- (void)updateLyrics;
-- (bool)createiTunesObjectIfNeeded;
-- (bool)destroyiTunes;
-- (void)setPlayerPosition:(double)newPosition;
+- (void)updateTags;
 
 @end
