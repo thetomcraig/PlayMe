@@ -116,7 +116,7 @@
 {
     if (!windowIsOpen)
     {
-        [self stopTimer];
+        ///[self stopTimer];
     }
     
     else
@@ -314,40 +314,18 @@
 //when the window opens.  We want to make sure it is at the right place right
 //off the bat, before the timer even starts
 //##############################################################################
+///r
+///Get this info from notiication
+/**
 -(void)updateMaxValue
 {
     [songSlider setDoubleValue:0.0];
     [songSlider setMaxValue:[iTunesController currentLength]];
     [self advanceProgress:nil];
 }
+*/
 
-//##############################################################################
-//This is called by the timer, to update the progress bar and countdown label.
-//Updated because we need to  account for the position moving independent of a
-//state change ie. user moves the scrubber bar when iTunes paused
-//In the last line, we redraw the view.
-//##############################################################################
--(void)advanceProgress:(NSTimer *)timer
-{
-    ///[iTunesController updateProgress];
-    
-    double totalSecsLeft = ([iTunesController currentLength] -
-                            [iTunesController currentProgress]);
-    int numMinsLeft = (floor(totalSecsLeft/60));
-    int numSecsLeft = (totalSecsLeft - numMinsLeft*60);
-    
-    //It needlessly showes 60's so we can just replace it
-    if (numSecsLeft == 60)
-    {
-        numMinsLeft = 0;
-        numSecsLeft = 0;
-    }
-    [songTimeLeft setStringValue:[NSString stringWithFormat:@"-%i:%02d",
-                                  numMinsLeft, numSecsLeft]];
-    
-    [songSlider setDoubleValue:[iTunesController currentProgress]];
-    [self.artworkWindow.artworkView display];
-}
+
 
 //##############################################################################
 //This makes sure the labels and progess bar just below the artwork.
@@ -838,32 +816,7 @@
 #
 #pragma mark -Utilities
 #
-//##############################################################################
-//Starts the timer used for the progress bar.  We seperate this because we
-//want to stop the timer when the window closes
-//##############################################################################
--(void)startTimer
-{
-    countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                      target:self
-                                                    selector:@selector(advanceProgress:)
-                                                    userInfo:nil repeats:YES];
-}
 
-//##############################################################################
-//This is used to invalidate the timer when it does not need to be running.
-//We do this when the window is closed because the progress bar is not
-//visible if that happens
-//##############################################################################
--(void)stopTimer
-{
-    if (countdownTimer != nil)
-    {
-        [countdownTimer invalidate];
-        countdownTimer = nil;
-        
-    }
-}
 
 //##############################################################################
 //Returns true when the iTunesController says iTunes is running.

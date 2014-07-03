@@ -11,8 +11,10 @@
 @synthesize currentAlbum = _currentAlbum;
 @synthesize currentLyrics = _currentLyrics;
 @synthesize currentArtwork = _currentArtwork;
+@synthesize countDownTimer = _countDownTimer;
 @synthesize currentProgress = _currentProgress;
 @synthesize currentLength = _currentLength;
+@synthesize currentTimeLeft = _currentTimeLeft;
 @synthesize iTunesRunning = _iTunesRunning;
 
 //##############################################################################
@@ -24,6 +26,11 @@
     if([self createiTunesObjectIfNeeded])
     {
         [self updateTags];
+    }
+
+    if ([_currentStatus isEqualToString:@"Playing"])
+    {
+        [self startTimer];
     }
     
     //For when iTunes plays/pauses/stops
@@ -268,6 +275,8 @@
                                    :_currentArtist
                                    :_currentAlbum
                                    :_currentArtwork];
+    //Start the timer again
+    [self startTimer];
     
     
     
@@ -303,6 +312,7 @@
 {
     _currentStatus = @"Paused";
     [self sendTagsNotification];
+    [self stopTimer];
     
     ///r
      ///Send not. to artwcontroller to do this
@@ -332,13 +342,11 @@
     //False positive - iTunes is actually quitting when this if statement
     //catches.  But this notification gets sent first, so we catch it here, then
     //allow the actual quit notificatino to get handled at the proper location.
-    if ([_currentStatus isEqualToString:@"Stopped"])
-    {
-        return;
-    }
+    if ([_currentStatus isEqualToString:@"Stopped"]) return;
 
     [self updateWithNill];
     [self sendTagsNotification];
+    [self stopTimer];
     
     
     ///r
@@ -420,14 +428,14 @@
     //Set up all the tags
     NSDictionary *iTunesTags =
     @{
-      @"CurrentStatus": _currentStatus,
-      @"CurrentSong": _currentSong,
-      @"CurrentArtist": _currentArtist,
-      @"CurrentAlbum": _currentAlbum,
-      @"CurrentLyrics": _currentLyrics,
-      @"CurrentArtwork": _currentArtwork,
+        @"CurrentStatus": _currentStatus,
+          @"CurrentSong": _currentSong,
+        @"CurrentArtist": _currentArtist,
+         @"CurrentAlbum": _currentAlbum,
+        @"CurrentLyrics": _currentLyrics,
+       @"CurrentArtwork": _currentArtwork,
       @"CurrentProgress": [NSNumber numberWithDouble:_currentProgress],
-      @"CurrentLength": [NSNumber numberWithDouble:_currentLength]
+        @"CurrentLength": [NSNumber numberWithDouble:_currentLength]
       };
 
     [[NSNotificationCenter defaultCenter]
@@ -469,6 +477,69 @@
         [self updateProgress];
     }
 }
+
+#
+#pragma mark - timer stuff
+#
+
+//##############################################################################
+//Starts the timer used for the progress bar.  We seperate this because we
+//want to stop the timer when the window closes.
+//##############################################################################
+- (void)startTimer
+{
+     _countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+     target:self
+     selector:@selector(advanceTimerProgress:)
+     userInfo:nil repeats:YES];
+}
+ 
+//##############################################################################
+//This is used to invalidate the timer when it does not need to be running.
+//We do this when the window is closed because the progress bar is not
+//visible if that happens
+//##############################################################################
+- (void)stopTimer
+{
+    if (_countDownTimer != nil)
+    {
+        [_countDownTimer invalidate];
+        _countDownTimer = nil;
+    }
+}
+
+//##############################################################################
+//Called by the timer every interval
+//##############################################################################
+- (void)advanceTimerProgress:(NSTimer *)timer
+{
+    ///[iTunesController updateProgress];
+    
+    double totalSecsLeft = (_currentLength - _currentProgress);
+    int numMinsLeft = (floor(totalSecsLeft/60));
+    int numSecsLeft = (totalSecsLeft - numMinsLeft*60);
+    
+    //It needlessly showes 60's so we can just replace it
+    if (numSecsLeft == 60)
+    {
+        numMinsLeft = 0;
+        numSecsLeft = 0;
+    }
+    
+    [self sendTagsNotification];
+    ///Send not. to do this
+    /**
+     
+     //Update the readable string with the time left in the song
+     _currentTimeLeft = [NSString stringWithFormat:@"-%i:%02d",
+     numMinsLeft,
+     numSecsLeft];
+    [songSlider setDoubleValue:[iTunesController currentProgress]];
+    [self.artworkWindow.artworkView display];
+     */
+}
+
+
 
 #
 #pragma mark - iTunes utilities

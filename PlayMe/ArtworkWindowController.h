@@ -60,15 +60,11 @@
 - (void)toggleWindow;
 - (void)openWindow;
 
-
-- (void)advanceProgress:(NSTimer *)timer;
 - (IBAction)playpause:(id)sender;
 - (IBAction)next:(id)sender;
 - (IBAction)previous:(id)sender;
 - (IBAction)sliderDidMove:(id)sender;
 
-- (void)startTimer;
-- (void)stopTimer;
 - (void)closeWindow;
 - (void)showPreferences:(id)sender;
 - (void)quitPlayMe:(id)sender;
