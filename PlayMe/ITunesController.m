@@ -44,7 +44,7 @@
     [[NSDistributedNotificationCenter defaultCenter]
                         addObserver:self
                            selector:@selector(receivedCommandNotification:)
-                               name:@"commandFromArtworkWindowController"
+                               name:@"commandNotification"
                              object:nil];
     
     //For receiving iTunes launch/quit information
@@ -54,12 +54,12 @@
                             [[NSWorkspace sharedWorkspace] notificationCenter];
     //Observer for when iTunes launches
     [sharedNC addObserver:self
-                 selector:@selector(iTunesLaunched:)
+                 selector:@selector(receivedITunesLaunchedNotification:)
                      name:NSWorkspaceDidLaunchApplicationNotification
                    object:nil];
     //Observer for whe iTunes quits
     [sharedNC addObserver:self
-                 selector:@selector(iTunesQuit:)
+                 selector:@selector(receivedITunesQuitNotification:)
                      name:NSWorkspaceDidTerminateApplicationNotification
                    object:nil];
     
@@ -164,7 +164,7 @@
 }
 
 #
-#pragma mark - Notification selector methods
+#pragma mark - Receiving notifications
 #
 //##############################################################################
 //Receives system notifications from the nsnotifcaion center.
@@ -173,7 +173,6 @@
 //##############################################################################
 - (void)receivedStatusNotification:(NSNotification *)note
 {
-
     //--------------------------------------------------------------------------
     //UPDATING
     //--------------------------------------------------------------------------
@@ -205,54 +204,6 @@
     {
         [self pausedUpdate];
     }
-    
-    ///r
-    ///move these around the rest of the app...
-    /**
-     //--------------------------------------------------------------------------
-     //FILTERING....
-     //--------------------------------------------------------------------------
-     //This came from the window controller, because the reveal in iTunes button
-     //was pressed.  We can update the menubar icon and be done after that
-     if ([note.name rangeOfString:@"iTunesButtonClicked"].location != NSNotFound)
-     {
-     [self update:NO];
-     return;
-     }
-     
-     //This also came from the window controller, because the close button was
-     //pressed.  Same shit as above
-     else if ([note.name rangeOfString:@"closeButtonClicked"].location != NSNotFound)
-     {
-     [self update:NO];
-     return;
-     }
-     
-     //This also came from the window controller, because the close button was
-     //pressed.  Same shit as above
-     else if ([note.name rangeOfString:@"ESCKeyHit"].location != NSNotFound)
-     {
-     [self update:NO];
-     return;
-     }
-     
-     //This comes from the preferences window, because the website button has
-     //been clicked, and the windows need to be closed, and everything else
-     //needs to be update appropriately
-     else if ([note.name rangeOfString:@"preferencesWindowButtonClicked"].location != NSNotFound)
-     {
-     [_artworkWindowController closeWindowWithButton:nil];
-     [self update:NO];
-     return;
-     }
-     
-     //This makes sure we only worry about the notification from iTunes
-     if ([note.name rangeOfString:@"iTunes"].location == NSNotFound) return;
-     //If the notification looks like this, iTunes has just
-     //been opened, and we do not need to update anything
-     if ([note.name isEqualToString:@"com.apple.iTunes.sourceInfo"]) return;
-     */
-
 }
 
 //##############################################################################
@@ -261,6 +212,43 @@
 //##############################################################################
 - (void)playingUpdate
 {
+    ///r re-incorporate
+    /**
+    if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
+    {
+        NSImage *newArtwork = [imageController
+                               resizeNothingPlaying
+                               :NSMakeSize(SMALL_ARTWORK_WIDTH - SMALL_BUFFER, SMALL_ARTWORK_HEIGHT)];
+        
+        [currentArtwork setImage:newArtwork];
+        
+    }
+    
+    
+    
+    if ([iTunesController currentArtwork].size.width != 0.0)
+    {
+        NSImage *newArtwork = [imageController resizeArt:[iTunesController currentArtwork]
+                                                        :currentArtwork.frame];
+        
+        //Make sure to mask it if the song is pasued
+        if ([[iTunesController currentStatus] isEqualToString:@"Paused"])
+        {
+            [imageController putOnPausedMask:newArtwork];
+        }
+        
+        //Finalize and put in the image
+        newArtwork = [imageController roundCorners:newArtwork];
+        [currentArtwork setImage:newArtwork];
+    }
+    
+    //There was no artwork :(
+    else
+    {
+        iTunesController.currentArtwork = [NSImage imageNamed:@"BlankArtwork"];
+    }
+    */
+    
     [self createiTunesObjectIfNeeded];
     [self updateTags];
     
@@ -370,80 +358,6 @@
      */
 }
 
- //#############################################################################
-//This method is called when iTunes launches, and it tells the iTunesController
-//to create an iTunes object if it has not already.
-///r
-///Can change this method to only pick up what I want, I think
-///Really, this is tripped whenever any application is launched, and I do a
-///double check to make sure it was iTunes,  This is mimicked in the quitting
-///function as well
-//##############################################################################
-- (void)iTunesLaunched:(NSNotification *)note
-{
-    if (_iTunesRunning)
-    {
-        [self createiTunesObjectIfNeeded];
-    }
-}
-
-//##############################################################################
-//This is called when iTune quits, and it destorys the iTunes object, and it
-//calls the stopped update to zero out tags and other info.
-///r
-///Might be able to change this behavior just in like in previous func.
-///Not that when ANY
-///progarm quits, this method pick it up and we filter to just get the iTunes
-///notifications.  There is a check with an if statement to quit the entire app
-///if that optin was checked in the preferences.
-//##############################################################################
-- (void)iTunesQuit:(NSNotification *)note
-{
-    if ([[note.userInfo
-          objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
-    {
-        [self destroyiTunes];
-        [self stoppedUpdate];
-        
-        ///r
-        ///Will want to send this message to the Delegate
-        /**
-        //If the UserDefaults option for quitting playme when
-        //itunes quits IS ENABLED, quit.  Otherwise do not
-        if([[NSUserDefaults standardUserDefaults]
-                                        boolForKey:@"quitWheniTunesQuits"])
-        {
-            [_artworkWindowController quitPlayMe:nil];
-        }
-         */
-    }
-}
-
-//##############################################################################
-//Sends a notification to the NSDistributedNotificationCenter, the notification
-//has all the iTunes tags in it.  It is picked up by the ArtworkwindowController
-//##############################################################################
-- (void)sendTagsNotification
-{
-    //Set up all the tags
-    NSDictionary *iTunesTags =
-    @{
-        @"CurrentStatus": _currentStatus,
-          @"CurrentSong": _currentSong,
-        @"CurrentArtist": _currentArtist,
-         @"CurrentAlbum": _currentAlbum,
-        @"CurrentLyrics": _currentLyrics,
-       @"CurrentArtwork": _currentArtwork,
-      @"CurrentProgress": [NSNumber numberWithDouble:_currentProgress],
-        @"CurrentLength": [NSNumber numberWithDouble:_currentLength]
-      };
-
-    [[NSNotificationCenter defaultCenter]
-        postNotificationName:@"iTunesControllerUpdate"
-                      object:self
-                    userInfo:iTunesTags];
-}
-
 //##############################################################################
 //Takes the notfication posted by some other part of the app to control iTunes,
 //parses the message and performs the action.
@@ -478,10 +392,122 @@
     }
 }
 
+///r
+///OTHER INFO WE NEED TO RECEIVE AND HANDLE
+/**
+ //--------------------------------------------------------------------------
+ //FILTERING....
+ //--------------------------------------------------------------------------
+ //This came from the window controller, because the reveal in iTunes button
+ //was pressed.  We can update the menubar icon and be done after that
+ if ([note.name rangeOfString:@"iTunesButtonClicked"].location != NSNotFound)
+ {
+ [self update:NO];
+ return;
+ }
+ 
+ //This also came from the window controller, because the close button was
+ //pressed.  Same shit as above
+ else if ([note.name rangeOfString:@"closeButtonClicked"].location != NSNotFound)
+ {
+ [self update:NO];
+ return;
+ }
+ 
+ //This also came from the window controller, because the close button was
+ //pressed.  Same shit as above
+ else if ([note.name rangeOfString:@"ESCKeyHit"].location != NSNotFound)
+ {
+ [self update:NO];
+ return;
+ }
+ 
+ //This comes from the preferences window, because the website button has
+ //been clicked, and the windows need to be closed, and everything else
+ //needs to be update appropriately
+ else if ([note.name rangeOfString:@"preferencesWindowButtonClicked"].location != NSNotFound)
+ {
+ [_artworkWindowController closeWindowWithButton:nil];
+ [self update:NO];
+ return;
+ }
+ 
+ //This makes sure we only worry about the notification from iTunes
+ if ([note.name rangeOfString:@"iTunes"].location == NSNotFound) return;
+ //If the notification looks like this, iTunes has just
+ //been opened, and we do not need to update anything
+ if ([note.name isEqualToString:@"com.apple.iTunes.sourceInfo"]) return;
+ */
+
+ //#############################################################################
+//This method is called when iTunes launches, and it tells the iTunesController
+//to create an iTunes object if it has not already.
+//##############################################################################
+- (void)receivedITunesLaunchedNotification:(NSNotification *)note
+{
+    if (_iTunesRunning)
+    {
+        [self createiTunesObjectIfNeeded];
+    }
+}
+
+//##############################################################################
+//This is called when iTune quits, and it destorys the iTunes object, and it
+//calls the stopped update to zero out tags and other info.
+//##############################################################################
+- (void)receivedITunesQuitNotification:(NSNotification *)note
+{
+    if ([[note.userInfo
+          objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
+    {
+        [self destroyiTunes];
+        [self stoppedUpdate];
+        
+        ///r
+        ///Will want to send this message to the Delegate
+        /**
+        //If the UserDefaults option for quitting playme when
+        //itunes quits IS ENABLED, quit.  Otherwise do not
+        if([[NSUserDefaults standardUserDefaults]
+                                        boolForKey:@"quitWhenreceivedITunesQuitNotifications"])
+        {
+            [_artworkWindowController quitPlayMe:nil];
+        }
+         */
+    }
+}
+
+#
+#pragma mark - Sending notifications
+#
+//##############################################################################
+//Sends a notification to the NSDistributedNotificationCenter, the notification
+//has all the iTunes tags in it.  It is picked up by the ArtworkwindowController
+//##############################################################################
+- (void)sendTagsNotification
+{
+    //Set up all the tags
+    NSDictionary *iTunesTags =
+    @{
+        @"CurrentStatus": _currentStatus,
+          @"CurrentSong": _currentSong,
+        @"CurrentArtist": _currentArtist,
+         @"CurrentAlbum": _currentAlbum,
+        @"CurrentLyrics": _currentLyrics,
+       @"CurrentArtwork": _currentArtwork,
+      @"CurrentProgress": [NSNumber numberWithDouble:_currentProgress],
+        @"CurrentLength": [NSNumber numberWithDouble:_currentLength]
+      };
+
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:@"TagsNotification"
+                      object:self
+                    userInfo:iTunesTags];
+}
+
 #
 #pragma mark - timer stuff
 #
-
 //##############################################################################
 //Starts the timer used for the progress bar.  We seperate this because we
 //want to stop the timer when the window closes.
@@ -513,33 +539,8 @@
 //##############################################################################
 - (void)advanceTimerProgress:(NSTimer *)timer
 {
-    ///[iTunesController updateProgress];
-    
-    double totalSecsLeft = (_currentLength - _currentProgress);
-    int numMinsLeft = (floor(totalSecsLeft/60));
-    int numSecsLeft = (totalSecsLeft - numMinsLeft*60);
-    
-    //It needlessly showes 60's so we can just replace it
-    if (numSecsLeft == 60)
-    {
-        numMinsLeft = 0;
-        numSecsLeft = 0;
-    }
-    
     [self sendTagsNotification];
-    ///Send not. to do this
-    /**
-     
-     //Update the readable string with the time left in the song
-     _currentTimeLeft = [NSString stringWithFormat:@"-%i:%02d",
-     numMinsLeft,
-     numSecsLeft];
-    [songSlider setDoubleValue:[iTunesController currentProgress]];
-    [self.artworkWindow.artworkView display];
-     */
 }
-
-
 
 #
 #pragma mark - iTunes utilities

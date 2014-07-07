@@ -10,16 +10,16 @@
 #import "StatusItemView.h"
 #import "MenubarController.h"
 
-
-
 @interface ArtworkWindowController : NSWindowController
 
-@property (retain, nonatomic) ITunesController *iTunesController;
-@property (retain, nonatomic) ImageController *imageController;
-@property (retain, nonatomic) NSWindowController *preferencesWindowController;
+///All of this needs to be taken out and moved elsewhere
+///@property (retain, nonatomic) ITunesController *iTunesController;
+///@property (retain, nonatomic) ImageController *imageController;
+///@property (retain, nonatomic) NSWindowController *preferencesWindowController;
 
 @property (strong) IBOutlet ArtworkWindow *artworkWindow;
 
+///r group these together somehow?
 @property (retain, nonatomic) NSMenu *menuButtonMenu;
 @property (retain, nonatomic) NSMenuItem *preferences;
 @property (retain, nonatomic) NSMenuItem *openIniTunes;
@@ -34,6 +34,7 @@
 @property (weak) IBOutlet SongSliderCell *songSliderCell;
 @property (weak) IBOutlet NSTextField *songTimeLeft;
 
+///r group these together also?
 @property (weak) IBOutlet ButtonsBackdrop *buttonsBackdrop;
 @property (weak) IBOutlet NSButton *playPauseButton;
 @property (weak) IBOutlet ControlButtonsCell *playPauseButtonCell;
@@ -43,32 +44,31 @@
 @property (weak) IBOutlet ControlButtonsCell *previousButtonCell;
 @property (retain, nonatomic) NSTrackingArea *trackingArea;
 
-@property (nonatomic, retain) NSTimer *countdownTimer;
-
+///prob dont need all the updates in the h file
 - (void)update:(BOOL)windowIsOpen;
 - (void)updateArtwork;
 - (void)updateLabels;
-- (void)updateColors:(BOOL)defaultColors;
+- (void)updateColors;
 - (void)updateControlButtons;
 - (void)updateMaxValue;
 - (void)updateWindowElements;
 - (void)updateWindowElementsWithiTunesStopped;
 - (void)updateCurrentArtworkFrame;
 - (void)updateTrackingAreas;
-
 - (void)updateUIElements;
+
 - (void)toggleWindow;
-- (void)openWindow;
 
 - (IBAction)playpause:(id)sender;
 - (IBAction)next:(id)sender;
 - (IBAction)previous:(id)sender;
 - (IBAction)sliderDidMove:(id)sender;
 
-- (void)closeWindow;
 - (void)showPreferences:(id)sender;
 - (void)quitPlayMe:(id)sender;
-- (IBAction)closeWindowWithButton:(id)sender;
+
+/// r can prob take out
+///- (IBAction)closeWindowWithButton:(id)sender;
 
 
 @end

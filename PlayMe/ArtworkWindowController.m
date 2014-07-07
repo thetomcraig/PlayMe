@@ -8,19 +8,7 @@
 
 #import "ArtworkWindowController.h"
 
-
 @implementation ArtworkWindowController
-{
-    //Colors used for all the
-    //colors of the window
-    NSColor *backgroundColor;
-    NSColor *primaryColor;
-    NSColor *secondaryColor;
-}
-
-@synthesize iTunesController;
-@synthesize imageController;
-@synthesize preferencesWindowController;
 
 @synthesize artworkWindow;
 
@@ -47,12 +35,6 @@
 @synthesize previousButtonCell;
 @synthesize trackingArea;
 
-@synthesize countdownTimer;
-
-
-#
-#pragma mark - Initalizing Method
-#
 //##############################################################################
 //We initialize with the nib that has everything on it
 //The iTunesController gives us access to iTunes info
@@ -62,6 +44,13 @@
 - (id)init
 {
     self = [super initWithWindowNibName:@"ArtworkWindowController"];
+    
+    [[NSNotificationCenter defaultCenter]
+                                 addObserver:self
+                                 selector:@selector(receivedTagsNotification:)
+                                 name:@"TagsNotification"
+                                 object:nil];
+    
     return self;
 }
 
@@ -76,8 +65,6 @@
 -(void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    imageController = [[ImageController alloc] init];
     
     NSRect artworkFrame = currentArtwork.frame;
     NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
@@ -96,169 +83,20 @@
     //Hiding this because I have not implemented it yet
     [currentLyrics setHidden:YES];
     [self mouseExited:nil];
-    [self updateColors:YES];
+    [self updateColors];
 }
 
-#
-#pragma mark - Updating Methods
-#
+
 //##############################################################################
-//Updating everything in the window from the iTunesController object
-//If windowIsOpen is TRUE we do more work that if it is FALSE
-//First, we start and stop the timer accordingly
-//If the window is not open, we can exit.
-//If the window is open, we have more stuff to do...
-//In the first if statement, we intialize the imageController if is hasn't
-//been done before, and analyze the album playing for colors.
-//This is the main function that calls smaller updater methods
+//Setting up the colors of the UI elements
 //##############################################################################
--(void)update:(BOOL)windowIsOpen
+-(void)updateColors
 {
-    if (!windowIsOpen)
-    {
-        ///[self stopTimer];
-    }
-    
-    else
-    {
-        [self updateLabels];
-        [self updateControlButtons];
-        
-        [self updateMaxValue];
-        [self updateArtwork];
-        
-        //-------------------------------------------------------------------------
-        //Updating the colors, if there is an art for algorithm to work with, run
-        //the algorithm, otherwise, just do default, black and white colors.
-        //Bear in mind it will run on a sperate thread
-        //-------------------------------------------------------------------------
-        [self updateColors:YES];
-        ///b
-        /**
-        if (([[iTunesController currentStatus] isEqualToString:@"Playing"]) ||
-            ([[iTunesController currentStatus] isEqualToString:@"Paused"]))
-        {
-            [imageController findColorsOpSeperateThread:[iTunesController currentArtwork]
-                                                forSong:[iTunesController currentSong]];
-        }
-        else
-        {
-            [self updateColors:YES];
-        }
-         */
-    }
-    
-}
+    NSColor *backgroundColor =
+        [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    NSColor *primaryColor =
+        [NSColor colorWithCalibratedRed:0.30 green:0.30 blue:0.30 alpha:1.0];
 
-//################################################################################
-//If iTunes is stopped, we have the small window showing, and get the small
-//artwork for it.
-//Otherwise, if the window is open, we resize the artwork, bevel its edges,
-//and put it in the view.
-//If there was NO artwork, we put in the black artwork image
-//################################################################################
--(void)updateArtwork
-{
-    ///r
-    ///take out resizenothingplaying stuff too
-    /**
-    //If it is stopped, we want the small window with logo
-    if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
-    {
-        NSImage *newArtwork = [imageController
-                               resizeNothingPlaying
-                               :NSMakeSize(SMALL_ARTWORK_WIDTH - SMALL_BUFFER, SMALL_ARTWORK_HEIGHT)];
-
-        [currentArtwork setImage:newArtwork];
-        
-    }
-     */
-    
-    
-    
-    ///_statusItemView.leftaction = NSSelectorFromString(@"toggleMainWindow:");
- 
-    //If we HAVE artwork tagged.....
-    if ([iTunesController currentArtwork].size.width != 0.0)
-    {
-        NSImage *newArtwork = [imageController resizeArt:[iTunesController currentArtwork]
-                                                        :currentArtwork.frame];
-        
-        //Make sure to mask it if the song is pasued
-        if ([[iTunesController currentStatus] isEqualToString:@"Paused"])
-        {
-            [imageController putOnPausedMask:newArtwork];
-        }
-        
-        //Finalize and put in the image
-        newArtwork = [imageController roundCorners:newArtwork];
-        [currentArtwork setImage:newArtwork];
-    }
-    
-    //There was no artwork :(
-    else
-    {
-        iTunesController.currentArtwork = [NSImage imageNamed:@"BlankArtwork"];
-    }
-    
-}
-
-//##############################################################################
-//Updating the labels with the song name, artist and album name.
-//It calls the trimString method to make sure they're clipped properly
-//##############################################################################
--(void)updateLabels
-{
-    [currentSong setStringValue:[iTunesController currentSong]];
-    
-    if ([[iTunesController currentArtist] isEqualToString:@""])
-    {
-        [currentArtistAndAlbum setStringValue:@""];
-    } else
-    {
-        NSString *combinedString = [NSString stringWithFormat:@"%@ - %@",
-                                         [iTunesController currentArtist],
-                                           [iTunesController currentAlbum]];
-        
-        [currentArtistAndAlbum setStringValue:
-                                    [NSString stringWithFormat:@"%@ - %@",
-                                    [iTunesController currentArtist],
-                                    [iTunesController currentAlbum]]];
-    }
-  
-}
-
-//##############################################################################
-//Updates everything that needs to be colored, colors come from the color
-//algorithm carried ou by the imageController.  The control buttons are white,
-//and we adjust their hue so it matches the calculated color.
-//Currently, only the names of the resource images matter, not their actual
-//color.  This is because the actual resource image is used like a mask, and
-//the depressed color is created programatically.
-//##############################################################################
-///b
--(void)updateColors:(BOOL)defaultColors
-{
-    //This gets hit when we want the default colors
-    NSColor *back = [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    NSColor *front = [NSColor colorWithCalibratedRed:0.30 green:0.30 blue:0.30 alpha:1.0];
-    backgroundColor = back;
-    primaryColor =  front;
-    secondaryColor = front;
-    
-    if (!defaultColors)
-    {
-        //-------------------------------------------------------------------------
-        //Get the colors we just found with the algorithm...
-        //-------------------------------------------------------------------------
-        backgroundColor = [imageController.albumColors objectForKey:@"backgroundColor"];
-        primaryColor = [imageController.albumColors objectForKey:@"primaryColor"];
-        secondaryColor = [imageController.albumColors objectForKey:@"secondaryColor"];
-    }
-
-    //-------------------------------------------------------------------------
-    //Assign all the colors
-    //-------------------------------------------------------------------------
     artworkWindow.artworkView.backgroundColor = backgroundColor;
     artworkWindow.artworkView.arrowColor = backgroundColor;
     //songSlider.backgroundColor = backgroundColor;
@@ -268,11 +106,11 @@
     currentSong.textColor = primaryColor;
     currentArtistAndAlbum.textColor = primaryColor;
     
-    songTimeLeft.textColor = secondaryColor;
-    nextButtonCell.buttonsColor = secondaryColor;
-    playPauseButtonCell.buttonsColor = secondaryColor;
-    previousButtonCell.buttonsColor = secondaryColor;
-    songSliderCell.progressColor = secondaryColor;
+    songTimeLeft.textColor = primaryColor;
+    nextButtonCell.buttonsColor = primaryColor;
+    playPauseButtonCell.buttonsColor = primaryColor;
+    previousButtonCell.buttonsColor = primaryColor;
+    songSliderCell.progressColor = primaryColor;
     
     [nextButton setImage:[NSImage imageNamed:@"NextButton"]];
     [nextButton setAlternateImage:[NSImage imageNamed:@"NextButtonDepressed"]];
@@ -280,52 +118,97 @@
     [previousButton setAlternateImage:[NSImage imageNamed:@"PreviousButtonDepressed"]];
 }
 
+#
+#pragma mark - Receiving notifications
+#
 //##############################################################################
-//This method used to update the control buttons when the status changes.
-//Called when they're clicked, and in by the app delegate.  If this update was
-//called when the last song in the iTunes cue finished, we hide everything and
-//are done.  Otherwise, we need to update the buttons.
+//Message to update sent from the iTunesController, with a notification that has
+//tag information.
 //##############################################################################
--(void)updateControlButtons
+- (void)receivedTagsNotification:(NSNotification *)note
 {
-    if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
+    //--------------------------------------------------------------------------
+    //Updating the labels with the song name, artist and album name.
+    //It calls the trimString method to make sure they're clipped properly
+    //--------------------------------------------------------------------------
+    [currentSong setStringValue:[note.userInfo objectForKey:@"CurrentSong"]];
+
+    if ([[note.userInfo objectForKey:@"CurrentArtist"] isEqualToString:@""])
     {
-        [playPauseButton setImage:[NSImage imageNamed:@"PlayButton"]];
-        [playPauseButton setAlternateImage:[NSImage imageNamed:@"PlayButtonDepressed"]];
-        return;
+        [currentArtistAndAlbum setStringValue:@""];
+    } else
+    {
+        NSString *combinedString =
+                                [NSString stringWithFormat:@"%@ - %@",
+                                [note.userInfo objectForKey:@"CurrentArtist"],
+                                [note.userInfo objectForKey:@"CurrentAlbum"]];
+        
+        [currentArtistAndAlbum setStringValue: combinedString];
+    }
+
+    //--------------------------------------------------------------------------
+    //Updating the control buttons
+    //--------------------------------------------------------------------------
+    NSString *nameOfButton = @"PlayButton";
+    
+    if ([[note.userInfo objectForKey:@"CurrentStatus"]
+         isEqualToString:@"Paused"] ||
+        [[note.userInfo objectForKey:@"CurrentStatus"]
+        isEqualToString:@"Stopped"])
+     {
+         nameOfButton = @"PlayButton";
+     }
+     else if ([[note.userInfo objectForKey:@"CurrentStatus"]
+               isEqualToString:@"Playing"])
+     {
+         nameOfButton = @"PausedButton";
+     }
+    
+    NSString *nameOfAltButton = [NSString stringWithFormat:@"%@%@",
+                                 nameOfButton,
+                                 @"ButtonDepressed"];
+    //Actually assigning the button resource image
+    [playPauseButton setImage:[NSImage imageNamed:nameOfButton]];
+    [playPauseButton setAlternateImage:[NSImage imageNamed:nameOfAltButton]];
+    
+    //--------------------------------------------------------------------------
+    //Updating the artwork.
+    //If there was NO artwork, we put in the black artwork image
+    //--------------------------------------------------------------------------
+    [currentArtwork setImage:[note.userInfo objectForKey:@"CurrentArtwork"]];
+
+    //--------------------------------------------------------------------------
+    //Timing - sliders
+    //--------------------------------------------------------------------------
+    //Sliders - have to use NSNumbers forth notification, so we make them into
+    //doubles here
+     [songSlider setDoubleValue:
+                [[note.userInfo objectForKey:@"CurrentProgress"] doubleValue]];
+     [songSlider setMaxValue:
+                [[note.userInfo objectForKey:@"CurrentLength"] doubleValue]];
+    
+    //--------------------------------------------------------------------------
+    //Timing - countdown label
+    //--------------------------------------------------------------------------
+    double totalSecsLeft =
+        ([[note.userInfo objectForKey:@"CurrentLength"] doubleValue] -
+         [[note.userInfo objectForKey:@"CurrentProgress"] doubleValue]);
+    int numMinsLeft = (floor(totalSecsLeft/60));
+    int numSecsLeft = (totalSecsLeft - numMinsLeft*60);
+    
+    //It needlessly showes 60's so we can just replace it
+    if (numSecsLeft == 60)
+    {
+        numMinsLeft = 0;
+        numSecsLeft = 0;
     }
     
-    if ([iTunesController.currentStatus isEqualToString:@"Paused"] || [iTunesController.currentStatus isEqualToString:@"Stopped"])
-    {
-        
-        [playPauseButton setImage:[NSImage imageNamed:@"PlayButton"]];
-        [playPauseButton setAlternateImage:[NSImage imageNamed:@"PlayButtonDepressed"]];
-    }
-    else if ([[iTunesController currentStatus] isEqualToString:@"Playing"])
-    {
-        [playPauseButton setImage:[NSImage imageNamed:@"PauseButton"]];
-        [playPauseButton setAlternateImage:[NSImage imageNamed:@"PauseButtonDepressed"]];
-    }
+    NSString *timeLeft = [NSString stringWithFormat:@"-%i:%02d",
+                         numMinsLeft,
+                         numSecsLeft];
+    
+    [songTimeLeft setStringValue:timeLeft];
 }
-
-//##############################################################################
-//Here, we make sure the progress bar values are calculated.  We set the
-//max value to the song length.  This reflects what the bar looks like right
-//when the window opens.  We want to make sure it is at the right place right
-//off the bat, before the timer even starts
-//##############################################################################
-///r
-///Get this info from notiication
-/**
--(void)updateMaxValue
-{
-    [songSlider setDoubleValue:0.0];
-    [songSlider setMaxValue:[iTunesController currentLength]];
-    [self advanceProgress:nil];
-}
-*/
-
-
 
 //##############################################################################
 //This makes sure the labels and progess bar just below the artwork.
@@ -465,7 +348,11 @@
 }
 
 #
-#pragma mark - Window Actions
+#pragma mark - Sending notifications
+#
+
+#
+#pragma mark - IBActions
 #
 //##############################################################################
 //This action taken out by the play/pause button, pauses and plays iTunes
@@ -473,6 +360,8 @@
 //##############################################################################
 -(IBAction)playpause:(id)sender
 {
+    ///r need to send not. to itC
+    /**
     ///[iTunesController playpause];
     //This is so it knows the correct status
     ///[iTunesController update];
@@ -482,6 +371,7 @@
     }
     [self updateArtwork];
     [self updateControlButtons];
+     */
 }
 
 //##############################################################################
@@ -489,6 +379,7 @@
 //##############################################################################
 -(IBAction)next:(id)sender
 {
+        ///r need to send not. to itC
     ///[iTunesController nextSong];
 }
 
@@ -499,6 +390,8 @@
 //##############################################################################
 -(IBAction)previous:(id)sender
 {
+        ///r need to send not. to itC
+    /**
     double goToPreviousThreshold = 2.0;
     if ([iTunesController currentProgress] > goToPreviousThreshold)
     {
@@ -507,41 +400,15 @@
     {
         ///[iTunesController previousSong];
     }
+     */
 
-}
-
-//##############################################################################
-//When iTunes status changes, we need to update the positioning of everything
-//in the window.  This is done if the window is open.
-//##############################################################################
--(void)updateUIElements
-{
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
-    NSRect tempFrame = NSMakeRect(0.0, 0.0, 0.0, 0.0);
-    tempFrame.size.width = LARGE_ARTWORK_WIDTH;
-    tempFrame.size.height = LARGE_ARTWORK_HEIGHT;
-    tempFrame.origin.y =  tempFrame.size.height - bgTopArrow.size.height;
-    [currentArtwork setFrame:tempFrame];
-    
-    [self updateArtwork];
-    
-    if (![self iTunesIsRunning] ||
-        ([[self iTunesController].currentStatus isEqualToString:@"Stopped"]))
-    {
-        [self updateWindowElementsWithiTunesStopped];
-    }
-    else
-    {
-        [self updateWindowElements];
-    }
-    [self updateControlButtons];
-  
 }
 
 //##############################################################################
 //Opening and closing the window with the menubar icon is clicked.
 //Called from the delegate most of the time, via the menubar controller.
 //##############################################################################
+///May want to tell the itC to start and stop the window
 -(void)toggleWindow
 {
     //If the window is open, close it
@@ -717,6 +584,8 @@
 //##############################################################################
 //Opens the preferences window
 //##############################################################################
+///r figure this out with nots.
+/**
 -(void)showPreferences:(id)sender
 {
     //-------------------------------------------------------------------------
@@ -740,6 +609,7 @@
     [preferencesWindowController showWindow:nil];
      
 }
+ */
 
 //##############################################################################
 //Closes PlayMe and goes to the song in iTunes
@@ -766,29 +636,23 @@
      [script executeAndReturnError:nil];
 }
 
-//##############################################################################
-//This quits the application.
-//##############################################################################
--(void)quitPlayMe:(id)sender
-{
-    [NSApp terminate:self];
-}
-
-
 
 //##############################################################################
 //Triggered when the cursor is hovering over the artwork
 //##############################################################################
 -(void)mouseEntered:(NSEvent *)theEvent
 {
-    if (!([[iTunesController currentStatus] isEqualToString:@"Stopped"]))
-    {
-        [buttonsBackdrop setHidden:NO];
-        playPauseButton.hidden = NO;
-        nextButton.hidden = NO;
-        previousButton.hidden = NO;
-        [songTimeLeft setHidden:NO];
-    }
+    ///r why did I need this if?
+    /**
+     if (!([[iTunesController currentStatus] isEqualToString:@"Stopped"]))
+     {
+     [buttonsBackdrop setHidden:NO];
+     playPauseButton.hidden = NO;
+     nextButton.hidden = NO;
+     previousButton.hidden = NO;
+     [songTimeLeft setHidden:NO];
+     }
+     */
 }
 
 //##############################################################################
@@ -816,18 +680,42 @@
 #
 #pragma mark -Utilities
 #
-
-
 //##############################################################################
-//Returns true when the iTunesController says iTunes is running.
+//When iTunes status changes, we need to update the positioning of everything
+//in the window.  This is done if the window is open.
 //##############################################################################
--(BOOL)iTunesIsRunning
+-(void)updateUIElements
 {
-    if ([iTunesController iTunesRunning])
-    {
-        return true;
-    }
-    return false;
+    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
+    NSRect tempFrame = NSMakeRect(0.0, 0.0, 0.0, 0.0);
+    tempFrame.size.width = LARGE_ARTWORK_WIDTH;
+    tempFrame.size.height = LARGE_ARTWORK_HEIGHT;
+    tempFrame.origin.y =  tempFrame.size.height - bgTopArrow.size.height;
+    [currentArtwork setFrame:tempFrame];
+    
+    [self updateArtwork];
+    ///r figure this one out...
+    /**
+     if (![self iTunesIsRunning] ||
+     ([[self iTunesController].currentStatus isEqualToString:@"Stopped"]))
+     {
+     [self updateWindowElementsWithiTunesStopped];
+     }
+     else
+     {
+     [self updateWindowElements];
+     }
+     */
+    [self updateControlButtons];
+    
+}
+
+//##############################################################################
+//This quits the application.
+//##############################################################################
+-(void)quitPlayMe:(id)sender
+{
+    [NSApp terminate:self];
 }
 
 @end

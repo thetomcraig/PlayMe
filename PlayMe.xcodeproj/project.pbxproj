@@ -12,8 +12,8 @@
 		831001EE17CC684C0055A5CB /* PausedWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 831001EB17CC684C0055A5CB /* PausedWhite.png */; };
 		831001EF17CC684C0055A5CB /* StoppedWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 831001EC17CC684C0055A5CB /* StoppedWhite.png */; };
 		831001F117CC690D0055A5CB /* PlayingWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 831001F017CC690D0055A5CB /* PlayingWhite.png */; };
-		83101A2617D9819B006E6CA8 /* PauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83101A2517D9819B006E6CA8 /* PauseButton.png */; };
-		83101A2F17DA879C006E6CA8 /* PlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83101A2D17DA879C006E6CA8 /* PlayButton.png */; };
+		83101A2617D9819B006E6CA8 /* PausedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83101A2517D9819B006E6CA8 /* PausedButton.png */; };
+		83101A2F17DA879C006E6CA8 /* PlayingButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83101A2D17DA879C006E6CA8 /* PlayingButton.png */; };
 		8310E585186B82B100510804 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8310E584186B82B100510804 /* icon.icns */; };
 		8310E5A3186BBEE000510804 /* closeButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8310E5A2186BBEE000510804 /* closeButtonDepressed.png */; };
 		8310E5A5186BBEF900510804 /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8310E5A4186BBEF900510804 /* closeButton.png */; };
@@ -74,8 +74,8 @@
 		83D532E51956B8B100E3EEAA /* ArtworkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */; };
 		83D532E61956B8B100E3EEAA /* PMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */; };
 		83DA970917DBEB2F007531E4 /* NextButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */; };
-		83DA970A17DBEB2F007531E4 /* PauseButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */; };
-		83DA970B17DBEB2F007531E4 /* PlayButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */; };
+		83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */; };
+		83DA970B17DBEB2F007531E4 /* PlayingButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970717DBEB2F007531E4 /* PlayingButtonDepressed.png */; };
 		83DA970C17DBEB2F007531E4 /* PreviousButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970817DBEB2F007531E4 /* PreviousButtonDepressed.png */; };
 		83DA970F17DBF2C5007531E4 /* ControlButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DA970E17DBF2C5007531E4 /* ControlButtonsCell.m */; };
 		83E1A7DA17E1A1FE00BC94B8 /* iTunesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E1A7D817E1A1FE00BC94B8 /* iTunesButton.png */; };
@@ -103,8 +103,8 @@
 		831001EB17CC684C0055A5CB /* PausedWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PausedWhite.png; sourceTree = "<group>"; };
 		831001EC17CC684C0055A5CB /* StoppedWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoppedWhite.png; sourceTree = "<group>"; };
 		831001F017CC690D0055A5CB /* PlayingWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayingWhite.png; sourceTree = "<group>"; };
-		83101A2517D9819B006E6CA8 /* PauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseButton.png; sourceTree = "<group>"; };
-		83101A2D17DA879C006E6CA8 /* PlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButton.png; sourceTree = "<group>"; };
+		83101A2517D9819B006E6CA8 /* PausedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PausedButton.png; sourceTree = "<group>"; };
+		83101A2D17DA879C006E6CA8 /* PlayingButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayingButton.png; sourceTree = "<group>"; };
 		8310E584186B82B100510804 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		8310E5A2186BBEE000510804 /* closeButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButtonDepressed.png; sourceTree = "<group>"; };
 		8310E5A4186BBEF900510804 /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 		83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
 		83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
 		83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButtonDepressed.png; sourceTree = "<group>"; };
-		83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseButtonDepressed.png; sourceTree = "<group>"; };
-		83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonDepressed.png; sourceTree = "<group>"; };
+		83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PausedButtonDepressed.png; sourceTree = "<group>"; };
+		83DA970717DBEB2F007531E4 /* PlayingButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayingButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970817DBEB2F007531E4 /* PreviousButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PreviousButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970D17DBF2C5007531E4 /* ControlButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlButtonsCell.h; sourceTree = "<group>"; };
 		83DA970E17DBF2C5007531E4 /* ControlButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlButtonsCell.m; sourceTree = "<group>"; };
@@ -241,13 +241,13 @@
 				83E1A7D817E1A1FE00BC94B8 /* iTunesButton.png */,
 				83E1A7D917E1A1FE00BC94B8 /* iTunesButtonDepressed.png */,
 				83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */,
-				83DA970617DBEB2F007531E4 /* PauseButtonDepressed.png */,
-				83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */,
+				83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */,
+				83DA970717DBEB2F007531E4 /* PlayingButtonDepressed.png */,
 				83DA970817DBEB2F007531E4 /* PreviousButtonDepressed.png */,
 				8376319717DAFA1E00B51CBC /* NextButton.png */,
 				8376319917DAFA1E00B51CBC /* PreviousButton.png */,
-				83101A2D17DA879C006E6CA8 /* PlayButton.png */,
-				83101A2517D9819B006E6CA8 /* PauseButton.png */,
+				83101A2D17DA879C006E6CA8 /* PlayingButton.png */,
+				83101A2517D9819B006E6CA8 /* PausedButton.png */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -571,7 +571,7 @@
 				8376319D17DAFA1E00B51CBC /* PreviousButton.png in Resources */,
 				8392AACA17CBF1C200EEF193 /* Stopped.png in Resources */,
 				8376319B17DAFA1E00B51CBC /* NextButton.png in Resources */,
-				83DA970B17DBEB2F007531E4 /* PlayButtonDepressed.png in Resources */,
+				83DA970B17DBEB2F007531E4 /* PlayingButtonDepressed.png in Resources */,
 				8310E5A5186BBEF900510804 /* closeButton.png in Resources */,
 				838800A117F23066002EC9C7 /* PausedWhite@2x.png in Resources */,
 				8342CB601892FD0E000CA6AE /* GeneralView.xib in Resources */,
@@ -582,13 +582,13 @@
 				83131A4A17C898DC00D50029 /* InfoPlist.strings in Resources */,
 				8342CB671892FD2E000CA6AE /* MASPreferencesWindow.xib in Resources */,
 				830F785018D2097C00C13B0D /* companyLogo.psd in Resources */,
-				83101A2F17DA879C006E6CA8 /* PlayButton.png in Resources */,
+				83101A2F17DA879C006E6CA8 /* PlayingButton.png in Resources */,
 				83246F6B17CC0F41001A3118 /* bgTopArrow.png in Resources */,
 				8388009C17F22FB4002EC9C7 /* Playing@2x.png in Resources */,
 				8310E585186B82B100510804 /* icon.icns in Resources */,
 				8388009D17F22FB4002EC9C7 /* PlayingWhite@2x.png in Resources */,
 				8392AAC817CBF1B200EEF193 /* Paused.png in Resources */,
-				83101A2617D9819B006E6CA8 /* PauseButton.png in Resources */,
+				83101A2617D9819B006E6CA8 /* PausedButton.png in Resources */,
 				838E0A6A18E781C7007FCEC5 /* appNameLogo.psd in Resources */,
 				833B4CDC1868E6CB000DB59A /* icon1024.psd in Resources */,
 				838800A517F230A8002EC9C7 /* StoppedWhite@2x.png in Resources */,
@@ -612,7 +612,7 @@
 				831001EF17CC684C0055A5CB /* StoppedWhite.png in Resources */,
 				838C439218B7B333005AADA4 /* icon1024.png in Resources */,
 				83131A8F17C8A50200D50029 /* MainMenu.xib in Resources */,
-				83DA970A17DBEB2F007531E4 /* PauseButtonDepressed.png in Resources */,
+				83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */,
 				831C29EC17D51F910014C228 /* PausedMask.png in Resources */,
 				835A69B118BCFB9A0080CEA3 /* PreferencesWindowController.xib in Resources */,
 				8342CB6D1892FF60000CA6AE /* AboutView.xib in Resources */,

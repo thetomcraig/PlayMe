@@ -85,6 +85,6 @@
     _menubarController.hasActiveIcon = !_menubarController.hasActiveIcon;
     NSLog(@"Stub menu needs to toggle");
 }
-*/
+ */
 
 @end
