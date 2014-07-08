@@ -5,8 +5,6 @@
 
 @synthesize statusItemView = _statusItemView;
 
-#pragma mark -
-
 - (id)init
 {
     self = [super init];
