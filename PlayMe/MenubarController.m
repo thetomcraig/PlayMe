@@ -5,45 +5,68 @@
 
 @synthesize statusItemView = _statusItemView;
 
+//##############################################################################
+//Init by making sure tha thte NSStatusItem in the statusItemView is given blank
+//title and the stopped icon.
+//##############################################################################
 - (id)init
 {
     self = [super init];
     if (self != nil)
     {
         // Install status item into the menu bar
-        NSStatusItem *statusItem =[[NSStatusBar systemStatusBar]
-                                   statusItemWithLength:STATUS_ITEM_VIEW_WIDTH];
-        _statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
+        _statusItemView = [[StatusItemView alloc] init];
         [_statusItemView update:@"" :@"Stopped"];
         
-        _statusItemView.leftaction = NSSelectorFromString(@"toggleMainWindow:");
-        _statusItemView.rightaction = NSSelectorFromString(@"toggleMenu:");
+        [self setView:_statusItemView];
         
     }
     return self;
 }
 
-- (void)dealloc
+#
+#pragma mark - mouse events
+#
+//##############################################################################
+//When he user clicks.  If they are holding the control key, this counts as a
+//right click, so we call right mouseDown.  RightMouseDown is similar, but sends
+//a different notification.
+//##############################################################################
+- (void)mouseDown:(NSEvent *)theEvent
 {
-    [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
+    [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
+    
+    if ([theEvent modifierFlags] & NSControlKeyMask)
+    {
+        ///Send a not.
+    }
+    else
+    {
+        [self rightMouseDown:nil];
+    }
 }
 
+- (void)rightMouseDown:(NSEvent *)theEvent
+{
+    [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
+    ///Send a not.
+}
+
+#
+#pragma mark - updating
+#
+//##############################################################################
+//For udating the info in the statusItemView
+//##############################################################################
 -(void)updateSatusItemView:(NSString *)songTitle
               iTunesStatus:(NSString *)iTunesStatusString
 {
     [_statusItemView update:songTitle :iTunesStatusString];
 }
 
-#pragma mark -
-#pragma mark Public accessors
-
-- (NSStatusItem *)statusItem
-{
-    return self.statusItemView.statusItem;
-}
-
-#pragma mark -
-
+#
+#pragma mark - icon methods
+#
 - (BOOL)hasActiveIcon
 {
     return self.statusItemView.isHighlighted;

@@ -3,46 +3,56 @@
 @implementation StatusItemView
 
 @synthesize statusItem = _statusItem;
+@synthesize title = _title;
 @synthesize image = _image;
 @synthesize alternateImage = _alternateImage;
-@synthesize title = _title;
 @synthesize isHighlighted = _isHighlighted;
-@synthesize leftaction = _leftaction;
-@synthesize rightaction = _rightaction;
-@synthesize target = _target;
 
-#pragma mark -
-
-- (id)initWithStatusItem:(NSStatusItem *)statusItem
+//##############################################################################
+//Initilaizing with an NSStatusItem
+//##############################################################################
+- (id)initWithStatusItem
 {
-    CGFloat itemWidth = [statusItem length];
+    _statusItem =[[NSStatusBar systemStatusBar]
+                               statusItemWithLength:STATUS_ITEM_VIEW_WIDTH];
+
+    CGFloat itemWidth = [_statusItem length];
     CGFloat itemHeight = [[NSStatusBar systemStatusBar] thickness];
     NSRect itemRect = NSMakeRect(0.0, 0.0, itemWidth, itemHeight);
     self = [super initWithFrame:itemRect];
     
-    if (self != nil) {
-        _statusItem = statusItem;
+    //StatusItemView has its own status item that get set
+    if (self != nil)
+    {
         _statusItem.view = self;
     }
     return self;
 }
 
+//##############################################################################
+//For updating the iTunes informatoin tahts displayed in the menubar
+//Know that the name of the rsource image is going to be the same as
+//the name of the iTunes status
+//##############################################################################
 - (void)update:(NSString *)songTitle :(NSString *)iTunesStatus
 {
     _title = songTitle;
     _image = [NSImage imageNamed:iTunesStatus];
-    _alternateImage = [NSImage imageNamed:[iTunesStatus stringByAppendingString:@"White"]];
+    _alternateImage =
+        [NSImage imageNamed:[iTunesStatus stringByAppendingString:@"White"]];
     [self setNeedsDisplay:YES];
     
 
 }
 
-#pragma mark -
-
+//##############################################################################
+//Draws the resource image and the string of the iTunesStatus
+//##############################################################################
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.isHighlighted];
-    
+    [self.statusItem
+     drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.isHighlighted];
+    //Deciding which icon to draw...
     NSImage *icon = self.isHighlighted ? self.alternateImage : self.image;
     NSSize iconSize = [icon size];
     NSRect bounds = self.bounds;
@@ -50,44 +60,42 @@
     CGFloat iconY = roundf((NSHeight(bounds) - iconSize.height) / 2);
     NSPoint iconPoint = NSMakePoint(iconX, iconY);
     
-    [icon drawAtPoint:iconPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    [icon drawAtPoint:iconPoint
+             fromRect:NSZeroRect
+            operation:NSCompositeSourceOver
+             fraction:1.0];
     
     NSPoint textPoint = NSMakePoint(40, 0);
 
     //Getting the default menubar font attributes
     //0 means default size
-    NSDictionary *attributes = @{
-                                 NSFontAttributeName: [NSFont menuBarFontOfSize: 0],
-                       NSParagraphStyleAttributeName: [NSParagraphStyle defaultParagraphStyle]
-                                  };
+    NSDictionary *attributes =
+    @{
+                 NSFontAttributeName: [NSFont menuBarFontOfSize: 0],
+       NSParagraphStyleAttributeName: [NSParagraphStyle defaultParagraphStyle]
+    };
     [_title drawAtPoint:textPoint withAttributes:attributes];
 }
 
-#pragma mark -
-#pragma mark Mouse tracking
-
+#
+#pragma mark - mouse events
+#
+//##############################################################################
+//The super is called for both of these methods
+//##############################################################################
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    if ([theEvent modifierFlags] & NSControlKeyMask)
-    {
-        [NSApp sendAction:self.rightaction to:self.target from:self];
-    }
-    else
-    {
-        [NSApp sendAction:self.leftaction to:self.target from:self];
-    }
-    
+    [super mouseDown:theEvent];
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-    [NSApp sendAction:self.rightaction to:self.target from:self];
+    [super rightMouseDown:theEvent];
 }
 
-
-#pragma mark -
-#pragma mark Accessors
-
+#
+#pragma mark - setters
+#
 - (void)setHighlighted:(BOOL)newFlag
 {
     if (_isHighlighted == newFlag) return;
@@ -95,7 +103,6 @@
     [self setNeedsDisplay:YES];
 }
 
-#pragma mark -
 
 - (void)setImage:(NSImage *)newImage
 {
@@ -120,8 +127,12 @@
     _title = newTitle;
 }
 
-#pragma mark -
-
+#
+#pragma mark - getters
+#
+//##############################################################################
+//Used to get the dimenions of the reect in screen coords
+//##############################################################################
 - (NSRect)globalRect
 {
 
