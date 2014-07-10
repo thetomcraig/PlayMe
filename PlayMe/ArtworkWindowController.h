@@ -44,8 +44,6 @@
 @property (weak) IBOutlet ControlButtonsCell *previousButtonCell;
 @property (retain, nonatomic) NSTrackingArea *trackingArea;
 
-///prob dont need all the updates in the h file
-- (void)update:(BOOL)windowIsOpen;
 - (void)updateArtwork;
 - (void)updateLabels;
 - (void)updateColors;

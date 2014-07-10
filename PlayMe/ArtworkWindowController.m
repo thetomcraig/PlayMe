@@ -51,6 +51,11 @@
                                  name:@"TagsNotification"
                                  object:nil];
     
+    [[NSNotificationCenter defaultCenter]
+                                 addObserver:self
+                                 selector:@selector(receivedWindowNotification:)
+                                 name:@"MouseDownNotification"
+                                 object:nil];
     return self;
 }
 
@@ -72,9 +77,15 @@
     currentArtwork.frame.size.height - bgTopArrow.size.height;
     [currentArtwork setFrame:artworkFrame];
     
-    preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(showPreferences:) keyEquivalent:@""];
-    openIniTunes = [[NSMenuItem alloc] initWithTitle:@"Go to song in iTunes" action:@selector(openIniTunes:) keyEquivalent:@""];
-    quitApp = [[NSMenuItem alloc] initWithTitle:@"Quit PlayMe" action:@selector(quitPlayMe:) keyEquivalent:@""];
+    preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
+                                             action:@selector(showPreferences:)
+                                      keyEquivalent:@""];
+    openIniTunes = [[NSMenuItem alloc] initWithTitle:@"Go to song in iTunes"
+                                              action:@selector(openIniTunes:)
+                                       keyEquivalent:@""];
+    quitApp = [[NSMenuItem alloc] initWithTitle:@"Quit PlayMe"
+                                         action:@selector(quitPlayMe:)
+                                  keyEquivalent:@""];
 
     [playPauseButton setBordered:NO];
     [nextButton setBordered:NO];
@@ -82,6 +93,7 @@
 
     //Hiding this because I have not implemented it yet
     [currentLyrics setHidden:YES];
+    
     [self mouseExited:nil];
     [self updateColors];
 }
@@ -99,7 +111,7 @@
 
     artworkWindow.artworkView.backgroundColor = backgroundColor;
     artworkWindow.artworkView.arrowColor = backgroundColor;
-    //songSlider.backgroundColor = backgroundColor;
+    songSlider.backgroundColor = backgroundColor;
     songSliderCell.backgroundColor = backgroundColor;
     buttonsBackdrop.mainColor = backgroundColor;
     
@@ -208,6 +220,11 @@
                          numSecsLeft];
     
     [songTimeLeft setStringValue:timeLeft];
+    
+    //--------------------------------------------------------------------------
+    //Other updates
+    //--------------------------------------------------------------------------
+    [self updateColors];
 }
 
 //##############################################################################
@@ -347,131 +364,77 @@
     [self.artworkWindow.artworkView addTrackingArea:trackingArea];
 }
 
-#
-#pragma mark - Sending notifications
-#
-
-#
-#pragma mark - IBActions
-#
-//##############################################################################
-//This action taken out by the play/pause button, pauses and plays iTunes
-//accordingly
-//##############################################################################
--(IBAction)playpause:(id)sender
-{
-    ///r need to send not. to itC
-    /**
-    ///[iTunesController playpause];
-    //This is so it knows the correct status
-    ///[iTunesController update];
-    if ([[iTunesController currentStatus] isEqualToString:@"Playing"])
-    {
-        [self mouseExited:nil];
-    }
-    [self updateArtwork];
-    [self updateControlButtons];
-     */
-}
-
-//##############################################################################
-//This action taken out by the next button, going to the next song
-//##############################################################################
--(IBAction)next:(id)sender
-{
-        ///r need to send not. to itC
-    ///[iTunesController nextSong];
-}
-
-//##############################################################################
-//This action taken out by the previous button, going to the previous song.
-//If the song has progressed past the threshold, it instead skips to the be-
-//geinning of the current song
-//##############################################################################
--(IBAction)previous:(id)sender
-{
-        ///r need to send not. to itC
-    /**
-    double goToPreviousThreshold = 2.0;
-    if ([iTunesController currentProgress] > goToPreviousThreshold)
-    {
-        ///[iTunesController setPlayerPosition:0.0];
-    } else
-    {
-        ///[iTunesController previousSong];
-    }
-     */
-
-}
 
 //##############################################################################
 //Opening and closing the window with the menubar icon is clicked.
-//Called from the delegate most of the time, via the menubar controller.
 //##############################################################################
-///May want to tell the itC to start and stop the window
--(void)toggleWindow
+-(void)receivedWindowNotification:(NSNotification *)note
 {
     //If the window is open, close it
-    if ([[self window] isVisible])
+    if (1/*[[self window] isVisible]*/)
     {
         [[self window] close];
-        [self update:NO];
+        //[self update:NO];
     }
     
     //Otherwise its closed, so open it
     else
     {
-        [self update:YES];
-
+        //[self update:YES];
+        
         [self updateUIElements];
-
         
-        //Clear notifications from the screen,
-        [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+         //Clear notifications from the screen,
+         [[NSUserNotificationCenter defaultUserNotificationCenter]
+         removeAllDeliveredNotifications];
+         
+         [self.artworkWindow.artworkView setNeedsDisplay:YES];
+         
+         
+         struct DangerZone
+         {
+         double lowerBound;
+         double upperBound;
+         };
+         
+         NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] frame];
+         NSRect statusRect = NSZeroRect;
+         
+         StatusItemView *statusItemView = nil;
         
-        [self.artworkWindow.artworkView setNeedsDisplay:YES];
-  
-        
-        struct DangerZone
-        {
-            double lowerBound;
-            double upperBound;
-        };
-        
-        NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] frame];
-        NSRect statusRect = NSZeroRect;
-        
-        StatusItemView *statusItemView = nil;
+        ///r
+        ///It needs the global rect from the menubarcontroller
         /**
-        if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
-        {
-            statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
-        }
-         */
+         if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
+         {
+         statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
+         }
+        */
     
-        if (statusItemView)
-        {
-            statusRect = statusItemView.globalRect;
-            statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
-        }
-        else
-        {
-            statusRect.size = NSMakeSize(STATUS_ITEM_VIEW_WIDTH, [[NSStatusBar systemStatusBar] thickness]);
-            statusRect.origin.x = roundf((NSWidth(screenRect) - NSWidth(statusRect)) / 2);
-            statusRect.origin.y = NSHeight(screenRect) - NSHeight(statusRect) * 2;
-        }
         
-        NSRect windowRect = [[self window] frame];
-        windowRect.size.width = LARGE_WIDTH;
-        windowRect.size.height = LARGE_HEIGHT;
-        windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect) / 2);
-        windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
-        
-            [[self window] setFrame:windowRect display:YES];
-            
-            [[self window] makeKeyAndOrderFront:self];
-            [[self window] setLevel:kCGFloatingWindowLevel];
-            [NSApp activateIgnoringOtherApps:YES];
+         if (statusItemView)
+         {
+         statusRect = statusItemView.globalRect;
+         statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
+         }
+         else
+         {
+         statusRect.size = NSMakeSize(STATUS_ITEM_VIEW_WIDTH, [[NSStatusBar systemStatusBar] thickness]);
+         statusRect.origin.x = roundf((NSWidth(screenRect) - NSWidth(statusRect)) / 2);
+         statusRect.origin.y = NSHeight(screenRect) - NSHeight(statusRect) * 2;
+         }
+         
+         NSRect windowRect = [[self window] frame];
+         windowRect.size.width = LARGE_WIDTH;
+         windowRect.size.height = LARGE_HEIGHT;
+         windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect) / 2);
+         windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
+         
+         [[self window] setFrame:windowRect display:YES];
+         
+         [[self window] makeKeyAndOrderFront:self];
+         [[self window] setLevel:kCGFloatingWindowLevel];
+         [NSApp activateIgnoringOtherApps:YES];
     }
     
     
@@ -541,45 +504,103 @@
      */
     
 }
-    
-    
+
+
 ///Moving this to the delegate so it can be a right click meun
 /**
-- (IBAction)openMenu:(id)sender
-{
-    //The menu we are going to open
-    menuButtonMenu = [[NSMenu alloc] initWithTitle:@"Menu"];
-    
-    [menuButtonMenu addItem:openIniTunes];
-    [menuButtonMenu addItem:preferences];
-    [menuButtonMenu addItem:quitApp];
-    
-    //Finding the position for the menu
-    
-    int menuXPos = [menuButton frame].origin.x - [menuButtonMenu size].width + [menuButton frame].size.width;
-    int menuYPos = menuYPos = buttonsBackdrop.frame.origin.y;
-    if (artworkWindow.frame.size.height == SMALL_HEIGHT)
-    {
-        menuYPos = 0;
-    }
-
-    
-    NSPoint locationInWindow = NSMakePoint(menuXPos, menuYPos);
-                                           
-    //Make this event to properly position the menu
-    NSEvent *menuMouseEvent = [NSEvent mouseEventWithType:NSLeftMouseDown
-                                                 location:locationInWindow
-                                            modifierFlags:0
-                                                timestamp:0
-                                             windowNumber:[[self window] windowNumber]
-                                                  context:nil
-                                              eventNumber:0
-                                               clickCount:0
-                                                 pressure:0];
-    //Open the menu
-    [NSMenu popUpContextMenu:menuButtonMenu withEvent:menuMouseEvent forView:sender];
-}
+ - (IBAction)openMenu:(id)sender
+ {
+ //The menu we are going to open
+ menuButtonMenu = [[NSMenu alloc] initWithTitle:@"Menu"];
+ 
+ [menuButtonMenu addItem:openIniTunes];
+ [menuButtonMenu addItem:preferences];
+ [menuButtonMenu addItem:quitApp];
+ 
+ //Finding the position for the menu
+ 
+ int menuXPos = [menuButton frame].origin.x - [menuButtonMenu size].width + [menuButton frame].size.width;
+ int menuYPos = menuYPos = buttonsBackdrop.frame.origin.y;
+ if (artworkWindow.frame.size.height == SMALL_HEIGHT)
+ {
+ menuYPos = 0;
+ }
+ 
+ 
+ NSPoint locationInWindow = NSMakePoint(menuXPos, menuYPos);
+ 
+ //Make this event to properly position the menu
+ NSEvent *menuMouseEvent = [NSEvent mouseEventWithType:NSLeftMouseDown
+ location:locationInWindow
+ modifierFlags:0
+ timestamp:0
+ windowNumber:[[self window] windowNumber]
+ context:nil
+ eventNumber:0
+ clickCount:0
+ pressure:0];
+ //Open the menu
+ [NSMenu popUpContextMenu:menuButtonMenu withEvent:menuMouseEvent forView:sender];
+ }
  */
+
+
+#
+#pragma mark - Sending notifications
+#
+
+#
+#pragma mark - IBActions
+#
+//##############################################################################
+//This action taken out by the play/pause button, pauses and plays iTunes
+//accordingly
+//##############################################################################
+-(IBAction)playpause:(id)sender
+{
+    ///r need to send not. to itC
+    /**
+    ///[iTunesController playpause];
+    //This is so it knows the correct status
+    ///[iTunesController update];
+    if ([[iTunesController currentStatus] isEqualToString:@"Playing"])
+    {
+        [self mouseExited:nil];
+    }
+    [self updateArtwork];
+    [self updateControlButtons];
+     */
+}
+
+//##############################################################################
+//This action taken out by the next button, going to the next song
+//##############################################################################
+-(IBAction)next:(id)sender
+{
+        ///r need to send not. to itC
+    ///[iTunesController nextSong];
+}
+
+//##############################################################################
+//This action taken out by the previous button, going to the previous song.
+//If the song has progressed past the threshold, it instead skips to the be-
+//geinning of the current song
+//##############################################################################
+-(IBAction)previous:(id)sender
+{
+        ///r need to send not. to itC
+    /**
+    double goToPreviousThreshold = 2.0;
+    if ([iTunesController currentProgress] > goToPreviousThreshold)
+    {
+        ///[iTunesController setPlayerPosition:0.0];
+    } else
+    {
+        ///[iTunesController previousSong];
+    }
+     */
+
+}
 
 //##############################################################################
 //Opens the preferences window

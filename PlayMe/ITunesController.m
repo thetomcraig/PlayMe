@@ -27,11 +27,18 @@
     {
         [self updateTags];
     }
+    else
+    {
+        [self updateWithNill];
+    }
 
     if ([_currentStatus isEqualToString:@"Playing"])
     {
         [self startTimer];
     }
+    
+    //Send a notification to get the AC updated
+    [self sendTagsNotification];
     
     //For when iTunes plays/pauses/stops
     [[NSDistributedNotificationCenter defaultCenter]
@@ -42,10 +49,10 @@
     
     //For when the user hits a button in the app's window
     [[NSDistributedNotificationCenter defaultCenter]
-                        addObserver:self
-                           selector:@selector(receivedCommandNotification:)
-                               name:@"commandNotification"
-                             object:nil];
+                            addObserver:self
+                               selector:@selector(receivedCommandNotification:)
+                                   name:@"commandNotification"
+                                 object:nil];
     
     //For receiving iTunes launch/quit information
     //Because I am monitoring the status of iTunes,
@@ -121,13 +128,14 @@
 //##############################################################################
 - (void)updateWithNill
 {
-    _currentStatus = @"Stopped";
-    _currentSong = @"";
-    _currentArtist = @"";
-    _currentAlbum = @"";
-    _currentLyrics = @"";
-    _currentProgress = 0;
+    _currentSong = @" ";
+    _currentArtist = @" ";
+    _currentAlbum = @" ";
     _currentLength = 0;
+    _currentArtwork = [NSImage imageNamed:@"PausedMask"];
+    _currentProgress = 0;
+    _currentLyrics = @" ";
+    _currentStatus = @"Stopped";
 }
 
 //##############################################################################
@@ -489,20 +497,20 @@
     //Set up all the tags
     NSDictionary *iTunesTags =
     @{
-        @"CurrentStatus": _currentStatus,
           @"CurrentSong": _currentSong,
         @"CurrentArtist": _currentArtist,
          @"CurrentAlbum": _currentAlbum,
-        @"CurrentLyrics": _currentLyrics,
+        @"CurrentLength": [NSNumber numberWithDouble:_currentLength],
        @"CurrentArtwork": _currentArtwork,
       @"CurrentProgress": [NSNumber numberWithDouble:_currentProgress],
-        @"CurrentLength": [NSNumber numberWithDouble:_currentLength]
+        @"CurrentLyrics": _currentLyrics,
+        @"CurrentStatus": _currentStatus
       };
 
     [[NSNotificationCenter defaultCenter]
-        postNotificationName:@"TagsNotification"
-                      object:self
-                    userInfo:iTunesTags];
+                                    postNotificationName:@"TagsNotification"
+                                                  object:self
+                                                userInfo:iTunesTags];
 }
 
 #

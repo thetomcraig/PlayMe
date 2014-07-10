@@ -11,7 +11,7 @@
 //##############################################################################
 //Initilaizing with an NSStatusItem
 //##############################################################################
-- (id)initWithStatusItem
+- (id)init
 {
     _statusItem =[[NSStatusBar systemStatusBar]
                                statusItemWithLength:STATUS_ITEM_VIEW_WIDTH];

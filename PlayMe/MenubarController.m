@@ -38,18 +38,27 @@
     
     if ([theEvent modifierFlags] & NSControlKeyMask)
     {
-        ///Send a not.
+        [self rightMouseDown:nil];
     }
     else
     {
-        [self rightMouseDown:nil];
+        //Sending the notification
+        [[NSNotificationCenter defaultCenter]
+                                 postNotificationName:@"MouseDownNotification"
+                                 object:self
+                                 userInfo:nil];
     }
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
     [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
-    ///Send a not.
+    
+    //Sending the notification
+    [[NSNotificationCenter defaultCenter]
+                             postNotificationName:@"RightMouseDownNotification"
+                             object:self
+                             userInfo:nil];
 }
 
 #

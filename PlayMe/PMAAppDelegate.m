@@ -27,12 +27,13 @@
 //##############################################################################
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-    //-------------------------------------------------------------------------
-    //Initialize stuff
-    //-------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    //Initialize stuff.  ArtworkWindowController first so it can get the update
+    //from the iTunesController's init method
+    //--------------------------------------------------------------------------
+    _artworkWindowController = [[ArtworkWindowController alloc] init];
     _iTunesController = [[ITunesController alloc] init];
     _menubarController = [[MenubarController alloc] init];
-    _artworkWindowController = [[ArtworkWindowController alloc] init];
     
     ///r
     /**
@@ -51,6 +52,8 @@
 //For updating the artworkWindowController and menubarController with new
 //info form iTunes
 //##############################################################################
+///r porb dont need this
+/**
 - (void)update:(BOOL)windowIsOpen
 {
     //Update the iTunes Controller
@@ -65,6 +68,7 @@
                                    iTunesStatus:_iTunesController.currentStatus];
     }
 }
+ */
 
 
 ///r move
