@@ -31,10 +31,10 @@
     //Initialize stuff.  ArtworkWindowController first so it can get the update
     //from the iTunesController's init method
     //--------------------------------------------------------------------------
-    ArtworkWindow *artworkWindow = [[ArtworkWindow alloc] init];
-    _artworkWindowController = [[ArtworkWindowController alloc] initWithWindow:artworkWindow];
+    _artworkWindowController = [[ArtworkWindowController alloc] initWithWindowNibName:@"ArtworkWindow"];
     _iTunesController = [[ITunesController alloc] init];
     _menubarController = [[MenubarController alloc] init];
+    
     
     ///r
     /**

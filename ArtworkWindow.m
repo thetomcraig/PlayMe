@@ -1,13 +1,26 @@
-//
-//  ArtworkWindow.m
-//  PlayMe
-//
-//  Created by Tom Craig on 7/11/14.
-//  Copyright (c) 2014 Tom Craig. All rights reserved.
-//
-
 #import "ArtworkWindow.h"
 
 @implementation ArtworkWindow
 
+-(id)initWithContentRect:(NSRect)contentRect
+               styleMask:(NSUInteger)aStyle
+                 backing:(NSBackingStoreType)bufferingType
+                   defer:(BOOL)flag
+{
+    //Reslts in a window with no titlebar
+    self = [super initWithContentRect:contentRect
+                            styleMask:NSBorderlessWindowMask
+                              backing:NSBackingStoreBuffered defer:NO];
+    if (self != nil)
+    {
+        [self setAlphaValue:1.0];
+        [self setOpaque:NO];
+    }
+    return self;
+}
+
+-(BOOL)canBecomeKeyWindow
+{
+    return YES;
+}
 @end
