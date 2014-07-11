@@ -26,9 +26,6 @@
 		83131A6017C898DC00D50029 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83131A3F17C898DC00D50029 /* Cocoa.framework */; };
 		83131A6817C898DC00D50029 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83131A6617C898DC00D50029 /* InfoPlist.strings */; };
 		83131A6A17C898DC00D50029 /* PlayMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A6917C898DC00D50029 /* PlayMeTests.m */; };
-		83131A8517C89A3400D50029 /* ArtworkWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83131A8317C89A3400D50029 /* ArtworkWindowController.xib */; };
-		83131A8817C89A9F00D50029 /* ArtworkWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A8717C89A9F00D50029 /* ArtworkWindow.m */; };
-		83131A8B17C89AE600D50029 /* ArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A8A17C89AE600D50029 /* ArtworkView.m */; };
 		83131A8F17C8A50200D50029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83131A8E17C8A50200D50029 /* MainMenu.xib */; };
 		83131A9317C8A99000D50029 /* ITunesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9117C8A99000D50029 /* ITunesController.m */; };
 		83131A9817C8AD3200D50029 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9717C8AD3200D50029 /* ImageController.m */; };
@@ -71,7 +68,6 @@
 		83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AE0FC517E2B93A00AE8282 /* SongSlider.m */; };
 		83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6419561160009D4FE2 /* MenubarController.m */; };
 		83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6719561231009D4FE2 /* StatusItemView.m */; };
-		83D532E51956B8B100E3EEAA /* ArtworkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */; };
 		83D532E61956B8B100E3EEAA /* PMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */; };
 		83DA970917DBEB2F007531E4 /* NextButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */; };
 		83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */; };
@@ -124,11 +120,6 @@
 		83131A6517C898DC00D50029 /* PlayMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayMeTests-Info.plist"; sourceTree = "<group>"; };
 		83131A6717C898DC00D50029 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83131A6917C898DC00D50029 /* PlayMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayMeTests.m; sourceTree = "<group>"; };
-		83131A8317C89A3400D50029 /* ArtworkWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkWindowController.xib; path = ../ArtworkWindowController.xib; sourceTree = "<group>"; };
-		83131A8617C89A9F00D50029 /* ArtworkWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindow.h; sourceTree = "<group>"; };
-		83131A8717C89A9F00D50029 /* ArtworkWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindow.m; sourceTree = "<group>"; };
-		83131A8917C89AE600D50029 /* ArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkView.h; sourceTree = "<group>"; };
-		83131A8A17C89AE600D50029 /* ArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkView.m; sourceTree = "<group>"; };
 		83131A8E17C8A50200D50029 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		83131A9017C8A99000D50029 /* ITunesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesController.h; sourceTree = "<group>"; };
 		83131A9117C8A99000D50029 /* ITunesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITunesController.m; sourceTree = "<group>"; };
@@ -187,8 +178,6 @@
 		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
 		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		83CB8D6719561231009D4FE2 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
-		83D532E11956B8B100E3EEAA /* ArtworkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindowController.h; sourceTree = "<group>"; };
-		83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindowController.m; sourceTree = "<group>"; };
 		83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
 		83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
 		83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButtonDepressed.png; sourceTree = "<group>"; };
@@ -359,17 +348,10 @@
 		83131A9617C8A9BA00D50029 /* Main Window */ = {
 			isa = PBXGroup;
 			children = (
-				83D532E11956B8B100E3EEAA /* ArtworkWindowController.h */,
-				83D532E21956B8B100E3EEAA /* ArtworkWindowController.m */,
 				83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */,
 				83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */,
-				83131A8317C89A3400D50029 /* ArtworkWindowController.xib */,
 				835CA99A1870A87600CE42A8 /* ColorOperation.h */,
 				835CA99B1870A87600CE42A8 /* ColorOperation.m */,
-				83131A8617C89A9F00D50029 /* ArtworkWindow.h */,
-				83131A8717C89A9F00D50029 /* ArtworkWindow.m */,
-				83131A8917C89AE600D50029 /* ArtworkView.h */,
-				83131A8A17C89AE600D50029 /* ArtworkView.m */,
 				8392818C18810A4C00266803 /* Main Window Elements */,
 				83246F6C17CC0F48001A3118 /* Background */,
 				83101A2717D981AA006E6CA8 /* Buttons */,
@@ -595,7 +577,6 @@
 				83F0B61217E963EF009BF1E1 /* quitButtonDepressed.png in Resources */,
 				83131A5817C898DC00D50029 /* Images.xcassets in Resources */,
 				8388009517F223AA002EC9C7 /* bgTopArrow@2x.png in Resources */,
-				83131A8517C89A3400D50029 /* ArtworkWindowController.xib in Resources */,
 				83246F6317CC0188001A3118 /* BlankArtwork.png in Resources */,
 				83131A5017C898DC00D50029 /* Credits.rtf in Resources */,
 				83A131F71872822200BB0DD2 /* NothingPlaying.png in Resources */,
@@ -635,10 +616,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83131A8B17C89AE600D50029 /* ArtworkView.m in Sources */,
 				8342CB5F1892FD0E000CA6AE /* GeneralViewController.m in Sources */,
-				83D532E51956B8B100E3EEAA /* ArtworkWindowController.m in Sources */,
-				83131A8817C89A9F00D50029 /* ArtworkWindow.m in Sources */,
 				83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */,
 				83131A9817C8AD3200D50029 /* ImageController.m in Sources */,
 				83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */,

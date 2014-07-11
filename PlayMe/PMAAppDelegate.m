@@ -4,7 +4,7 @@
 
 @synthesize iTunesController = _iTunesController;
 @synthesize menubarController = _menubarController;
-@synthesize artworkWindowController = _artworkWindowController;
+///@synthesize artworkWindowController = _artworkWindowController;
 
 //##############################################################################
 //Setting up the default settings for the app.  Because awakeFromNib is called
@@ -31,7 +31,7 @@
     //Initialize stuff.  ArtworkWindowController first so it can get the update
     //from the iTunesController's init method
     //--------------------------------------------------------------------------
-    _artworkWindowController = [[ArtworkWindowController alloc] init];
+    ///_artworkWindowController = [[ArtworkWindowController alloc] init];
     _iTunesController = [[ITunesController alloc] init];
     _menubarController = [[MenubarController alloc] init];
     
