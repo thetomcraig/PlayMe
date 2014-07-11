@@ -25,7 +25,7 @@
 }
 
 #
-#pragma mark - mouse events
+#pragma mark - mouse events - Sending Notifications
 #
 //##############################################################################
 //When he user clicks.  If they are holding the control key, this counts as a
@@ -42,11 +42,20 @@
     }
     else
     {
+        
+        //We need to pass the position of the rect in the menubar,
+        //and we convert it to an NSValue
+        NSString *globalRectString = NSStringFromRect([_statusItemView globalRect]);
+        NSDictionary *menubarInfo =
+        @{
+          @"GlobalRect": globalRectString
+        };
+        
         //Sending the notification
         [[NSNotificationCenter defaultCenter]
                                  postNotificationName:@"MouseDownNotification"
                                  object:self
-                                 userInfo:nil];
+                                 userInfo:menubarInfo];
     }
 }
 

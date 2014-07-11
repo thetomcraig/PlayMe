@@ -11,7 +11,10 @@
 #import "MenubarController.h"
 
 @interface ArtworkWindowController : NSWindowController
-
+{
+@private
+    ArtworkWindow *_artworkWindow;
+}
 ///All of this needs to be taken out and moved elsewhere
 ///@property (retain, nonatomic) ITunesController *iTunesController;
 ///@property (retain, nonatomic) ImageController *imageController;

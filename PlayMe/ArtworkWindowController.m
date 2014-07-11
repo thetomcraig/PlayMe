@@ -10,7 +10,7 @@
 
 @implementation ArtworkWindowController
 
-@synthesize artworkWindow;
+@synthesize artworkWindow =  _artworkWindow;
 
 @synthesize menuButtonMenu;
 @synthesize preferences;
@@ -53,7 +53,7 @@
     
     [[NSNotificationCenter defaultCenter]
                                  addObserver:self
-                                 selector:@selector(receivedWindowNotification:)
+                                 selector:@selector(receivedMouseDownNotification:)
                                  name:@"MouseDownNotification"
                                  object:nil];
     return self;
@@ -109,8 +109,8 @@
     NSColor *primaryColor =
         [NSColor colorWithCalibratedRed:0.30 green:0.30 blue:0.30 alpha:1.0];
 
-    artworkWindow.artworkView.backgroundColor = backgroundColor;
-    artworkWindow.artworkView.arrowColor = backgroundColor;
+    _artworkWindow.artworkView.backgroundColor = backgroundColor;
+    _artworkWindow.artworkView.arrowColor = backgroundColor;
     songSlider.backgroundColor = backgroundColor;
     songSliderCell.backgroundColor = backgroundColor;
     buttonsBackdrop.mainColor = backgroundColor;
@@ -263,13 +263,13 @@
     //-------------------------------------------------------------------------
     //Making sure that the slider is the same height as the knob, so it is seemless
     songSlider.frame = CGRectMake(-[songSliderCell knobRectFlipped:NO].size.width/2, bottomOfArt - sliderBuffer,
-                                  [artworkWindow.artworkView frame].size.width + [songSliderCell knobRectFlipped:NO].size.width,
+                                  [_artworkWindow.artworkView frame].size.width + [songSliderCell knobRectFlipped:NO].size.width,
                                   sliderBuffer);
     currentSong.frame = CGRectMake(smallBuffer, bottomOfBar - currentSong.frame.size.height - smallBuffer,
-                                   [artworkWindow.artworkView frame].size.width - smallBuffer*2,
+                                   [_artworkWindow.artworkView frame].size.width - smallBuffer*2,
                                    fontHeight);
     currentArtistAndAlbum.frame = CGRectMake(smallBuffer, currentSong.frame.origin.y - fontHeight - smallBuffer,
-                                             [artworkWindow.artworkView frame].size.width - smallBuffer*2,
+                                             [_artworkWindow.artworkView frame].size.width - smallBuffer*2,
                                              fontHeight + smallBuffer);
     //Buttons
     buttonsBackdrop.frame = CGRectMake(currentArtwork.frame.origin.x,
@@ -303,7 +303,7 @@
                                     [songTimeLeft frame].size.height);
 
     //Reposition
-    songTimeLeft.frame = CGRectMake(artworkWindow.artworkView.frame.size.width - songTimeLeft.frame.size.width,
+    songTimeLeft.frame = CGRectMake(_artworkWindow.artworkView.frame.size.width - songTimeLeft.frame.size.width,
                                     buttonsBackdrop.frame.origin.y + smallBuffer,
                                     [songTimeLeft frame].size.width - smallBuffer,
                                     [songTimeLeft frame].size.height);
@@ -368,18 +368,21 @@
 //##############################################################################
 //Opening and closing the window with the menubar icon is clicked.
 //##############################################################################
--(void)receivedWindowNotification:(NSNotification *)note
+-(void)receivedMouseDownNotification:(NSNotification *)note
 {
+
     //If the window is open, close it
-    if (1/*[[self window] isVisible]*/)
+    if ([_artworkWindow isVisible])
     {
-        [[self window] close];
+        NSLog(@"ALPHA");
+        [_artworkWindow close];
         //[self update:NO];
     }
     
     //Otherwise its closed, so open it
     else
     {
+        NSLog(@"BETA");
         //[self update:YES];
         
         [self updateUIElements];
@@ -388,52 +391,34 @@
          [[NSUserNotificationCenter defaultUserNotificationCenter]
          removeAllDeliveredNotifications];
          
-         [self.artworkWindow.artworkView setNeedsDisplay:YES];
+         [_artworkWindow.artworkView setNeedsDisplay:YES];
          
          
          struct DangerZone
          {
-         double lowerBound;
-         double upperBound;
+             double lowerBound;
+             double upperBound;
          };
-         
-         NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] frame];
-         NSRect statusRect = NSZeroRect;
-         
-         StatusItemView *statusItemView = nil;
         
-        ///r
-        ///It needs the global rect from the menubarcontroller
-        /**
-         if ([self.delegate respondsToSelector:@selector(statusItemViewForArtworkWindowController:)])
-         {
-         statusItemView = [self.delegate statusItemViewForArtworkWindowController:self];
-         }
-        */
-    
+
+        CGRect statusRect = NSRectFromString(
+                    [note.userInfo objectForKey:@"GlobalRect"]);
         
-         if (statusItemView)
-         {
-         statusRect = statusItemView.globalRect;
+
          statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
-         }
-         else
-         {
-         statusRect.size = NSMakeSize(STATUS_ITEM_VIEW_WIDTH, [[NSStatusBar systemStatusBar] thickness]);
-         statusRect.origin.x = roundf((NSWidth(screenRect) - NSWidth(statusRect)) / 2);
-         statusRect.origin.y = NSHeight(screenRect) - NSHeight(statusRect) * 2;
-         }
-         
-         NSRect windowRect = [[self window] frame];
+        
+        
+         NSRect windowRect = [_artworkWindow frame];
          windowRect.size.width = LARGE_WIDTH;
          windowRect.size.height = LARGE_HEIGHT;
          windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect) / 2);
          windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
          
-         [[self window] setFrame:windowRect display:YES];
+         [_artworkWindow setFrame:windowRect display:YES];
          
-         [[self window] makeKeyAndOrderFront:self];
-         [[self window] setLevel:kCGFloatingWindowLevel];
+         [_artworkWindow makeKeyAndOrderFront:self];
+         [_artworkWindow setLevel:kCGFloatingWindowLevel];
+        [self window] = _artworkWindow;
          [NSApp activateIgnoringOtherApps:YES];
     }
     
@@ -714,7 +699,7 @@
     tempFrame.origin.y =  tempFrame.size.height - bgTopArrow.size.height;
     [currentArtwork setFrame:tempFrame];
     
-    [self updateArtwork];
+    ///[self updateArtwork];
     ///r figure this one out...
     /**
      if (![self iTunesIsRunning] ||
@@ -727,7 +712,7 @@
      [self updateWindowElements];
      }
      */
-    [self updateControlButtons];
+    ///[self updateControlButtons];
     
 }
 
