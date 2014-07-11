@@ -68,6 +68,8 @@
 		83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AE0FC517E2B93A00AE8282 /* SongSlider.m */; };
 		83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6419561160009D4FE2 /* MenubarController.m */; };
 		83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB8D6719561231009D4FE2 /* StatusItemView.m */; };
+		83D36EAF19703B0100A241EF /* ArtworkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D36EAE19703B0100A241EF /* ArtworkWindowController.m */; };
+		83D36EB719703E7D00A241EF /* ArtworkWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D36EB619703E7D00A241EF /* ArtworkWindow.m */; };
 		83D532E61956B8B100E3EEAA /* PMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */; };
 		83DA970917DBEB2F007531E4 /* NextButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */; };
 		83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */; };
@@ -178,6 +180,10 @@
 		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
 		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		83CB8D6719561231009D4FE2 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
+		83D36EAD19703B0100A241EF /* ArtworkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindowController.h; sourceTree = "<group>"; };
+		83D36EAE19703B0100A241EF /* ArtworkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindowController.m; sourceTree = "<group>"; };
+		83D36EB519703E7D00A241EF /* ArtworkWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindow.h; sourceTree = "<group>"; };
+		83D36EB619703E7D00A241EF /* ArtworkWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindow.m; sourceTree = "<group>"; };
 		83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
 		83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
 		83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButtonDepressed.png; sourceTree = "<group>"; };
@@ -244,6 +250,10 @@
 		83131A3317C898DC00D50029 = {
 			isa = PBXGroup;
 			children = (
+				83D36EB519703E7D00A241EF /* ArtworkWindow.h */,
+				83D36EB619703E7D00A241EF /* ArtworkWindow.m */,
+				83D36EAD19703B0100A241EF /* ArtworkWindowController.h */,
+				83D36EAE19703B0100A241EF /* ArtworkWindowController.m */,
 				838C439318B7B339005AADA4 /* App Icons */,
 				83131A4517C898DC00D50029 /* PlayMe */,
 				83131A6317C898DC00D50029 /* PlayMeTests */,
@@ -362,8 +372,8 @@
 		83131A9C17C8AE2500D50029 /* Necesry/Unused */ = {
 			isa = PBXGroup;
 			children = (
-				83E1A7DC17E1A21600BC94B8 /* revealTrack.scpt */,
 				83131A8E17C8A50200D50029 /* MainMenu.xib */,
+				83E1A7DC17E1A21600BC94B8 /* revealTrack.scpt */,
 				83131A5717C898DC00D50029 /* Images.xcassets */,
 				83131A9217C8A99000D50029 /* iTunes.h */,
 			);
@@ -628,7 +638,9 @@
 				8342CB6C1892FF60000CA6AE /* AboutViewController.m in Sources */,
 				83E5A98D17D0441900CDC2F7 /* AlbumColorPicker.m in Sources */,
 				835CA99C1870A87600CE42A8 /* ColorOperation.m in Sources */,
+				83D36EB719703E7D00A241EF /* ArtworkWindow.m in Sources */,
 				83131A9B17C8AE0C00D50029 /* NCController.m in Sources */,
+				83D36EAF19703B0100A241EF /* ArtworkWindowController.m in Sources */,
 				837631A517DB186A00B51CBC /* ButtonsBackdrop.m in Sources */,
 				83A3409018C6A46700B7F4C4 /* PreferencesBackdrop.m in Sources */,
 				83131A9317C8A99000D50029 /* ITunesController.m in Sources */,
