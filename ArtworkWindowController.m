@@ -2,9 +2,9 @@
 
 @implementation ArtworkWindowController
 
-- (id)initWithWindow:(NSWindow *)window
+- (id)initWithWindowNibName:(NSString *)windowNibName
 {
-    self = [super initWithWindow:window];
+    self = [super initWithWindowNibName:windowNibName];
     if (self)
     {
         [[NSNotificationCenter defaultCenter]
