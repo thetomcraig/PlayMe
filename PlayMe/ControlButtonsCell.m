@@ -56,5 +56,4 @@
     
     CFRelease(imageRef);
 }
-
 @end

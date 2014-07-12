@@ -6,6 +6,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ArtworkWindowController">
             <connections>
+                <outlet property="nextButton" destination="j3p-ih-vld" id="0tT-BZ-sY7"/>
+                <outlet property="nextButtonCell" destination="m7t-aJ-uQy" id="0cb-x7-dYB"/>
+                <outlet property="playPauseButton" destination="cnl-OF-8DX" id="Q33-VH-LMY"/>
+                <outlet property="playPauseButtonCell" destination="weP-ze-7e4" id="q7H-Xm-Wjk"/>
+                <outlet property="previousButton" destination="uj6-Q8-eeU" id="Z21-3R-cJS"/>
+                <outlet property="previousButtonCell" destination="Yj6-zz-hvd" id="OVM-8a-5bt"/>
+                <outlet property="songSlider" destination="GMW-14-vys" id="00x-cJ-4yX"/>
+                <outlet property="songSliderCell" destination="Fn5-FV-lrK" id="eFM-Ny-k7A"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -14,18 +22,45 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="ArtworkWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="400" height="420"/>
+            <rect key="contentRect" x="196" y="240" width="400" height="500"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="420"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mty-T4-h3R" customClass="ArtworkView">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="420"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uj6-Q8-eeU">
+                                <rect key="frame" x="101" y="88" width="48" height="48"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yj6-zz-hvd" customClass="ControlButtonsCell">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnl-OF-8DX">
+                                <rect key="frame" x="176" y="88" width="48" height="48"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="weP-ze-7e4" customClass="ControlButtonsCell">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j3p-ih-vld">
+                                <rect key="frame" x="250" y="88" width="48" height="48"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m7t-aJ-uQy" customClass="ControlButtonsCell">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-14-vys" customClass="SongSlider">
+                                <rect key="frame" x="0.0" y="44" width="400" height="21"/>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Fn5-FV-lrK" customClass="SongSliderCell"/>
+                            </slider>
+                        </subviews>
                     </customView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="300" y="207"/>
+            <point key="canvasLocation" x="381" y="365"/>
         </window>
     </objects>
 </document>
