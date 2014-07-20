@@ -15,9 +15,10 @@
 @property (nonatomic, strong) NSImage *image;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSImage *alternateImage;
-@property (nonatomic, setter = setHighlighted:) BOOL isHighlighted;
+@property (nonatomic) BOOL isHighlighted;
 @property (nonatomic, readonly) NSRect globalRect;
 
 - (void)update:(NSString *)songTitle :(NSString *)iTunesStatus;
+- (void)setHighlighted:(BOOL)newFlag;
 
 @end

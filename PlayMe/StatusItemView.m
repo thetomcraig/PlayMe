@@ -100,7 +100,11 @@
 {
     if (_isHighlighted == newFlag) return;
     _isHighlighted = newFlag;
-    [self setNeedsDisplay:YES];
+    ///r
+    ///This makes it break...
+    ///Fix it
+    ///[self setNeedsDisplay:YES];
+
 }
 
 

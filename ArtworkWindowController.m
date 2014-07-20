@@ -87,20 +87,16 @@
     
     currentSong.textColor = primaryColor;
     currentArtistAndAlbum.textColor = primaryColor;
-    /*
-    buttonsBackdrop.mainColor = backgroundColor;
-    */
+    
+    [buttonsBackdrop setMainColor: backgroundColor];
     [nextButtonCell setButtonsColor: primaryColor];
     [playPauseButtonCell setButtonsColor: primaryColor];
     [previousButtonCell setButtonsColor: primaryColor];
-    ///MAKE THESE COLORS STRONG!
-    /*
-    songSlider.backgroundColor = backgroundColor;
-    songSliderCell.backgroundColor = backgroundColor;
-    songSliderCell.progressColor = primaryColor;
+
+    [songSlider setBackgroundColor: backgroundColor];
+    [songSliderCell setBackgroundColor: backgroundColor];
+    [songSliderCell setProgressColor: primaryColor];
     songTimeLeft.textColor = primaryColor;
-     */
-     
 }
 
 #
@@ -235,6 +231,81 @@
         [[self window] setLevel:kCGFloatingWindowLevel];
         [NSApp activateIgnoringOtherApps:YES];
     }//End else
+    
+}
+
+
+#pragma mark - IBActions
+#
+//##############################################################################
+//This action taken out by the play/pause button, pauses and plays iTunes
+//accordingly
+//##############################################################################
+-(IBAction)playpause:(id)sender
+{
+    NSDictionary *commandNotification =
+    @{
+      @"Command": @"PlayPause"
+      };
+    
+    [[NSNotificationCenter defaultCenter]
+                                     postNotificationName:@"commandNotification"
+                                     object:self
+                                     userInfo:commandNotification];
+    
+   
+    ///shuold not need any updating here because the command makes the itunes controller carry it out and then sind a not. that this class will pick up
+    ///if this doesnt work, come here and see if this makes sense again
+}
+
+//##############################################################################
+//This action taken out by the next button, going to the next song
+//##############################################################################
+-(IBAction)next:(id)sender
+{
+    NSDictionary *commandNotification =
+    @{
+      @"Command": @"NextTrack"
+      };
+    
+    [[NSNotificationCenter defaultCenter]
+                                     postNotificationName:@"commandNotification"
+                                     object:self
+                                     userInfo:commandNotification];
+}
+
+//##############################################################################
+//This action taken out by the previous button, going to the previous song.
+//If the song has progressed past the threshold, it instead skips to the be-
+//geinning of the current song
+//##############################################################################
+-(IBAction)previous:(id)sender
+{
+    NSString *commandString = @"PreviousTrack";
+    
+    //If a few second into a song, skip to its beginning
+    //instead of actually going to the previous song.
+    /**
+    double goToPreviousThreshold = 2.0;
+     ///cant do until set up hte slider
+     if ([iTunesController currentProgress] > goToPreviousThreshold)
+     {
+     ///[iTunesController setPlayerPosition:0.0];
+     } else
+     {
+     ///[iTunesController previousSong];
+     }
+     */
+    
+    NSDictionary *commandNotification =
+    @{
+      @"Command": commandString
+      };
+    
+    [[NSNotificationCenter defaultCenter]
+                                     postNotificationName:@"commandNotification"
+                                     object:self
+                                     userInfo:commandNotification];
     
 }
 

@@ -48,7 +48,7 @@
                                  object:nil];
     
     //For when the user hits a button in the app's window
-    [[NSDistributedNotificationCenter defaultCenter]
+    [[NSNotificationCenter defaultCenter]
                             addObserver:self
                                selector:@selector(receivedCommandNotification:)
                                    name:@"commandNotification"
@@ -372,7 +372,7 @@
 //##############################################################################
 - (void)receivedCommandNotification:(NSNotification *)note
 {
-    NSString *command =[note.userInfo objectForKey:@"command"];
+    NSString *command =[note.userInfo objectForKey:@"Command"];
     
     if ([command isEqualToString:@"PlayPause"])
     {

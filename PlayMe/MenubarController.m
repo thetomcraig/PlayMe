@@ -34,15 +34,13 @@
 //##############################################################################
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
-    
     if ([theEvent modifierFlags] & NSControlKeyMask)
     {
         [self rightMouseDown:nil];
     }
     else
     {
-        
+        [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
         //We need to pass the position of the rect in the menubar,
         //and we convert it to an NSValue
         NSString *globalRectString = NSStringFromRect([_statusItemView globalRect]);
@@ -57,6 +55,7 @@
                                  object:self
                                  userInfo:menubarInfo];
     }
+   
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
@@ -68,6 +67,7 @@
                              postNotificationName:@"RightMouseDownNotification"
                              object:self
                              userInfo:nil];
+    
 }
 
 #

@@ -2,6 +2,6 @@
 
 @interface ButtonsBackdrop : NSImageView
 
-@property (nonatomic, assign) NSColor *mainColor;
+@property (strong, retain) NSColor *mainColor;
 
 @end
