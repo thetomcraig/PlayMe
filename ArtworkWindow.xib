@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ArtworkWindowController">
             <connections>
                 <outlet property="artworkView" destination="mty-T4-h3R" id="rgX-dJ-BRV"/>
+                <outlet property="buttonsBackdrop" destination="hGI-89-g56" id="vau-4W-U8j"/>
                 <outlet property="currentArtwork" destination="CGh-M1-qI9" id="PXe-mw-3gW"/>
                 <outlet property="nextButton" destination="j3p-ih-vld" id="0tT-BZ-sY7"/>
                 <outlet property="nextButtonCell" destination="m7t-aJ-uQy" id="0cb-x7-dYB"/>
@@ -25,7 +26,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="500"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="400" height="475"/>
             <value key="maxSize" type="size" width="400" height="500"/>
             <view key="contentView" id="se5-gp-TjO">
@@ -38,6 +39,10 @@
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGh-M1-qI9">
                                 <rect key="frame" x="0.0" y="75" width="400" height="400"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="qNi-YW-peQ"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGI-89-g56" customClass="ButtonsBackdrop">
+                                <rect key="frame" x="0.0" y="100" width="400" height="82"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kZe-70-Xyo"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uj6-Q8-eeU">
                                 <rect key="frame" x="101" y="123" width="48" height="48"/>
@@ -72,12 +77,15 @@
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-14-vys" customClass="SongSlider">
                                 <rect key="frame" x="-2" y="73" width="400" height="21"/>
                                 <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Fn5-FV-lrK" customClass="SongSliderCell"/>
+                                <connections>
+                                    <action selector="sliderDidMove:" target="-2" id="DTW-oS-tzv"/>
+                                </connections>
                             </slider>
                         </subviews>
                     </customView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="596" y="454.5"/>
+            <point key="canvasLocation" x="700" y="467"/>
         </window>
     </objects>
 </document>

@@ -37,6 +37,6 @@
 - (IBAction)playpause:(id)sender;
 - (IBAction)next:(id)sender;
 - (IBAction)previous:(id)sender;
-///- (IBAction)sliderDidMove:(id)sender;
+- (IBAction)sliderDidMove:(id)sender;
 
 @end

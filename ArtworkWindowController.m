@@ -96,7 +96,7 @@
     currentArtistAndAlbum.textColor = primaryColor;
     
     [artworkView setBackgroundColor: backgroundColor];
-    [buttonsBackdrop setMainColor: backgroundColor];
+    [buttonsBackdrop setBackgroundColor: backgroundColor];
     [nextButtonCell setButtonsColor: primaryColor];
     [playPauseButtonCell setButtonsColor: primaryColor];
     [previousButtonCell setButtonsColor: primaryColor];
@@ -106,7 +106,6 @@
     [songSliderCell setProgressColor: primaryColor];
     songTimeLeft.textColor = primaryColor;
 }
-
 
 
 #
@@ -268,7 +267,6 @@
 //##############################################################################
 - (void)updateWindowGeometry
 {
-    
     NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
     
     //This puts the artwork just below the top arrow
@@ -370,7 +368,7 @@
 }
 
 #
-#pragma mark - IBActions
+#pragma mark - Sending Notifications (IBActions)
 #
 //##############################################################################
 //This action taken out by the play/pause button, pauses and plays iTunes
@@ -387,10 +385,6 @@
                                      postNotificationName:@"commandNotification"
                                      object:self
                                      userInfo:commandNotification];
-    
-   
-    ///shuold not need any updating here because the command makes the itunes controller carry it out and then sind a not. that this class will pick up
-    ///if this doesnt work, come here and see if this makes sense again
 }
 
 //##############################################################################
@@ -416,37 +410,47 @@
 //##############################################################################
 -(IBAction)previous:(id)sender
 {
-    NSString *commandString = @"PreviousTrack";
+    NSDictionary *commandNotification =
+    @{
+      @"Command": @"PreviousTrack"
+      };
+
     
     //If a few second into a song, skip to its beginning
     //instead of actually going to the previous song.
-    /**
     double goToPreviousThreshold = 2.0;
-     ///cant do until set up hte slider
-     if ([iTunesController currentProgress] > goToPreviousThreshold)
+     if ([songSlider doubleValue] > goToPreviousThreshold)
      {
-     ///[iTunesController setPlayerPosition:0.0];
-     } else
-     {
-     ///[iTunesController previousSong];
+         commandNotification =
+         @{
+             @"Command": @"SetPosition",
+             @"Position" : [NSNumber numberWithDouble: 0.0]
+             };
      }
-     */
-    
-    NSDictionary *commandNotification =
-    @{
-      @"Command": commandString
-      };
     
     [[NSNotificationCenter defaultCenter]
                                      postNotificationName:@"commandNotification"
                                      object:self
                                      userInfo:commandNotification];
-    
 }
 
+//##############################################################################
+//When the slier is mutated, this method is called, and it send a notification
+//to the iTunesController object, with the actual value of the slider, so it can
+//tell iTunes to move there.
+//##############################################################################
 - (IBAction)sliderDidMove:(id)sender
 {
-
+    NSDictionary *commandNotification =
+    @{
+      @"Command": @"SetPosition",
+      @"Position": [NSNumber numberWithDouble: [songSlider doubleValue]]
+      };
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"commandNotification"
+     object:self
+     userInfo:commandNotification];
 }
 
 #

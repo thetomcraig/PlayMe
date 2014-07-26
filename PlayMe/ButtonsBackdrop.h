@@ -2,6 +2,6 @@
 
 @interface ButtonsBackdrop : NSImageView
 
-@property (strong, retain) NSColor *mainColor;
+@property (strong, retain) NSColor *backgroundColor;
 
 @end

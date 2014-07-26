@@ -372,7 +372,7 @@
 //##############################################################################
 - (void)receivedCommandNotification:(NSNotification *)note
 {
-    NSString *command =[note.userInfo objectForKey:@"Command"];
+    NSString *command = [note.userInfo objectForKey:@"Command"];
     
     if ([command isEqualToString:@"PlayPause"])
     {
@@ -387,12 +387,10 @@
         [_iTunes previousTrack];
     }
     //Setting the position of the song, through the UI
-    else if ([command isEqualToString:@"SetPlayerPosition"])
+    else if ([command isEqualToString:@"SetPosition"])
     {
-        ///r
-        ///set this up in the artworkwindowcontroller;
-        double newPosition = 0.0;
-        [_iTunes setPlayerPosition:newPosition];
+        double pos = [[note.userInfo objectForKey:@"Position"] doubleValue];
+        [_iTunes setPlayerPosition:pos];
     }
     else if ([command isEqualToString:@"UpdateProgress"])
     {
