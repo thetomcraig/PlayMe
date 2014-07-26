@@ -2,8 +2,8 @@
 
 @implementation ArtworkView
 
-@synthesize backgroundColor = _backgroundColor;
-@synthesize topArrow = _topArrow;
+@synthesize backgroundColor;
+@synthesize topArrow;
 
 //##############################################################################
 //Overrode the shit out of this class.  It is made transparent, then the arrow
@@ -11,11 +11,7 @@
 //##############################################################################
 - (void)drawRect:(NSRect)dirtyRect
 {
-    _backgroundColor = [NSColor colorWithCalibratedRed:0.9
-                                                 green:0.9
-                                                  blue:0.9
-                                                 alpha:1.0];
-    _topArrow = [NSImage imageNamed:@"bgTopArrow"];
+    topArrow = [NSImage imageNamed:@"bgTopArrow"];
     
     //Clear everything
     [[NSColor clearColor] set];
@@ -37,16 +33,16 @@
 {
     
     NSPoint arrowLocation =
-        NSMakePoint(dirtyRect.size.width/2 - _topArrow.size.width/2,
-                    dirtyRect.size.height - _topArrow.size.height);
+        NSMakePoint(dirtyRect.size.width/2 - topArrow.size.width/2,
+                    dirtyRect.size.height - topArrow.size.height);
     
     NSRect arrowRect = NSMakeRect(arrowLocation.x, arrowLocation.y,
-                                  _topArrow.size.width, _topArrow.size.height);
+                                  topArrow.size.width, topArrow.size.height);
     
     NSGraphicsContext *ctx = [NSGraphicsContext currentContext];
     CGContextRef contextRef = [ctx graphicsPort];
     
-    NSData *data = [_topArrow TIFFRepresentation];
+    NSData *data = [topArrow TIFFRepresentation];
     CGImageSourceRef source =
                     CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
     
@@ -56,7 +52,7 @@
     CGContextSaveGState(contextRef);
     {
         CGContextClipToMask(contextRef, NSRectToCGRect(arrowRect), imageRef);
-        [_backgroundColor setFill];
+        [backgroundColor setFill];
         NSRectFill(arrowRect);
     }
     CGContextRestoreGState(contextRef);
@@ -73,7 +69,7 @@
 //##############################################################################
 -(void)drawBackground:(NSRect)dirtyRect
 {
-    double capHeight = 30.0;
+    double capHeight = 50.0;
     double roundingRadius = 6;
     NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
     double arrowHeight = bgTopArrow.size.height;
@@ -92,8 +88,7 @@
     [topImage lockFocus];
     [[NSGraphicsContext currentContext]
                                 setImageInterpolation:NSImageInterpolationHigh];
-    [_backgroundColor set];
-    
+
     NSBezierPath* topCap =
                 [NSBezierPath bezierPathWithRoundedRect
                 :NSMakeRect(0.0, topSize.height - capHeight - roundingRadius,
@@ -102,7 +97,9 @@
                 xRadius:roundingRadius yRadius:roundingRadius];
     
     [topCap setWindingRule:NSEvenOddWindingRule];
+    [backgroundColor set];
     [topCap fill];
+    
     [topImage unlockFocus];
     
     //--------------------------------------------------------------------------
@@ -114,14 +111,14 @@
     [middleImage lockFocus];
     [[NSGraphicsContext currentContext]
                                 setImageInterpolation:NSImageInterpolationHigh];
-    [_backgroundColor set];
-    
+
     NSBezierPath* middle = [NSBezierPath bezierPathWithRect
                             :NSMakeRect(0.0, 0.0,
                                         middleSize.width,
                                         middleSize.height)];
-    
+    [backgroundColor set];
     [middle fill];
+    
     [middleImage unlockFocus];
     
     //--------------------------------------------------------------------------
@@ -133,7 +130,6 @@
     [bottomImage lockFocus];
     [[NSGraphicsContext currentContext]
                                 setImageInterpolation:NSImageInterpolationHigh];
-    [_backgroundColor set];
     
     NSBezierPath* bottomCap = [NSBezierPath bezierPathWithRoundedRect
                                :NSMakeRect(0.0, 0.0,
@@ -142,7 +138,9 @@
                                xRadius:roundingRadius yRadius:roundingRadius];
     
     [bottomCap setWindingRule:NSEvenOddWindingRule];
+    [backgroundColor set];
     [bottomCap fill];
+    
     [bottomImage unlockFocus];
     
     //--------------------------------------------------------------------------

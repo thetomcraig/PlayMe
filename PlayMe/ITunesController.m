@@ -494,6 +494,9 @@
 //##############################################################################
 - (void)sendTagsNotification
 {
+    //Need to update this here because it cahnged literally every second
+    [self updateProgress];
+    
     //Set up all the tags
     NSDictionary *iTunesTags =
     @{

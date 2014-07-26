@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import "ArtworkView.h"
 #import "ArtworkWindow.h"
 #import "ButtonsBackdrop.h"
 #import "ControlButtonsCell.h"
@@ -11,6 +12,7 @@
 @property (retain, nonatomic) NSMenuItem *preferences, *openIniTunes, *quitApp;
 
 //The tags we get from iTunes
+@property (weak) IBOutlet ArtworkView *artworkView;
 @property (nonatomic, retain) IBOutlet NSImageView *currentArtwork;
 @property (weak) IBOutlet NSTextField *currentSong;
 @property (weak) IBOutlet NSTextField *currentArtistAndAlbum;
@@ -35,6 +37,6 @@
 - (IBAction)playpause:(id)sender;
 - (IBAction)next:(id)sender;
 - (IBAction)previous:(id)sender;
-- (IBAction)sliderDidMove:(id)sender;
+///- (IBAction)sliderDidMove:(id)sender;
 
 @end
