@@ -3,7 +3,7 @@
 
 @implementation MenubarController
 
-@synthesize statusItemView = _statusItemView;
+@synthesize statusItemView;
 
 //##############################################################################
 //Init by making sure tha thte NSStatusItem in the statusItemView is given blank
@@ -15,17 +15,38 @@
     if (self != nil)
     {
         // Install status item into the menu bar
-        _statusItemView = [[StatusItemView alloc] init];
-        [_statusItemView update:@"" :@"Stopped"];
+        statusItemView = [[StatusItemView alloc] init];
+        [statusItemView update:@"" :@"Stopped"];
         
-        [self setView:_statusItemView];
+        [self setView:statusItemView];
         
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(receivedTagsNotification:)
+         name:@"TagsNotification"
+         object:nil];
     }
     return self;
 }
 
+
 #
-#pragma mark - mouse events - Sending Notifications
+#pragma mark - Receiving notifications
+#
+//##############################################################################
+//Message to update sent from the iTunesController, with a notification that has
+//tag information.
+//##############################################################################
+- (void)receivedTagsNotification:(NSNotification *)note
+{
+    NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
+    NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
+    
+    [statusItemView update:currentSong :currentStatus];
+}
+
+#
+#pragma mark - Sending Notifications (mouse events )
 #
 //##############################################################################
 //When he user clicks.  If they are holding the control key, this counts as a
@@ -40,10 +61,10 @@
     }
     else
     {
-        [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
+        ///[statusItemView setHighlighted: ![statusItemView isHighlighted]];
         //We need to pass the position of the rect in the menubar,
         //and we convert it to an NSValue
-        NSString *globalRectString = NSStringFromRect([_statusItemView globalRect]);
+        NSString *globalRectString = NSStringFromRect([statusItemView globalRect]);
         NSDictionary *menubarInfo =
         @{
           @"GlobalRect": globalRectString
@@ -60,7 +81,7 @@
 
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-    [_statusItemView setHighlighted: ![_statusItemView isHighlighted]];
+    [statusItemView setHighlighted: ![statusItemView isHighlighted]];
     
     //Sending the notification
     [[NSNotificationCenter defaultCenter]
@@ -79,7 +100,7 @@
 -(void)updateSatusItemView:(NSString *)songTitle
               iTunesStatus:(NSString *)iTunesStatusString
 {
-    [_statusItemView update:songTitle :iTunesStatusString];
+    [statusItemView update:songTitle :iTunesStatusString];
 }
 
 #
