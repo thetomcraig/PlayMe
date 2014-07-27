@@ -7,7 +7,10 @@
 
 //##############################################################################
 //Overrode the shit out of this class.  It is made transparent, then the arrow
-//is drawn at the top, and the background it drawn below it, behind the art
+//is drawn at the top, and the background it drawn below it, behind the art.
+//"dirtyRect" the bounds of whatever UI element most recently changed, as such,
+//we use self.bounds to get the actual view dimensions for drawing the whole
+//thing
 //##############################################################################
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -17,8 +20,8 @@
     [[NSColor clearColor] set];
     NSRectFill([self frame]);
     
-    [self drawArrow:dirtyRect];
-    [self drawBackground:dirtyRect];
+    [self drawArrow:self.bounds];
+    [self drawBackground:self.bounds];
 }
 
 //##############################################################################

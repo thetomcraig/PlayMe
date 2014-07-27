@@ -98,6 +98,7 @@
     
     [artworkView setBackgroundColor: backgroundColor];
     [buttonsBackdrop setBackgroundColor: backgroundColor];
+    [buttonsBackdrop setBackgroundColor: backgroundColor];
     [nextButtonCell setButtonsColor: primaryColor];
     [playPauseButtonCell setButtonsColor: primaryColor];
     [previousButtonCell setButtonsColor: primaryColor];
@@ -286,7 +287,7 @@
     //--------------------------------------------------------------------------
     //The distance of the the elements from the edge of the window, and one
     //another.  This buffer is the only constant value
-    int smallBuffer = 4;
+    int smallBuffer = 6;
     int bottomOfArt = [currentArtwork frame].origin.y;
     //Buttons seperated by half their width
     int bottomOfBar = [songSlider frame].origin.y;

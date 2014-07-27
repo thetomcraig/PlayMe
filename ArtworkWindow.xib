@@ -8,7 +8,9 @@
             <connections>
                 <outlet property="artworkView" destination="mty-T4-h3R" id="rgX-dJ-BRV"/>
                 <outlet property="buttonsBackdrop" destination="hGI-89-g56" id="vau-4W-U8j"/>
+                <outlet property="currentArtistAndAlbum" destination="Xfe-yF-24H" id="Pks-Tp-9E5"/>
                 <outlet property="currentArtwork" destination="CGh-M1-qI9" id="PXe-mw-3gW"/>
+                <outlet property="currentSong" destination="kz1-yj-oWJ" id="kGv-7v-S6Q"/>
                 <outlet property="nextButton" destination="j3p-ih-vld" id="0tT-BZ-sY7"/>
                 <outlet property="nextButtonCell" destination="m7t-aJ-uQy" id="0cb-x7-dYB"/>
                 <outlet property="playPauseButton" destination="cnl-OF-8DX" id="Q33-VH-LMY"/>
@@ -26,7 +28,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="500"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="400" height="475"/>
             <value key="maxSize" type="size" width="400" height="500"/>
             <view key="contentView" id="se5-gp-TjO">
@@ -44,7 +46,7 @@
                                 <rect key="frame" x="0.0" y="100" width="400" height="82"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kZe-70-Xyo"/>
                             </imageView>
-                            <button canDrawConcurrently="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uj6-Q8-eeU">
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uj6-Q8-eeU">
                                 <rect key="frame" x="101" y="123" width="48" height="48"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yj6-zz-hvd" customClass="ControlButtonsCell">
                                     <behavior key="behavior" lightByContents="YES"/>
@@ -74,13 +76,29 @@
                                     <action selector="next:" target="-2" id="ZZ9-q4-hHA"/>
                                 </connections>
                             </button>
-                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-14-vys" customClass="SongSlider">
-                                <rect key="frame" x="-2" y="73" width="400" height="21"/>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Fn5-FV-lrK" customClass="SongSliderCell"/>
+                            <slider focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-14-vys" customClass="SongSlider">
+                                <rect key="frame" x="-2" y="74" width="400" height="19"/>
+                                <sliderCell key="cell" state="on" focusRingType="none" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Fn5-FV-lrK" customClass="SongSliderCell"/>
                                 <connections>
                                     <action selector="sliderDidMove:" target="-2" id="DTW-oS-tzv"/>
                                 </connections>
                             </slider>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kz1-yj-oWJ">
+                                <rect key="frame" x="7" y="50" width="391" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zkg-ns-Wci">
+                                    <font key="font" metaFont="system" size="14"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xfe-yF-24H">
+                                <rect key="frame" x="7" y="25" width="391" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="6EE-Ew-j53">
+                                    <font key="font" metaFont="system" size="14"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </customView>
                 </subviews>
