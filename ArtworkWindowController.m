@@ -157,7 +157,8 @@
     
     NSString *nameOfAltButton = [NSString stringWithFormat:@"%@%@",
                                  nameOfButton,
-                                 @"ButtonDepressed"];
+                                 @"Depressed"];
+        
     //Actually assigning the button resource image
     [playPauseButton setImage:[NSImage imageNamed:nameOfButton]];
     [playPauseButton setAlternateImage:[NSImage imageNamed:nameOfAltButton]];

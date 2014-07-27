@@ -241,13 +241,13 @@
 				83E1A7D817E1A1FE00BC94B8 /* iTunesButton.png */,
 				83E1A7D917E1A1FE00BC94B8 /* iTunesButtonDepressed.png */,
 				83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */,
-				83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */,
 				83DA970717DBEB2F007531E4 /* PlayingButtonDepressed.png */,
 				83DA970817DBEB2F007531E4 /* PreviousButtonDepressed.png */,
 				8376319717DAFA1E00B51CBC /* NextButton.png */,
 				8376319917DAFA1E00B51CBC /* PreviousButton.png */,
 				83101A2D17DA879C006E6CA8 /* PlayingButton.png */,
 				83101A2517D9819B006E6CA8 /* PausedButton.png */,
+				83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
