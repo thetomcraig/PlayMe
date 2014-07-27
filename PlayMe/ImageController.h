@@ -12,9 +12,9 @@
 @property (nonatomic, retain) NSString *lastArtCalculated;
 
 -(BOOL)findColorsOpSeperateThread :(NSImage *)albumArt forSong:(NSString *)songTitle;
--(NSImage *)resizeArt :(NSImage *) bigArt :(NSRect)targetSize;
+-(NSImage *)resizeArt :(NSImage *) bigArt forSize:(NSSize)targetSize;
 -(NSImage *)resizeNothingPlaying:(NSSize)targetSize;
--(NSImage *)resizeResource :(NSImage *) origImage :(NSRect)targetSize;
+-(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize;
 -(NSImage *)putOnPausedMask :(NSImage *)unmaskedArt;
 -(NSImage *)roundCorners: (NSImage *)squareArt;
 

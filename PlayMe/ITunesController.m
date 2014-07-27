@@ -1,5 +1,10 @@
 #import "ITunesController.h"
 
+#define ARTWORK_WIDTH 400
+#define ARTWORK_HEIGHT 400
+#define WINDOW_HEIGHT 500
+
+
 @implementation ITunesController
 
 @synthesize iTunes = _iTunes;
@@ -23,6 +28,8 @@
 //##############################################################################
 - (id)init
 {
+    _imageController = [[ImageController alloc] init];
+    
     if([self createiTunesObjectIfNeeded])
     {
         [self updateTags];
@@ -91,7 +98,6 @@
     _currentArtist = [[_iTunes currentTrack] artist];
     _currentAlbum = [[_iTunes currentTrack] album];
     _currentLength  = [[_iTunes currentTrack] duration];
-    [self updateArtwork];
     [self updateProgress];
     [self updateLyrics];
     
@@ -121,6 +127,12 @@
                 _currentStatus = @"Paused";
             }
     }
+    
+    //--------------------------------------------------------------------------
+    //The artwork; because the artwork needs to know the status of iTunes, it
+    //must be updated after the status is determined.
+    //--------------------------------------------------------------------------
+    [self updateArtwork];
 }
 
 //##############################################################################
@@ -143,11 +155,41 @@
 //##############################################################################
 - (void)updateArtwork
 {
+    //Getting the artwork from iTunes
     iTunesArtwork *rawArtwork =
-        (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
+    (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
+    NSImage *newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
     
-    NSImage *theArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
-    _currentArtwork = theArtwork;
+    //Resizing/manipulation
+    //For resizing
+    NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
+
+    //If there is nothing playing, grab the resource image for this instead
+    if ([_currentStatus isEqualToString:@"Stopped"])
+    {
+        newArtwork = [_imageController resizeNothingPlaying: targetSize];
+    }
+    
+    //There was no artwork :(
+    //Get the blank resource image
+    if (newArtwork.size.width == 0.0)
+    {
+        newArtwork = [NSImage imageNamed:@"BlankArtwork"];
+    }
+    
+    //Resize the image
+    newArtwork = [_imageController resizeArt:newArtwork forSize:targetSize];
+
+    //Make sure to mask it if the song is paused
+    if ([_currentStatus isEqualToString:@"Paused"])
+    {
+        newArtwork = [_imageController putOnPausedMask:newArtwork];
+    }
+    
+    //Finalize and put in the image
+    newArtwork = [_imageController roundCorners:newArtwork];
+    
+    _currentArtwork = newArtwork;
 }
 
 //##############################################################################
@@ -220,44 +262,8 @@
 //##############################################################################
 - (void)playingUpdate
 {
-    ///r re-incorporate
-    /**
-    if ([[iTunesController currentStatus] isEqualToString:@"Stopped"])
-    {
-        NSImage *newArtwork = [imageController
-                               resizeNothingPlaying
-                               :NSMakeSize(SMALL_ARTWORK_WIDTH - SMALL_BUFFER, SMALL_ARTWORK_HEIGHT)];
-        
-        [currentArtwork setImage:newArtwork];
-        
-    }
-    
-    
-    
-    if ([iTunesController currentArtwork].size.width != 0.0)
-    {
-        NSImage *newArtwork = [imageController resizeArt:[iTunesController currentArtwork]
-                                                        :currentArtwork.frame];
-        
-        //Make sure to mask it if the song is pasued
-        if ([[iTunesController currentStatus] isEqualToString:@"Paused"])
-        {
-            [imageController putOnPausedMask:newArtwork];
-        }
-        
-        //Finalize and put in the image
-        newArtwork = [imageController roundCorners:newArtwork];
-        [currentArtwork setImage:newArtwork];
-    }
-    
-    //There was no artwork :(
-    else
-    {
-        iTunesController.currentArtwork = [NSImage imageNamed:@"BlankArtwork"];
-    }
-    */
-    
     [self createiTunesObjectIfNeeded];
+    
     [self updateTags];
     
     //Sending the notification that the ArtworkWindowController will pick up
@@ -307,6 +313,7 @@
 - (void)pausedUpdate
 {
     _currentStatus = @"Paused";
+    [self updateArtwork];
     [self sendTagsNotification];
     [self stopTimer];
     

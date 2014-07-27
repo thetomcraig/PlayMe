@@ -2,7 +2,8 @@
 
 #define ARTWORK_WIDTH 400
 #define ARTWORK_HEIGHT 400
-#define WINDOW_HEIGHT 450
+#define WINDOW_HEIGHT 500
+
 
 @implementation ArtworkWindowController
 
