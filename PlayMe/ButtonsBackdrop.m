@@ -19,7 +19,6 @@
 //############################################################################
 - (void)drawRect:(NSRect)dirtyRect
 {
-    
     [[NSColor colorWithCalibratedRed:backgroundColor.redComponent
                                green:backgroundColor.greenComponent
                                 blue:backgroundColor.blueComponent

@@ -27,27 +27,27 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="ArtworkWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="400" height="500"/>
+            <rect key="contentRect" x="196" y="240" width="400" height="470"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <value key="minSize" type="size" width="400" height="475"/>
-            <value key="maxSize" type="size" width="400" height="500"/>
+            <value key="minSize" type="size" width="400" height="470"/>
+            <value key="maxSize" type="size" width="400" height="475"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="470"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mty-T4-h3R" customClass="ArtworkView">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="470"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGh-M1-qI9">
-                                <rect key="frame" x="0.0" y="75" width="400" height="400"/>
+                                <rect key="frame" x="0.0" y="45" width="400" height="400"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="qNi-YW-peQ"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGI-89-g56" customClass="ButtonsBackdrop">
-                                <rect key="frame" x="0.0" y="100" width="400" height="82"/>
+                                <rect key="frame" x="0.0" y="70" width="400" height="82"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kZe-70-Xyo"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uj6-Q8-eeU">
-                                <rect key="frame" x="101" y="123" width="48" height="48"/>
+                                <rect key="frame" x="101" y="93" width="48" height="48"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yj6-zz-hvd" customClass="ControlButtonsCell">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnl-OF-8DX">
-                                <rect key="frame" x="176" y="123" width="48" height="48"/>
+                                <rect key="frame" x="176" y="93" width="48" height="48"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="weP-ze-7e4" customClass="ControlButtonsCell">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -67,7 +67,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j3p-ih-vld">
-                                <rect key="frame" x="250" y="123" width="48" height="48"/>
+                                <rect key="frame" x="250" y="93" width="48" height="48"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m7t-aJ-uQy" customClass="ControlButtonsCell">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -77,14 +77,14 @@
                                 </connections>
                             </button>
                             <slider focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-14-vys" customClass="SongSlider">
-                                <rect key="frame" x="-2" y="74" width="400" height="19"/>
+                                <rect key="frame" x="-2" y="44" width="400" height="21"/>
                                 <sliderCell key="cell" state="on" focusRingType="none" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Fn5-FV-lrK" customClass="SongSliderCell"/>
                                 <connections>
                                     <action selector="sliderDidMove:" target="-2" id="DTW-oS-tzv"/>
                                 </connections>
                             </slider>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kz1-yj-oWJ">
-                                <rect key="frame" x="7" y="50" width="391" height="17"/>
+                                <rect key="frame" x="7" y="32" width="391" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zkg-ns-Wci">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -92,7 +92,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xfe-yF-24H">
-                                <rect key="frame" x="7" y="25" width="391" height="17"/>
+                                <rect key="frame" x="7" y="15" width="391" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="6EE-Ew-j53">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -103,7 +103,7 @@
                     </customView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="700" y="467"/>
+            <point key="canvasLocation" x="700" y="490.5"/>
         </window>
     </objects>
 </document>
