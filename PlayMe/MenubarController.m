@@ -3,8 +3,8 @@
 
 @implementation MenubarController
 
-@synthesize statusItemView;
 @synthesize statusItem;
+@synthesize statusItemView;
 
 //##############################################################################
 //Init by making sure tha thte NSStatusItem in the statusItemView is given blank
@@ -18,32 +18,12 @@
         // Install status item into the menu bar
         statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
         
-        [statusItem setTitle:@"TEST"];
+        statusItemView = [[StatusItemView alloc] init];
         
-        ///[statusItem setView:statusItemView];
-        [statusItem setTarget:self];
-        [statusItem setAction:@selector(testMethod:)];
-        
-        
-        /*
-        NSMenuItem *preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
-                                                 action:@selector(showPreferences:)
-                                          keyEquivalent:@""];
-        
-        NSMenu *menuButtonMenu = [[NSMenu alloc] initWithTitle:@"Menu"];
-        
-        [menuButtonMenu addItem:preferences];
-        
-        [statusItem setMenu:menuButtonMenu];
-        */
-        
+        statusItemView.statusItem = statusItem;
 
-
-
-        ///statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
-        ///[statusItemView update:@"" :@"Stopped"];
-        
-        ///[self setView:statusItemView];
+        [statusItem setView:statusItemView];
+        [statusItemView setTitle:@"PlayMe"];
         
         [[NSNotificationCenter defaultCenter]
          addObserver:self
@@ -54,10 +34,7 @@
     return self;
 }
 
-- (void)testMethod:(id)sender
-{
-    NSLog(@"ALPHA");
-}
+
 
 #
 #pragma mark - Receiving notifications
@@ -71,36 +48,9 @@
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
     
-    ///[statusItemView update:currentSong :currentStatus];
+    statusItemView.statusItem = statusItem;
+    [statusItem setView:statusItemView];
+    [statusItemView setTitle:currentSong];
 }
-
-#
-#pragma mark - updating
-#
-//##############################################################################
-//For udating the info in the statusItemView
-//##############################################################################
--(void)updateSatusItemView:(NSString *)songTitle
-              iTunesStatus:(NSString *)iTunesStatusString
-{
-    ///[statusItemView update:songTitle :iTunesStatusString];
-}
-
-#
-#pragma mark - icon methods
-#
-- (BOOL)hasActiveIcon
-{
-    return self.statusItemView.isHighlighted;
-}
-
-- (void)setHasActiveIcon:(BOOL)flag
-{
-    self.statusItemView.isHighlighted = flag;
-}
-
-
-
-
 
 @end

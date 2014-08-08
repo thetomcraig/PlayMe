@@ -1,15 +1,18 @@
 #import <Cocoa/Cocoa.h>
 
+
 @interface StatusItemView : NSView
+{
+    NSStatusItem *statusItem;
+    NSString *title;
+    BOOL isMenuVisible;
+}
 
-@property (nonatomic, strong, readonly) NSStatusItem *statusItem;
+@property(retain, nonatomic) NSStatusItem *statusItem;
+@property (retain, nonatomic) NSString *title;
+
 @property (nonatomic, strong) NSImage *image;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSImage *alternateImage;
-@property (nonatomic) BOOL isHighlighted;
-@property (nonatomic, readonly) NSRect globalRect;
 
-- (id)initWithStatusItem:(NSStatusItem *)statusItemInp;
 - (void)update:(NSString *)songTitle :(NSString *)iTunesStatus;
 
 @end
