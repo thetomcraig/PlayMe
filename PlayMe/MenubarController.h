@@ -6,6 +6,7 @@
 
 
 @property (nonatomic, strong, readonly) StatusItemView *statusItemView;
+@property (nonatomic, strong) NSStatusItem *statusItem;
 @property (nonatomic) BOOL hasActiveIcon;
 
 -(void)updateSatusItemView:(NSString *)songTitle

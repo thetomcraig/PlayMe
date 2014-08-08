@@ -53,6 +53,19 @@
                              selector:@selector(receivedMouseDownNotification:)
                              name:@"MouseDownNotification"
                              object:nil];
+        
+        ///This may nee to move
+        //Send the notification to update the iTunesController
+        //So it will update the window elements
+        NSDictionary *fakeUpdateDict =
+        @{
+          @"Player State": @"Stopped",
+          };
+        
+        [[NSDistributedNotificationCenter defaultCenter]
+         postNotificationName:@"com.apple.iTunes.playerInfo"
+         object:nil
+         userInfo:fakeUpdateDict];
     }
     return self;
 }
@@ -108,18 +121,6 @@
     [songSliderCell setProgressColor: primaryColor];
     songTimeLeft.textColor = primaryColor;
     
-    ///This may nee to move
-    //Send the notification to update the iTunesController
-    //So it will update the window elements
-    NSDictionary *fakeUpdateDict =
-    @{
-      @"Player State": @"Stopped",
-      };
-    
-    [[NSDistributedNotificationCenter defaultCenter]
-     postNotificationName:@"com.apple.iTunes.playerInfo"
-     object:nil
-     userInfo:fakeUpdateDict];
 }
 
 
@@ -156,11 +157,9 @@
     else
     {
         //Telling the window where to open using ths corresponding string
-        [self positionAndOpenWindow:
-                                    [note.userInfo objectForKey:@"GlobalRect"]];
+        [self positionAndOpenWindow:[note.userInfo objectForKey:@"GlobalRect"]];
         //After it's opened, position the window elementt properly
         [self updateWindowGeometry];
-    
     }
 }
 
@@ -190,10 +189,8 @@
     //--------------------------------------------------------------------------
     //The distance of the the elements from the edge of the window, and one
     //another.  This buffer is the only constant value
-    int smallBuffer = 6;
+    int smallBuffer = 3;
     int bottomOfArt = [currentArtwork frame].origin.y;
-    //Buttons seperated by half their width
-    int bottomOfBar = [songSlider frame].origin.y;
     //Buffer in a third the button's height, for making them equidistant
     int controlButtonsSideBufer = playPauseButton.frame.size.width/4;
     //Buffer for the menu and close buttons
@@ -214,6 +211,10 @@
     songSlider.frame = CGRectMake(-[songSliderCell knobRectFlipped:NO].size.width/2, bottomOfArt - sliderBuffer,
                                   ARTWORK_WIDTH + [songSliderCell knobRectFlipped:NO].size.width,
                                   sliderBuffer);
+    
+    //Buttons seperated by half their width
+    int bottomOfBar = [songSlider frame].origin.y;
+    
     currentSong.frame = CGRectMake(smallBuffer, bottomOfBar - currentSong.frame.size.height - smallBuffer,
                                    ARTWORK_WIDTH - smallBuffer*2,
                                    fontHeight);

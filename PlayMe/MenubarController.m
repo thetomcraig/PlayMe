@@ -4,6 +4,7 @@
 @implementation MenubarController
 
 @synthesize statusItemView;
+@synthesize statusItem;
 
 //##############################################################################
 //Init by making sure tha thte NSStatusItem in the statusItemView is given blank
@@ -15,10 +16,34 @@
     if (self != nil)
     {
         // Install status item into the menu bar
-        statusItemView = [[StatusItemView alloc] init];
-        [statusItemView update:@"" :@"Stopped"];
+        statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
         
-        [self setView:statusItemView];
+        [statusItem setTitle:@"TEST"];
+        
+        ///[statusItem setView:statusItemView];
+        [statusItem setTarget:self];
+        [statusItem setAction:@selector(testMethod:)];
+        
+        
+        /*
+        NSMenuItem *preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
+                                                 action:@selector(showPreferences:)
+                                          keyEquivalent:@""];
+        
+        NSMenu *menuButtonMenu = [[NSMenu alloc] initWithTitle:@"Menu"];
+        
+        [menuButtonMenu addItem:preferences];
+        
+        [statusItem setMenu:menuButtonMenu];
+        */
+        
+
+
+
+        ///statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
+        ///[statusItemView update:@"" :@"Stopped"];
+        
+        ///[self setView:statusItemView];
         
         [[NSNotificationCenter defaultCenter]
          addObserver:self
@@ -29,6 +54,10 @@
     return self;
 }
 
+- (void)testMethod:(id)sender
+{
+    NSLog(@"ALPHA");
+}
 
 #
 #pragma mark - Receiving notifications
@@ -42,53 +71,7 @@
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
     
-    [statusItemView update:currentSong :currentStatus];
-}
-
-#
-#pragma mark - Sending Notifications (mouse events )
-#
-//##############################################################################
-//When he user clicks.  If they are holding the control key, this counts as a
-//right click, so we call right mouseDown.  RightMouseDown is similar, but sends
-//a different notification.
-//##############################################################################
-- (void)mouseDown:(NSEvent *)theEvent
-{
-    if ([theEvent modifierFlags] & NSControlKeyMask)
-    {
-        [self rightMouseDown:nil];
-    }
-    else
-    {
-        ///[statusItemView setHighlighted: ![statusItemView isHighlighted]];
-        //We need to pass the position of the rect in the menubar,
-        //and we convert it to an NSValue
-        NSString *globalRectString = NSStringFromRect([statusItemView globalRect]);
-        NSDictionary *menubarInfo =
-        @{
-          @"GlobalRect": globalRectString
-        };
-        
-        //Sending the notification
-        [[NSNotificationCenter defaultCenter]
-                                 postNotificationName:@"MouseDownNotification"
-                                 object:self
-                                 userInfo:menubarInfo];
-    }
-   
-}
-
-- (void)rightMouseDown:(NSEvent *)theEvent
-{
-    [statusItemView setHighlighted: ![statusItemView isHighlighted]];
-    
-    //Sending the notification
-    [[NSNotificationCenter defaultCenter]
-                             postNotificationName:@"RightMouseDownNotification"
-                             object:self
-                             userInfo:nil];
-    
+    ///[statusItemView update:currentSong :currentStatus];
 }
 
 #
@@ -100,7 +83,7 @@
 -(void)updateSatusItemView:(NSString *)songTitle
               iTunesStatus:(NSString *)iTunesStatusString
 {
-    [statusItemView update:songTitle :iTunesStatusString];
+    ///[statusItemView update:songTitle :iTunesStatusString];
 }
 
 #
@@ -115,6 +98,9 @@
 {
     self.statusItemView.isHighlighted = flag;
 }
+
+
+
 
 
 @end
