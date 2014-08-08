@@ -5,13 +5,13 @@
 {
     NSStatusItem *statusItem;
     NSString *title;
-    BOOL isMenuVisible;
+    BOOL isHighlighted;
 }
 
 @property(retain, nonatomic) NSStatusItem *statusItem;
 @property (retain, nonatomic) NSString *title;
-
 @property (nonatomic, strong) NSImage *image;
+@property (nonatomic, strong) NSImage *alternateImage;
 
 - (void)update:(NSString *)songTitle :(NSString *)iTunesStatus;
 

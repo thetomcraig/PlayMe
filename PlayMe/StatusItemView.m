@@ -10,58 +10,108 @@
 @synthesize image;
 @synthesize alternateImage;
 
-
-
-- (id)initWithFrame:(NSRect)frame {
+//##############################################################################
+//Init
+//##############################################################################
+- (id)initWithFrame:(NSRect)frame
+{
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         statusItem = nil;
         title = @"";
-        isMenuVisible = NO;
+        isHighlighted = NO;
     }
     return self;
 }
 
-- (void)mouseDown:(NSEvent *)event {
-    isMenuVisible = !isMenuVisible;
+#
+#pragma mark - updating
+#
+//##############################################################################
+//For updating the iTunes informatoin tahts displayed in the menubar
+//Know that the name of the rsource image is going to be the same as
+//the name of the iTunes status
+//##############################################################################
+- (void)update:(NSString *)songTitle :(NSString *)iTunesStatus
+{
+    if (![title isEqualToString:songTitle])
+    {
+        title = songTitle;
+        image = [NSImage imageNamed:iTunesStatus];
+        alternateImage =
+        [NSImage imageNamed:[iTunesStatus stringByAppendingString:@"White"]];
+        
+        [self setNeedsDisplay:YES];
+    }
+}
+
+#
+#pragma mark - mouse events
+#
+//##############################################################################
+//When he user clicks.  If they are holding the control key, this counts as a
+//right click, so we call right mouseDown.  RightMouseDown is similar, but sends
+//a different notification.
+//##############################################################################
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    isHighlighted = !isHighlighted;
     ///[[self menu] setDelegate:self];
     ///[statusItem popUpStatusItemMenu:[self menu]];
     
-    NSString *globalRectString = NSStringFromRect([[[NSApp currentEvent] window] frame]);
     
-    NSDictionary *menubarInfo =
-    @{
-      @"GlobalRect": globalRectString
-      };
     
-    //Sending the notification
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"MouseDownNotification"
-     object:self
-     userInfo:menubarInfo];
+    if ([theEvent modifierFlags] & NSControlKeyMask)
+    {
+        [self rightMouseDown:nil];
+    }
+    else
+    {
+        //We need to pass the position of the rect in the menubar,
+        //and we convert it to an NSValue
+        NSString *globalRectString =
+        NSStringFromRect([[[NSApp currentEvent] window] frame]);
+        
+        NSDictionary *menubarInfo =
+        @{
+          @"GlobalRect": globalRectString
+          };
+        
+        //Sending the notification
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"MouseDownNotification"
+         object:self
+         userInfo:menubarInfo];
+    }
     
     [self setNeedsDisplay:YES];
 }
 
-- (void)rightMouseDown:(NSEvent *)event {
-    // Treat right-click just like left-click
-    NSLog(@"ALPHA");
-    [self mouseDown:event];
+- (void)rightMouseDown:(NSEvent *)theEvent
+{
+    isHighlighted = !isHighlighted;
+    
+    //Sending the notification
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"RightMouseDownNotification"
+     object:self
+     userInfo:nil];
 }
 
 - (void)menuWillOpen:(NSMenu *)menu {
-    isMenuVisible = YES;
+    isHighlighted = YES;
     [self setNeedsDisplay:YES];
 }
 
 - (void)menuDidClose:(NSMenu *)menu {
-    isMenuVisible = NO;
+    isHighlighted = NO;
     [menu setDelegate:nil];
     [self setNeedsDisplay:YES];
 }
 
 - (NSColor *)titleForegroundColor {
-    if (isMenuVisible) {
+    if (isHighlighted) {
         return [NSColor whiteColor];
     }
     else {
@@ -89,8 +139,7 @@
 
 - (void)setTitle:(NSString *)newTitle {
     if (![title isEqual:newTitle]) {
-        ///[newTitle retain];
-        ///[title release];
+
         title = newTitle;
         
         // Update status item size (which will also update this view's bounds)
@@ -109,7 +158,7 @@
 - (void)drawRect:(NSRect)rect {
     // Draw status bar background, highlighted if menu is showing
     [statusItem drawStatusBarBackgroundInRect:[self bounds]
-                                withHighlight:isMenuVisible];
+                                withHighlight:isHighlighted];
     
     // Draw title string
     NSPoint origin = NSMakePoint(StatusItemViewPaddingWidth,
@@ -118,44 +167,10 @@
         withAttributes:[self titleAttributes]];
 }
 
-@end
+
+
 
 /**
-//##############################################################################
-//Initilaizing with an NSStatusItem
-//##############################################################################
-- (id)initWithStatusItem:(NSStatusItem *)statusItemInp
-{
-    CGFloat itemWidth = [statusItem length];
-    CGFloat itemHeight = [[NSStatusBar systemStatusBar] thickness];
-    NSRect itemRect = NSMakeRect(0.0, 0.0, itemWidth, itemHeight);
-    self = [super initWithFrame:itemRect];
-    
-    if (self != nil) {
-        statusItem = statusItemInp;
-        statusItem.view = self;
-    }
-    return self;
-}
-
-//##############################################################################
-//For updating the iTunes informatoin tahts displayed in the menubar
-//Know that the name of the rsource image is going to be the same as
-//the name of the iTunes status
-//##############################################################################
-- (void)update:(NSString *)songTitle :(NSString *)iTunesStatus
-{
-    if (![title isEqualToString:songTitle])
-    {
-        title = songTitle;
-        image = [NSImage imageNamed:iTunesStatus];
-        alternateImage =
-            [NSImage imageNamed:[iTunesStatus stringByAppendingString:@"White"]];
-        
-        [self setNeedsDisplay:YES];
-    }
-}
-
 //##############################################################################
 //Draws the resource image and the string of the iTunesStatus
 //##############################################################################
@@ -213,63 +228,6 @@
 
 
 
-#
-#pragma mark - mouse events
-#
-//##############################################################################
-//When he user clicks.  If they are holding the control key, this counts as a
-//right click, so we call right mouseDown.  RightMouseDown is similar, but sends
-//a different notification.
-//##############################################################################
-- (void)mouseDown:(NSEvent *)theEvent
-{
-    self.isHighlighted = TRUE;
-    
-    [self setNeedsDisplay:YES];
-    
-    if ([theEvent modifierFlags] & NSControlKeyMask)
-    {
-        [self rightMouseDown:nil];
-    }
-    else
-    {
-        //We need to pass the position of the rect in the menubar,
-        //and we convert it to an NSValue
-        NSString *globalRectString = NSStringFromRect([self globalRect]);
-        
-        NSDictionary *menubarInfo =
-        @{
-          @"GlobalRect": globalRectString
-          };
-        
-        //Sending the notification
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"MouseDownNotification"
-         object:self
-         userInfo:menubarInfo];
-    }
-}
-
-- (void)rightMouseDown:(NSEvent *)theEvent
-{
-    self.isHighlighted = TRUE;
-    
-    //Sending the notification
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"RightMouseDownNotification"
-     object:self
-     userInfo:nil];
-}
-
-- (void)mouseUp:(NSEvent *)theEvent
-{
-    ///self.isHighlighted = FALSE;
-}
-
-- (void)rightMouseUp:(NSEvent *)theEvent
-{
-    ///self.isHighlighted = FALSE;
-}
 
 
 #
@@ -290,19 +248,5 @@
 {
     title = newTitle;
 }
-
-#
-#pragma mark - getters
-#
-//##############################################################################
-//Used to get the dimenions of the reect in screen coords
-//##############################################################################
-- (NSRect)globalRect
-{
-    NSRect frame = [self frame];
-    frame.origin = [self.window convertBaseToScreen:frame.origin];
-    return frame;
-}
-
+*/
 @end
- */

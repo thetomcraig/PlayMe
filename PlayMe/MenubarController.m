@@ -21,7 +21,6 @@
         statusItemView = [[StatusItemView alloc] init];
         
         statusItemView.statusItem = statusItem;
-
         [statusItem setView:statusItemView];
         [statusItemView setTitle:@"PlayMe"];
         
@@ -48,7 +47,6 @@
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
     
-    statusItemView.statusItem = statusItem;
     [statusItem setView:statusItemView];
     [statusItemView setTitle:currentSong];
 }
