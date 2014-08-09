@@ -10,6 +10,10 @@
 @synthesize title;
 @synthesize image;
 @synthesize alternateImage;
+@synthesize menu;
+@synthesize preferences;
+@synthesize openIniTunes;
+@synthesize quitApp;
 
 //##############################################################################
 //Init
@@ -22,7 +26,28 @@
         statusItem = nil;
         title = @"";
         image = [NSImage imageNamed:@"Stopped"];
-        isHighlighted = NO;
+        isHighlighted = FALSE;
+        
+        preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
+                                                             action:@selector(showPreferences:)
+                                                      keyEquivalent:@""];
+        openIniTunes = [[NSMenuItem alloc] initWithTitle:@"Go to song in iTunes"
+                                                              action:@selector(openIniTunes:)
+                                                       keyEquivalent:@""];
+        quitApp = [[NSMenuItem alloc] initWithTitle:@"Quit PlayMe"
+                                                         action:@selector(quitPlayMe:)
+                                                  keyEquivalent:@""];
+        
+        
+        //The menu we are going to open
+        menu = [[NSMenu alloc] initWithTitle:@"Menu"];
+        
+        [menu addItem:openIniTunes];
+        [menu addItem:preferences];
+        [menu addItem:quitApp];
+        
+        [statusItem setMenu:menu];
+        [menu setDelegate:self];
     }
     return self;
 }
@@ -37,8 +62,6 @@
 //##############################################################################
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    isHighlighted = !isHighlighted;
-    
     if ([theEvent modifierFlags] & NSControlKeyMask)
     {
         [self rightMouseDown:nil];
@@ -70,13 +93,82 @@
 //##############################################################################
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-    isHighlighted = !isHighlighted;
+    [statusItem popUpStatusItemMenu:menu];
+}
+
+#
+#pragma mark - menu-related
+#
+//##############################################################################
+//When the menu opens highliht it
+//##############################################################################
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    isHighlighted = YES;
+    [self setNeedsDisplay:YES];
+}
+
+//##############################################################################
+//When the menu closes, unhighlight
+//##############################################################################
+- (void)menuDidClose:(NSMenu *)menu
+{
+    isHighlighted = NO;
+    [self setNeedsDisplay:YES];
+}
+
+//##############################################################################
+//Opens the preferences window
+//##############################################################################
+///r figure this out with nots.
+/**
+ -(void)showPreferences:(id)sender
+ {
+ //-------------------------------------------------------------------------
+ //Positioning the window
+ //------------------------------------------------------------------------
+ //preferencesWinowController = [[NSWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
+ preferencesWindowController = [[PreferencesWindowController alloc] init];
+ 
+ NSScreen *mainScreen = [NSScreen mainScreen];
+ CGPoint center = CGPointMake(mainScreen.frame.size.width/2, mainScreen.frame.size.height/2);
+ //This perfectly centers the window
+ CGPoint topLeftPos = CGPointMake(center.x - [preferencesWindowController window].frame.size.width/2,
+ center.y + [preferencesWindowController window].frame.size.height/2);
+ 
+ //-------------------------------------------------------------------------
+ //Setting the window position, and opening it
+ //-------------------------------------------------------------------------
+ [[preferencesWindowController window] setFrameTopLeftPoint:topLeftPos];
+ 
+ [[preferencesWindowController window] setLevel:kCGFloatingWindowLevel];
+ [preferencesWindowController showWindow:nil];
+ 
+ }
+ */
+
+//##############################################################################
+//Closes PlayMe and goes to the song in iTunes
+//It also closes the window that's open and it sends a notification
+//so the delegate knows to update the menubar.
+//##############################################################################
+-(void)openIniTunes:(id)sender
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"revealTrack"
+                                                     ofType:@"scpt"];
+    NSAppleScript *script = [[NSAppleScript alloc]
+                             initWithContentsOfURL:[NSURL fileURLWithPath:path]
+                             error:nil];
     
-    //Sending the notification
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"RightMouseDownNotification"
-     object:self
-     userInfo:nil];
+    [script executeAndReturnError:nil];
+}
+
+//##############################################################################
+//This quits the application.
+//##############################################################################
+-(void)quitPlayMe:(id)sender
+{
+    [NSApp terminate:self];
 }
 
 
@@ -183,17 +275,4 @@
                     fraction:1.0];
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 @end

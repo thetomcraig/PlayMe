@@ -12,5 +12,9 @@
 @property (retain, nonatomic) NSString *title;
 @property (nonatomic, strong) NSImage *image;
 @property (nonatomic, strong) NSImage *alternateImage;
+@property (nonatomic, strong) NSMenu *menu;
+@property (nonatomic, strong) NSMenuItem *preferences;
+@property (nonatomic, strong) NSMenuItem *openIniTunes;
+@property (nonatomic, strong) NSMenuItem *quitApp;
 
 @end
