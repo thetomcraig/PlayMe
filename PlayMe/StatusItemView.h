@@ -1,14 +1,14 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface StatusItemView : NSView
+@interface StatusItemView : NSView <NSMenuDelegate>
 {
     NSStatusItem *statusItem;
     NSString *title;
     BOOL isHighlighted;
 }
 
-@property(retain, nonatomic) NSStatusItem *statusItem;
+@property (retain, nonatomic) NSStatusItem *statusItem;
 @property (retain, nonatomic) NSString *title;
 @property (nonatomic, strong) NSImage *image;
 @property (nonatomic, strong) NSImage *alternateImage;

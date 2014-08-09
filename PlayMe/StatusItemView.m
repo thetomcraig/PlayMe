@@ -28,23 +28,19 @@
         image = [NSImage imageNamed:@"Stopped"];
         isHighlighted = FALSE;
         
-        preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
-                                                             action:@selector(showPreferences:)
-                                                      keyEquivalent:@""];
-        openIniTunes = [[NSMenuItem alloc] initWithTitle:@"Go to song in iTunes"
-                                                              action:@selector(openIniTunes:)
-                                                       keyEquivalent:@""];
-        quitApp = [[NSMenuItem alloc] initWithTitle:@"Quit PlayMe"
-                                                         action:@selector(quitPlayMe:)
-                                                  keyEquivalent:@""];
-        
-        
-        //The menu we are going to open
         menu = [[NSMenu alloc] initWithTitle:@"Menu"];
+        [[menu addItemWithTitle:@"Go to song in iTunes"
+                         action:@selector(openIniTunes:)
+                  keyEquivalent:@""] setTarget:self];
         
-        [menu addItem:openIniTunes];
-        [menu addItem:preferences];
-        [menu addItem:quitApp];
+        [[menu addItemWithTitle:@"Preferences..."
+                         action:@selector(showPreferences:)
+                  keyEquivalent:@""] setTarget:self];
+        
+        [[menu addItemWithTitle:@"Quit PlayMe"
+                         action:@selector(quitPlayMe:)
+                  keyEquivalent:@""] setTarget:self];
+        
         
         [statusItem setMenu:menu];
         [menu setDelegate:self];
