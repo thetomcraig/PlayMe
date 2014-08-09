@@ -13,6 +13,4 @@
 @property (nonatomic, strong) NSImage *image;
 @property (nonatomic, strong) NSImage *alternateImage;
 
-- (void)update:(NSString *)songTitle :(NSString *)iTunesStatus;
-
 @end

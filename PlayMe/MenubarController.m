@@ -1,5 +1,7 @@
+#define TEXT_WIDTH 20
+
 #import "MenubarController.h"
-#include "StatusItemView.h"
+#import "StatusItemView.h"
 
 @implementation MenubarController
 
@@ -22,7 +24,7 @@
         
         statusItemView.statusItem = statusItem;
         [statusItem setView:statusItemView];
-        [statusItemView setTitle:@"PlayMe"];
+        [statusItemView setTitle:@""];
         
         [[NSNotificationCenter defaultCenter]
          addObserver:self
@@ -32,7 +34,6 @@
     }
     return self;
 }
-
 
 
 #
@@ -47,8 +48,24 @@
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
     
+    //Setting up the text, which will determine the size of the entire
+    //NSSTatusItem, butonly up to the threshold - TEXT_WIDTH
     [statusItem setView:statusItemView];
-    [statusItemView setTitle:currentSong];
+    //Range we care about
+    NSRange stringRange = {0, MIN([currentSong length], TEXT_WIDTH)};
+    //Adjust the range to include dependent chars
+    stringRange = [currentSong rangeOfComposedCharacterSequencesForRange:stringRange];
+    NSString *shortString = [currentSong substringWithRange:stringRange];
+    [statusItemView setTitle:shortString];
+    
+    //Setting up the image
+
+    NSImage *image = [NSImage imageNamed:currentStatus];
+    NSImage *alternateImage =
+    [NSImage imageNamed:[currentStatus stringByAppendingString:@"White"]];
+
+    [statusItemView setImage:image];
+    [statusItemView setAlternateImage:alternateImage];
 }
 
 @end

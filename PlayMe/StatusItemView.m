@@ -1,5 +1,6 @@
-#define StatusItemViewPaddingWidth  6
-#define StatusItemViewPaddingHeight 3
+#define EDGE_PADDING_WIDTH  6
+#define INNER_PADDING_WIDTH  3
+#define PADDING_HEIGHT 3
 
 #import "StatusItemView.h"
 
@@ -20,30 +21,10 @@
     {
         statusItem = nil;
         title = @"";
+        image = [NSImage imageNamed:@"Stopped"];
         isHighlighted = NO;
     }
     return self;
-}
-
-#
-#pragma mark - updating
-#
-//##############################################################################
-//For updating the iTunes informatoin tahts displayed in the menubar
-//Know that the name of the rsource image is going to be the same as
-//the name of the iTunes status
-//##############################################################################
-- (void)update:(NSString *)songTitle :(NSString *)iTunesStatus
-{
-    if (![title isEqualToString:songTitle])
-    {
-        title = songTitle;
-        image = [NSImage imageNamed:iTunesStatus];
-        alternateImage =
-        [NSImage imageNamed:[iTunesStatus stringByAppendingString:@"White"]];
-        
-        [self setNeedsDisplay:YES];
-    }
 }
 
 #
@@ -57,10 +38,6 @@
 - (void)mouseDown:(NSEvent *)theEvent
 {
     isHighlighted = !isHighlighted;
-    ///[[self menu] setDelegate:self];
-    ///[statusItem popUpStatusItemMenu:[self menu]];
-    
-    
     
     if ([theEvent modifierFlags] & NSControlKeyMask)
     {
@@ -88,6 +65,9 @@
     [self setNeedsDisplay:YES];
 }
 
+//##############################################################################
+//For rgith clicks, sends its own notification
+//##############################################################################
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
     isHighlighted = !isHighlighted;
@@ -99,140 +79,29 @@
      userInfo:nil];
 }
 
-- (void)menuWillOpen:(NSMenu *)menu {
-    isHighlighted = YES;
-    [self setNeedsDisplay:YES];
-}
 
-- (void)menuDidClose:(NSMenu *)menu {
-    isHighlighted = NO;
-    [menu setDelegate:nil];
-    [self setNeedsDisplay:YES];
-}
-
-- (NSColor *)titleForegroundColor {
-    if (isHighlighted) {
-        return [NSColor whiteColor];
-    }
-    else {
-        return [NSColor blackColor];
-    }
-}
-
-- (NSDictionary *)titleAttributes {
-    // Use default menu bar font size
-    NSFont *font = [NSFont menuBarFontOfSize:0];
-    
-    NSColor *foregroundColor = [self titleForegroundColor];
-    
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            font,            NSFontAttributeName,
-            foregroundColor, NSForegroundColorAttributeName,
-            nil];
-}
-
-- (NSRect)titleBoundingRect {
-    return [title boundingRectWithSize:NSMakeSize(1e100, 1e100)
-                               options:0
-                            attributes:[self titleAttributes]];
-}
-
-- (void)setTitle:(NSString *)newTitle {
-    if (![title isEqual:newTitle]) {
+#
+#pragma mark - setters
+#
+//##############################################################################
+//Setting the instacne property, and setting the length of the statusItem to
+//match the length of the text
+//##############################################################################
+- (void)setTitle:(NSString *)newTitle
+{
+    if (![title isEqual:newTitle])
+    {
 
         title = newTitle;
         
         // Update status item size (which will also update this view's bounds)
         NSRect titleBounds = [self titleBoundingRect];
-        int newWidth = titleBounds.size.width + (2 * StatusItemViewPaddingWidth);
+        int newWidth = titleBounds.size.width + image.size.width + (2*EDGE_PADDING_WIDTH) + INNER_PADDING_WIDTH;
         [statusItem setLength:newWidth];
         
         [self setNeedsDisplay:YES];
     }
 }
-
-- (NSString *)title {
-    return title;
-}
-
-- (void)drawRect:(NSRect)rect {
-    // Draw status bar background, highlighted if menu is showing
-    [statusItem drawStatusBarBackgroundInRect:[self bounds]
-                                withHighlight:isHighlighted];
-    
-    // Draw title string
-    NSPoint origin = NSMakePoint(StatusItemViewPaddingWidth,
-                                 StatusItemViewPaddingHeight);
-    [title drawAtPoint:origin
-        withAttributes:[self titleAttributes]];
-}
-
-
-
-
-/**
-//##############################################################################
-//Draws the resource image and the string of the iTunesStatus
-//##############################################################################
-- (void)drawRect:(NSRect)dirtyRect
-{
-
-
-    [self.statusItem drawStatusBarBackgroundInRect:statusItem.view.frame
-                                     withHighlight:self.isHighlighted];
-
-    //What color icons and text?
-    NSImage *icon = self.isHighlighted ? self.alternateImage : self.image;
-    NSColor *textColor = self.isHighlighted ? [NSColor whiteColor] : [NSColor blackColor];
-
-    //Setting up the text attributes, 0 means default size
-    NSFont *menuBarFont = [NSFont menuBarFontOfSize: 0];
-    
-    NSMutableParagraphStyle *menuBarparagraphStyle =
-    [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [menuBarparagraphStyle setAlignment:NSCenterTextAlignment];
-    
-    NSDictionary *attributes =
-    @{
-      NSFontAttributeName: menuBarFont,
-      NSParagraphStyleAttributeName: menuBarparagraphStyle,
-      NSForegroundColorAttributeName:textColor
-      };
-    
-    //Setting up the icon information
-    NSSize iconSize = [icon size];
-    NSRect bounds = self.bounds;
-    CGFloat iconX = 0;
-    CGFloat iconY = roundf((NSHeight(bounds) - iconSize.height) / 2);
-    NSPoint iconPoint = NSMakePoint(iconX, iconY);
-
-    //Do the icon and text
-    [icon drawAtPoint:iconPoint
-             fromRect:NSZeroRect
-            operation:NSCompositeSourceOver
-             fraction:1.0];
-    
-    [title drawInRect:self.bounds withAttributes:attributes];
-    
-    
-    //This is finding what size the actual menubar item should take up
-    //because it's dependent upon how much text we have
-    NSRect newBounds = self.bounds;
-    CGSize titleSize = [title sizeWithAttributes:attributes];
-    
-    newBounds.size.width = titleSize.width;
-    ///[statusItem setLength:newBounds.size.width];
-    ///[self setBounds:newBounds];
-    ///[statusItem setTitle:title];
-}
-
-
-
-
-
-#
-#pragma mark - setters
-#
 
 - (void)setImage:(NSImage *)newImage
 {
@@ -244,9 +113,87 @@
     alternateImage = newImage;
 }
 
-- (void)setTitle:(NSString *)newTitle
+#
+#pragma mark - getters
+#
+- (NSString *)title
 {
-    title = newTitle;
+    return title;
 }
-*/
+
+- (NSColor *)titleForegroundColor
+{
+    if (isHighlighted) {
+        return [NSColor whiteColor];
+    }
+    else {
+        return [NSColor blackColor];
+    }
+}
+
+- (NSDictionary *)titleAttributes
+{
+    // Use default menu bar font size
+    NSFont *font = [NSFont menuBarFontOfSize:0];
+    
+    NSColor *foregroundColor = [self titleForegroundColor];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            font,            NSFontAttributeName,
+            foregroundColor, NSForegroundColorAttributeName,
+            nil];
+}
+
+- (NSRect)titleBoundingRect
+{
+    return [title boundingRectWithSize:NSMakeSize(1e100, 1e100)
+                               options:0
+                            attributes:[self titleAttributes]];
+}
+
+#
+#pragma mark - drawing
+#
+//##############################################################################
+//Drawing the statusbar in the view, and drawing the text at the origin
+//##############################################################################
+- (void)drawRect:(NSRect)rect
+{
+    //Draw status bar background, highlighted if menu is showing
+    [statusItem drawStatusBarBackgroundInRect:[self bounds]
+                                withHighlight:isHighlighted];
+    
+    //"origin" according to the padding
+    NSPoint origin = NSMakePoint(EDGE_PADDING_WIDTH,
+                                 PADDING_HEIGHT);
+    
+    double widthOfImage = image.size.width;
+    NSPoint titlePoint = origin;
+    titlePoint.x += widthOfImage + INNER_PADDING_WIDTH;
+    
+    [title drawAtPoint:titlePoint
+        withAttributes:[self titleAttributes]];
+
+    NSPoint imagePoint = origin;
+    imagePoint.y = 0;
+    NSImage *imageToDraw = isHighlighted ? alternateImage : image;
+    [imageToDraw drawAtPoint:imagePoint
+                    fromRect:NSZeroRect
+                   operation:NSCompositeSourceOver
+                    fraction:1.0];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
