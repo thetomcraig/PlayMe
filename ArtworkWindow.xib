@@ -19,6 +19,7 @@
                 <outlet property="previousButtonCell" destination="Yj6-zz-hvd" id="OVM-8a-5bt"/>
                 <outlet property="songSlider" destination="GMW-14-vys" id="00x-cJ-4yX"/>
                 <outlet property="songSliderCell" destination="Fn5-FV-lrK" id="eFM-Ny-k7A"/>
+                <outlet property="songTimeLeft" destination="IQs-YS-drz" id="FU1-Lf-yGU"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -28,7 +29,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="475"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <value key="minSize" type="size" width="400" height="475"/>
             <value key="maxSize" type="size" width="400" height="475"/>
             <view key="contentView" id="se5-gp-TjO">
@@ -99,11 +100,19 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQs-YS-drz">
+                                <rect key="frame" x="328" y="76" width="52" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="4kv-qH-d4D">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </customView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="700" y="490.5"/>
+            <point key="canvasLocation" x="505" y="146.5"/>
         </window>
     </objects>
 </document>
