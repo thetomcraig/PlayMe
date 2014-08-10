@@ -13,21 +13,22 @@
 //The color picker is used to find the colors of the current album
 //The the album colors dict holds the found colors
 //############################################################################
+/**
 -(id)init
 {
     self = [super init];
     if (self)
     {
-        self.albumColors = [[NSDictionary alloc] initWithObjectsAndKeys:@"backgroundColor",
+         self.albumColors = [[NSDictionary alloc] initWithObjectsAndKeys:@"backgroundColor",
                             @"primaryColor", @"secondaryColor", @"detailColor",
                             nil, nil, nil, nil, nil];
-        
+
         self.lastArtCalculated = @"";
 
     }
     return self;
 }
-
+*/
 //############################################################################
 //We pass both the art and the song title, so it can rememeber what songs it
 //calculated art for.  If we ask it to do the same song two times in a row,
@@ -105,12 +106,12 @@
 //the image is clipped and made square.  I think iTunes does this too, and it
 //is hardly noticable on irregular album arts
 //############################################################################
--(NSImage *)resizeArt: (NSImage *) bigArt :(NSRect)targetSize
+-(NSImage *)resizeArt :(NSImage *) bigArt forSize:(NSSize)targetSize
 {
     [bigArt setScalesWhenResized:YES];
     [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
     
-    double targetWidth = targetSize.size.width;
+    double targetWidth = targetSize.width;
     double targetHeight = 0.0;
     
     //-------------------------------------------------------------------------
@@ -119,7 +120,7 @@
     //instead it is zoomed in until square,
     //This just makes the image square, it still needs to be resized
     //-------------------------------------------------------------------------
-    threshold = targetSize.size.width*.075;
+    threshold = targetSize.width*.075;
     if (0 < abs(bigArt.size.height - bigArt.size.width) &&
         abs(bigArt.size.height - bigArt.size.width) < threshold)
     {
@@ -294,7 +295,7 @@
 //############################################################################
 //This is used to resize resource images, so they don't look shitty on retina
 //############################################################################
--(NSImage *)resizeResource :(NSImage *) origImage :(NSRect)targetSize
+-(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize
 {
     return origImage;
 }

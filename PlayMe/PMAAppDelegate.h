@@ -1,17 +1,20 @@
-#import <Cocoa/Cocoa.h>
 #import "NCController.h"
+#import "MenubarController.h"
 #import "ArtworkWindowController.h"
+#import "PreferencesWindowController.h"
+#import "ITunesController.h"
 
-@interface PMAAppDelegate : NSObject <NSApplicationDelegate>
+@interface PMAAppDelegate : NSObject
+{
+    ITunesController *_iTunesController;
+    MenubarController *_menubarController;
+    ArtworkWindowController *_artworkWindowController;
+    PreferencesWindowController *_preferencesWindowController;
+}
 
-@property (nonatomic, retain) NSStatusItem *statusItem;
-@property (nonatomic, retain) NCController *ncController;
-@property (nonatomic, retain) ArtworkWindowController *artworkWindowController;
-
--(void)update:(BOOL)windowIsOpen;
--(void)updateIcon:(BOOL)windowIsOpen;
--(void)updateUIElements;
--(void)updateWindowPosition;
--(void)clicked:(id)sender;
+@property (nonatomic, strong, readonly) ITunesController *iTunesController;
+@property (nonatomic, strong, readonly) MenubarController *menubarController;
+@property (nonatomic, strong, readonly) ArtworkWindowController *artworkWindowController;
+@property (nonatomic, strong, readonly) PreferencesWindowController *preferencesWindowController;
 
 @end
