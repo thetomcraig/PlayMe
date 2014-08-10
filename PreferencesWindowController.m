@@ -62,7 +62,7 @@
     CGPoint center = CGPointMake(mainScreen.frame.size.width/2, mainScreen.frame.size.height/2);
     //This perfectly centers the window
     CGPoint topLeftPos = CGPointMake(center.x - [self window].frame.size.width/2,
-                                     center.y + [self window].frame.size.height/2);
+                                     center.y + [self window].frame.size.height);
     
     //--------------------------------------------------------------------------
     //Setting the window position, and opening it

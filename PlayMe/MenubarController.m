@@ -53,7 +53,7 @@
     //the name.  Otherwise there shuold be no title
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        currentSong = @"";
+        ///currentSong = @"";
     }
     
     //Setting up the text, which will determine the size of the entire
