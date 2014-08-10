@@ -18,6 +18,8 @@
                                  @"NO", @"quitWheniTunesQuits",
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
+    
 
 }
 

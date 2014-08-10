@@ -48,30 +48,36 @@
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
     
+    //Setting up the text, which will determine the size of the entire
+    //NSSTatusItem, butonly up to the threshold - TEXT_WIDTH
+    [statusItem setView:statusItemView];
+    
     //If the UserDefaults option for showing
     //the name in the menubar IS ENABLED, then we show
     //the name.  Otherwise there shuold be no title
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        ///currentSong = @"";
+        currentSong = @"";
     }
     
-    //Setting up the text, which will determine the size of the entire
-    //NSSTatusItem, butonly up to the threshold - TEXT_WIDTH
-    [statusItem setView:statusItemView];
-    //Range we care about
-    NSRange stringRange = {0, MIN([currentSong length], TEXT_WIDTH)};
-    //Adjust the range to include dependent chars
-    stringRange = [currentSong rangeOfComposedCharacterSequencesForRange:stringRange];
-    NSString *shortString = [currentSong substringWithRange:stringRange];
-    [statusItemView setTitle:shortString];
+    else
+    {
+        //Range we care about
+        NSRange stringRange = {0, MIN([currentSong length], TEXT_WIDTH)};
+        //Adjust the range to include dependent chars
+        stringRange = [currentSong rangeOfComposedCharacterSequencesForRange:stringRange];
+        currentSong = [currentSong substringWithRange:stringRange];
+    }
     
-    //Setting up the image
+    //Setting the tite
+    [statusItemView setTitle:currentSong];
 
+    //Setting up the image
     NSImage *image = [NSImage imageNamed:currentStatus];
     NSImage *alternateImage =
     [NSImage imageNamed:[currentStatus stringByAppendingString:@"White"]];
 
+    //Setting the images
     [statusItemView setImage:image];
     [statusItemView setAlternateImage:alternateImage];
 }

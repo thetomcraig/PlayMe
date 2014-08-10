@@ -172,7 +172,13 @@
         
         // Update status item size (which will also update this view's bounds)
         NSRect titleBounds = [self titleBoundingRect];
-        int newWidth = titleBounds.size.width + image.size.width + (2*EDGE_PADDING_WIDTH) + INNER_PADDING_WIDTH;
+        int newWidth = titleBounds.size.width + image.size.width + (2*EDGE_PADDING_WIDTH);
+        
+        //If we are showing the song name, we need extra buffer space
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
+        {
+            newWidth += INNER_PADDING_WIDTH;
+        }
         [statusItem setLength:newWidth];
         
         [self setNeedsDisplay:YES];
@@ -245,7 +251,15 @@
     
     double widthOfImage = image.size.width;
     NSPoint titlePoint = origin;
-    titlePoint.x += widthOfImage + INNER_PADDING_WIDTH;
+    titlePoint.x += widthOfImage;
+    
+    //If the title of the song is also shown in the menubar
+    //increate the width to make room for it
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
+    {
+        NSLog(@"ALPHA");
+        titlePoint.x += INNER_PADDING_WIDTH;
+    }
     
     [title drawAtPoint:titlePoint
         withAttributes:[self titleAttributes]];
