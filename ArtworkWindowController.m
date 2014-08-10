@@ -502,7 +502,6 @@
      nextButton.hidden = NO;
      previousButton.hidden = NO;
      [songTimeLeft setHidden:NO];
-
 }
 
 //##############################################################################
