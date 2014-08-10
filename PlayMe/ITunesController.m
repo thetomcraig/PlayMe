@@ -279,30 +279,6 @@
                                    :_currentArtwork];
     //Start the timer again
     [self startTimer];
-    
-    
-    
-    
-    ///r
-    ///Keeping for posterity
-    ///Send not. to artworkwindow controller telling it to do these following tasks
-    /**
-    if ([[_artworkWindowController window] isVisible])
-    {
-     [self update:YES];
-    }
-    else
-    {
-     [self update:NO];
-    }
-
-    [_artworkWindowController updateUIElements];
-
-    [_artworkWindowController startTimer];
-    [_artworkWindowController.openIniTunes setTitle:@"Go to song in iTunes"];
-    */
-
- 
  }
 
 //##############################################################################
@@ -316,13 +292,6 @@
     [self updateArtwork];
     [self sendTagsNotification];
     [self stopTimer];
-    
-    ///r
-     ///Send not. to artwcontroller to do this
-     ///[_artworkWindowController updateUIElements];
-    ///send not. menubarcont. to do this
-     ///make sure this is opdating properly, dont poll itunes, just update the icon
-     ///[_menubarController updateSatusItemView:nil iTunesStatus:_iTunesController.currentStatus];
 }
 
 //##############################################################################
@@ -350,27 +319,6 @@
     [self updateWithNill];
     [self sendTagsNotification];
     [self stopTimer];
-    
-    
-    ///r
-    ///send not. to menubar cont. to do this
-    ///self.statusItem.title = @"";
-    
-    ///sned not. to artworkwindowcontroller to do this
-    /**
-    if ([[_artworkWindowController window] isVisible])
-    {
-        [self update:YES];
-    }
-    else
-    {
-        [self update:NO];
-    }
-
-    [_artworkWindowController updateUIElements];
-    [_artworkWindowController.artworkWindow.artworkView setNeedsDisplay:NO];
-    [_artworkWindowController.openIniTunes setTitle:@"Go to iTunes"];
-     */
 }
 
 //##############################################################################
@@ -404,54 +352,6 @@
         [self updateProgress];
     }
 }
-
-///r
-///OTHER INFO WE NEED TO RECEIVE AND HANDLE
-/**
- //--------------------------------------------------------------------------
- //FILTERING....
- //--------------------------------------------------------------------------
- //This came from the window controller, because the reveal in iTunes button
- //was pressed.  We can update the menubar icon and be done after that
- if ([note.name rangeOfString:@"iTunesButtonClicked"].location != NSNotFound)
- {
- [self update:NO];
- return;
- }
- 
- //This also came from the window controller, because the close button was
- //pressed.  Same shit as above
- else if ([note.name rangeOfString:@"closeButtonClicked"].location != NSNotFound)
- {
- [self update:NO];
- return;
- }
- 
- //This also came from the window controller, because the close button was
- //pressed.  Same shit as above
- else if ([note.name rangeOfString:@"ESCKeyHit"].location != NSNotFound)
- {
- [self update:NO];
- return;
- }
- 
- //This comes from the preferences window, because the website button has
- //been clicked, and the windows need to be closed, and everything else
- //needs to be update appropriately
- else if ([note.name rangeOfString:@"preferencesWindowButtonClicked"].location != NSNotFound)
- {
- [_artworkWindowController closeWindowWithButton:nil];
- [self update:NO];
- return;
- }
- 
- //This makes sure we only worry about the notification from iTunes
- if ([note.name rangeOfString:@"iTunes"].location == NSNotFound) return;
- //If the notification looks like this, iTunes has just
- //been opened, and we do not need to update anything
- if ([note.name isEqualToString:@"com.apple.iTunes.sourceInfo"]) return;
- */
-
  //#############################################################################
 //This method is called when iTunes launches, and it tells the iTunesController
 //to create an iTunes object if it has not already.

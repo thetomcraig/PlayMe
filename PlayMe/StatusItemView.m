@@ -93,7 +93,7 @@
 }
 
 #
-#pragma mark - menu-related
+#pragma mark - menu related
 #
 //##############################################################################
 //When the menu opens highliht it
@@ -116,32 +116,20 @@
 //##############################################################################
 //Opens the preferences window
 //##############################################################################
-///r figure this out with nots.
-/**
- -(void)showPreferences:(id)sender
- {
- //-------------------------------------------------------------------------
- //Positioning the window
- //------------------------------------------------------------------------
- //preferencesWinowController = [[NSWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
- preferencesWindowController = [[PreferencesWindowController alloc] init];
- 
- NSScreen *mainScreen = [NSScreen mainScreen];
- CGPoint center = CGPointMake(mainScreen.frame.size.width/2, mainScreen.frame.size.height/2);
- //This perfectly centers the window
- CGPoint topLeftPos = CGPointMake(center.x - [preferencesWindowController window].frame.size.width/2,
- center.y + [preferencesWindowController window].frame.size.height/2);
- 
- //-------------------------------------------------------------------------
- //Setting the window position, and opening it
- //-------------------------------------------------------------------------
- [[preferencesWindowController window] setFrameTopLeftPoint:topLeftPos];
- 
- [[preferencesWindowController window] setLevel:kCGFloatingWindowLevel];
- [preferencesWindowController showWindow:nil];
- 
- }
- */
+ - (void)showPreferences:(id)sender
+{
+    //--------------------------------------------------------------------------
+    //Positioning the window
+    //--------------------------------------------------------------------------
+     NSDictionary *menubarInfo = @{};
+     
+     //Sending the notification
+     [[NSNotificationCenter defaultCenter]
+      postNotificationName:@"PreferencesSelectionNotification"
+      object:self
+      userInfo:menubarInfo];
+}
+
 
 //##############################################################################
 //Closes PlayMe and goes to the song in iTunes

@@ -44,7 +44,7 @@
 		8342CB731893071C000CA6AE /* moreButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB721893071C000CA6AE /* moreButtonDepressed.png */; };
 		8351AD0B17CBF2DF002835F2 /* Open.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351AD0A17CBF2DF002835F2 /* Open.png */; };
 		835A69B018BCFB9A0080CEA3 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */; };
-		835A69B118BCFB9A0080CEA3 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835A69AF18BCFB9A0080CEA3 /* PreferencesWindowController.xib */; };
+		835A69B118BCFB9A0080CEA3 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */; };
 		835CA99C1870A87600CE42A8 /* ColorOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 835CA99B1870A87600CE42A8 /* ColorOperation.m */; };
 		8376319B17DAFA1E00B51CBC /* NextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8376319717DAFA1E00B51CBC /* NextButton.png */; };
 		8376319D17DAFA1E00B51CBC /* PreviousButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8376319917DAFA1E00B51CBC /* PreviousButton.png */; };
@@ -151,7 +151,7 @@
 		8351AD0A17CBF2DF002835F2 /* Open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Open.png; sourceTree = "<group>"; };
 		835A69AD18BCFB9A0080CEA3 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = ../PreferencesWindowController.h; sourceTree = "<group>"; };
 		835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = ../PreferencesWindowController.m; sourceTree = "<group>"; };
-		835A69AF18BCFB9A0080CEA3 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PreferencesWindowController.xib; path = ../PreferencesWindowController.xib; sourceTree = "<group>"; };
+		835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PreferencesWindow.xib; path = ../PreferencesWindow.xib; sourceTree = "<group>"; };
 		835CA99A1870A87600CE42A8 /* ColorOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorOperation.h; sourceTree = "<group>"; };
 		835CA99B1870A87600CE42A8 /* ColorOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorOperation.m; sourceTree = "<group>"; };
 		8376319717DAFA1E00B51CBC /* NextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButton.png; sourceTree = "<group>"; };
@@ -349,7 +349,7 @@
 				83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */,
 				835A69AD18BCFB9A0080CEA3 /* PreferencesWindowController.h */,
 				835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */,
-				835A69AF18BCFB9A0080CEA3 /* PreferencesWindowController.xib */,
+				835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */,
 				83CB8D6319561160009D4FE2 /* MenubarController.h */,
 				83CB8D6419561160009D4FE2 /* MenubarController.m */,
 				83CB8D6619561231009D4FE2 /* StatusItemView.h */,
@@ -614,7 +614,7 @@
 				83AFDA1619707DFF00DE0429 /* ArtworkWindow.xib in Resources */,
 				83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */,
 				831C29EC17D51F910014C228 /* PausedMask.png in Resources */,
-				835A69B118BCFB9A0080CEA3 /* PreferencesWindowController.xib in Resources */,
+				835A69B118BCFB9A0080CEA3 /* PreferencesWindow.xib in Resources */,
 				8342CB6D1892FF60000CA6AE /* AboutView.xib in Resources */,
 				83E1A7DB17E1A1FE00BC94B8 /* iTunesButtonDepressed.png in Resources */,
 			);

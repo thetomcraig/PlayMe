@@ -48,6 +48,14 @@
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
     
+    //If the UserDefaults option for showing
+    //the name in the menubar IS ENABLED, then we show
+    //the name.  Otherwise there shuold be no title
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
+    {
+        currentSong = @"";
+    }
+    
     //Setting up the text, which will determine the size of the entire
     //NSSTatusItem, butonly up to the threshold - TEXT_WIDTH
     [statusItem setView:statusItemView];

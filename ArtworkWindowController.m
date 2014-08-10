@@ -55,6 +55,7 @@
                              object:nil];
         
         ///This may nee to move
+        /**
         //Send the notification to update the iTunesController
         //So it will update the window elements
         NSDictionary *fakeUpdateDict =
@@ -66,6 +67,7 @@
          postNotificationName:@"com.apple.iTunes.playerInfo"
          object:nil
          userInfo:fakeUpdateDict];
+         */
     }
     return self;
 }
