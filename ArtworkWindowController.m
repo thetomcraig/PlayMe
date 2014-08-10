@@ -66,17 +66,6 @@
 {
     [super windowDidLoad];
     
-    //Setting up the menuItems
-    preferences = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
-                                             action:@selector(showPreferences:)
-                                      keyEquivalent:@""];
-    openIniTunes = [[NSMenuItem alloc] initWithTitle:@"Go to song in iTunes"
-                                              action:@selector(openIniTunes:)
-                                       keyEquivalent:@""];
-    quitApp = [[NSMenuItem alloc] initWithTitle:@"Quit PlayMe"
-                                         action:@selector(quitPlayMe:)
-                                  keyEquivalent:@""];
-    
     [playPauseButton setBordered:NO];
     [nextButton setBordered:NO];
     [previousButton setBordered:NO];

@@ -75,8 +75,7 @@
     [sharedNC addObserver:self
                  selector:@selector(receivedITunesQuitNotification:)
                      name:NSWorkspaceDidTerminateApplicationNotification
-                   object:nil];
-    
+                   object:nil];    
     return self;
 }
 

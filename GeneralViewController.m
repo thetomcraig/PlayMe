@@ -17,7 +17,7 @@
 
 -(NSImage *)toolbarItemImage
 {
-    ///Change this later
+    //Change this later
     return [NSImage imageNamed:NSImageNamePreferencesGeneral];
 }
 
