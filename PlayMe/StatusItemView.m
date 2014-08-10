@@ -257,7 +257,6 @@
     //increate the width to make room for it
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        NSLog(@"ALPHA");
         titlePoint.x += INNER_PADDING_WIDTH;
     }
     
