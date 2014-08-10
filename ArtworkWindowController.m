@@ -53,18 +53,6 @@
                              selector:@selector(receivedMouseDownNotification:)
                              name:@"MouseDownNotification"
                              object:nil];
-        
-        //Sending fake notification to update everythig with nil information
-        //So it has a blank state to initialize
-        NSDictionary *fakeUpdateDict =
-        @{
-          @"Player State": @"Stopped",
-          };
-        
-        [[NSDistributedNotificationCenter defaultCenter]
-         postNotificationName:@"com.apple.iTunes.playerInfo"
-         object:nil
-         userInfo:fakeUpdateDict];
     }
     return self;
 }

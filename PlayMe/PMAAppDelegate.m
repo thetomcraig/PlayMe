@@ -36,9 +36,8 @@
     //--------------------------------------------------------------------------
     _artworkWindowController = [[ArtworkWindowController alloc] initWithWindowNibName:@"ArtworkWindow"];
     _preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
-    _iTunesController = [[ITunesController alloc] init];
     _menubarController = [[MenubarController alloc] init];
-    
+    _iTunesController = [[ITunesController alloc] init];
 }
 
 @end

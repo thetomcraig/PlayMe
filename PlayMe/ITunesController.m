@@ -375,18 +375,6 @@
     {
         [self destroyiTunes];
         [self stoppedUpdate];
-        
-        ///r
-        ///Will want to send this message to the Delegate
-        /**
-        //If the UserDefaults option for quitting playme when
-        //itunes quits IS ENABLED, quit.  Otherwise do not
-        if([[NSUserDefaults standardUserDefaults]
-                                        boolForKey:@"quitWhenreceivedITunesQuitNotifications"])
-        {
-            [_artworkWindowController quitPlayMe:nil];
-        }
-         */
     }
 }
 
