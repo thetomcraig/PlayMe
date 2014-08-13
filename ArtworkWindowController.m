@@ -32,7 +32,7 @@
 @synthesize trackingArea;
 
 #
-#pragma mark - Setup mehods
+#pragma mark - Setup methods
 #
 //##############################################################################
 //The init method makes sure we observer notificatinos from the iTunesContrller
@@ -96,7 +96,6 @@
     [songSliderCell setBackgroundColor: backgroundColor];
     [songSliderCell setProgressColor: primaryColor];
     songTimeLeft.textColor = primaryColor;
-    
 }
 
 
@@ -132,6 +131,29 @@
     //Otherwise its closed, so open it
     else
     {
+        
+        
+        
+        
+        ///Trying to fake the notificatinon, so when the mousedown
+        ///is called, we can call an itunes update so that the
+        ///window elements are updating when the app opens when
+        ///itunes is paused
+        /**
+        NSDictionary *commandNotification =
+        @{
+          @"Player State": @"PlayPause"
+          };
+        
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"com.apple.iTunes.playerInfo"
+         object:self
+         userInfo:commandNotification];
+        */
+        
+        
+        
+        
         //Telling the window where to open using ths corresponding string
         [self positionAndOpenWindow:[note.userInfo objectForKey:@"GlobalRect"]];
         //After it's opened, position the window elementt properly
@@ -266,7 +288,7 @@
     //It calls the trimString method to make sure they're clipped properly
     //--------------------------------------------------------------------------
     [currentSong setStringValue:currentSongInp];
-    
+
     if ([currentArtistInp isEqualToString:@""])
     {
         [currentArtistAndAlbum setStringValue:@""];
@@ -276,8 +298,6 @@
         [NSString stringWithFormat:@"%@ - %@",
          currentArtistInp,
          currentAlbumInp];
-        
-        [currentArtistAndAlbum setStringValue: combinedString];
     }
     
     //--------------------------------------------------------------------------
