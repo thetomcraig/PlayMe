@@ -11,6 +11,19 @@
 @property (retain, nonatomic) NSMenu *menuButtonMenu;
 @property (retain, nonatomic) NSMenuItem *preferences, *openIniTunes, *quitApp;
 
+//Instance variables to hold the iTunes information
+//These need to be stored internally because the window
+//elements cannot be set when the window has not yet loaded
+@property (nonatomic, strong) NSString *currentSongState;
+@property (nonatomic, strong) NSString *currentArtistAndAlbumState;
+@property (nonatomic, strong) NSString *currentStatusState;
+@property (nonatomic, strong) NSString *currentButtonNameState;
+@property (nonatomic, strong) NSString *currentAltButtonNameState;
+@property (nonatomic, strong) NSImage *currentArtworkState;
+@property (nonatomic, strong) NSNumber *currentProgressState;
+@property (nonatomic, strong) NSNumber *currentLengthState;
+@property (nonatomic, strong) NSString *currentTimeLeftState;
+
 //The tags we get from iTunes
 @property (weak) IBOutlet ArtworkView *artworkView;
 @property (nonatomic, retain) IBOutlet NSImageView *currentArtwork;

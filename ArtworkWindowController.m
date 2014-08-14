@@ -12,8 +12,21 @@
 @synthesize openIniTunes;
 @synthesize quitApp;
 
+//These all hold iTunes information for assigning
+//to window elements at the right time
+@synthesize currentSongState;
+@synthesize currentArtistAndAlbumState;
+@synthesize currentStatusState;
+@synthesize currentButtonNameState;
+@synthesize currentAltButtonNameState;
+@synthesize currentArtworkState;
+@synthesize currentProgressState;
+@synthesize currentLengthState;
+@synthesize currentTimeLeftState;
+
 @synthesize artworkView;
 @synthesize currentArtwork;
+
 @synthesize currentSong;
 @synthesize currentArtistAndAlbum;
 @synthesize currentLyrics;
@@ -65,6 +78,8 @@
 -(void)windowDidLoad
 {
     [super windowDidLoad];
+    
+    [self assignStateVariables];
     
     [playPauseButton setBordered:NO];
     [nextButton setBordered:NO];
@@ -287,17 +302,18 @@
     //Updating the labels with the song name, artist and album name.
     //It calls the trimString method to make sure they're clipped properly
     //--------------------------------------------------------------------------
-    [currentSong setStringValue:currentSongInp];
+    currentSongState = currentSongInp;
 
     if ([currentArtistInp isEqualToString:@""])
     {
-        [currentArtistAndAlbum setStringValue:@""];
+        currentArtistAndAlbumState = @"";
     } else
     {
         NSString *combinedString =
         [NSString stringWithFormat:@"%@ - %@",
          currentArtistInp,
          currentAlbumInp];
+        currentArtistAndAlbumState = combinedString;
     }
     
     //--------------------------------------------------------------------------
@@ -323,24 +339,20 @@
                                  @"Depressed"];
     
     //Actually assigning the button resource image
-    [playPauseButton setImage:[NSImage imageNamed:nameOfButton]];
-    [playPauseButton setAlternateImage:[NSImage imageNamed:nameOfAltButton]];
+    currentButtonNameState = nameOfButton;
+    currentAltButtonNameState = nameOfAltButton;
     
     //--------------------------------------------------------------------------
     //Updating the artwork.
     //If there was NO artwork, we put in the black artwork image
     //--------------------------------------------------------------------------
-    [currentArtwork setImage:currentArtworkInp];
+    currentArtworkState = currentArtworkInp;
     
     //--------------------------------------------------------------------------
-    //Timing - sliders
+    //Timing
     //--------------------------------------------------------------------------
-    //Sliders - have to use NSNumbers forth notification, so we make them into
-    //doubles here
-    [songSlider setDoubleValue:
-     [currentProgressInp doubleValue]];
-    [songSlider setMaxValue:
-    [currentLengthInp doubleValue]];
+    currentProgressState = currentProgressInp;
+    currentLengthState = currentLengthInp;
     
     //--------------------------------------------------------------------------
     //Timing - countdown label
@@ -361,7 +373,34 @@
                           numMinsLeft,
                           numSecsLeft];
     
-    [songTimeLeft setStringValue:timeLeft];
+    currentTimeLeftState = timeLeft;
+    
+    //--------------------------------------------------------------------------
+    //Assign all thse state variables
+    //--------------------------------------------------------------------------
+    [self assignStateVariables];
+}
+
+//##############################################################################
+//This assigns all the state variables to the window elements.  Called at the
+//end of the updateWindwoElements method, but also in the windowDidLoad method
+//this allows the variables to be assigned when iTunes is paused.
+//##############################################################################
+- (void)assignStateVariables
+{
+    [currentSong setStringValue:currentSongState];
+    
+    [currentArtistAndAlbum setStringValue:currentArtistAndAlbumState];
+    
+    [currentArtwork setImage: currentArtworkState];
+
+    [playPauseButton setImage:[NSImage imageNamed:currentButtonNameState]];
+    [playPauseButton setAlternateImage:[NSImage imageNamed:currentAltButtonNameState]];
+
+    [songSlider setDoubleValue: [currentProgressState doubleValue]];
+    [songSlider setMaxValue: [currentLengthState doubleValue]];
+
+    [songTimeLeft setStringValue: currentTimeLeftState];
 }
 
 //##############################################################################
