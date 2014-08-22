@@ -108,10 +108,12 @@
         //Playing
         case 1800426320:
             _currentStatus = @"Playing";
+            [self updateArtwork:YES];
             break;
         //Paused
         case 1800426352:
             _currentStatus = @"Paused";
+            [self updateArtwork:NO];
             break;
         //Two cases for stopped
         default:
@@ -124,14 +126,9 @@
             else
             {
                 _currentStatus = @"Paused";
+                [self updateArtwork:NO];
             }
     }
-    
-    //--------------------------------------------------------------------------
-    //The artwork; because the artwork needs to know the status of iTunes, it
-    //must be updated after the status is determined.
-    //--------------------------------------------------------------------------
-    [self updateArtwork];
 }
 
 //##############################################################################
@@ -150,15 +147,22 @@
 }
 
 //##############################################################################
-//Update the artwork from iTunes.
+//Update the artwork from iTunes.  We don't want to poll iTunes when we don't
+//have to, so the boolean is telling us if we really want to do that.  When it
+//is true we update from itunes, if not, we retain the current artwork.
 //##############################################################################
-- (void)updateArtwork
+- (void)updateArtwork:(BOOL)getNewArt
 {
-    //Getting the artwork from iTunes
-    iTunesArtwork *rawArtwork =
-    (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
-    NSImage *newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
+    NSImage *newArtwork = _currentArtwork;
     
+    //Getting the new artwork from iTunes
+    if (getNewArt)
+    {
+        iTunesArtwork *rawArtwork =
+        (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
+        newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
+    }
+
     //Resizing/manipulation
     //For resizing
     NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
@@ -199,7 +203,10 @@
 //##############################################################################
 - (void)updateProgress
 {
-    _currentProgress = [_iTunes playerPosition];
+    if (_iTunesRunning)
+    {
+        _currentProgress = [_iTunes playerPosition];
+    }
     
 }
 
@@ -288,7 +295,7 @@
 - (void)pausedUpdate
 {
     _currentStatus = @"Paused";
-    [self updateArtwork];
+    [self updateArtwork:NO];
     [self sendTagsNotification];
     [self stopTimer];
 }
@@ -387,6 +394,10 @@
 - (void)sendTagsNotification
 {
     //Need to update this here because it cahnged literally every second
+    
+    //This cannpt happen in here because when itunes quites it send a
+    //paused update before anything else, this makes itunes reopen when its quit
+    //so I need to handle this updaing outside of this function
     [self updateProgress];
     
     //Set up all the tags

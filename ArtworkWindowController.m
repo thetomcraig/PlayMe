@@ -123,6 +123,7 @@
 //##############################################################################
 - (void)receivedTagsNotification:(NSNotification *)note
 {
+    
     [self updateWindowElements:[note.userInfo objectForKey:@"CurrentSong"]
                               :[note.userInfo objectForKey:@"CurrentArtist"]
                               :[note.userInfo objectForKey:@"CurrentAlbum"]
