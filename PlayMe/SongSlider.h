@@ -3,6 +3,6 @@
 @interface SongSlider : NSSlider
 
 @property (readwrite, assign) int sliderPosition;
-@property (nonatomic, assign) NSColor *backgroundColor;
+@property (strong, retain) NSColor *backgroundColor;
 
 @end

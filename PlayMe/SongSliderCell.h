@@ -3,7 +3,7 @@
 
 @interface SongSliderCell : NSSliderCell
 
-@property (nonatomic, assign) NSColor *backgroundColor;
-@property (nonatomic, assign) NSColor *progressColor;
+@property (strong, retain) NSColor *backgroundColor;
+@property (strong, retain) NSColor *progressColor;
 
 @end

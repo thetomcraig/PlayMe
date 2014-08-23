@@ -2,6 +2,6 @@
 
 @interface ControlButtonsCell : NSButtonCell
 
-@property (nonatomic, assign) NSColor *buttonsColor;
+@property (strong, retain) NSColor *buttonsColor;
 
 @end

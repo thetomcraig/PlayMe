@@ -27,7 +27,7 @@
 
 -(NSImage *)toolbarItemImage
 {
-    ///Change this later
+    //Change this later
     return [NSImage imageNamed:NSImageNamePreferencesGeneral];
 }
 
@@ -66,7 +66,7 @@
                                        applicationLogo.frame.size.width,
                                        applicationLogo.frame.size.height);
     
-    ///[[self applicationLogo] setImage:[NSImage imageNamed:@"icon"]];
+    //[[self applicationLogo] setImage:[NSImage imageNamed:@"icon"]];
     
     //-------------------------------------------------------------------------
     //Title text
@@ -127,6 +127,6 @@
 - (IBAction)openMyWebsite:(id)sender
 {
     [self updateWidowElements];
-    ///[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"http://about.me/tomcraig/"]];
+    //[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"http://about.me/tomcraig/"]];
 }
 @end

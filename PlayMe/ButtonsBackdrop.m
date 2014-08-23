@@ -2,7 +2,7 @@
 
 @implementation ButtonsBackdrop
 
-@synthesize mainColor;
+@synthesize backgroundColor;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -19,10 +19,9 @@
 //############################################################################
 - (void)drawRect:(NSRect)dirtyRect
 {
-    
-    [[NSColor colorWithCalibratedRed:mainColor.redComponent
-                               green:mainColor.greenComponent
-                                blue:mainColor.blueComponent
+    [[NSColor colorWithCalibratedRed:backgroundColor.redComponent
+                               green:backgroundColor.greenComponent
+                                blue:backgroundColor.blueComponent
                                alpha:0.80] set];
     NSRect backgroundRect = NSMakeRect(0.0, 0.0,
                                        self.bounds.size.width,

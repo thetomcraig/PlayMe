@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A314h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.21"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController">
             <connections>
                 <outlet property="applicationIcon" destination="cLm-Ak-QzE" id="lYH-M3-miD"/>
-                <outlet property="creditsBackdrop" destination="pov-XD-JyQ" id="dtj-W7-S6z"/>
                 <outlet property="logo" destination="gjZ-MJ-qra" id="ZKA-0l-x4f"/>
                 <outlet property="preferencesBackdrop" destination="pov-XD-JyQ" id="XhM-5Y-KLq"/>
-                <outlet property="quitWithiTunes" destination="12u-Al-5yd" id="Khk-fm-4UD"/>
                 <outlet property="showSongName" destination="7pm-AV-J7Q" id="LRM-Fr-jk6"/>
                 <outlet property="title" destination="cdr-BI-TMp" id="YNI-75-1d3"/>
                 <outlet property="twitterButton" destination="uQS-RY-x3u" id="dvz-EG-xo0"/>
@@ -24,35 +22,20 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="331" height="276"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
-            <view key="contentView" appearanceType="lightContent" id="2">
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" appearanceType="aqua" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="331" height="276"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <customView appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pov-XD-JyQ" customClass="PreferencesBackdrop">
+                    <customView appearanceType="aqua" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pov-XD-JyQ" customClass="PreferencesBackdrop">
                         <rect key="frame" x="0.0" y="0.0" width="331" height="276"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-MJ-qra">
+                            <imageView appearanceType="aqua" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-MJ-qra">
                                 <rect key="frame" x="62" y="-8" width="206" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="xpX-ov-fzi"/>
                             </imageView>
-                            <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12u-Al-5yd">
-                                <rect key="frame" x="18" y="70" width="214" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Quit PlayMe when iTunes quits" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZQ9-hJ-nnj">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="toggleQuitWheniTunesQuits:" target="-2" id="nx4-Pg-vig"/>
-                                    <binding destination="TeG-Vt-Wyj" name="value" keyPath="values.quitWheniTunesQuits" id="eRr-zn-Gbd"/>
-                                </connections>
-                            </button>
-                            <button appearanceType="lightContent" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7pm-AV-J7Q">
-                                <rect key="frame" x="18" y="90" width="205" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button appearanceType="aqua" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7pm-AV-J7Q">
+                                <rect key="frame" x="18" y="82" width="205" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show song name in menubar" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9Hg-fY-xlT">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -62,14 +45,12 @@
                                     <binding destination="TeG-Vt-Wyj" name="value" keyPath="values.showSongName" id="92y-vl-eiy"/>
                                 </connections>
                             </button>
-                            <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLm-Ak-QzE">
+                            <imageView appearanceType="aqua" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLm-Ak-QzE">
                                 <rect key="frame" x="113" y="176" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Boz-ht-cbc"/>
                             </imageView>
-                            <button appearanceType="lightContent" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkZ-L1-fAo">
+                            <button appearanceType="aqua" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkZ-L1-fAo">
                                 <rect key="frame" x="65" y="36" width="103" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="My Website" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zOy-9I-P8C">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -78,23 +59,20 @@
                                     <action selector="openWebsite:" target="-2" id="SHZ-51-XwR"/>
                                 </connections>
                             </button>
-                            <imageView appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-BI-TMp">
+                            <imageView appearanceType="aqua" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-BI-TMp">
                                 <rect key="frame" x="67" y="122" width="197" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="H19-jq-HJz"/>
                             </imageView>
-                            <textField appearanceType="lightContent" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sn-h3-2A5">
+                            <textField appearanceType="aqua" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sn-h3-2A5">
                                 <rect key="frame" x="194" y="125" width="52" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="v. 0.0.0" id="VCs-2k-w2a">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button appearanceType="lightContent" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uQS-RY-x3u">
+                            <button appearanceType="aqua" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uQS-RY-x3u">
                                 <rect key="frame" x="162" y="36" width="103" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Follow Me!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jfw-xw-IVS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -113,14 +91,6 @@
         </window>
         <customObject id="-3" userLabel="Application"/>
         <userDefaultsController representsSharedInstance="YES" id="TeG-Vt-Wyj"/>
-        <button verticalHuggingPriority="750" id="roW-w7-mMX">
-            <rect key="frame" x="0.0" y="0.0" width="116" height="25"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <buttonCell key="cell" type="roundTextured" title="Round Textured" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FHE-PV-adX">
-                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                <font key="font" metaFont="system"/>
-            </buttonCell>
-        </button>
     </objects>
     <resources>
         <image name="icon" width="512" height="512"/>
