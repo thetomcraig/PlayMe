@@ -139,11 +139,11 @@
 - (void)updateWithNill
 {
     _currentSong = @"PlayMe";
-    _currentArtist = @"";
-    _currentAlbum = @"";
+    _currentArtist = @" ";
+    _currentAlbum = @" ";
     _currentLength = 0;
     _currentProgress = 0;
-    _currentLyrics = @"";
+    _currentLyrics = @" ";
     _currentStatus = @"Stopped";
     
     //Taking the nothing playingartwork and pretending its itunes artwork
@@ -168,7 +168,6 @@
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
-        NSLog(@"BETA");
         iTunesArtwork *rawArtwork =
         (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
         newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];

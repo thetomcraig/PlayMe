@@ -289,9 +289,9 @@
 }
 
 //##############################################################################
-//Updating all the onscreen window elements.  This sets all of the "-state"
-//variables so it does not directly interact wit hUI elements, which are set
-//later using the assignstatevarables method.
+//Updating all the onscreen window elements.  This method sets all of the
+//"-state" variables which are set to the onscreen elements in the
+//"assignStateVariables" method
 //##############################################################################
 - (void)updateWindowElements:(NSString *) currentSongInp
                             :(NSString *) currentArtistInp
@@ -301,10 +301,21 @@
                             :(NSNumber *) currentProgressInp
                             :(NSNumber *) currentLengthInp
 {
-    //In this case, the current song has no value, i.e. nothing is playing
-    if ([currentSongInp isEqualToString:@"PlayMe"])
+    //--------------------------------------------------------------------------
+    //Updating the labels with the song name, artist and album name.
+    //It calls the trimString method to make sure they're clipped properly
+    //--------------------------------------------------------------------------
+    //Set the song, but if it's PlayMe, then nothing is playing, so we want to
+    //zero this out, it needs to have at least one character to be set, so it is
+    //a space.
+    currentSongState = currentSongInp;
+    if ([currentSongState isEqualToString:@"PlayMe"])
     {
-        currentSongState = @"";
+        currentSongState = @" ";
+    }
+
+    if ([currentArtistInp isEqualToString:@" "])
+    {
         currentArtistAndAlbumState = @"";
     } else
     {
@@ -314,7 +325,6 @@
          currentAlbumInp];
         currentArtistAndAlbumState = combinedString;
     }
-
     
     //--------------------------------------------------------------------------
     //Updating the control buttons

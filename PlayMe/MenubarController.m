@@ -47,7 +47,7 @@
 {
     NSString *currentSong = [note.userInfo objectForKey:@"CurrentSong"];
     NSString *currentStatus = [note.userInfo objectForKey:@"CurrentStatus"];
-    
+        
     //Setting up the text, which will determine the size of the entire
     //NSSTatusItem, butonly up to the threshold - TEXT_WIDTH
     [statusItem setView:statusItemView];
