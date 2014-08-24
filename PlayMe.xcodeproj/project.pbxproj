@@ -29,11 +29,13 @@
 		83131A9317C8A99000D50029 /* ITunesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9117C8A99000D50029 /* ITunesController.m */; };
 		83131A9817C8AD3200D50029 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9717C8AD3200D50029 /* ImageController.m */; };
 		83131A9B17C8AE0C00D50029 /* NCController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9A17C8AE0C00D50029 /* NCController.m */; };
-		831C29EC17D51F910014C228 /* PausedMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 831C29EB17D51F910014C228 /* PausedMask.png */; };
 		83246F6317CC0188001A3118 /* BlankArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 83246F6217CC0188001A3118 /* BlankArtwork.png */; };
 		83246F6B17CC0F41001A3118 /* bgTopArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 83246F6717CC0F41001A3118 /* bgTopArrow.png */; };
 		8329B49517CBEA0F0000BB47 /* Playing.png in Resources */ = {isa = PBXBuildFile; fileRef = 8329B49417CBEA0F0000BB47 /* Playing.png */; };
 		833B4CDC1868E6CB000DB59A /* icon1024.psd in Resources */ = {isa = PBXBuildFile; fileRef = 833B4CDA1868E6CB000DB59A /* icon1024.psd */; };
+		833E46AD19A9692700A1C69A /* BackdropReference.psd in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AA19A9692700A1C69A /* BackdropReference.psd */; };
+		833E46AE19A9692700A1C69A /* NothingPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AB19A9692700A1C69A /* NothingPlaying.png */; };
+		833E46AF19A9692700A1C69A /* PausedMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AC19A9692700A1C69A /* PausedMask.png */; };
 		8342CB5F1892FD0E000CA6AE /* GeneralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8342CB5A1892FD0E000CA6AE /* GeneralViewController.m */; };
 		8342CB601892FD0E000CA6AE /* GeneralView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB5B1892FD0E000CA6AE /* GeneralView.xib */; };
 		8342CB671892FD2E000CA6AE /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB641892FD2E000CA6AE /* MASPreferencesWindow.xib */; };
@@ -62,7 +64,6 @@
 		838E0A6A18E781C7007FCEC5 /* appNameLogo.psd in Resources */ = {isa = PBXBuildFile; fileRef = 838E0A6818E781C7007FCEC5 /* appNameLogo.psd */; };
 		8392AAC817CBF1B200EEF193 /* Paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 8392AAC717CBF1B200EEF193 /* Paused.png */; };
 		8392AACA17CBF1C200EEF193 /* Stopped.png in Resources */ = {isa = PBXBuildFile; fileRef = 8392AAC917CBF1C200EEF193 /* Stopped.png */; };
-		83A131F71872822200BB0DD2 /* NothingPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 83A131F61872822200BB0DD2 /* NothingPlaying.png */; };
 		83A3409018C6A46700B7F4C4 /* PreferencesBackdrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */; };
 		83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AE0FC517E2B93A00AE8282 /* SongSlider.m */; };
 		83AFDA091970696F00DE0429 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AFDA081970696F00DE0429 /* MainMenu.xib */; };
@@ -131,11 +132,13 @@
 		83131A9717C8AD3200D50029 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
 		83131A9917C8AE0C00D50029 /* NCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCController.h; sourceTree = "<group>"; };
 		83131A9A17C8AE0C00D50029 /* NCController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCController.m; sourceTree = "<group>"; };
-		831C29EB17D51F910014C228 /* PausedMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PausedMask.png; sourceTree = "<group>"; };
 		83246F6217CC0188001A3118 /* BlankArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlankArtwork.png; sourceTree = "<group>"; };
 		83246F6717CC0F41001A3118 /* bgTopArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgTopArrow.png; sourceTree = "<group>"; };
 		8329B49417CBEA0F0000BB47 /* Playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Playing.png; sourceTree = "<group>"; };
 		833B4CDA1868E6CB000DB59A /* icon1024.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon1024.psd; sourceTree = "<group>"; };
+		833E46AA19A9692700A1C69A /* BackdropReference.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackdropReference.psd; sourceTree = "<group>"; };
+		833E46AB19A9692700A1C69A /* NothingPlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NothingPlaying.png; sourceTree = "<group>"; };
+		833E46AC19A9692700A1C69A /* PausedMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PausedMask.png; sourceTree = "<group>"; };
 		8342CB591892FD0E000CA6AE /* GeneralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralViewController.h; sourceTree = "<group>"; };
 		8342CB5A1892FD0E000CA6AE /* GeneralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralViewController.m; sourceTree = "<group>"; };
 		8342CB5B1892FD0E000CA6AE /* GeneralView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralView.xib; sourceTree = "<group>"; };
@@ -171,7 +174,6 @@
 		838E0A6818E781C7007FCEC5 /* appNameLogo.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = appNameLogo.psd; sourceTree = "<group>"; };
 		8392AAC717CBF1B200EEF193 /* Paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paused.png; sourceTree = "<group>"; };
 		8392AAC917CBF1C200EEF193 /* Stopped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stopped.png; sourceTree = "<group>"; };
-		83A131F61872822200BB0DD2 /* NothingPlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NothingPlaying.png; sourceTree = "<group>"; };
 		83A3408E18C6A46700B7F4C4 /* PreferencesBackdrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesBackdrop.h; sourceTree = "<group>"; };
 		83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesBackdrop.m; sourceTree = "<group>"; };
 		83AE0FC417E2B93A00AE8282 /* SongSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSlider.h; sourceTree = "<group>"; };
@@ -184,7 +186,6 @@
 		83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtworkWindow.xib; sourceTree = "<group>"; };
 		83AFDA1719707FDD00DE0429 /* ArtworkWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindow.h; sourceTree = "<group>"; };
 		83AFDA1819707FDD00DE0429 /* ArtworkWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindow.m; sourceTree = "<group>"; };
-		83B2E9991863CF2900C5896F /* NothingPlaying.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = NothingPlaying.psd; sourceTree = "<group>"; };
 		83CB8D6319561160009D4FE2 /* MenubarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenubarController.h; sourceTree = "<group>"; };
 		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
 		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
@@ -391,12 +392,12 @@
 		83246F6C17CC0F48001A3118 /* Background */ = {
 			isa = PBXGroup;
 			children = (
-				831C29EB17D51F910014C228 /* PausedMask.png */,
+				833E46AA19A9692700A1C69A /* BackdropReference.psd */,
+				833E46AB19A9692700A1C69A /* NothingPlaying.png */,
+				833E46AC19A9692700A1C69A /* PausedMask.png */,
 				83246F6717CC0F41001A3118 /* bgTopArrow.png */,
 				8388009417F223AA002EC9C7 /* bgTopArrow@2x.png */,
 				83246F6217CC0188001A3118 /* BlankArtwork.png */,
-				83A131F61872822200BB0DD2 /* NothingPlaying.png */,
-				83B2E9991863CF2900C5896F /* NothingPlaying.psd */,
 			);
 			name = Background;
 			sourceTree = "<group>";
@@ -597,14 +598,15 @@
 				83131A5817C898DC00D50029 /* Images.xcassets in Resources */,
 				8388009517F223AA002EC9C7 /* bgTopArrow@2x.png in Resources */,
 				83246F6317CC0188001A3118 /* BlankArtwork.png in Resources */,
+				833E46AE19A9692700A1C69A /* NothingPlaying.png in Resources */,
 				83131A5017C898DC00D50029 /* Credits.rtf in Resources */,
-				83A131F71872822200BB0DD2 /* NothingPlaying.png in Resources */,
 				838800A417F230A8002EC9C7 /* Stopped@2x.png in Resources */,
 				83DA970C17DBEB2F007531E4 /* PreviousButtonDepressed.png in Resources */,
 				831001F117CC690D0055A5CB /* PlayingWhite.png in Resources */,
 				8351AD0B17CBF2DF002835F2 /* Open.png in Resources */,
 				831001ED17CC684C0055A5CB /* OpenWhite.png in Resources */,
 				831001EE17CC684C0055A5CB /* PausedWhite.png in Resources */,
+				833E46AD19A9692700A1C69A /* BackdropReference.psd in Resources */,
 				8329B49517CBEA0F0000BB47 /* Playing.png in Resources */,
 				83E1A7DA17E1A1FE00BC94B8 /* iTunesButton.png in Resources */,
 				8342CB731893071C000CA6AE /* moreButtonDepressed.png in Resources */,
@@ -612,8 +614,8 @@
 				831001EF17CC684C0055A5CB /* StoppedWhite.png in Resources */,
 				838C439218B7B333005AADA4 /* icon1024.png in Resources */,
 				83AFDA1619707DFF00DE0429 /* ArtworkWindow.xib in Resources */,
+				833E46AF19A9692700A1C69A /* PausedMask.png in Resources */,
 				83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */,
-				831C29EC17D51F910014C228 /* PausedMask.png in Resources */,
 				835A69B118BCFB9A0080CEA3 /* PreferencesWindow.xib in Resources */,
 				8342CB6D1892FF60000CA6AE /* AboutView.xib in Resources */,
 				83E1A7DB17E1A1FE00BC94B8 /* iTunesButtonDepressed.png in Resources */,

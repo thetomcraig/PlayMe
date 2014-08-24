@@ -36,7 +36,9 @@
     }
     else
     {
+        //iTunes is not open
         [self updateWithNill];
+        [self sendTagsNotification];
     }
 
     if ([_currentStatus isEqualToString:@"Playing"])
@@ -113,7 +115,7 @@
         //Paused
         case 1800426352:
             _currentStatus = @"Paused";
-            [self updateArtwork:NO];
+            [self updateArtwork:YES];
             break;
         //Two cases for stopped
         default:
@@ -126,7 +128,7 @@
             else
             {
                 _currentStatus = @"Paused";
-                [self updateArtwork:NO];
+                [self updateArtwork:YES];
             }
     }
 }
@@ -136,14 +138,21 @@
 //##############################################################################
 - (void)updateWithNill
 {
-    _currentSong = @" ";
-    _currentArtist = @" ";
-    _currentAlbum = @" ";
+    _currentSong = @"PlayMe";
+    _currentArtist = @"";
+    _currentAlbum = @"";
     _currentLength = 0;
-    _currentArtwork = [NSImage imageNamed:@"PausedMask"];
     _currentProgress = 0;
-    _currentLyrics = @" ";
+    _currentLyrics = @"";
     _currentStatus = @"Stopped";
+    
+    //Taking the nothing playingartwork and pretending its itunes artwork
+    NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
+    NSImage *nothingPlaying = [NSImage imageNamed:@"NothingPlaying"];
+    nothingPlaying = [_imageController resizeArt:nothingPlaying forSize:targetSize];
+    nothingPlaying = [_imageController roundCorners:nothingPlaying];
+    _currentArtwork = nothingPlaying;
+ 
 }
 
 //##############################################################################
@@ -153,11 +162,13 @@
 //##############################################################################
 - (void)updateArtwork:(BOOL)getNewArt
 {
+
     NSImage *newArtwork = _currentArtwork;
     
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
+        NSLog(@"BETA");
         iTunesArtwork *rawArtwork =
         (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
         newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
@@ -290,7 +301,10 @@
 //##############################################################################
 //This function sets paused information, making sure to only update the
 //menubar icon if the window is closed
-//At the end it makes sure all the UI elements are arranged properly
+//At the end it makes sure all the UI elements are arranged properly.
+//Using the NO flag on the update artwork is essential, because when iTunes
+//quits is actually sends a paused notification.  The NO flag allows us to NOT
+//poll iTunes because if we do it causes iTunes to relaunch accidentally.
 //##############################################################################
 - (void)pausedUpdate
 {
