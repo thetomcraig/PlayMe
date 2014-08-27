@@ -19,7 +19,7 @@
     
     //Clear everything
     [[NSColor clearColor] set];
-    NSRectFill([self frame]);
+    NSRectFill(self.bounds);
     
     [self drawArrow];
     [self drawBackground:self.bounds];

@@ -159,7 +159,13 @@
 }
 
 //##############################################################################
-//Opening and closing the window with the menubar icon is clicked.
+//For positinoing th arrow on top of the window.  To prevent the window from jum
+//-ping around, the arrow is positioed completely differently from the window.
+//The window is entered below the menubar icon and the arrow is as well, but the
+//arrow has its position changed at every song change, but the window does not
+//get updated this often, so the window doesnt jump around, only the arrow on
+//top does.  This is updated via the statusitem view, because it gives info
+//about where the icon is located
 //##############################################################################
 - (void)receivedArrowPositionNotification:(NSNotification *)note
 {
@@ -168,11 +174,15 @@
     CGRect statusRect = NSRectFromString(globalRect);
     
     NSImage *topArrow = [NSImage imageNamed:@"bgTopArrow"];
-    [artworkView setArrowLocation:NSMakePoint(statusRect.origin.x + statusRect.size.width/2 - [[self window] frame].origin.x - topArrow.size.width/2,
+    //Annoying math,
+    [artworkView setArrowLocation:NSMakePoint(statusRect.origin.x +
+                                              statusRect.size.width/2 -
+                                              [[self window] frame].origin.x -
+                                              topArrow.size.width/2,
+                                              
                                               WINDOW_HEIGHT - topArrow.size.height)];
     
     [artworkView setNeedsDisplay:YES];
-    
 }
 
 //##############################################################################
