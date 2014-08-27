@@ -4,6 +4,7 @@
 
 @synthesize backgroundColor;
 @synthesize topArrow;
+@synthesize arrowLocation;
 
 //##############################################################################
 //Overrode the shit out of this class.  It is made transparent, then the arrow
@@ -20,7 +21,7 @@
     [[NSColor clearColor] set];
     NSRectFill([self frame]);
     
-    [self drawArrow:self.bounds];
+    [self drawArrow];
     [self drawBackground:self.bounds];
 }
 
@@ -32,13 +33,8 @@
 //topArrowLocation is set from the window controller, and it is where the top
 //arrow is on the x axis
 //##############################################################################
--(void)drawArrow:(NSRect)dirtyRect
+-(void)drawArrow
 {
-    
-    NSPoint arrowLocation =
-        NSMakePoint(dirtyRect.size.width/2 - topArrow.size.width/2,
-                    dirtyRect.size.height - topArrow.size.height);
-    
     NSRect arrowRect = NSMakeRect(arrowLocation.x, arrowLocation.y,
                                   topArrow.size.width, topArrow.size.height);
     

@@ -1,6 +1,6 @@
 #define EDGE_PADDING_WIDTH  6
-#define INNER_PADDING_WIDTH  3
-#define PADDING_HEIGHT 3
+#define INNER_PADDING_WIDTH  4
+#define PADDING_HEIGHT 2
 
 #import "StatusItemView.h"
 
@@ -64,21 +64,7 @@
     }
     else
     {
-        //We need to pass the position of the rect in the menubar,
-        //and we convert it to an NSValue
-        NSString *globalRectString =
-        NSStringFromRect([[[NSApp currentEvent] window] frame]);
-        
-        NSDictionary *menubarInfo =
-        @{
-          @"GlobalRect": globalRectString
-          };
-        
-        //Sending the notification
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"MouseDownNotification"
-         object:self
-         userInfo:menubarInfo];
+        [self sendRectNotification:YES];
     }
     
     [self setNeedsDisplay:YES];
@@ -262,7 +248,7 @@
     
     [title drawAtPoint:titlePoint
         withAttributes:[self titleAttributes]];
-
+    
     NSPoint imagePoint = origin;
     imagePoint.y = 0;
     NSImage *imageToDraw = isHighlighted ? alternateImage : image;
@@ -271,5 +257,46 @@
                    operation:NSCompositeSourceOver
                     fraction:1.0];
     
+    [self sendRectNotification:NO];
+}
+
+
+#
+#pragma mark - Sending notifications
+#
+//##############################################################################
+//Sends a notification with a rect trepresnting the menubar icon, so the window
+//can be centered nelow it properly.
+//This will either happen when mousedown occurs on the icon or when
+//drawrect calls it, if mousedown we just toggle the window
+//##############################################################################
+- (void)sendRectNotification :(Boolean)mouseDown
+{
+    NSString *nameOfNot = @"ArrowPositionNotification";
+    if (mouseDown)
+    {
+        nameOfNot = @"MouseDownNotification";
+    }
+    
+    //We need to pass the position of the rect in the menubar,
+    //and we convert it to an NSValue.  We pas it the rect that
+    //corresponds to the location of the icon only.
+    //The multiplication by 2 simulates a rectangle with the
+    //image cetnered in it
+    NSRect imageRect = [[self window] frame];
+    imageRect.size.width = 0 + EDGE_PADDING_WIDTH*2 + image.size.width;
+    NSString *globalRectString = NSStringFromRect(imageRect);
+    
+    
+    NSDictionary *menubarInfo =
+    @{
+      @"GlobalRect": globalRectString
+      };
+    
+    //Sending the notification
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:nameOfNot
+     object:self
+     userInfo:menubarInfo];
 }
 @end

@@ -57,7 +57,7 @@
     //the name.  Otherwise there shuold be no title
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
     {
-        currentSong = @"";
+        currentSong = @" ";
     }
     
     else

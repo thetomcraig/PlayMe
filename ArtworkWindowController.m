@@ -2,7 +2,7 @@
 
 #define ARTWORK_WIDTH 400
 #define ARTWORK_HEIGHT 400
-#define WINDOW_HEIGHT 500
+#define WINDOW_HEIGHT 475
 
 
 @implementation ArtworkWindowController
@@ -66,6 +66,11 @@
                              selector:@selector(receivedMouseDownNotification:)
                              name:@"MouseDownNotification"
                              object:nil];
+        [[NSNotificationCenter defaultCenter]
+                             addObserver:self
+                             selector:@selector(receivedArrowPositionNotification:)
+                             name:@"ArrowPositionNotification"
+                             object:nil];
     }
     return self;
 }
@@ -123,7 +128,6 @@
 //##############################################################################
 - (void)receivedTagsNotification:(NSNotification *)note
 {
-    
     [self updateWindowElements:[note.userInfo objectForKey:@"CurrentSong"]
                               :[note.userInfo objectForKey:@"CurrentArtist"]
                               :[note.userInfo objectForKey:@"CurrentAlbum"]
@@ -147,34 +151,28 @@
     //Otherwise its closed, so open it
     else
     {
-        
-        
-        
-        
-        ///Trying to fake the notificatinon, so when the mousedown
-        ///is called, we can call an itunes update so that the
-        ///window elements are updating when the app opens when
-        ///itunes is paused
-        /**
-        NSDictionary *commandNotification =
-        @{
-          @"Player State": @"PlayPause"
-          };
-        
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"com.apple.iTunes.playerInfo"
-         object:self
-         userInfo:commandNotification];
-        */
-        
-        
-        
-        
         //Telling the window where to open using ths corresponding string
         [self positionAndOpenWindow:[note.userInfo objectForKey:@"GlobalRect"]];
         //After it's opened, position the window elementt properly
         [self updateWindowGeometry];
     }
+}
+
+//##############################################################################
+//Opening and closing the window with the menubar icon is clicked.
+//##############################################################################
+- (void)receivedArrowPositionNotification:(NSNotification *)note
+{
+    NSString *globalRect = [note.userInfo objectForKey:@"GlobalRect"];
+    //Need to get the position of where the window should open
+    CGRect statusRect = NSRectFromString(globalRect);
+    
+    NSImage *topArrow = [NSImage imageNamed:@"bgTopArrow"];
+    [artworkView setArrowLocation:NSMakePoint(statusRect.origin.x + statusRect.size.width/2 - [[self window] frame].origin.x - topArrow.size.width/2,
+                                              WINDOW_HEIGHT - topArrow.size.height)];
+    
+    [artworkView setNeedsDisplay:YES];
+    
 }
 
 //##############################################################################
@@ -433,8 +431,7 @@
     };
     
     //Need to get the position of where the window should open
-    CGRect statusRect =
-    NSRectFromString(globalRect);
+    CGRect statusRect = NSRectFromString(globalRect);
     statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
     //Move the window to under here
     NSRect windowRect = [[self window] frame];
