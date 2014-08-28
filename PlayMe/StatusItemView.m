@@ -151,6 +151,9 @@
 //##############################################################################
 - (void)setTitle:(NSString *)newTitle
 {
+    
+    NSLog(@"%@", newTitle);
+    
     if (![title isEqual:newTitle])
     {
 

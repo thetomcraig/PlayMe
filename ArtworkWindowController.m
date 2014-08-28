@@ -479,6 +479,8 @@
 {
     BOOL hadToReposition = false;
     
+    double rightBuffer = topArrow.size.height;
+    
     struct DangerZone
     {
         double lowerBound;
@@ -509,8 +511,8 @@
     {
         struct DangerZone dangerZone;
         double rightEdge = [screens[i] frame].origin.x + [screens[i] frame].size.width;
-        dangerZone.lowerBound = rightEdge - [self window].frame.size.width;
-        dangerZone.upperBound = rightEdge - [self window].frame.size.width/2;
+        dangerZone.lowerBound = rightEdge - [self window].frame.size.width - rightBuffer;
+        dangerZone.upperBound = rightEdge - [self window].frame.size.width/2 + rightBuffer;
         dangerZones[i] = dangerZone;
     }
     
@@ -520,7 +522,6 @@
     //clarity and because I may want to recalculate the window positions
     //differently at a later time
     //-------------------------------------------------------------------------
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
     //This has to start as zero, (arrow in the middle = 0)
     double arrowLocation = 0;
     
@@ -530,7 +531,6 @@
         if ((dangerZones[i].lowerBound < windowTopLeftPosition.x) &&
             (windowTopLeftPosition.x < dangerZones[i].upperBound))
         {
-            double rightBuffer = bgTopArrow.size.height;
             //Here, we reset the arrow location
             double postionOfRightSideOfWindow = windowTopLeftPosition.x + [self window].frame.size.width;
             double xPositionOfRightSideOfScreen = [screens[i] frame].origin.x + [screens[i] frame].size.width;
