@@ -98,9 +98,9 @@
     [previousButton setAlternateImage:[NSImage imageNamed:@"PreviousButtonDepressed"]];
     
     NSColor *backgroundColor =
-    [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    [NSColor colorWithCalibratedRed:0.92 green:0.92 blue:0.92 alpha:1.0];
     NSColor *primaryColor =
-    [NSColor colorWithCalibratedRed:0.30 green:0.30 blue:0.30 alpha:1.0];
+    [NSColor colorWithCalibratedRed:0.20 green:0.20 blue:0.20 alpha:1.0];
     
     currentSong.textColor = primaryColor;
     currentArtistAndAlbum.textColor = primaryColor;
@@ -183,6 +183,8 @@
                                               WINDOW_HEIGHT - topArrow.size.height)];
     
     [artworkView setNeedsDisplay:YES];
+    [[self window] invalidateShadow];
+    [[self window] update];
 }
 
 //##############################################################################
@@ -427,12 +429,10 @@
 //window over appropriately
 //##############################################################################
 - (void)positionAndOpenWindow: (NSString *)globalRect
-{
+{    
     //Clear notifications from the screen,
     [[NSUserNotificationCenter defaultUserNotificationCenter]
      removeAllDeliveredNotifications];
-    
-    [[self window] display];
     
     struct DangerZone
     {
@@ -453,6 +453,12 @@
     [[self window] makeKeyAndOrderFront:self];
     [[self window] setLevel:kCGFloatingWindowLevel];
     [NSApp activateIgnoringOtherApps:YES];
+    
+    //This makes sure there are no artifacts
+    //from the top arrow changing position
+    //says to redraw where there is shadow
+    [[self window] invalidateShadow];
+    [[self window] update];
 }
 
 #

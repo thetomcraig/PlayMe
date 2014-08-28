@@ -21,7 +21,6 @@
     [[NSColor clearColor] set];
     NSRectFill(self.bounds);
     
-    [self drawArrow];
     [self drawBackground:self.bounds];
 }
 
@@ -33,7 +32,7 @@
 //topArrowLocation is set from the window controller, and it is where the top
 //arrow is on the x axis
 //##############################################################################
--(void)drawArrow
+- (void)drawArrow
 {
     NSRect arrowRect = NSMakeRect(arrowLocation.x, arrowLocation.y,
                                   topArrow.size.width, topArrow.size.height);
@@ -66,12 +65,11 @@
 //The roundingRadus is for th beveled edges, and the height is that of the
 //Top and bottom caps, as the middle image is stretched to bridge the gap
 //##############################################################################
--(void)drawBackground:(NSRect)dirtyRect
+- (void)drawBackground:(NSRect)dirtyRect
 {
     double capHeight = 50.0;
     double roundingRadius = 6;
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
-    double arrowHeight = bgTopArrow.size.height;
+    double arrowHeight = topArrow.size.height;
     //Make a rect that's everything but the arrow
     NSRect mainBackgroundRect = NSMakeRect(dirtyRect.origin.x,
                                            dirtyRect.origin.y,
