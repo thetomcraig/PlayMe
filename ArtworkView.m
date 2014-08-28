@@ -13,7 +13,7 @@
 //we use self.bounds to get the actual view dimensions for drawing the whole
 //thing
 //##############################################################################
-- (void)drawRect:(NSRect)dirtyRect
+- (void)drawRect:(NSRect)dirtyRect 
 {
     topArrow = [NSImage imageNamed:@"bgTopArrow"];
     
@@ -21,6 +21,7 @@
     [[NSColor clearColor] set];
     NSRectFill(self.bounds);
     
+    [self drawArrow];
     [self drawBackground:self.bounds];
 }
 

@@ -7,6 +7,7 @@
 
 @implementation ArtworkWindowController
 
+@synthesize topArrow;
 @synthesize menuButtonMenu;
 @synthesize preferences;
 @synthesize openIniTunes;
@@ -56,6 +57,8 @@
     self = [super initWithWindowNibName:windowNibName];
     if (self)
     {
+        topArrow = [NSImage imageNamed:@"bgTopArrow"];
+        
         [[NSNotificationCenter defaultCenter]
                              addObserver:self
                              selector:@selector(receivedTagsNotification:)
@@ -173,8 +176,6 @@
     //Need to get the position of where the window should open
     CGRect statusRect = NSRectFromString(globalRect);
     
-    NSImage *topArrow = [NSImage imageNamed:@"bgTopArrow"];
-    //Annoying math,
     [artworkView setArrowLocation:NSMakePoint(statusRect.origin.x +
                                               statusRect.size.width/2 -
                                               [[self window] frame].origin.x -
@@ -196,15 +197,13 @@
 //##############################################################################
 - (void)updateWindowGeometry
 {
-    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
-    
     //This puts the artwork just below the top arrow
     NSRect tempFrame = NSMakeRect(0.0, 0.0, 0.0, 0.0);
     tempFrame.size.width = ARTWORK_WIDTH;
     tempFrame.size.height = ARTWORK_HEIGHT;
     tempFrame.origin.y = [self window].frame.size.height -
     tempFrame.size.height -
-    bgTopArrow.size.height;
+    topArrow.size.height;
     
     [currentArtwork setFrame:tempFrame];
     
@@ -450,6 +449,19 @@
     [[self window] setFrame:windowRect display:YES];
     
     //Display the window
+    [[self window] invalidateShadow];
+    [[self window] update];
+    
+    
+    
+    
+    [artworkView setArrowLocation:NSMakePoint([[self window] frame].size.width/2 -
+                                              topArrow.size.width/2,
+                                              
+                                              WINDOW_HEIGHT - topArrow.size.height)];
+    
+
+    
     [[self window] makeKeyAndOrderFront:self];
     [[self window] setLevel:kCGFloatingWindowLevel];
     [NSApp activateIgnoringOtherApps:YES];
@@ -457,8 +469,6 @@
     //This makes sure there are no artifacts
     //from the top arrow changing position
     //says to redraw where there is shadow
-    [[self window] invalidateShadow];
-    [[self window] update];
 }
 
 #

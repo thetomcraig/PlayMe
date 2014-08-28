@@ -7,6 +7,9 @@
 
 @interface ArtworkWindowController : NSWindowController
 
+//For sizing
+@property (nonatomic, strong) NSImage *topArrow;
+
 //The menu button and its options
 @property (retain, nonatomic) NSMenu *menuButtonMenu;
 @property (retain, nonatomic) NSMenuItem *preferences, *openIniTunes, *quitApp;
