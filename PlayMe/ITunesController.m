@@ -30,7 +30,7 @@
 {
     _imageController = [[ImageController alloc] init];
     
-    if([self createiTunesObjectIfNeeded])
+    if([self iTunesRunning])
     {
         [self updateTags];
     }
@@ -255,11 +255,26 @@
     //--------------------------------------------------------------------------
     //STOPPED UPDATE
     //The current track stopped and there are no following songs,
-    //or there is just not anything playing.
+    //or there is just not anything playing.  This can be triggered if iTunes
+    //skips to a new song while paused, so it is paused with the scrubber set
+    //at 0 secs.
     //--------------------------------------------------------------------------
     else if ([incomingPlayerState isEqualToString:@"Stopped"])
     {
-        [self stoppedUpdate];
+        //If this is the case then we have a song qeueued
+        if ([note.userInfo count] > 1)
+        {
+            //Playing update to get all the new tags
+            //then paused update because we know it
+            //is paused
+            [self playingUpdate];
+            [self updateArtwork:YES];
+        }
+        else
+        {
+            [self stoppedUpdate];
+        }
+
     }
     //--------------------------------------------------------------------------
     //PAUSED UPDATE
@@ -311,6 +326,7 @@
     [self updateArtwork:NO];
     [self sendTagsNotification];
     [self stopTimer];
+     
 }
 
 //##############################################################################
@@ -320,7 +336,7 @@
 //This case is also hit when skipping to the next song while iTunes is
 //paused.  Because of this, it may actually have to do the paused update,
 //so I check for that.  In this case, we may actually need to update some
-//info, so we check if iTunes is running, then do that
+//info, so we check if iTunes is running, then do that.
 //
 //Recently put in the very first if statement, which says that if the player
 //state was stopped, then update to stopped again, then itunes must be
@@ -330,6 +346,8 @@
 //##############################################################################
 - (void)stoppedUpdate
 {
+    NSLog(@"Stopped");
+    
     //False positive - iTunes is actually quitting when this if statement
     //catches.  But this notification gets sent first, so we catch it here, then
     //allow the actual quit notificatino to get handled at the proper location.
@@ -338,6 +356,7 @@
     [self updateWithNill];
     [self sendTagsNotification];
     [self stopTimer];
+    
 }
 
 //##############################################################################
@@ -393,7 +412,9 @@
           objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
     {
         [self destroyiTunes];
-        [self stoppedUpdate];
+        [self updateWithNill];
+        [self sendTagsNotification];
+        [self stopTimer];
     }
 }
 
@@ -406,13 +427,6 @@
 //##############################################################################
 - (void)sendTagsNotification
 {
-    //Need to update this here because it cahnged literally every second
-    
-    //This cannpt happen in here because when itunes quites it send a
-    //paused update before anything else, this makes itunes reopen when its quit
-    //so I need to handle this updaing outside of this function
-    [self updateProgress];
-    
     //Set up all the tags
     NSDictionary *iTunesTags =
     @{
@@ -466,6 +480,7 @@
 //##############################################################################
 - (void)advanceTimerProgress:(NSTimer *)timer
 {
+    [self updateProgress];
     [self sendTagsNotification];
 }
 
@@ -476,7 +491,17 @@
 //This creates the iTunes object if iTunes is running on the mac.
 //It returns whether iTunes is open.  Shouldn't need to fuck wit this
 //##############################################################################
-- (bool)createiTunesObjectIfNeeded
+- (void)createiTunesObjectIfNeeded
+{
+    _iTunesRunning = [self iTunesRunning];
+    if (!_iTunes)
+    {
+        _iTunes = [SBApplication
+                   applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    }
+}
+
+- (bool)iTunesRunning
 {
     NSArray *appNames = [[NSWorkspace sharedWorkspace] runningApplications];
     for (int i = 0; i < [appNames count]; i++)
@@ -494,6 +519,7 @@
     }
     return false;
 }
+
 
 //##############################################################################
 //'Destroy' iTunes - set the object to nil, so I don't poll
