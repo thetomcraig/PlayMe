@@ -433,12 +433,6 @@
     [[NSUserNotificationCenter defaultUserNotificationCenter]
      removeAllDeliveredNotifications];
     
-    struct DangerZone
-    {
-        double lowerBound;
-        double upperBound;
-    };
-    
     //Need to get the position of where the window should open
     CGRect statusRect = NSRectFromString(globalRect);
     statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
@@ -448,27 +442,113 @@
     windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
     [[self window] setFrame:windowRect display:YES];
     
-    //Display the window
-    [[self window] invalidateShadow];
-    [[self window] update];
-    
-    
-    
-    
-    [artworkView setArrowLocation:NSMakePoint([[self window] frame].size.width/2 -
-                                              topArrow.size.width/2,
-                                              
-                                              WINDOW_HEIGHT - topArrow.size.height)];
-    
-
-    
-    [[self window] makeKeyAndOrderFront:self];
-    [[self window] setLevel:kCGFloatingWindowLevel];
-    [NSApp activateIgnoringOtherApps:YES];
+    BOOL repositioned = [self checkForDangerZones];
     
     //This makes sure there are no artifacts
     //from the top arrow changing position
     //says to redraw where there is shadow
+    [[self window] invalidateShadow];
+    [[self window] update];
+    
+    //If the window was repositioned, we do NOT want to center the arrow
+    //Makig normally, we center the window.
+    if (!repositioned)
+    {
+        //Reposition the arrow so it is in the top middle of the window
+        [artworkView setArrowLocation:NSMakePoint([[self window] frame].size.width/2 -
+                                                  topArrow.size.width/2,
+                                                  
+                                                  WINDOW_HEIGHT - topArrow.size.height)];
+    }
+    
+
+    //Display the window
+    [[self window] makeKeyAndOrderFront:self];
+    [[self window] setLevel:kCGFloatingWindowLevel];
+    [NSApp activateIgnoringOtherApps:YES];
+    
+}
+
+//##############################################################################
+//This method makes sure the window doesnt fall off the edge of the screen.
+//It has to check the top LEFT side of the window because there could be mutli
+//-ple screens.  If the window is falling off the right side of the screen,
+//this method moves it over to the right edge.
+//##############################################################################
+- (BOOL)checkForDangerZones
+{
+    BOOL hadToReposition = false;
+    
+    struct DangerZone
+    {
+        double lowerBound;
+        double upperBound;
+    };
+    
+    
+    //Finding the origin
+    CGPoint origin = [[self window] frame].origin;
+    //The size of the window we want to open
+    CGSize windowSize = [self window].frame.size;
+    //Getting the position for the window
+    CGPoint windowTopLeftPosition =
+            CGPointMake(origin.x, origin.y + [[self window] frame].size.height);
+    
+    //-------------------------------------------------------------------------
+    //Checking to make sure it is not hanging off the screen
+    //This block sets up an array of "danger zones" which are bounds of x
+    //positions.  If the left position of the window is between the higher and
+    //lower numbers of any of the danger zones in the array, we know that window
+    //will be hanging off the edge of one of the screens.  This means we have
+    //to reposition the window so it is just on the right edge of the screen
+    //-------------------------------------------------------------------------
+    //Creating the danger zones
+    NSArray *screens = [NSScreen screens];
+    struct DangerZone dangerZones[[screens count]];
+    for (int i = 0; i < [screens count]; i++)
+    {
+        struct DangerZone dangerZone;
+        double rightEdge = [screens[i] frame].origin.x + [screens[i] frame].size.width;
+        dangerZone.lowerBound = rightEdge - [self window].frame.size.width;
+        dangerZone.upperBound = rightEdge - [self window].frame.size.width/2;
+        dangerZones[i] = dangerZone;
+    }
+    
+    //-------------------------------------------------------------------------
+    //Now, checking the topLeftPosition against all the danger zones.  This
+    //could probably be put in with the above code but it is seperated for
+    //clarity and because I may want to recalculate the window positions
+    //differently at a later time
+    //-------------------------------------------------------------------------
+    NSImage *bgTopArrow = [NSImage imageNamed:@"bgTopArrow"];
+    //This has to start as zero, (arrow in the middle = 0)
+    double arrowLocation = 0;
+    
+    for (int i = 0; i < [screens count]; i++)
+    {
+        //If this gets hit, the point is in the danger zone!
+        if ((dangerZones[i].lowerBound < windowTopLeftPosition.x) &&
+            (windowTopLeftPosition.x < dangerZones[i].upperBound))
+        {
+            double rightBuffer = bgTopArrow.size.height;
+            //Here, we reset the arrow location
+            double postionOfRightSideOfWindow = windowTopLeftPosition.x + [self window].frame.size.width;
+            double xPositionOfRightSideOfScreen = [screens[i] frame].origin.x + [screens[i] frame].size.width;
+            arrowLocation = (postionOfRightSideOfWindow - xPositionOfRightSideOfScreen) + rightBuffer;
+            
+            //Here, we reset the window location
+            windowTopLeftPosition.x = dangerZones[i].lowerBound - rightBuffer;
+            
+            hadToReposition = true;
+        }
+    }
+    
+    //-------------------------------------------------------------------------
+    //Finally, Setting the window position and arrow location
+    //-------------------------------------------------------------------------
+    [[self window] setFrameTopLeftPoint:windowTopLeftPosition];
+    
+    return hadToReposition;
 }
 
 #
