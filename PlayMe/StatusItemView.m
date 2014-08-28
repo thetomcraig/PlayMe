@@ -163,7 +163,10 @@
         //If we are showing the song name, we need extra buffer space
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
         {
-            newWidth = newWidth + titleBounds.size.width + INNER_PADDING_WIDTH;
+            if ([title isNotEqualTo:@" "])
+            {
+                newWidth = newWidth + titleBounds.size.width + INNER_PADDING_WIDTH;
+            }
         }
         
         [statusItem setLength:newWidth];

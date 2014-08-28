@@ -346,8 +346,6 @@
 //##############################################################################
 - (void)stoppedUpdate
 {
-    NSLog(@"Stopped");
-    
     //False positive - iTunes is actually quitting when this if statement
     //catches.  But this notification gets sent first, so we catch it here, then
     //allow the actual quit notificatino to get handled at the proper location.
