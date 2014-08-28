@@ -318,10 +318,6 @@
     //zero this out, it needs to have at least one character to be set, so it is
     //a space.
     currentSongState = currentSongInp;
-    if ([currentSongState isEqualToString:@"PlayMe"])
-    {
-        currentSongState = @" ";
-    }
 
     if ([currentArtistInp isEqualToString:@" "])
     {

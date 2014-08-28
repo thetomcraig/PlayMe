@@ -151,9 +151,6 @@
 //##############################################################################
 - (void)setTitle:(NSString *)newTitle
 {
-    
-    NSLog(@"%@", newTitle);
-    
     if (![title isEqual:newTitle])
     {
 
@@ -161,13 +158,14 @@
         
         // Update status item size (which will also update this view's bounds)
         NSRect titleBounds = [self titleBoundingRect];
-        int newWidth = titleBounds.size.width + image.size.width + (2*EDGE_PADDING_WIDTH);
-        
+        int newWidth = image.size.width + (2*EDGE_PADDING_WIDTH);
+
         //If we are showing the song name, we need extra buffer space
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
         {
-            newWidth += INNER_PADDING_WIDTH;
+            newWidth = newWidth + titleBounds.size.width + INNER_PADDING_WIDTH;
         }
+        
         [statusItem setLength:newWidth];
         
         [self setNeedsDisplay:YES];

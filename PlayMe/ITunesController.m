@@ -138,7 +138,7 @@
 //##############################################################################
 - (void)updateWithNill
 {
-    _currentSong = @"PlayMe";
+    _currentSong = @" ";
     _currentArtist = @" ";
     _currentAlbum = @" ";
     _currentLength = 0;
