@@ -9,7 +9,6 @@
 
 @synthesize iTunes = _iTunes;
 @synthesize imageController = _imageController;
-@synthesize ncController = _ncController;
 @synthesize currentStatus = _currentStatus;
 @synthesize currentSong = _currentSong;
 @synthesize currentArtist = _currentArtist;
@@ -304,10 +303,6 @@
     [[NSUserNotificationCenter defaultUserNotificationCenter]
                                             removeAllDeliveredNotifications];
     
-    [_ncController sendNotification:_currentSong
-                                   :_currentArtist
-                                   :_currentAlbum
-                                   :_currentArtwork];
     //Start the timer again
     [self startTimer];
  }

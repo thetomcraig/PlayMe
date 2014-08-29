@@ -1,14 +1,12 @@
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
 #import "ImageController.h"
-#import "NCController.h"
 
 
 @interface ITunesController :NSObject
 {
     iTunesApplication *_iTunes;
     ImageController *_imageController;
-    NCController *_ncController;
     NSString *_currentStatus;
     NSString *_currentSong;
     NSString *_currentArtist;

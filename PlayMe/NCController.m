@@ -21,6 +21,7 @@
                        :(NSString *)informativeText
                        :(NSImage *)artwork
 {
+    NSLog(@"BETA");
     notification = [[NSUserNotification alloc] init];
     notification.title = [NSString stringWithFormat:@"%@%@", @"", title];
     notification.subtitle = [NSString stringWithFormat:@"%@%@", @"", subtitle];

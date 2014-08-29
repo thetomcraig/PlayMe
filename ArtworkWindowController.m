@@ -460,7 +460,7 @@
 
     //Display the window
     [[self window] makeKeyAndOrderFront:self];
-    [[self window] setLevel:kCGFloatingWindowLevel];
+    [[self window] setLevel:NSFloatingWindowLevel];
     [NSApp activateIgnoringOtherApps:YES];
     
 }
@@ -641,11 +641,11 @@
 //##############################################################################
 -(void)mouseEntered:(NSEvent *)theEvent
 {
-     [buttonsBackdrop setHidden:NO];
-     playPauseButton.hidden = NO;
-     nextButton.hidden = NO;
-     previousButton.hidden = NO;
-     [songTimeLeft setHidden:NO];
+    [buttonsBackdrop setHidden:NO];
+    playPauseButton.hidden = NO;
+    nextButton.hidden = NO;
+    previousButton.hidden = NO;
+    [songTimeLeft setHidden:NO];
 }
 
 //##############################################################################
