@@ -23,7 +23,6 @@
 
 @property (nonatomic, strong) iTunesApplication *iTunes;
 @property (nonatomic, strong) ImageController *imageController;
-@property (nonatomic, strong) NCController *ncController;
 @property (nonatomic, strong) NSString *currentStatus;
 @property (nonatomic, strong) NSString *currentSong;
 @property (nonatomic, strong) NSString *currentArtist;
