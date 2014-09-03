@@ -75,6 +75,7 @@
                              name:@"ArrowPositionNotification"
                              object:nil];
     }
+    
     return self;
 }
 
@@ -424,7 +425,7 @@
 //window over appropriately
 //##############################################################################
 - (void)positionAndOpenWindow: (NSString *)globalRect
-{    
+{
     //Clear notifications from the screen,
     [[NSUserNotificationCenter defaultUserNotificationCenter]
      removeAllDeliveredNotifications];
@@ -456,13 +457,11 @@
                                                   
                                                   WINDOW_HEIGHT - topArrow.size.height)];
     }
-    
 
     //Display the window
-    [[self window] makeKeyAndOrderFront:self];
-    [[self window] setLevel:NSFloatingWindowLevel];
     [NSApp activateIgnoringOtherApps:YES];
-    
+    [[self window] makeKeyAndOrderFront:self];
+    [[self window] setLevel:kCGFloatingWindowLevel];
 }
 
 //##############################################################################
