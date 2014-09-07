@@ -22,6 +22,8 @@
     NSRectFill(self.bounds);
     
     [self drawArrow];
+    
+    
     [self drawBackground:self.bounds];
 }
 

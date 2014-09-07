@@ -147,7 +147,7 @@
 - (void)receivedMouseDownNotification:(NSNotification *)note
 {
     //If the window is open, close it
-    if ([[self window] isVisible])
+    if ([[self window] isKeyWindow])
     {
         [[self window] close];
     }
@@ -404,19 +404,20 @@
 //##############################################################################
 - (void)assignStateVariables
 {
-    [currentSong setStringValue:currentSongState];
+        [currentSong setStringValue:currentSongState];
+        
+        [currentArtistAndAlbum setStringValue:currentArtistAndAlbumState];
+        
+        [currentArtwork setImage: currentArtworkState];
     
-    [currentArtistAndAlbum setStringValue:currentArtistAndAlbumState];
+        [playPauseButton setImage:[NSImage imageNamed:currentButtonNameState]];
+        [playPauseButton setAlternateImage:[NSImage imageNamed:currentAltButtonNameState]];
+        
+        [songSlider setDoubleValue: [currentProgressState doubleValue]];
+        [songSlider setMaxValue: [currentLengthState doubleValue]];
+        
+        [songTimeLeft setStringValue: currentTimeLeftState];
     
-    [currentArtwork setImage: currentArtworkState];
-
-    [playPauseButton setImage:[NSImage imageNamed:currentButtonNameState]];
-    [playPauseButton setAlternateImage:[NSImage imageNamed:currentAltButtonNameState]];
-
-    [songSlider setDoubleValue: [currentProgressState doubleValue]];
-    [songSlider setMaxValue: [currentLengthState doubleValue]];
-
-    [songTimeLeft setStringValue: currentTimeLeftState];
 }
 
 //##############################################################################
@@ -462,6 +463,7 @@
     [NSApp activateIgnoringOtherApps:YES];
     [[self window] makeKeyAndOrderFront:self];
     [[self window] setLevel:kCGFloatingWindowLevel];
+    [[self window] setHidesOnDeactivate:YES];
 }
 
 //##############################################################################

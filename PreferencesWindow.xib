@@ -22,7 +22,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="331" height="276"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" appearanceType="aqua" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="331" height="276"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,16 +49,6 @@
                                 <rect key="frame" x="113" y="176" width="100" height="100"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Boz-ht-cbc"/>
                             </imageView>
-                            <button appearanceType="aqua" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkZ-L1-fAo">
-                                <rect key="frame" x="65" y="36" width="103" height="32"/>
-                                <buttonCell key="cell" type="push" title="My Website" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zOy-9I-P8C">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="openWebsite:" target="-2" id="SHZ-51-XwR"/>
-                                </connections>
-                            </button>
                             <imageView appearanceType="aqua" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-BI-TMp">
                                 <rect key="frame" x="67" y="122" width="197" height="59"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="H19-jq-HJz"/>
@@ -72,13 +62,23 @@
                                 </textFieldCell>
                             </textField>
                             <button appearanceType="aqua" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uQS-RY-x3u">
-                                <rect key="frame" x="162" y="36" width="103" height="32"/>
+                                <rect key="frame" x="164" y="36" width="103" height="32"/>
                                 <buttonCell key="cell" type="push" title="Follow Me!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jfw-xw-IVS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="openTwitter:" target="-2" id="6pw-68-tId"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkZ-L1-fAo">
+                                <rect key="frame" x="64" y="36" width="97" height="32"/>
+                                <buttonCell key="cell" type="push" title="Email Me" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zOy-9I-P8C">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openEmail:" target="-2" id="U9p-Rz-8za"/>
                                 </connections>
                             </button>
                         </subviews>

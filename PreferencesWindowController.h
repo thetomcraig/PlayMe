@@ -16,6 +16,6 @@
 @property (strong) IBOutlet NSImageView *logo;
 
 - (IBAction)toggleShowSongName:(id)sender;
-- (IBAction)openWebsite:(id)sender;
+- (IBAction)openEmail:(id)sender;
 
 @end

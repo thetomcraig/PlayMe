@@ -87,22 +87,17 @@
 //Opens my website when that button is clicked.  Also sends a notification
 //that the delegate picks up to close the windows.
 //##############################################################################
-- (IBAction)openWebsite:(id)sender
+- (IBAction)openEmail:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"http://about.me/tomcraig/"]];
-    NSNotification *iTunesButtonNotification = [NSNotification
-                                                notificationWithName:@"preferencesWindowButtonClicked"
-                                                object:nil];
-    [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
+    #define URLEMail @"mailto:thetomcraig@icloud.com?subject=PlayMe&body="
+    
+    NSString *url = [URLEMail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
+    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: url]];
 }
 
 - (IBAction)openTwitter:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:@"https://twitter.com/thetomcraig"]];
-    NSNotification *iTunesButtonNotification = [NSNotification
-                                                notificationWithName:@"preferencesWindowButtonClicked"
-                                                object:nil];
-    [[NSDistributedNotificationCenter defaultCenter] postNotification:iTunesButtonNotification];
 }
 
 
