@@ -37,7 +37,7 @@
 //##############################################################################
 - (void)drawArrow
 {
-    NSRect arrowRect = NSMakeRect(arrowLocation.x, arrowLocation.y,
+    NSRect arrowRect = NSMakeRect(self.bounds.size.width/2 - topArrow.size.width/2, self.bounds.size.height - topArrow.size.height,
                                   topArrow.size.width, topArrow.size.height);
     
     NSGraphicsContext *ctx = [NSGraphicsContext currentContext];

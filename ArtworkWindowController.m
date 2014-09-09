@@ -69,11 +69,6 @@
                              selector:@selector(receivedMouseDownNotification:)
                              name:@"MouseDownNotification"
                              object:nil];
-        [[NSNotificationCenter defaultCenter]
-                             addObserver:self
-                             selector:@selector(receivedArrowPositionNotification:)
-                             name:@"ArrowPositionNotification"
-                             object:nil];
     }
     
     return self;
@@ -155,38 +150,44 @@
     //Otherwise its closed, so open it
     else
     {
-        //Telling the window where to open using ths corresponding string
-        [self positionAndOpenWindow:[note.userInfo objectForKey:@"GlobalRect"]];
+        [self positionAndOpenWindow:note];
         //After it's opened, position the window elementt properly
         [self updateWindowGeometry];
     }
 }
 
 //##############################################################################
-//For positinoing th arrow on top of the window.  To prevent the window from jum
-//-ping around, the arrow is positioed completely differently from the window.
-//The window is entered below the menubar icon and the arrow is as well, but the
-//arrow has its position changed at every song change, but the window does not
-//get updated this often, so the window doesnt jump around, only the arrow on
-//top does.  This is updated via the statusitem view, because it gives info
-//about where the icon is located
+//Positions the window to in the center of the menubar icon, which is stationary
 //##############################################################################
-- (void)receivedArrowPositionNotification:(NSNotification *)note
+- (void)positionAndOpenWindow:(NSNotification *)note
 {
-    NSString *globalRect = [note.userInfo objectForKey:@"GlobalRect"];
+     NSString *imageRectString = [note.userInfo objectForKey:@"ImagePoint"];
+     //Need to get the position of where the window should open
+     NSRect statusRect = NSRectFromString(imageRectString);
+    
+    ///May want to put checks to not overly position the window,
+    ///if flickering persists
+
     //Need to get the position of where the window should open
-    CGRect statusRect = NSRectFromString(globalRect);
-    
-    [artworkView setArrowLocation:NSMakePoint(statusRect.origin.x +
-                                              statusRect.size.width/2 -
-                                              [[self window] frame].origin.x -
-                                              topArrow.size.width/2,
-                                              
-                                              WINDOW_HEIGHT - topArrow.size.height)];
-    
-    [artworkView setNeedsDisplay:YES];
-    [[self window] invalidateShadow];
-    [[self window] update];
+    statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
+    //Move the window to under here
+    NSRect windowRect = [[self window] frame];
+    windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect)/2);
+    windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
+    [[self window] setFrame:windowRect display:YES];
+
+    [self fixForDangerZones];
+
+    //Clear notifications from the screen,
+    [[NSUserNotificationCenter defaultUserNotificationCenter]
+    removeAllDeliveredNotifications];
+
+    //Telling the window where to open using ths corresponding string
+    //Display the window
+    [NSApp activateIgnoringOtherApps:YES];
+    [[self window] makeKeyAndOrderFront:self];
+    [[self window] setLevel:kCGFloatingWindowLevel];
+    [[self window] setHidesOnDeactivate:YES];
 }
 
 //##############################################################################
@@ -421,58 +422,12 @@
 }
 
 //##############################################################################
-//This method calculates where to open the window using the gllobal rect
-//supplied by the nsstatusitem.  It does screen edge detection and slide the
-//window over appropriately
-//##############################################################################
-- (void)positionAndOpenWindow: (NSString *)globalRect
-{
-    //Clear notifications from the screen,
-    [[NSUserNotificationCenter defaultUserNotificationCenter]
-     removeAllDeliveredNotifications];
-    
-    //Need to get the position of where the window should open
-    CGRect statusRect = NSRectFromString(globalRect);
-    statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
-    //Move the window to under here
-    NSRect windowRect = [[self window] frame];
-    windowRect.origin.x = roundf(NSMidX(statusRect) - NSWidth(windowRect)/2);
-    windowRect.origin.y = NSMaxY(statusRect) - NSHeight(windowRect);
-    [[self window] setFrame:windowRect display:YES];
-    
-    BOOL repositioned = [self checkForDangerZones];
-    
-    //This makes sure there are no artifacts
-    //from the top arrow changing position
-    //says to redraw where there is shadow
-    [[self window] invalidateShadow];
-    [[self window] update];
-    
-    //If the window was repositioned, we do NOT want to center the arrow
-    //Makig normally, we center the window.
-    if (!repositioned)
-    {
-        //Reposition the arrow so it is in the top middle of the window
-        [artworkView setArrowLocation:NSMakePoint([[self window] frame].size.width/2 -
-                                                  topArrow.size.width/2,
-                                                  
-                                                  WINDOW_HEIGHT - topArrow.size.height)];
-    }
-
-    //Display the window
-    [NSApp activateIgnoringOtherApps:YES];
-    [[self window] makeKeyAndOrderFront:self];
-    [[self window] setLevel:kCGFloatingWindowLevel];
-    [[self window] setHidesOnDeactivate:YES];
-}
-
-//##############################################################################
 //This method makes sure the window doesnt fall off the edge of the screen.
 //It has to check the top LEFT side of the window because there could be mutli
 //-ple screens.  If the window is falling off the right side of the screen,
 //this method moves it over to the right edge.
 //##############################################################################
-- (BOOL)checkForDangerZones
+- (BOOL)fixForDangerZones
 {
     BOOL hadToReposition = false;
     

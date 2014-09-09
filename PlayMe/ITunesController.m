@@ -448,7 +448,7 @@
 //##############################################################################
 - (void)startTimer
 {
-     _countDownTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+     _countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
      target:self
      selector:@selector(advanceTimerProgress:)
      userInfo:nil repeats:YES];
