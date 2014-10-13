@@ -47,6 +47,7 @@
 		8351AD0B17CBF2DF002835F2 /* Open.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351AD0A17CBF2DF002835F2 /* Open.png */; };
 		835A69B018BCFB9A0080CEA3 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */; };
 		835A69B118BCFB9A0080CEA3 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */; };
+		835ADE2F19EB610A00958EF2 /* killers.png in Resources */ = {isa = PBXBuildFile; fileRef = 835ADE2E19EB610A00958EF2 /* killers.png */; };
 		835CA99C1870A87600CE42A8 /* ColorOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 835CA99B1870A87600CE42A8 /* ColorOperation.m */; };
 		8376319B17DAFA1E00B51CBC /* NextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8376319717DAFA1E00B51CBC /* NextButton.png */; };
 		8376319D17DAFA1E00B51CBC /* PreviousButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8376319917DAFA1E00B51CBC /* PreviousButton.png */; };
@@ -200,6 +201,7 @@
 		835A69AD18BCFB9A0080CEA3 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = ../PreferencesWindowController.h; sourceTree = "<group>"; };
 		835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = ../PreferencesWindowController.m; sourceTree = "<group>"; };
 		835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PreferencesWindow.xib; path = ../PreferencesWindow.xib; sourceTree = "<group>"; };
+		835ADE2E19EB610A00958EF2 /* killers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = killers.png; sourceTree = "<group>"; };
 		835CA99A1870A87600CE42A8 /* ColorOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorOperation.h; sourceTree = "<group>"; };
 		835CA99B1870A87600CE42A8 /* ColorOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorOperation.m; sourceTree = "<group>"; };
 		8376319717DAFA1E00B51CBC /* NextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButton.png; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		8336E36419EB5BE100D6629F /* PlayMePics */ = {
 			isa = PBXGroup;
 			children = (
+				835ADE2E19EB610A00958EF2 /* killers.png */,
 				83A8E67B19EB5FDF00EA03A4 /* coldplay.png */,
 				83A8E67C19EB5FDF00EA03A4 /* guster.png */,
 				83A8E67D19EB5FDF00EA03A4 /* leon.png */,
@@ -686,6 +689,7 @@
 				83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */,
 				835A69B118BCFB9A0080CEA3 /* PreferencesWindow.xib in Resources */,
 				8342CB6D1892FF60000CA6AE /* AboutView.xib in Resources */,
+				835ADE2F19EB610A00958EF2 /* killers.png in Resources */,
 				83E1A7DB17E1A1FE00BC94B8 /* iTunesButtonDepressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
