@@ -14,6 +14,7 @@
 @synthesize preferences;
 @synthesize openIniTunes;
 @synthesize quitApp;
+@synthesize statusRect;
 
 //##############################################################################
 //Init
@@ -64,7 +65,7 @@
     }
     else
     {
-        [self sendRectNotification:YES];
+        [self sendMouseDownNotification];
     }
     
     [self setNeedsDisplay:YES];
@@ -228,7 +229,10 @@
 #pragma mark - drawing
 #
 //##############################################################################
-//Drawing the statusbar in the view, and drawing the text at the origin
+//The text is drawn at the right and the icon at the left.  In this way, the
+//icon is always at the right edge of the bounding rect, so it neever moves,
+//and this is reflected in the statusRect that is the rect for the onscreen
+//position of the icon (used to position window)
 //##############################################################################
 - (void)drawRect:(NSRect)rect
 {
@@ -240,29 +244,26 @@
     NSPoint origin = NSMakePoint(EDGE_PADDING_WIDTH,
                                  PADDING_HEIGHT);
     
-    double widthOfImage = image.size.width;
-    NSPoint titlePoint = origin;
-    titlePoint.x += widthOfImage;
     
-    //If the title of the song is also shown in the menubar
-    //increate the width to make room for it
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"showSongName"])
-    {
-        titlePoint.x += INNER_PADDING_WIDTH;
-    }
-    
-    [title drawAtPoint:titlePoint
+    [title drawAtPoint:origin
         withAttributes:[self titleAttributes]];
     
-    NSPoint imagePoint = origin;
-    imagePoint.y = 0;
+    
+    NSPoint imageLocation = self.bounds.origin;
+    imageLocation.x = self.bounds.size.width - image.size.width - EDGE_PADDING_WIDTH;
+    
+    imageLocation.y = 0;
     NSImage *imageToDraw = isHighlighted ? alternateImage : image;
-    [imageToDraw drawAtPoint:imagePoint
+    [imageToDraw drawAtPoint:imageLocation
                     fromRect:NSZeroRect
                    operation:NSCompositeSourceOver
                     fraction:1.0];
     
-    [self sendRectNotification:NO];
+    //statusRect is position onscreen of the image
+    //For the mouseDown notifications
+    statusRect = [[self window] frame];
+    statusRect.origin.x += imageLocation.x;
+    statusRect.size.width = image.size.width;
 }
 
 
@@ -270,38 +271,21 @@
 #pragma mark - Sending notifications
 #
 //##############################################################################
-//Sends a notification with a rect trepresnting the menubar icon, so the window
-//can be centered nelow it properly.
-//This will either happen when mousedown occurs on the icon or when
-//drawrect calls it, if mousedown we just toggle the window
+//Notification for when the icon is clicked, sends the position of the icon
+//for proper window placement.
 //##############################################################################
-- (void)sendRectNotification :(Boolean)mouseDown
+- (void)sendMouseDownNotification
 {
-    NSString *nameOfNot = @"ArrowPositionNotification";
-    if (mouseDown)
-    {
-        nameOfNot = @"MouseDownNotification";
-    }
-    
-    //We need to pass the position of the rect in the menubar,
-    //and we convert it to an NSValue.  We pas it the rect that
-    //corresponds to the location of the icon only.
-    //The multiplication by 2 simulates a rectangle with the
-    //image cetnered in it
-    NSRect imageRect = [[self window] frame];
-    imageRect.size.width = 0 + EDGE_PADDING_WIDTH*2 + image.size.width;
-    NSString *globalRectString = NSStringFromRect(imageRect);
-    
-    
     NSDictionary *menubarInfo =
     @{
-      @"GlobalRect": globalRectString
+      @"ImagePoint": NSStringFromRect(statusRect)
       };
     
     //Sending the notification
     [[NSNotificationCenter defaultCenter]
-     postNotificationName:nameOfNot
+     postNotificationName:@"MouseDownNotification"
      object:self
      userInfo:menubarInfo];
+
 }
 @end

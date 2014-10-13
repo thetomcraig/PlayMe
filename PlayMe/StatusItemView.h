@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSMenuItem *preferences;
 @property (nonatomic, strong) NSMenuItem *openIniTunes;
 @property (nonatomic, strong) NSMenuItem *quitApp;
+@property (nonatomic) NSRect statusRect;
 
 @end
