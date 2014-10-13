@@ -164,9 +164,6 @@
      NSString *imageRectString = [note.userInfo objectForKey:@"ImagePoint"];
      //Need to get the position of where the window should open
      NSRect statusRect = NSRectFromString(imageRectString);
-    
-    ///May want to put checks to not overly position the window,
-    ///if flickering persists
 
     //Need to get the position of where the window should open
     statusRect.origin.y = NSMinY(statusRect) - NSHeight(statusRect);
