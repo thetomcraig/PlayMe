@@ -32,6 +32,9 @@
 		83246F6317CC0188001A3118 /* BlankArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 83246F6217CC0188001A3118 /* BlankArtwork.png */; };
 		83246F6B17CC0F41001A3118 /* bgTopArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 83246F6717CC0F41001A3118 /* bgTopArrow.png */; };
 		8329B49517CBEA0F0000BB47 /* Playing.png in Resources */ = {isa = PBXBuildFile; fileRef = 8329B49417CBEA0F0000BB47 /* Playing.png */; };
+		8336E36819EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.55.46 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 8336E36519EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.55.46 PM.png */; };
+		8336E36919EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.00 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 8336E36619EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.00 PM.png */; };
+		8336E36A19EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.14 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 8336E36719EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.14 PM.png */; };
 		833B4CDC1868E6CB000DB59A /* icon1024.psd in Resources */ = {isa = PBXBuildFile; fileRef = 833B4CDA1868E6CB000DB59A /* icon1024.psd */; };
 		833E46AD19A9692700A1C69A /* BackdropReference.psd in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AA19A9692700A1C69A /* BackdropReference.psd */; };
 		833E46AE19A9692700A1C69A /* NothingPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AB19A9692700A1C69A /* NothingPlaying.png */; };
@@ -177,6 +180,9 @@
 		83246F6217CC0188001A3118 /* BlankArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlankArtwork.png; sourceTree = "<group>"; };
 		83246F6717CC0F41001A3118 /* bgTopArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgTopArrow.png; sourceTree = "<group>"; };
 		8329B49417CBEA0F0000BB47 /* Playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Playing.png; sourceTree = "<group>"; };
+		8336E36519EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.55.46 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2014-10-12 at 5.55.46 PM.png"; sourceTree = "<group>"; };
+		8336E36619EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.00 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2014-10-12 at 5.56.00 PM.png"; sourceTree = "<group>"; };
+		8336E36719EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.14 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2014-10-12 at 5.56.14 PM.png"; sourceTree = "<group>"; };
 		833B4CDA1868E6CB000DB59A /* icon1024.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon1024.psd; sourceTree = "<group>"; };
 		833E46AA19A9692700A1C69A /* BackdropReference.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackdropReference.psd; sourceTree = "<group>"; };
 		833E46AB19A9692700A1C69A /* NothingPlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NothingPlaying.png; sourceTree = "<group>"; };
@@ -298,6 +304,7 @@
 		83131A3317C898DC00D50029 = {
 			isa = PBXGroup;
 			children = (
+				8336E36419EB5BE100D6629F /* PlayMePics */,
 				83AFDA1219707DFF00DE0429 /* ArtworkWindowController.h */,
 				83AFDA1319707DFF00DE0429 /* ArtworkWindowController.m */,
 				83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */,
@@ -465,6 +472,16 @@
 				8388009717F22E53002EC9C7 /* OpenWhite@2x.png */,
 			);
 			name = "Bar Icons";
+			sourceTree = "<group>";
+		};
+		8336E36419EB5BE100D6629F /* PlayMePics */ = {
+			isa = PBXGroup;
+			children = (
+				8336E36519EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.55.46 PM.png */,
+				8336E36619EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.00 PM.png */,
+				8336E36719EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.14 PM.png */,
+			);
+			path = PlayMePics;
 			sourceTree = "<group>";
 		};
 		838C439318B7B339005AADA4 /* App Icons */ = {
@@ -639,12 +656,14 @@
 				8388009D17F22FB4002EC9C7 /* PlayingWhite@2x.png in Resources */,
 				8392AAC817CBF1B200EEF193 /* Paused.png in Resources */,
 				83101A2617D9819B006E6CA8 /* PausedButton.png in Resources */,
+				8336E36A19EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.14 PM.png in Resources */,
 				838E0A6A18E781C7007FCEC5 /* appNameLogo.psd in Resources */,
 				833B4CDC1868E6CB000DB59A /* icon1024.psd in Resources */,
 				838800A517F230A8002EC9C7 /* StoppedWhite@2x.png in Resources */,
 				83F0B61217E963EF009BF1E1 /* quitButtonDepressed.png in Resources */,
 				83131A5817C898DC00D50029 /* Images.xcassets in Resources */,
 				8388009517F223AA002EC9C7 /* bgTopArrow@2x.png in Resources */,
+				8336E36819EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.55.46 PM.png in Resources */,
 				83246F6317CC0188001A3118 /* BlankArtwork.png in Resources */,
 				833E46AE19A9692700A1C69A /* NothingPlaying.png in Resources */,
 				83131A5017C898DC00D50029 /* Credits.rtf in Resources */,
@@ -653,6 +672,7 @@
 				831001F117CC690D0055A5CB /* PlayingWhite.png in Resources */,
 				8351AD0B17CBF2DF002835F2 /* Open.png in Resources */,
 				831001ED17CC684C0055A5CB /* OpenWhite.png in Resources */,
+				8336E36919EB5BE100D6629F /* Screen Shot 2014-10-12 at 5.56.00 PM.png in Resources */,
 				831001EE17CC684C0055A5CB /* PausedWhite.png in Resources */,
 				833E46AD19A9692700A1C69A /* BackdropReference.psd in Resources */,
 				8329B49517CBEA0F0000BB47 /* Playing.png in Resources */,
