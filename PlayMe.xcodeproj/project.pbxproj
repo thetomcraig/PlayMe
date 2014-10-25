@@ -28,7 +28,6 @@
 		83131A6A17C898DC00D50029 /* PlayMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A6917C898DC00D50029 /* PlayMeTests.m */; };
 		83131A9317C8A99000D50029 /* ITunesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9117C8A99000D50029 /* ITunesController.m */; };
 		83131A9817C8AD3200D50029 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9717C8AD3200D50029 /* ImageController.m */; };
-		83131A9B17C8AE0C00D50029 /* NCController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83131A9A17C8AE0C00D50029 /* NCController.m */; };
 		83246F6317CC0188001A3118 /* BlankArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 83246F6217CC0188001A3118 /* BlankArtwork.png */; };
 		83246F6B17CC0F41001A3118 /* bgTopArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 83246F6717CC0F41001A3118 /* bgTopArrow.png */; };
 		8329B49517CBEA0F0000BB47 /* Playing.png in Resources */ = {isa = PBXBuildFile; fileRef = 8329B49417CBEA0F0000BB47 /* Playing.png */; };
@@ -36,12 +35,6 @@
 		833E46AD19A9692700A1C69A /* BackdropReference.psd in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AA19A9692700A1C69A /* BackdropReference.psd */; };
 		833E46AE19A9692700A1C69A /* NothingPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AB19A9692700A1C69A /* NothingPlaying.png */; };
 		833E46AF19A9692700A1C69A /* PausedMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 833E46AC19A9692700A1C69A /* PausedMask.png */; };
-		8342CB5F1892FD0E000CA6AE /* GeneralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8342CB5A1892FD0E000CA6AE /* GeneralViewController.m */; };
-		8342CB601892FD0E000CA6AE /* GeneralView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB5B1892FD0E000CA6AE /* GeneralView.xib */; };
-		8342CB671892FD2E000CA6AE /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB641892FD2E000CA6AE /* MASPreferencesWindow.xib */; };
-		8342CB681892FD2E000CA6AE /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8342CB661892FD2E000CA6AE /* MASPreferencesWindowController.m */; };
-		8342CB6C1892FF60000CA6AE /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8342CB6A1892FF60000CA6AE /* AboutViewController.m */; };
-		8342CB6D1892FF60000CA6AE /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB6B1892FF60000CA6AE /* AboutView.xib */; };
 		8342CB7018930704000CA6AE /* moreButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB6E18930704000CA6AE /* moreButton.png */; };
 		8342CB731893071C000CA6AE /* moreButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8342CB721893071C000CA6AE /* moreButtonDepressed.png */; };
 		8351AD0B17CBF2DF002835F2 /* Open.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351AD0A17CBF2DF002835F2 /* Open.png */; };
@@ -178,8 +171,6 @@
 		83131A9217C8A99000D50029 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		83131A9417C8A99F00D50029 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageController.h; sourceTree = "<group>"; };
 		83131A9717C8AD3200D50029 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
-		83131A9917C8AE0C00D50029 /* NCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCController.h; sourceTree = "<group>"; };
-		83131A9A17C8AE0C00D50029 /* NCController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCController.m; sourceTree = "<group>"; };
 		83246F6217CC0188001A3118 /* BlankArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankArtwork.png; path = ../resources/windowElements/BlankArtwork.png; sourceTree = "<group>"; };
 		83246F6717CC0F41001A3118 /* bgTopArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgTopArrow.png; path = ../resources/windowElements/bgTopArrow.png; sourceTree = "<group>"; };
 		8329B49417CBEA0F0000BB47 /* Playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Playing.png; path = ../resources/menubarIcons/Playing.png; sourceTree = "<group>"; };
@@ -187,16 +178,6 @@
 		833E46AA19A9692700A1C69A /* BackdropReference.psd */ = {isa = PBXFileReference; lastKnownFileType = file; name = BackdropReference.psd; path = ../resources/windowElements/BackdropReference.psd; sourceTree = "<group>"; };
 		833E46AB19A9692700A1C69A /* NothingPlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NothingPlaying.png; path = ../resources/windowElements/NothingPlaying.png; sourceTree = "<group>"; };
 		833E46AC19A9692700A1C69A /* PausedMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PausedMask.png; path = ../resources/windowElements/PausedMask.png; sourceTree = "<group>"; };
-		8342CB591892FD0E000CA6AE /* GeneralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralViewController.h; sourceTree = "<group>"; };
-		8342CB5A1892FD0E000CA6AE /* GeneralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralViewController.m; sourceTree = "<group>"; };
-		8342CB5B1892FD0E000CA6AE /* GeneralView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralView.xib; sourceTree = "<group>"; };
-		8342CB631892FD2E000CA6AE /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
-		8342CB641892FD2E000CA6AE /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
-		8342CB651892FD2E000CA6AE /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
-		8342CB661892FD2E000CA6AE /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
-		8342CB691892FF60000CA6AE /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
-		8342CB6A1892FF60000CA6AE /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		8342CB6B1892FF60000CA6AE /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		8342CB6E18930704000CA6AE /* moreButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = moreButton.png; path = ../resources/buttons/moreButton.png; sourceTree = "<group>"; };
 		8342CB721893071C000CA6AE /* moreButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = moreButtonDepressed.png; path = ../resources/buttons/moreButtonDepressed.png; sourceTree = "<group>"; };
 		8351AD0A17CBF2DF002835F2 /* Open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Open.png; path = ../resources/menubarIcons/Open.png; sourceTree = "<group>"; };
@@ -311,7 +292,6 @@
 		83131A3317C898DC00D50029 = {
 			isa = PBXGroup;
 			children = (
-				837F1CA619EC8E6B00F33D74 /* resources */,
 				83AFDA1219707DFF00DE0429 /* ArtworkWindowController.h */,
 				83AFDA1319707DFF00DE0429 /* ArtworkWindowController.m */,
 				83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */,
@@ -319,6 +299,7 @@
 				83AFDA1819707FDD00DE0429 /* ArtworkWindow.m */,
 				83AFDA0F19706A1700DE0429 /* ArtworkView.h */,
 				83AFDA1019706A1700DE0429 /* ArtworkView.m */,
+				837F1CA619EC8E6B00F33D74 /* resources */,
 				83131A4517C898DC00D50029 /* PlayMe */,
 				83131A6317C898DC00D50029 /* PlayMeTests */,
 				83131A3E17C898DC00D50029 /* Frameworks */,
@@ -359,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				83131A9617C8A9BA00D50029 /* Main Window */,
-				8392819418810C8700266803 /* Settings Window (Not using) */,
 				83131A9517C8A9A900D50029 /* Main Classes */,
 				83131A9C17C8AE2500D50029 /* Necesry/Unused */,
 				83131A4617C898DC00D50029 /* Supporting Files */,
@@ -536,36 +516,8 @@
 			children = (
 				83E5A98B17D0441900CDC2F7 /* AlbumColorPicker.h */,
 				83E5A98C17D0441900CDC2F7 /* AlbumColorPicker.m */,
-				83131A9917C8AE0C00D50029 /* NCController.h */,
-				83131A9A17C8AE0C00D50029 /* NCController.m */,
 			);
 			name = Utilities;
-			sourceTree = "<group>";
-		};
-		8392819418810C8700266803 /* Settings Window (Not using) */ = {
-			isa = PBXGroup;
-			children = (
-				8342CB631892FD2E000CA6AE /* MASPreferencesViewController.h */,
-				8342CB641892FD2E000CA6AE /* MASPreferencesWindow.xib */,
-				8342CB651892FD2E000CA6AE /* MASPreferencesWindowController.h */,
-				8342CB661892FD2E000CA6AE /* MASPreferencesWindowController.m */,
-				83E76CBB1891782200576A77 /* SettingsWindowViews */,
-			);
-			name = "Settings Window (Not using)";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		83E76CBB1891782200576A77 /* SettingsWindowViews */ = {
-			isa = PBXGroup;
-			children = (
-				8342CB591892FD0E000CA6AE /* GeneralViewController.h */,
-				8342CB5A1892FD0E000CA6AE /* GeneralViewController.m */,
-				8342CB5B1892FD0E000CA6AE /* GeneralView.xib */,
-				8342CB691892FF60000CA6AE /* AboutViewController.h */,
-				8342CB6A1892FF60000CA6AE /* AboutViewController.m */,
-				8342CB6B1892FF60000CA6AE /* AboutView.xib */,
-			);
-			name = SettingsWindowViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -660,7 +612,6 @@
 				83DA970B17DBEB2F007531E4 /* PlayButtonDepressed.png in Resources */,
 				8310E5A5186BBEF900510804 /* closeButton.png in Resources */,
 				838800A117F23066002EC9C7 /* PausedWhite@2x.png in Resources */,
-				8342CB601892FD0E000CA6AE /* GeneralView.xib in Resources */,
 				837F1CB519EC900300F33D74 /* Screen Shot 2014-10-12 at 6.09.27 PM.png in Resources */,
 				8342CB7018930704000CA6AE /* moreButton.png in Resources */,
 				837F1CB119EC900300F33D74 /* coldplay.png in Resources */,
@@ -668,7 +619,6 @@
 				838800A017F23066002EC9C7 /* Paused@2x.png in Resources */,
 				8310E5A3186BBEE000510804 /* closeButtonDepressed.png in Resources */,
 				83131A4A17C898DC00D50029 /* InfoPlist.strings in Resources */,
-				8342CB671892FD2E000CA6AE /* MASPreferencesWindow.xib in Resources */,
 				830F785018D2097C00C13B0D /* companyLogo.psd in Resources */,
 				83101A2F17DA879C006E6CA8 /* PlayButton.png in Resources */,
 				83246F6B17CC0F41001A3118 /* bgTopArrow.png in Resources */,
@@ -708,7 +658,6 @@
 				833E46AF19A9692700A1C69A /* PausedMask.png in Resources */,
 				83DA970A17DBEB2F007531E4 /* PausedButtonDepressed.png in Resources */,
 				835A69B118BCFB9A0080CEA3 /* PreferencesWindow.xib in Resources */,
-				8342CB6D1892FF60000CA6AE /* AboutView.xib in Resources */,
 				83E1A7DB17E1A1FE00BC94B8 /* iTunesButtonDepressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,21 +677,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8342CB5F1892FD0E000CA6AE /* GeneralViewController.m in Sources */,
 				83CB8D6819561231009D4FE2 /* StatusItemView.m in Sources */,
 				83AFDA1519707DFF00DE0429 /* ArtworkWindowController.m in Sources */,
 				83131A9817C8AD3200D50029 /* ImageController.m in Sources */,
 				83CB8D6519561160009D4FE2 /* MenubarController.m in Sources */,
-				8342CB681892FD2E000CA6AE /* MASPreferencesWindowController.m in Sources */,
 				83D532E61956B8B100E3EEAA /* PMAAppDelegate.m in Sources */,
 				83E1A7E217E272C700BC94B8 /* SongSliderCell.m in Sources */,
 				83AFDA1119706A1700DE0429 /* ArtworkView.m in Sources */,
 				83AE0FC617E2B93A00AE8282 /* SongSlider.m in Sources */,
 				83131A4C17C898DC00D50029 /* main.m in Sources */,
-				8342CB6C1892FF60000CA6AE /* AboutViewController.m in Sources */,
 				83E5A98D17D0441900CDC2F7 /* AlbumColorPicker.m in Sources */,
 				835CA99C1870A87600CE42A8 /* ColorOperation.m in Sources */,
-				83131A9B17C8AE0C00D50029 /* NCController.m in Sources */,
 				837631A517DB186A00B51CBC /* ButtonsBackdrop.m in Sources */,
 				83A3409018C6A46700B7F4C4 /* PreferencesBackdrop.m in Sources */,
 				83131A9317C8A99000D50029 /* ITunesController.m in Sources */,

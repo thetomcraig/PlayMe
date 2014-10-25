@@ -1,4 +1,3 @@
-#import "NCController.h"
 #import "MenubarController.h"
 #import "ArtworkWindowController.h"
 #import "PreferencesWindowController.h"

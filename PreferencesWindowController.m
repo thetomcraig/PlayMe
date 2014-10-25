@@ -2,7 +2,7 @@
 
 @implementation PreferencesWindowController
 
-@synthesize aboutViewController;
+
 @synthesize preferencesBackdrop;
 @synthesize applicationIcon;
 @synthesize title;

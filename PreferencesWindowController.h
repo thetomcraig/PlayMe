@@ -1,10 +1,8 @@
 #import <Cocoa/Cocoa.h>
-#import "AboutViewController.h"
 #import "PreferencesBackdrop.h"
 
 @interface PreferencesWindowController : NSWindowController
 
-@property (retain, nonatomic) AboutViewController *aboutViewController;
 
 @property (strong) IBOutlet PreferencesBackdrop *preferencesBackdrop;
 @property (strong) IBOutlet NSImageView *applicationIcon;
