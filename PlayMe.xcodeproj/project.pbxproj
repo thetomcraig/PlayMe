@@ -166,11 +166,11 @@
 		83131A6517C898DC00D50029 /* PlayMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayMeTests-Info.plist"; sourceTree = "<group>"; };
 		83131A6717C898DC00D50029 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83131A6917C898DC00D50029 /* PlayMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayMeTests.m; sourceTree = "<group>"; };
-		83131A9017C8A99000D50029 /* ITunesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesController.h; sourceTree = "<group>"; };
-		83131A9117C8A99000D50029 /* ITunesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITunesController.m; sourceTree = "<group>"; };
+		83131A9017C8A99000D50029 /* ITunesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITunesController.h; path = PlayMe/ITunesController.h; sourceTree = "<group>"; };
+		83131A9117C8A99000D50029 /* ITunesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITunesController.m; path = PlayMe/ITunesController.m; sourceTree = "<group>"; };
 		83131A9217C8A99000D50029 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		83131A9417C8A99F00D50029 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageController.h; sourceTree = "<group>"; };
-		83131A9717C8AD3200D50029 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
+		83131A9417C8A99F00D50029 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageController.h; path = PlayMe/ImageController.h; sourceTree = "<group>"; };
+		83131A9717C8AD3200D50029 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageController.m; path = PlayMe/ImageController.m; sourceTree = "<group>"; };
 		83246F6217CC0188001A3118 /* BlankArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankArtwork.png; path = ../resources/windowElements/BlankArtwork.png; sourceTree = "<group>"; };
 		83246F6717CC0F41001A3118 /* bgTopArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgTopArrow.png; path = ../resources/windowElements/bgTopArrow.png; sourceTree = "<group>"; };
 		8329B49417CBEA0F0000BB47 /* Playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Playing.png; path = ../resources/menubarIcons/Playing.png; sourceTree = "<group>"; };
@@ -188,8 +188,8 @@
 		835CA99B1870A87600CE42A8 /* ColorOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorOperation.m; sourceTree = "<group>"; };
 		8376319717DAFA1E00B51CBC /* NextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NextButton.png; path = ../resources/buttons/NextButton.png; sourceTree = "<group>"; };
 		8376319917DAFA1E00B51CBC /* PreviousButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviousButton.png; path = ../resources/buttons/PreviousButton.png; sourceTree = "<group>"; };
-		837631A317DB186A00B51CBC /* ButtonsBackdrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsBackdrop.h; sourceTree = "<group>"; };
-		837631A417DB186A00B51CBC /* ButtonsBackdrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsBackdrop.m; sourceTree = "<group>"; };
+		837631A317DB186A00B51CBC /* ButtonsBackdrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonsBackdrop.h; path = artworkWindow/ButtonsBackdrop.h; sourceTree = "<group>"; };
+		837631A417DB186A00B51CBC /* ButtonsBackdrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonsBackdrop.m; path = artworkWindow/ButtonsBackdrop.m; sourceTree = "<group>"; };
 		837F1CAB19EC900300F33D74 /* coldplay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coldplay.png; path = resources/PlayMePics/coldplay.png; sourceTree = SOURCE_ROOT; };
 		837F1CAC19EC900300F33D74 /* guster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guster.png; path = resources/PlayMePics/guster.png; sourceTree = SOURCE_ROOT; };
 		837F1CAD19EC900300F33D74 /* killers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = killers.png; path = resources/PlayMePics/killers.png; sourceTree = SOURCE_ROOT; };
@@ -211,33 +211,33 @@
 		8392AAC917CBF1C200EEF193 /* Stopped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Stopped.png; path = ../resources/menubarIcons/Stopped.png; sourceTree = "<group>"; };
 		83A3408E18C6A46700B7F4C4 /* PreferencesBackdrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesBackdrop.h; sourceTree = "<group>"; };
 		83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesBackdrop.m; sourceTree = "<group>"; };
-		83AE0FC417E2B93A00AE8282 /* SongSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSlider.h; sourceTree = "<group>"; };
-		83AE0FC517E2B93A00AE8282 /* SongSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSlider.m; sourceTree = "<group>"; };
+		83AE0FC417E2B93A00AE8282 /* SongSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongSlider.h; path = artworkWindow/SongSlider.h; sourceTree = "<group>"; };
+		83AE0FC517E2B93A00AE8282 /* SongSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongSlider.m; path = artworkWindow/SongSlider.m; sourceTree = "<group>"; };
 		83AFDA081970696F00DE0429 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		83AFDA0F19706A1700DE0429 /* ArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkView.h; sourceTree = "<group>"; };
-		83AFDA1019706A1700DE0429 /* ArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkView.m; sourceTree = "<group>"; };
-		83AFDA1219707DFF00DE0429 /* ArtworkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindowController.h; sourceTree = "<group>"; };
-		83AFDA1319707DFF00DE0429 /* ArtworkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindowController.m; sourceTree = "<group>"; };
-		83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtworkWindow.xib; sourceTree = "<group>"; };
-		83AFDA1719707FDD00DE0429 /* ArtworkWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtworkWindow.h; sourceTree = "<group>"; };
-		83AFDA1819707FDD00DE0429 /* ArtworkWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtworkWindow.m; sourceTree = "<group>"; };
-		83CB8D6319561160009D4FE2 /* MenubarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenubarController.h; sourceTree = "<group>"; };
-		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
-		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
-		83CB8D6719561231009D4FE2 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
-		83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMAAppDelegate.h; sourceTree = "<group>"; };
-		83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMAAppDelegate.m; sourceTree = "<group>"; };
+		83AFDA0F19706A1700DE0429 /* ArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtworkView.h; path = artworkWindow/ArtworkView.h; sourceTree = "<group>"; };
+		83AFDA1019706A1700DE0429 /* ArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArtworkView.m; path = artworkWindow/ArtworkView.m; sourceTree = "<group>"; };
+		83AFDA1219707DFF00DE0429 /* ArtworkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtworkWindowController.h; path = artworkWindow/ArtworkWindowController.h; sourceTree = "<group>"; };
+		83AFDA1319707DFF00DE0429 /* ArtworkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArtworkWindowController.m; path = artworkWindow/ArtworkWindowController.m; sourceTree = "<group>"; };
+		83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkWindow.xib; path = artworkWindow/ArtworkWindow.xib; sourceTree = "<group>"; };
+		83AFDA1719707FDD00DE0429 /* ArtworkWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtworkWindow.h; path = artworkWindow/ArtworkWindow.h; sourceTree = "<group>"; };
+		83AFDA1819707FDD00DE0429 /* ArtworkWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArtworkWindow.m; path = artworkWindow/ArtworkWindow.m; sourceTree = "<group>"; };
+		83CB8D6319561160009D4FE2 /* MenubarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenubarController.h; path = PlayMe/MenubarController.h; sourceTree = "<group>"; };
+		83CB8D6419561160009D4FE2 /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenubarController.m; path = PlayMe/MenubarController.m; sourceTree = "<group>"; };
+		83CB8D6619561231009D4FE2 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusItemView.h; path = PlayMe/StatusItemView.h; sourceTree = "<group>"; };
+		83CB8D6719561231009D4FE2 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusItemView.m; path = PlayMe/StatusItemView.m; sourceTree = "<group>"; };
+		83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMAAppDelegate.h; path = PlayMe/PMAAppDelegate.h; sourceTree = "<group>"; };
+		83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMAAppDelegate.m; path = PlayMe/PMAAppDelegate.m; sourceTree = "<group>"; };
 		83DA970517DBEB2F007531E4 /* NextButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NextButtonDepressed.png; path = ../resources/buttons/NextButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970617DBEB2F007531E4 /* PausedButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PausedButtonDepressed.png; path = ../resources/buttons/PausedButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970717DBEB2F007531E4 /* PlayButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayButtonDepressed.png; path = ../resources/buttons/PlayButtonDepressed.png; sourceTree = "<group>"; };
 		83DA970817DBEB2F007531E4 /* PreviousButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviousButtonDepressed.png; path = ../resources/buttons/PreviousButtonDepressed.png; sourceTree = "<group>"; };
-		83DA970D17DBF2C5007531E4 /* ControlButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlButtonsCell.h; sourceTree = "<group>"; };
-		83DA970E17DBF2C5007531E4 /* ControlButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlButtonsCell.m; sourceTree = "<group>"; };
+		83DA970D17DBF2C5007531E4 /* ControlButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlButtonsCell.h; path = artworkWindow/ControlButtonsCell.h; sourceTree = "<group>"; };
+		83DA970E17DBF2C5007531E4 /* ControlButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlButtonsCell.m; path = artworkWindow/ControlButtonsCell.m; sourceTree = "<group>"; };
 		83E1A7D817E1A1FE00BC94B8 /* iTunesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesButton.png; path = ../resources/buttons/iTunesButton.png; sourceTree = "<group>"; };
 		83E1A7D917E1A1FE00BC94B8 /* iTunesButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesButtonDepressed.png; path = ../resources/buttons/iTunesButtonDepressed.png; sourceTree = "<group>"; };
 		83E1A7DC17E1A21600BC94B8 /* revealTrack.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = revealTrack.scpt; sourceTree = "<group>"; };
-		83E1A7E017E272C700BC94B8 /* SongSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSliderCell.h; sourceTree = "<group>"; };
-		83E1A7E117E272C700BC94B8 /* SongSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSliderCell.m; sourceTree = "<group>"; };
+		83E1A7E017E272C700BC94B8 /* SongSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongSliderCell.h; path = artworkWindow/SongSliderCell.h; sourceTree = "<group>"; };
+		83E1A7E117E272C700BC94B8 /* SongSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongSliderCell.m; path = artworkWindow/SongSliderCell.m; sourceTree = "<group>"; };
 		83E5A98B17D0441900CDC2F7 /* AlbumColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumColorPicker.h; sourceTree = "<group>"; };
 		83E5A98C17D0441900CDC2F7 /* AlbumColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumColorPicker.m; sourceTree = "<group>"; };
 		83F0B61017E963EF009BF1E1 /* quitButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = quitButtonDepressed.png; path = ../resources/buttons/quitButtonDepressed.png; sourceTree = "<group>"; };
@@ -292,15 +292,22 @@
 		83131A3317C898DC00D50029 = {
 			isa = PBXGroup;
 			children = (
-				83AFDA1219707DFF00DE0429 /* ArtworkWindowController.h */,
-				83AFDA1319707DFF00DE0429 /* ArtworkWindowController.m */,
-				83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */,
-				83AFDA1719707FDD00DE0429 /* ArtworkWindow.h */,
-				83AFDA1819707FDD00DE0429 /* ArtworkWindow.m */,
-				83AFDA0F19706A1700DE0429 /* ArtworkView.h */,
-				83AFDA1019706A1700DE0429 /* ArtworkView.m */,
+				83131A4617C898DC00D50029 /* Supporting Files */,
+				83131A9C17C8AE2500D50029 /* Necesry/Unused */,
+				8392818D18810A6900266803 /* Utilities */,
+				83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */,
+				83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */,
+				83CB8D6319561160009D4FE2 /* MenubarController.h */,
+				83CB8D6419561160009D4FE2 /* MenubarController.m */,
+				83CB8D6619561231009D4FE2 /* StatusItemView.h */,
+				83CB8D6719561231009D4FE2 /* StatusItemView.m */,
+				83131A9017C8A99000D50029 /* ITunesController.h */,
+				83131A9117C8A99000D50029 /* ITunesController.m */,
+				83131A9417C8A99F00D50029 /* ImageController.h */,
+				83131A9717C8AD3200D50029 /* ImageController.m */,
+				8368F8A019FC135600A68C21 /* preferecesWindow */,
+				8368F8A119FC137C00A68C21 /* artworkWindow */,
 				837F1CA619EC8E6B00F33D74 /* resources */,
-				83131A4517C898DC00D50029 /* PlayMe */,
 				83131A6317C898DC00D50029 /* PlayMeTests */,
 				83131A3E17C898DC00D50029 /* Frameworks */,
 				83131A3D17C898DC00D50029 /* Products */,
@@ -336,17 +343,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		83131A4517C898DC00D50029 /* PlayMe */ = {
-			isa = PBXGroup;
-			children = (
-				83131A9617C8A9BA00D50029 /* Main Window */,
-				83131A9517C8A9A900D50029 /* Main Classes */,
-				83131A9C17C8AE2500D50029 /* Necesry/Unused */,
-				83131A4617C898DC00D50029 /* Supporting Files */,
-			);
-			path = PlayMe;
-			sourceTree = "<group>";
-		};
 		83131A4617C898DC00D50029 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +353,7 @@
 				83131A4E17C898DC00D50029 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			path = PlayMe;
 			sourceTree = "<group>";
 		};
 		83131A6317C898DC00D50029 /* PlayMeTests */ = {
@@ -377,39 +374,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		83131A9517C8A9A900D50029 /* Main Classes */ = {
-			isa = PBXGroup;
-			children = (
-				83A3408E18C6A46700B7F4C4 /* PreferencesBackdrop.h */,
-				83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */,
-				835A69AD18BCFB9A0080CEA3 /* PreferencesWindowController.h */,
-				835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */,
-				835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */,
-				83CB8D6319561160009D4FE2 /* MenubarController.h */,
-				83CB8D6419561160009D4FE2 /* MenubarController.m */,
-				83CB8D6619561231009D4FE2 /* StatusItemView.h */,
-				83CB8D6719561231009D4FE2 /* StatusItemView.m */,
-				83131A9017C8A99000D50029 /* ITunesController.h */,
-				83131A9117C8A99000D50029 /* ITunesController.m */,
-				83131A9417C8A99F00D50029 /* ImageController.h */,
-				83131A9717C8AD3200D50029 /* ImageController.m */,
-				8392818D18810A6900266803 /* Utilities */,
-			);
-			name = "Main Classes";
-			sourceTree = "<group>";
-		};
-		83131A9617C8A9BA00D50029 /* Main Window */ = {
-			isa = PBXGroup;
-			children = (
-				83D532E31956B8B100E3EEAA /* PMAAppDelegate.h */,
-				83D532E41956B8B100E3EEAA /* PMAAppDelegate.m */,
-				835CA99A1870A87600CE42A8 /* ColorOperation.h */,
-				835CA99B1870A87600CE42A8 /* ColorOperation.m */,
-				8392818C18810A4C00266803 /* Main Window Elements */,
-			);
-			name = "Main Window";
-			sourceTree = "<group>";
-		};
 		83131A9C17C8AE2500D50029 /* Necesry/Unused */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +383,7 @@
 				83131A9217C8A99000D50029 /* iTunes.h */,
 			);
 			name = Necesry/Unused;
+			path = PlayMe;
 			sourceTree = "<group>";
 		};
 		83246F6C17CC0F48001A3118 /* windowElements */ = {
@@ -474,6 +439,41 @@
 			path = PlayMePics;
 			sourceTree = "<group>";
 		};
+		8368F8A019FC135600A68C21 /* preferecesWindow */ = {
+			isa = PBXGroup;
+			children = (
+				83A3408E18C6A46700B7F4C4 /* PreferencesBackdrop.h */,
+				835A69AD18BCFB9A0080CEA3 /* PreferencesWindowController.h */,
+				835A69AE18BCFB9A0080CEA3 /* PreferencesWindowController.m */,
+				835A69AF18BCFB9A0080CEA3 /* PreferencesWindow.xib */,
+				83A3408F18C6A46700B7F4C4 /* PreferencesBackdrop.m */,
+			);
+			name = preferecesWindow;
+			path = PlayMe;
+			sourceTree = "<group>";
+		};
+		8368F8A119FC137C00A68C21 /* artworkWindow */ = {
+			isa = PBXGroup;
+			children = (
+				83DA970D17DBF2C5007531E4 /* ControlButtonsCell.h */,
+				83DA970E17DBF2C5007531E4 /* ControlButtonsCell.m */,
+				83AE0FC417E2B93A00AE8282 /* SongSlider.h */,
+				83AE0FC517E2B93A00AE8282 /* SongSlider.m */,
+				83E1A7E017E272C700BC94B8 /* SongSliderCell.h */,
+				83E1A7E117E272C700BC94B8 /* SongSliderCell.m */,
+				837631A317DB186A00B51CBC /* ButtonsBackdrop.h */,
+				837631A417DB186A00B51CBC /* ButtonsBackdrop.m */,
+				83AFDA1219707DFF00DE0429 /* ArtworkWindowController.h */,
+				83AFDA1319707DFF00DE0429 /* ArtworkWindowController.m */,
+				83AFDA1419707DFF00DE0429 /* ArtworkWindow.xib */,
+				83AFDA1719707FDD00DE0429 /* ArtworkWindow.h */,
+				83AFDA1819707FDD00DE0429 /* ArtworkWindow.m */,
+				83AFDA0F19706A1700DE0429 /* ArtworkView.h */,
+				83AFDA1019706A1700DE0429 /* ArtworkView.m */,
+			);
+			name = artworkWindow;
+			sourceTree = "<group>";
+		};
 		837F1CA619EC8E6B00F33D74 /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,28 +496,16 @@
 			name = appIcons;
 			sourceTree = "<group>";
 		};
-		8392818C18810A4C00266803 /* Main Window Elements */ = {
-			isa = PBXGroup;
-			children = (
-				83DA970D17DBF2C5007531E4 /* ControlButtonsCell.h */,
-				83DA970E17DBF2C5007531E4 /* ControlButtonsCell.m */,
-				83AE0FC417E2B93A00AE8282 /* SongSlider.h */,
-				83AE0FC517E2B93A00AE8282 /* SongSlider.m */,
-				83E1A7E017E272C700BC94B8 /* SongSliderCell.h */,
-				83E1A7E117E272C700BC94B8 /* SongSliderCell.m */,
-				837631A317DB186A00B51CBC /* ButtonsBackdrop.h */,
-				837631A417DB186A00B51CBC /* ButtonsBackdrop.m */,
-			);
-			name = "Main Window Elements";
-			sourceTree = "<group>";
-		};
 		8392818D18810A6900266803 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				835CA99A1870A87600CE42A8 /* ColorOperation.h */,
+				835CA99B1870A87600CE42A8 /* ColorOperation.m */,
 				83E5A98B17D0441900CDC2F7 /* AlbumColorPicker.h */,
 				83E5A98C17D0441900CDC2F7 /* AlbumColorPicker.m */,
 			);
 			name = Utilities;
+			path = PlayMe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
