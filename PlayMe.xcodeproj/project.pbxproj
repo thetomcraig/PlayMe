@@ -169,8 +169,8 @@
 		83131A9017C8A99000D50029 /* ITunesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITunesController.h; path = iTunesController/ITunesController.h; sourceTree = "<group>"; };
 		83131A9117C8A99000D50029 /* ITunesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITunesController.m; path = iTunesController/ITunesController.m; sourceTree = "<group>"; };
 		83131A9217C8A99000D50029 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iTunes.h; path = iTunesController/iTunes.h; sourceTree = "<group>"; };
-		83131A9417C8A99F00D50029 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageController.h; path = PlayMe/ImageController.h; sourceTree = "<group>"; };
-		83131A9717C8AD3200D50029 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageController.m; path = PlayMe/ImageController.m; sourceTree = "<group>"; };
+		83131A9417C8A99F00D50029 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageController.h; path = ../artworkWindowUtilities/ImageController.h; sourceTree = "<group>"; };
+		83131A9717C8AD3200D50029 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageController.m; path = ../artworkWindowUtilities/ImageController.m; sourceTree = "<group>"; };
 		83246F6217CC0188001A3118 /* BlankArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankArtwork.png; path = ../resources/windowElements/BlankArtwork.png; sourceTree = "<group>"; };
 		83246F6717CC0F41001A3118 /* bgTopArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgTopArrow.png; path = ../resources/windowElements/bgTopArrow.png; sourceTree = "<group>"; };
 		8329B49417CBEA0F0000BB47 /* Playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Playing.png; path = ../resources/menubarIcons/Playing.png; sourceTree = "<group>"; };
@@ -317,8 +317,6 @@
 				83131A9C17C8AE2500D50029 /* Necesry/Unused */,
 				8392818D18810A6900266803 /* artworkWindowUtilities */,
 				835F29D019FC165D003EB585 /* menuBarController */,
-				83131A9417C8A99F00D50029 /* ImageController.h */,
-				83131A9717C8AD3200D50029 /* ImageController.m */,
 				8368F8A019FC135600A68C21 /* preferecesWindow */,
 				8368F8A119FC137C00A68C21 /* artworkWindow */,
 				837F1CA619EC8E6B00F33D74 /* resources */,
@@ -527,6 +525,8 @@
 				835CA99B1870A87600CE42A8 /* ColorOperation.m */,
 				83E5A98B17D0441900CDC2F7 /* AlbumColorPicker.h */,
 				83E5A98C17D0441900CDC2F7 /* AlbumColorPicker.m */,
+				83131A9417C8A99F00D50029 /* ImageController.h */,
+				83131A9717C8AD3200D50029 /* ImageController.m */,
 			);
 			name = artworkWindowUtilities;
 			path = PlayMe;
