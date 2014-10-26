@@ -18,7 +18,7 @@
     double _currentLength;
     NSString *_currentTimeLeft;
     bool _iTunesRunning;
-    
+    iTunesArtwork *_rawArtwork;
 }
 
 @property (nonatomic, strong) iTunesApplication *iTunes;
@@ -34,6 +34,7 @@
 @property (nonatomic) double currentLength;
 @property (nonatomic, strong) NSString *currentTimeLeft;
 @property (nonatomic) bool iTunesRunning;
+@property (nonatomic, strong) iTunesArtwork *rawArtwork;
 
 - (void)updateTags;
 

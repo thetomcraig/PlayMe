@@ -20,6 +20,7 @@
 @synthesize currentLength = _currentLength;
 @synthesize currentTimeLeft = _currentTimeLeft;
 @synthesize iTunesRunning = _iTunesRunning;
+@synthesize rawArtwork = _rawArtwork;
 
 //##############################################################################
 //We we initliaze, we create our iTunes object if it' needed
@@ -31,6 +32,7 @@
     
     if([self iTunesRunning])
     {
+        [self createiTunesObjectIfNeeded];
         [self updateTags];
     }
     else
@@ -167,9 +169,9 @@
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
-        iTunesArtwork *rawArtwork =
+        _rawArtwork =
         (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
-        newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
+        newArtwork = [[NSImage alloc] initWithData:[_rawArtwork rawData]];
     }
 
     //Resizing/manipulation
@@ -501,12 +503,6 @@
     {
         if ([[appNames[i] localizedName] isEqualToString:@"iTunes"])
         {
-            if (!_iTunes)
-            {
-                _iTunes = [SBApplication
-                           applicationWithBundleIdentifier:@"com.apple.iTunes"];
-                _iTunesRunning = true;
-            }
             return true;
         }
     }
