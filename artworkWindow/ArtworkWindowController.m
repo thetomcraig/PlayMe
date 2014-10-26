@@ -439,8 +439,6 @@
     
     //Finding the origin
     CGPoint origin = [[self window] frame].origin;
-    //The size of the window we want to open
-    CGSize windowSize = [self window].frame.size;
     //Getting the position for the window
     CGPoint windowTopLeftPosition =
             CGPointMake(origin.x, origin.y + [[self window] frame].size.height);

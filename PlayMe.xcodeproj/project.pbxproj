@@ -311,14 +311,14 @@
 		83131A3317C898DC00D50029 = {
 			isa = PBXGroup;
 			children = (
+				8368F8A119FC137C00A68C21 /* artworkWindow */,
+				8392818D18810A6900266803 /* artworkWindowUtilities */,
 				8306066C19FD5A0100DD3B7E /* delegate */,
 				8306066B19FD59C600DD3B7E /* iTunesController */,
 				83131A4617C898DC00D50029 /* Supporting Files */,
 				83131A9C17C8AE2500D50029 /* Necesry/Unused */,
-				8392818D18810A6900266803 /* artworkWindowUtilities */,
 				835F29D019FC165D003EB585 /* menuBarController */,
 				8368F8A019FC135600A68C21 /* preferecesWindow */,
-				8368F8A119FC137C00A68C21 /* artworkWindow */,
 				837F1CA619EC8E6B00F33D74 /* resources */,
 				83131A6317C898DC00D50029 /* PlayMeTests */,
 				83131A3E17C898DC00D50029 /* Frameworks */,
