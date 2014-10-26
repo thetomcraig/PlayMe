@@ -288,13 +288,13 @@
 		83131A3317C898DC00D50029 = {
 			isa = PBXGroup;
 			children = (
+				8363C28F19FD6BA800B01F1E /* artworkWindow */,
+				8392818D18810A6900266803 /* artworkWindowUtilities */,
 				83131A9517C8A9A900D50029 /* iTunesController */,
 				83131A9617C8A9BA00D50029 /* delegate */,
 				8363C29119FD6BDB00B01F1E /* preferencesWindow */,
 				8363C29019FD6BB900B01F1E /* menubarController */,
-				8392818D18810A6900266803 /* artworkWindowUtilities */,
 				8363C28E19FD6AD000B01F1E /* resources */,
-				8363C28F19FD6BA800B01F1E /* artworkWindow */,
 				83131A4517C898DC00D50029 /* PlayMe */,
 				83131A6317C898DC00D50029 /* PlayMeTests */,
 				83131A3E17C898DC00D50029 /* Frameworks */,
