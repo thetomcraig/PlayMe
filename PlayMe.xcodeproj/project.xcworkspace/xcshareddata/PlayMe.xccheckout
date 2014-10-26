@@ -10,29 +10,29 @@
 	<string>PlayMe</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</key>
+		<key>E785EB9B3C7E165A6E5A8DC5B6CD0DEEB46844FB</key>
 		<string>https://github.com/thetomcraig/PlayMe.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PlayMe.xcodeproj/project.xcworkspace</string>
+	<string>PlayMe.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</key>
+		<key>E785EB9B3C7E165A6E5A8DC5B6CD0DEEB46844FB</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/thetomcraig/PlayMe.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</string>
+	<string>E785EB9B3C7E165A6E5A8DC5B6CD0DEEB46844FB</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2D1429FA-8AC2-4E94-86F3-3B151AA4042E</string>
+			<string>E785EB9B3C7E165A6E5A8DC5B6CD0DEEB46844FB</string>
 			<key>IDESourceControlWCCName</key>
 			<string>PlayMe</string>
 		</dict>
