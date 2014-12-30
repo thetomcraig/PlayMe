@@ -4,22 +4,7 @@
 
 
 @interface ITunesController :NSObject
-{
-    iTunesApplication *_iTunes;
-    ImageController *_imageController;
-    NSString *_currentStatus;
-    NSString *_currentSong;
-    NSString *_currentArtist;
-    NSString *_currentAlbum;
-    NSString *_currentLyrics;
-    NSImage *_currentArtwork;
-    NSTimer *_countDownTimer;
-    double _currentProgress;
-    double _currentLength;
-    NSString *_currentTimeLeft;
-    bool _iTunesRunning;
-    
-}
+
 
 @property (nonatomic, strong) iTunesApplication *iTunes;
 @property (nonatomic, strong) ImageController *imageController;
