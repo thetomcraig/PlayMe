@@ -217,7 +217,11 @@
 {
     if (_iTunesRunning)
     {
-        _currentProgress = [_iTunes playerPosition];
+        @autoreleasepool
+        {
+            _currentProgress = [_iTunes playerPosition];
+        }
+        
     }
     
 }
