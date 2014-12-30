@@ -167,9 +167,12 @@
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
-        iTunesArtwork *rawArtwork =
-        (iTunesArtwork *)[[[[_iTunes currentTrack] artworks] get] lastObject];
-        newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
+        SBElementArray *artworks = [[_iTunes currentTrack] artworks];
+        @autoreleasepool
+        {
+            iTunesArtwork *rawArtwork = artworks[0];
+            newArtwork = [[NSImage alloc] initWithData:[rawArtwork rawData]];
+        }
     }
 
     //Resizing/manipulation
@@ -238,9 +241,6 @@
 //##############################################################################
 - (void)receivedStatusNotification:(NSNotification *)note
 {
-    
-    ///Print all of the eleemnts in the dict
-    
     //--------------------------------------------------------------------------
     //UPDATING
     //--------------------------------------------------------------------------
