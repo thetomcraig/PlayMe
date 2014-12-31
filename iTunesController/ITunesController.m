@@ -19,7 +19,6 @@
 @synthesize currentProgress = _currentProgress;
 @synthesize currentLength = _currentLength;
 @synthesize currentTimeLeft = _currentTimeLeft;
-@synthesize iTunesRunning = _iTunesRunning;
 
 //##############################################################################
 //We we initliaze, we create our iTunes object if it' needed
@@ -29,7 +28,7 @@
 {
     _imageController = [[ImageController alloc] init];
     
-    if([self iTunesRunning])
+    if([_iTunes isRunning])
     {
         [self updateTags];
     }
@@ -219,7 +218,7 @@
 //##############################################################################
 - (void)updateProgress
 {
-    if (_iTunesRunning)
+    if ([_iTunes isRunning])
     {
         @autoreleasepool
         {
@@ -400,7 +399,7 @@
 //##############################################################################
 - (void)receivedITunesLaunchedNotification:(NSNotification *)note
 {
-    if (_iTunesRunning)
+    if ([_iTunes isRunning])
     {
         [self createiTunesObjectIfNeeded];
     }
@@ -497,7 +496,6 @@
 //##############################################################################
 - (void)createiTunesObjectIfNeeded
 {
-    _iTunesRunning = [self iTunesRunning];
     if (!_iTunes)
     {
         _iTunes = [SBApplication
@@ -505,33 +503,12 @@
     }
 }
 
-- (bool)iTunesRunning
-{
-    NSArray *appNames = [[NSWorkspace sharedWorkspace] runningApplications];
-    for (int i = 0; i < [appNames count]; i++)
-    {
-        if ([[appNames[i] localizedName] isEqualToString:@"iTunes"])
-        {
-            if (!_iTunes)
-            {
-                _iTunes = [SBApplication
-                           applicationWithBundleIdentifier:@"com.apple.iTunes"];
-                _iTunesRunning = true;
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
-
 //##############################################################################
 //'Destroy' iTunes - set the object to nil, so I don't poll
 //when iTunes has been quit - this caused iTunes to reopen when quit - muy malo
 //##############################################################################
 - (bool)destroyiTunes;
 {
-    _iTunesRunning = false;
     _iTunes = nil;
     return true;
 }
