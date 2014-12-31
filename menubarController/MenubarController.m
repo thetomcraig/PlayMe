@@ -69,7 +69,7 @@
         currentSong = [currentSong substringWithRange:stringRange];
     }
     
-    //Setting the tite
+    //Setting the title
     [statusItemView setTitle:currentSong];
 
     //Setting up the image
@@ -78,6 +78,7 @@
     [NSImage imageNamed:[currentStatus stringByAppendingString:@"White"]];
 
     //Setting the images
+    [image setTemplate:YES];
     [statusItemView setImage:image];
     [statusItemView setAlternateImage:alternateImage];
 }

@@ -196,7 +196,7 @@
 
 - (NSColor *)titleForegroundColor
 {
-    if (isHighlighted) {
+    if (isHighlighted || [self isDarkModeOn]) {
         return [NSColor whiteColor];
     }
     else {
@@ -288,4 +288,16 @@
      userInfo:menubarInfo];
 
 }
+
+#
+#pragma mark - Utilities
+#
+- (BOOL)isDarkModeOn
+{
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+    id style = [dict objectForKey:@"AppleInterfaceStyle"];
+    BOOL darkModeOn = (style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+    return darkModeOn;
+}
+
 @end
