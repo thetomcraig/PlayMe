@@ -94,42 +94,46 @@
     //--------------------------------------------------------------------------
     //Update tags
     //--------------------------------------------------------------------------
-    _currentSong = [[_iTunes currentTrack] name];
-    _currentArtist = [[_iTunes currentTrack] artist];
-    _currentAlbum = [[_iTunes currentTrack] album];
-    _currentLength  = [[_iTunes currentTrack] duration];
-    [self updateProgress];
-    [self updateLyrics];
-    
-    //--------------------------------------------------------------------------
-    //Update the status.  If nothing is playing, make sure to wipeout the tags
-    //--------------------------------------------------------------------------
-    switch ([_iTunes playerState])
+    @autoreleasepool
     {
-        //Playing
-        case 1800426320:
-            _currentStatus = @"Playing";
-            [self updateArtwork:YES];
-            break;
-        //Paused
-        case 1800426352:
-            _currentStatus = @"Paused";
-            [self updateArtwork:YES];
-            break;
-        //Two cases for stopped
-        default:
-            //Stopped - Nothing playing
-            if (!_currentSong)
-            {
-                [self updateWithNill];
-            }
-            //Stopped - begining of a song
-            else
-            {
+        _currentSong = [[_iTunes currentTrack] name];
+        _currentArtist = [[_iTunes currentTrack] artist];
+        _currentAlbum = [[_iTunes currentTrack] album];
+        _currentLength  = [[_iTunes currentTrack] duration];
+        [self updateProgress];
+        [self updateLyrics];
+        
+        //--------------------------------------------------------------------------
+        //Update the status.  If nothing is playing, make sure to wipeout the tags
+        //--------------------------------------------------------------------------
+        switch ([_iTunes playerState])
+        {
+            //Playing
+            case 1800426320:
+                _currentStatus = @"Playing";
+                [self updateArtwork:YES];
+                break;
+            //Paused
+            case 1800426352:
                 _currentStatus = @"Paused";
                 [self updateArtwork:YES];
-            }
-    }
+                break;
+            //Two cases for stopped
+            default:
+                //Stopped - Nothing playing
+                if (!_currentSong)
+                {
+                    [self updateWithNill];
+                }
+                //Stopped - begining of a song
+                else
+                {
+                    _currentStatus = @"Paused";
+                    [self updateArtwork:YES];
+                }
+            //end default
+        }//end switch
+    }//end autorelease
 }
 
 //##############################################################################
