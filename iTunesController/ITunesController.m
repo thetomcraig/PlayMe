@@ -19,7 +19,6 @@
 @synthesize currentProgress = _currentProgress;
 @synthesize currentLength = _currentLength;
 @synthesize currentTimeLeft = _currentTimeLeft;
-@synthesize iTunesRunning = _iTunesRunning;
 
 //##############################################################################
 //We we initliaze, we create our iTunes object if it' needed
@@ -27,9 +26,10 @@
 //##############################################################################
 - (id)init
 {
+    _iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     _imageController = [[ImageController alloc] init];
     
-    if([self iTunesRunning])
+    if([_iTunes isRunning])
     {
         [self updateTags];
     }
@@ -219,13 +219,11 @@
 //##############################################################################
 - (void)updateProgress
 {
-    if (_iTunesRunning)
-    {
-        @autoreleasepool
+    @autoreleasepool {
+        if ([_iTunes isRunning])
         {
             _currentProgress = [_iTunes playerPosition];
         }
-        
     }
     
 }
@@ -303,7 +301,7 @@
 //##############################################################################
 - (void)playingUpdate
 {
-    [self createiTunesObjectIfNeeded];
+    ///[self createiTunesObjectIfNeeded];
     
     [self updateTags];
     
@@ -400,10 +398,12 @@
 //##############################################################################
 - (void)receivedITunesLaunchedNotification:(NSNotification *)note
 {
-    if (_iTunesRunning)
+    /**
+    if ([_iTunes isRunning])
     {
         [self createiTunesObjectIfNeeded];
     }
+    */
 }
 
 //##############################################################################
@@ -415,7 +415,7 @@
     if ([[note.userInfo
           objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
     {
-        [self destroyiTunes];
+        ///[self destroyiTunes];
         [self updateWithNill];
         [self sendTagsNotification];
         [self stopTimer];
@@ -495,35 +495,16 @@
 //This creates the iTunes object if iTunes is running on the mac.
 //It returns whether iTunes is open.  Shouldn't need to fuck wit this
 //##############################################################################
+/**
 - (void)createiTunesObjectIfNeeded
 {
-    _iTunesRunning = [self iTunesRunning];
     if (!_iTunes)
     {
         _iTunes = [SBApplication
                    applicationWithBundleIdentifier:@"com.apple.iTunes"];
     }
 }
-
-- (bool)iTunesRunning
-{
-    NSArray *appNames = [[NSWorkspace sharedWorkspace] runningApplications];
-    for (int i = 0; i < [appNames count]; i++)
-    {
-        if ([[appNames[i] localizedName] isEqualToString:@"iTunes"])
-        {
-            if (!_iTunes)
-            {
-                _iTunes = [SBApplication
-                           applicationWithBundleIdentifier:@"com.apple.iTunes"];
-                _iTunesRunning = true;
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
+*/
 
 //##############################################################################
 //'Destroy' iTunes - set the object to nil, so I don't poll
@@ -531,7 +512,6 @@
 //##############################################################################
 - (bool)destroyiTunes;
 {
-    _iTunesRunning = false;
     _iTunes = nil;
     return true;
 }

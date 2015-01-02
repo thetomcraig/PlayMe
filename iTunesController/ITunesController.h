@@ -18,7 +18,6 @@
 @property (nonatomic) double currentProgress;
 @property (nonatomic) double currentLength;
 @property (nonatomic, strong) NSString *currentTimeLeft;
-@property (nonatomic) bool iTunesRunning;
 
 - (void)updateTags;
 
