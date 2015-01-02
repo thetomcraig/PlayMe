@@ -15,6 +15,7 @@
 @synthesize openIniTunes;
 @synthesize quitApp;
 @synthesize statusRect;
+@synthesize currentStatus;
 
 //##############################################################################
 //Init
@@ -27,6 +28,7 @@
         statusItem = nil;
         title = @"";
         image = [NSImage imageNamed:@"Stopped"];
+        currentStatus = @"Stopped";
         isHighlighted = FALSE;
         
         menu = [[NSMenu alloc] initWithTitle:@"Menu"];
@@ -45,6 +47,9 @@
         
         [statusItem setMenu:menu];
         [menu setDelegate:self];
+        
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                            selector:@selector(darkModeChanged:) name:@"AppleInterfaceThemeChangedNotification"object:nil];
     }
     return self;
 }
@@ -176,6 +181,33 @@
     }
 }
 
+//##############################################################################
+//Uses the regualr methods to set the images.  Use this logic is in the view,
+//because it needs to check if the OS is in dark mode.
+//##############################################################################
+- (void)setImagesForStatus:(NSString *)statusFromController
+{
+    currentStatus = statusFromController;
+    NSLog(@"%@", currentStatus);
+    //Setting up the image
+    NSImage *imageFromController = [NSImage imageNamed:currentStatus];
+    NSImage *alternateImageFromController =
+    [NSImage imageNamed:[currentStatus stringByAppendingString:@"White"]];
+
+    if ([self isDarkModeOn])
+    {
+        NSLog(@"ALPHA");
+        imageFromController =
+        [NSImage imageNamed:[currentStatus stringByAppendingString:@"White"]];
+
+    }
+    
+    //Setting the images
+    [self setImage:imageFromController];
+    [self setAlternateImage:alternateImageFromController];
+    [self setNeedsDisplay:YES];
+}
+
 - (void)setImage:(NSImage *)newImage
 {
     image = newImage;
@@ -196,10 +228,12 @@
 
 - (NSColor *)titleForegroundColor
 {
-    if (isHighlighted || [self isDarkModeOn]) {
+    if (isHighlighted || [self isDarkModeOn])
+    {
         return [NSColor whiteColor];
     }
-    else {
+    else
+    {
         return [NSColor blackColor];
     }
 }
@@ -292,6 +326,12 @@
 #
 #pragma mark - Utilities
 #
+
+- (void)darkModeChanged:(NSNotification *)notif
+{
+    [self setImagesForStatus:currentStatus];
+}
+
 - (BOOL)isDarkModeOn
 {
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];

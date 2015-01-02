@@ -17,5 +17,8 @@
 @property (nonatomic, strong) NSMenuItem *openIniTunes;
 @property (nonatomic, strong) NSMenuItem *quitApp;
 @property (nonatomic) NSRect statusRect;
+@property (retain, nonatomic) NSString *currentStatus;
+
+- (void)setImagesForStatus:(NSString *)statusFromController;
 
 @end
