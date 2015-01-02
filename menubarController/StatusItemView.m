@@ -188,7 +188,6 @@
 - (void)setImagesForStatus:(NSString *)statusFromController
 {
     currentStatus = statusFromController;
-    NSLog(@"%@", currentStatus);
     //Setting up the image
     NSImage *imageFromController = [NSImage imageNamed:currentStatus];
     NSImage *alternateImageFromController =
@@ -196,7 +195,6 @@
 
     if ([self isDarkModeOn])
     {
-        NSLog(@"ALPHA");
         imageFromController =
         [NSImage imageNamed:[currentStatus stringByAppendingString:@"White"]];
 
