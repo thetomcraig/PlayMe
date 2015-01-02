@@ -325,6 +325,10 @@
 #pragma mark - Utilities
 #
 
+//##############################################################################
+//Made this observer for when the user changes the mode so the images are up-
+//datd manually.
+//##############################################################################
 - (void)darkModeChanged:(NSNotification *)notif
 {
     [self setImagesForStatus:currentStatus];
