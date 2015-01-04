@@ -47,9 +47,7 @@
 //############################################################################
 -(BOOL)findColorsOpSeperateThread :(NSImage *)albumArt forSong:(NSString *)songTitle
 {
-    ///b
     ///All of this commented out because I have dis-enabled the color stuff for now
-    /**
     albumColorPicker = [[AlbumColorPicker alloc] init];
     
     if ([songTitle isEqualToString:lastArtCalculated])
@@ -94,7 +92,6 @@
                            return;
                        }
                    });
-     */
     return true;
 }
 
