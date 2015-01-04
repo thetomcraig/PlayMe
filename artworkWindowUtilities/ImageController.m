@@ -13,7 +13,6 @@
 //The color picker is used to find the colors of the current album
 //The the album colors dict holds the found colors
 //############################################################################
-/*
 -(id)init
 {
     self = [super init];
@@ -28,7 +27,7 @@
     }
     return self;
 }
-*/
+
 //############################################################################
 //We pass both the art and the song title, so it can rememeber what songs it
 //calculated art for.  If we ask it to do the same song two times in a row,
@@ -47,7 +46,6 @@
 //############################################################################
 -(BOOL)findColorsOpSeperateThread :(NSImage *)albumArt forSong:(NSString *)songTitle
 {
-    ///All of this commented out because I have dis-enabled the color stuff for now
     albumColorPicker = [[AlbumColorPicker alloc] init];
     
     if ([songTitle isEqualToString:lastArtCalculated])
