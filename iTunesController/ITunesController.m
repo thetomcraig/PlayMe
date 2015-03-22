@@ -7,29 +7,23 @@
 
 @implementation ITunesController
 
-@synthesize iTunes = _iTunes;
 @synthesize imageController = _imageController;
 @synthesize currentStatus = _currentStatus;
 @synthesize currentSong = _currentSong;
 @synthesize currentArtist = _currentArtist;
 @synthesize currentAlbum = _currentAlbum;
-@synthesize currentLyrics = _currentLyrics;
 @synthesize currentArtwork = _currentArtwork;
 @synthesize countDownTimer = _countDownTimer;
 @synthesize currentProgress = _currentProgress;
 @synthesize currentLength = _currentLength;
 @synthesize currentTimeLeft = _currentTimeLeft;
 
-//##############################################################################
-//We we initliaze, we create our iTunes object if it' needed
-//(if iTunes.app is open).  Then we set up observers for when
-//##############################################################################
 - (id)init
 {
-    _iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     _imageController = [[ImageController alloc] init];
     
-    if([_iTunes isRunning])
+    if([iTunes isRunning])
     {
         [self updateTags];
     }
@@ -83,62 +77,56 @@
 #
 #pragma mark - Updating Methods
 #
-//##############################################################################
-//Updates all the information from iTunes.  Bear in mind that this assumes
-//iTunes is open.  If it tries to poll iTunes when iTunes is closed, it will
-//launch iTunes.  This should never happen though, and we make sure of that
-//in the delegate.
-//##############################################################################
+
+//Updates all the information from iTunes.
 - (void)updateTags
 {
+    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     //--------------------------------------------------------------------------
     //Update tags
     //--------------------------------------------------------------------------
-    @autoreleasepool
+    
+    _currentSong = [[iTunes currentTrack] name];
+    _currentArtist = [[iTunes currentTrack] artist];
+    _currentAlbum = [[iTunes currentTrack] album];
+    _currentLength  = [[iTunes currentTrack] duration];
+    [self updateProgress];
+    [self updateLyrics];
+    
+    //--------------------------------------------------------------------------
+    //Update the status.  If nothing is playing, make sure to wipeout the tags
+    //--------------------------------------------------------------------------
+    switch ([iTunes playerState])
     {
-        _currentSong = [[_iTunes currentTrack] name];
-        _currentArtist = [[_iTunes currentTrack] artist];
-        _currentAlbum = [[_iTunes currentTrack] album];
-        _currentLength  = [[_iTunes currentTrack] duration];
-        [self updateProgress];
-        [self updateLyrics];
-        
-        //--------------------------------------------------------------------------
-        //Update the status.  If nothing is playing, make sure to wipeout the tags
-        //--------------------------------------------------------------------------
-        switch ([_iTunes playerState])
-        {
-            //Playing
-            case 1800426320:
-                _currentStatus = @"Playing";
-                [self updateArtwork:YES];
-                break;
-            //Paused
-            case 1800426352:
+        //Playing
+        case 1800426320:
+            _currentStatus = @"Playing";
+            [self updateArtwork:YES];
+            break;
+        //Paused
+        case 1800426352:
+            _currentStatus = @"Paused";
+            [self updateArtwork:YES];
+            break;
+        //Two cases for stopped
+        default:
+            //Stopped - Nothing playing
+            if (!_currentSong)
+            {
+                [self updateWithNill];
+            }
+            //Stopped - begining of a song
+            else
+            {
                 _currentStatus = @"Paused";
                 [self updateArtwork:YES];
-                break;
-            //Two cases for stopped
-            default:
-                //Stopped - Nothing playing
-                if (!_currentSong)
-                {
-                    [self updateWithNill];
-                }
-                //Stopped - begining of a song
-                else
-                {
-                    _currentStatus = @"Paused";
-                    [self updateArtwork:YES];
-                }
-            //end default
-        }//end switch
-    }//end autorelease
+            }
+        //end default
+    }//end switch
+
 }
 
-//##############################################################################
 //"Updates" everything with zeroed out tags.  It wipes everything.
-//##############################################################################
 - (void)updateWithNill
 {
     _currentSong = @" ";
@@ -158,20 +146,18 @@
  
 }
 
-//##############################################################################
 //Update the artwork from iTunes.  We don't want to poll iTunes when we don't
 //have to, so the boolean is telling us if we really want to do that.  When it
 //is true we update from itunes, if not, we retain the current artwork.
-//##############################################################################
 - (void)updateArtwork:(BOOL)getNewArt
 {
-
+    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     NSImage *newArtwork = _currentArtwork;
     
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
-        SBElementArray *artworks = [[_iTunes currentTrack] artworks];
+        SBElementArray *artworks = [[iTunes currentTrack] artworks];
         @autoreleasepool
         {
             iTunesArtwork *rawArtwork = artworks[0];
@@ -211,62 +197,37 @@
     _currentArtwork = newArtwork;
 }
 
-//##############################################################################
 //Update the progress of the current track
-//This is seperated from the other tags so it can be called independently.
-//Our timer in the window controller calls this function to set itself to
-//the correct position.
-//##############################################################################
 - (void)updateProgress
 {
+    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    
     @autoreleasepool {
-        if ([_iTunes isRunning])
+        if ([iTunes isRunning])
         {
-            _currentProgress = [_iTunes playerPosition];
+            _currentProgress = [iTunes playerPosition];
         }
     }
     
 }
 
-//##############################################################################
-//Update the lyrics, will need to do some scraping here.  For now it's blank
-//##############################################################################
-///b
-- (void)updateLyrics
-{
-    _currentLyrics = @"";
-}
 
 #
 #pragma mark - Receiving notifications
 #
-//##############################################################################
-//Receives system notifications from the nsnotifcaion center.
-//Called when iTunes' status changes.  We filter notifications that tell if
-//iTunes has played, paused, or stopped
-//##############################################################################
 - (void)receivedStatusNotification:(NSNotification *)note
 {
-    //--------------------------------------------------------------------------
-    //UPDATING
-    //--------------------------------------------------------------------------
     NSString *incomingPlayerState =[note.userInfo objectForKey:@"Player State"];
     
-    //--------------------------------------------------------------------------
-    //PLAYING UPDATE
-    //If it is playing, a new track has begun, or a track has been unpaused
-    //--------------------------------------------------------------------------
     if ([incomingPlayerState isEqualToString:@"Playing"])
     {
         [self playingUpdate];
     }
-    //--------------------------------------------------------------------------
-    //STOPPED UPDATE
+    
     //The current track stopped and there are no following songs,
     //or there is just not anything playing.  This can be triggered if iTunes
     //skips to a new song while paused, so it is paused with the scrubber set
     //at 0 secs.
-    //--------------------------------------------------------------------------
     else if ([incomingPlayerState isEqualToString:@"Stopped"])
     {
         //If this is the case then we have a song qeueued
@@ -284,46 +245,26 @@
         }
 
     }
-    //--------------------------------------------------------------------------
-    //PAUSED UPDATE
-    //Because we have no new song starting, all we need to
-    //update it the artwork, and put the paused mask on it
-    //--------------------------------------------------------------------------
+
     else if ([incomingPlayerState isEqualToString:@"Paused"])
     {
         [self pausedUpdate];
     }
 }
 
-//##############################################################################
-//Gets the information from iTunes and updates it accordingly.
-//Makes sure all the UI elements are arranged properly
-//##############################################################################
 - (void)playingUpdate
 {
-    ///[self createiTunesObjectIfNeeded];
-    
     [self updateTags];
     
     //Sending the notification that the ArtworkWindowController will pick up
     [self sendTagsNotification];
     
-    //Post a notification to the notification center
-    [[NSUserNotificationCenter defaultUserNotificationCenter]
-                                            removeAllDeliveredNotifications];
-    
     //Start the timer again
     [self startTimer];
  }
 
-//##############################################################################
-//This function sets paused information, making sure to only update the
-//menubar icon if the window is closed
-//At the end it makes sure all the UI elements are arranged properly.
-//Using the NO flag on the update artwork is essential, because when iTunes
-//quits is actually sends a paused notification.  The NO flag allows us to NOT
-//poll iTunes because if we do it causes iTunes to relaunch accidentally.
-//##############################################################################
+//The NO flag allows us to NOT poll iTunes because if we do it causes iTunes
+//to relaunch accidentally.
 - (void)pausedUpdate
 {
     _currentStatus = @"Paused";
@@ -333,21 +274,8 @@
      
 }
 
-//##############################################################################
-//Essentially the same as the paused one
-//At the end it makes sure all the UI elements are arranged properly
-//
-//This case is also hit when skipping to the next song while iTunes is
-//paused.  Because of this, it may actually have to do the paused update,
-//so I check for that.  In this case, we may actually need to update some
-//info, so we check if iTunes is running, then do that.
-//
-//Recently put in the very first if statement, which says that if the player
-//state was stopped, then update to stopped again, then itunes must be
-//quitting.  If it went from playing or paused to stopped we can assume it
-//actually did just stop playback.  But if it goes from stopped to stopped,
-//its a false positive - iTunes sends out a stopped updated when it quits...
-//##############################################################################
+//If the player state was stopped ALREADY, then updated to stopped again,
+//then itunes must be quitting.  So its a false positive
 - (void)stoppedUpdate
 {
     //False positive - iTunes is actually quitting when this if statement
@@ -361,61 +289,40 @@
     
 }
 
-//##############################################################################
-//Takes the notfication posted by some other part of the app to control iTunes,
-//parses the message and performs the action.
-//##############################################################################
 - (void)receivedCommandNotification:(NSNotification *)note
 {
+    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     NSString *command = [note.userInfo objectForKey:@"Command"];
     
     if ([command isEqualToString:@"PlayPause"])
     {
-        [_iTunes playpause];
+        [iTunes playpause];
     }
     else if ([command isEqualToString:@"NextTrack"])
     {
-        [_iTunes nextTrack];
+        [iTunes nextTrack];
     }
     else if ([command isEqualToString:@"PreviousTrack"])
     {
-        [_iTunes previousTrack];
+        [iTunes previousTrack];
     }
     //Setting the position of the song, through the UI
     else if ([command isEqualToString:@"SetPosition"])
     {
         double pos = [[note.userInfo objectForKey:@"Position"] doubleValue];
-        [_iTunes setPlayerPosition:pos];
+        [iTunes setPlayerPosition:pos];
     }
     else if ([command isEqualToString:@"UpdateProgress"])
     {
         [self updateProgress];
     }
 }
- //#############################################################################
-//This method is called when iTunes launches, and it tells the iTunesController
-//to create an iTunes object if it has not already.
-//##############################################################################
-- (void)receivedITunesLaunchedNotification:(NSNotification *)note
-{
-    /**
-    if ([_iTunes isRunning])
-    {
-        [self createiTunesObjectIfNeeded];
-    }
-    */
-}
 
-//##############################################################################
-//This is called when iTune quits, and it destorys the iTunes object, and it
-//calls the stopped update to zero out tags and other info.
-//##############################################################################
 - (void)receivedITunesQuitNotification:(NSNotification *)note
 {
     if ([[note.userInfo
           objectForKey:@"NSApplicationName"] isEqualToString:@"iTunes"])
     {
-        ///[self destroyiTunes];
         [self updateWithNill];
         [self sendTagsNotification];
         [self stopTimer];
@@ -425,10 +332,9 @@
 #
 #pragma mark - Sending notifications
 #
-//##############################################################################
-//Sends a notification to the NSDistributedNotificationCenter, the notification
-//has all the iTunes tags in it.  It is picked up by the ArtworkwindowController
-//##############################################################################
+
+//Sends a notification to the NSDistributedNotificationCenter, It is picked up
+//by the ArtworkwindowController
 - (void)sendTagsNotification
 {
     //Set up all the tags
@@ -453,10 +359,9 @@
 #
 #pragma mark - timer stuff
 #
-//##############################################################################
+
 //Starts the timer used for the progress bar.  We seperate this because we
 //want to stop the timer when the window closes.
-//##############################################################################
 - (void)startTimer
 {
      _countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -465,11 +370,8 @@
      userInfo:nil repeats:YES];
 }
  
-//##############################################################################
-//This is used to invalidate the timer when it does not need to be running.
-//We do this when the window is closed because the progress bar is not
-//visible if that happens
-//##############################################################################
+
+//We do this when the window is closed the timer can be stopped
 - (void)stopTimer
 {
     if (_countDownTimer != nil)
@@ -479,41 +381,11 @@
     }
 }
 
-//##############################################################################
-//Called by the timer every interval
-//##############################################################################
 - (void)advanceTimerProgress:(NSTimer *)timer
 {
     [self updateProgress];
     [self sendTagsNotification];
 }
 
-#
-#pragma mark - iTunes utilities
-#
-//##############################################################################
-//This creates the iTunes object if iTunes is running on the mac.
-//It returns whether iTunes is open.  Shouldn't need to fuck wit this
-//##############################################################################
-/**
-- (void)createiTunesObjectIfNeeded
-{
-    if (!_iTunes)
-    {
-        _iTunes = [SBApplication
-                   applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    }
-}
-*/
-
-//##############################################################################
-//'Destroy' iTunes - set the object to nil, so I don't poll
-//when iTunes has been quit - this caused iTunes to reopen when quit - muy malo
-//##############################################################################
-- (bool)destroyiTunes;
-{
-    _iTunes = nil;
-    return true;
-}
 
 @end
