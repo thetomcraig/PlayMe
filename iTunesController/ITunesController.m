@@ -117,25 +117,6 @@
     }//end switch
 }
 
-//Updates by taking nsdict
-- (void)updateTags:(NSDictionary *)dict
-{
-    /**
-     for(NSString *key in [dict allKeys])
-     {
-     NSLog(@"%@", key);
-     NSLog(@"%@", [dict objectForKey:key]);
-     NSLog(@"--");
-     }
-     */
-    
-    _currentSong = [dict objectForKey:@"Name"];
-    _currentArtist = [dict objectForKey:@"Artist"];
-    _currentAlbum = [dict objectForKey:@"Album"];
-    ///_currentLength = [dict objectForKey:@"Total Time"];
-    [self updateProgress];
-}
-
 //"Updates" everything with zeroed out tags.  It wipes everything.
 - (void)updateWithNill
 {
@@ -160,12 +141,12 @@
 //is true we update from itunes, if not, we retain the current artwork.
 - (void)updateArtwork:(BOOL)getNewArt
 {
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     NSImage *newArtwork = _currentArtwork;
     
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
+        iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
         SBElementArray *artworks = [[iTunes currentTrack] artworks];
         @autoreleasepool
         {
@@ -230,6 +211,9 @@
 
     if ([incomingPlayerState isEqualToString:@"Playing"])
     {
+        NSLog(@"ALPHA");
+        [self updateProgress];
+        [self updateArtwork:YES];
         [self playingUpdate: note.userInfo];
     }
     
@@ -245,8 +229,9 @@
             //Playing update to get all the new tags
             //then paused update because we know it
             //is paused
-            [self playingUpdate];
+            [self updateProgress];
             [self updateArtwork:YES];
+            [self playingUpdate: note.userInfo];
         }
         else
         {
@@ -263,8 +248,12 @@
 
 - (void)playingUpdate:(NSDictionary *)dict
 {
-    [self updateTags:(NSDictionary *)dict];
-    
+    _currentSong = [dict objectForKey:@"Name"];
+    _currentArtist = [dict objectForKey:@"Artist"];
+    _currentAlbum = [dict objectForKey:@"Album"];
+    _currentStatus = @"Playing";
+    _currentLength = [[dict objectForKey:@"Total Time"] doubleValue];
+
     //Sending the notification that the ArtworkWindowController will pick up
     [self sendTagsNotification];
     
