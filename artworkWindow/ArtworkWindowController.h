@@ -32,8 +32,6 @@
 @property (nonatomic, retain) IBOutlet NSImageView *currentArtwork;
 @property (weak) IBOutlet NSTextField *currentSong;
 @property (weak) IBOutlet NSTextField *currentArtistAndAlbum;
-///b
-@property (weak) IBOutlet NSTextField *currentLyrics;
 
 //Slider and timer
 @property (weak) IBOutlet SongSlider *songSlider;

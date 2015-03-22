@@ -16,6 +16,7 @@
 @property (nonatomic) double currentLength;
 @property (nonatomic, strong) NSString *currentTimeLeft;
 
-- (void)updateTags;
+- (void)updateTagsPoll;
+- (void)updateTags:(NSDictionary *)dict;
 
 @end

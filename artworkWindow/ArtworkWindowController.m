@@ -30,7 +30,7 @@
 
 @synthesize currentSong;
 @synthesize currentArtistAndAlbum;
-@synthesize currentLyrics;
+
 
 @synthesize songSlider;
 @synthesize songSliderCell;

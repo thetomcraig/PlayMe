@@ -25,7 +25,7 @@
     
     if([iTunes isRunning])
     {
-        [self updateTags];
+        [self updateTagsPoll];
     }
     else
     {
@@ -77,38 +77,30 @@
 #
 #pragma mark - Updating Methods
 #
-
-//Updates all the information from iTunes.
-- (void)updateTags
+//Poll iTunes to get the info
+- (void)updateTagsPoll
 {
     iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    //--------------------------------------------------------------------------
-    //Update tags
-    //--------------------------------------------------------------------------
     
     _currentSong = [[iTunes currentTrack] name];
     _currentArtist = [[iTunes currentTrack] artist];
     _currentAlbum = [[iTunes currentTrack] album];
     _currentLength  = [[iTunes currentTrack] duration];
-    [self updateProgress];
-    [self updateLyrics];
-    
-    //--------------------------------------------------------------------------
+
     //Update the status.  If nothing is playing, make sure to wipeout the tags
-    //--------------------------------------------------------------------------
     switch ([iTunes playerState])
     {
-        //Playing
+            //Playing
         case 1800426320:
             _currentStatus = @"Playing";
             [self updateArtwork:YES];
             break;
-        //Paused
+            //Paused
         case 1800426352:
             _currentStatus = @"Paused";
             [self updateArtwork:YES];
             break;
-        //Two cases for stopped
+            //Two cases for stopped
         default:
             //Stopped - Nothing playing
             if (!_currentSong)
@@ -121,9 +113,27 @@
                 _currentStatus = @"Paused";
                 [self updateArtwork:YES];
             }
-        //end default
+            //end default
     }//end switch
+}
 
+//Updates by taking nsdict
+- (void)updateTags:(NSDictionary *)dict
+{
+    /**
+     for(NSString *key in [dict allKeys])
+     {
+     NSLog(@"%@", key);
+     NSLog(@"%@", [dict objectForKey:key]);
+     NSLog(@"--");
+     }
+     */
+    
+    _currentSong = [dict objectForKey:@"Name"];
+    _currentArtist = [dict objectForKey:@"Artist"];
+    _currentAlbum = [dict objectForKey:@"Album"];
+    ///_currentLength = [dict objectForKey:@"Total Time"];
+    [self updateProgress];
 }
 
 //"Updates" everything with zeroed out tags.  It wipes everything.
@@ -134,7 +144,6 @@
     _currentAlbum = @" ";
     _currentLength = 0;
     _currentProgress = 0;
-    _currentLyrics = @" ";
     _currentStatus = @"Stopped";
     
     //Taking the nothing playingartwork and pretending its itunes artwork
@@ -218,10 +227,10 @@
 - (void)receivedStatusNotification:(NSNotification *)note
 {
     NSString *incomingPlayerState =[note.userInfo objectForKey:@"Player State"];
-    
+
     if ([incomingPlayerState isEqualToString:@"Playing"])
     {
-        [self playingUpdate];
+        [self playingUpdate: note.userInfo];
     }
     
     //The current track stopped and there are no following songs,
@@ -252,9 +261,9 @@
     }
 }
 
-- (void)playingUpdate
+- (void)playingUpdate:(NSDictionary *)dict
 {
-    [self updateTags];
+    [self updateTags:(NSDictionary *)dict];
     
     //Sending the notification that the ArtworkWindowController will pick up
     [self sendTagsNotification];
@@ -346,7 +355,6 @@
         @"CurrentLength": [NSNumber numberWithDouble:_currentLength],
        @"CurrentArtwork": _currentArtwork,
       @"CurrentProgress": [NSNumber numberWithDouble:_currentProgress],
-        @"CurrentLyrics": _currentLyrics,
         @"CurrentStatus": _currentStatus
       };
 
