@@ -146,6 +146,7 @@
     //Getting the new artwork from iTunes
     if (getNewArt)
     {
+        NSLog(@"BETA");
         iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
         SBElementArray *artworks = [[iTunes currentTrack] artworks];
         @autoreleasepool
@@ -207,13 +208,19 @@
 #
 - (void)receivedStatusNotification:(NSNotification *)note
 {
+    /*
+    for(NSString *key in [note.userInfo allKeys]) {
+        NSLog(@"%@ : %@", key, [note.userInfo objectForKey:key]);
+        NSLog(@"--");
+    }
+    */
+    
+
     NSString *incomingPlayerState =[note.userInfo objectForKey:@"Player State"];
 
     if ([incomingPlayerState isEqualToString:@"Playing"])
     {
         NSLog(@"ALPHA");
-        [self updateProgress];
-        [self updateArtwork:YES];
         [self playingUpdate: note.userInfo];
     }
     
@@ -229,8 +236,6 @@
             //Playing update to get all the new tags
             //then paused update because we know it
             //is paused
-            [self updateProgress];
-            [self updateArtwork:YES];
             [self playingUpdate: note.userInfo];
         }
         else
@@ -253,6 +258,8 @@
     _currentAlbum = [dict objectForKey:@"Album"];
     _currentStatus = @"Playing";
     _currentLength = [[dict objectForKey:@"Total Time"] doubleValue];
+    [self updateProgress];
+    [self updateArtwork:YES];
 
     //Sending the notification that the ArtworkWindowController will pick up
     [self sendTagsNotification];
