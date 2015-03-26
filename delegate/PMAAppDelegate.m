@@ -32,7 +32,7 @@
     //from the iTunesController's init method
     //--------------------------------------------------------------------------
     _artworkWindowController = [[ArtworkWindowController alloc] initWithWindowNibName:@"ArtworkWindow"];
-    _preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
+    ///_preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
     _menubarController = [[MenubarController alloc] init];
     _iTunesController = [[ITunesController alloc] init];
 }
