@@ -10,10 +10,6 @@
 @synthesize imageController = _imageController;
 @synthesize iTunes = _iTunes;
 @synthesize artworks = _artworks;
-@synthesize currentStatus = _currentStatus;
-@synthesize currentSong = _currentSong;
-@synthesize currentArtist = _currentArtist;
-@synthesize currentAlbum = _currentAlbum;
 @synthesize currentArtwork = _currentArtwork;
 @synthesize iTunesTags = _iTunesTags;
 @synthesize countDownTimer = _countDownTimer;
@@ -33,22 +29,18 @@
     _currentLength = [NSNumber numberWithDouble:_currentLengthDouble];
     _currentProgress = [NSNumber numberWithDouble:_currentLengthDouble];
     
-    _currentSong = @"";
-    _currentArtist = @"";
-    _currentAlbum = @"";
     _currentArtwork = @"";
-    _currentStatus = @"";
     
-    _iTunesTags =
+    _iTunesTags = [NSMutableDictionary dictionaryWithDictionary:
     @{
-      @"CurrentSong": _currentSong,
-      @"CurrentArtist": _currentArtist,
-      @"CurrentAlbum": _currentAlbum,
+      @"CurrentSong": @"",
+      @"CurrentArtist": @"",
+      @"CurrentAlbum": @"",
       @"CurrentLength": _currentLength,
       @"CurrentArtwork": _currentArtwork,
       @"CurrentProgress": _currentProgress,
-      @"CurrentStatus": _currentStatus
-      };
+      @"CurrentStatus": @""
+      }];
     
     
     ///_imageController = [[ImageController alloc] init];
@@ -61,7 +53,6 @@
     {
         //iTunes is not open
         [self updateWithNill];
-        [self sendTagsNotification];
     }
     /**
     if ([_currentStatus isEqualToString:@"Playing"])
@@ -106,15 +97,14 @@
 //Poll iTunes to get the info
 - (void)updateTagsPoll
 {
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    
-    _currentSong = [[iTunes currentTrack] name];
-    _currentArtist = [[iTunes currentTrack] artist];
-    _currentAlbum = [[iTunes currentTrack] album];
-    _currentLengthDouble  = [[iTunes currentTrack] duration];
+    /**
+    _currentSong = [[_iTunes currentTrack] name];
+    _currentArtist = [[_iTunes currentTrack] artist];
+    _currentAlbum = [[_iTunes currentTrack] album];
+    _currentLengthDouble  = [[_iTunes currentTrack] duration];
 
     //Update the status.  If nothing is playing, make sure to wipeout the tags
-    switch ([iTunes playerState])
+    switch ([_iTunes playerState])
     {
             //Playing
         case 1800426320:
@@ -141,11 +131,13 @@
             }
             //end default
     }//end switch
+     */
 }
 
 //"Updates" everything with zeroed out tags.  It wipes everything.
 - (void)updateWithNill
 {
+    /**
     _currentSong = @" ";
     _currentArtist = @" ";
     _currentAlbum = @" ";
@@ -159,6 +151,7 @@
     nothingPlaying = [_imageController resizeArt:nothingPlaying forSize:targetSize];
     nothingPlaying = [_imageController roundCorners:nothingPlaying];
     _currentArtwork = nothingPlaying;
+     */
  
 }
 
@@ -179,14 +172,13 @@
              */
              _artworks = [[_iTunes currentTrack] artworks];
             
-            _currentArtwork = (NSImage*)[_artworks[0] rawData];
+            [_iTunesTags setObject:(NSImage*)[_artworks[0] rawData] forKey:@"CurrentArtwork"];
+            [_iTunesTags setObject:            [NSImage imageNamed:@"BlankArtwork"] forKey:@"CurrentArtwork"];
             
+    
         }
         
     }
-    
-    NSLog(@"Testing the length double: %f", _currentLengthDouble);
-    
     /**
     //Resizing/manipulation
     //For resizing
@@ -248,7 +240,7 @@
     {
         [self playingUpdate: note.userInfo];
     }
-    /**
+    
     //The current track stopped and there are no following songs,
     //or there is just not anything playing.  This can be triggered if iTunes
     //skips to a new song while paused, so it is paused with the scrubber set
@@ -274,19 +266,19 @@
     {
         [self pausedUpdate];
     }
-     */
+    
 }
 
 - (void)playingUpdate:(NSDictionary *)dict
 {
-     NSLog(@"ALPHA");
-    
-    _currentSong = [dict objectForKey:@"Name"];
-    _currentArtist = [dict objectForKey:@"Artist"];
-    _currentAlbum = [dict objectForKey:@"Album"];
-    _currentStatus = @"Playing";
+    [_iTunesTags setObject:@"Playing" forKey:@"CurrentStatus"];
+    [_iTunesTags setObject:[dict objectForKey:@"Name"] forKey:@"CurrentSong"];
+    [_iTunesTags setObject:[dict objectForKey:@"Artist"] forKey:@"CurrentArtist"];
+    [_iTunesTags setObject:[dict objectForKey:@"Album"] forKey:@"CurrentAlbum"];
     _currentLengthDouble = [[dict objectForKey:@"Total Time"] doubleValue];
     [self updateProgress];
+    
+    
     [self updateArtwork:YES];
 
     //Sending the notification that the ArtworkWindowController will pick up
@@ -300,7 +292,7 @@
 //to relaunch accidentally.
 - (void)pausedUpdate
 {
-    _currentStatus = @"Paused";
+    [_iTunesTags setObject:@"Paused" forKey:@"CurrentStatus"];
     [self updateArtwork:NO];
     [self sendTagsNotification];
     [self stopTimer];
@@ -311,6 +303,7 @@
 //then itunes must be quitting.  So its a false positive
 - (void)stoppedUpdate
 {
+    /**
     //False positive - iTunes is actually quitting when this if statement
     //catches.  But this notification gets sent first, so we catch it here, then
     //allow the actual quit notificatino to get handled at the proper location.
@@ -319,6 +312,7 @@
     [self updateWithNill];
     [self sendTagsNotification];
     [self stopTimer];
+     */
     
 }
 

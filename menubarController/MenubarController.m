@@ -24,7 +24,7 @@
         
         statusItemView.statusItem = statusItem;
         [statusItem setView:statusItemView];
-        [statusItemView setTitle:@"Test"];
+        [statusItemView setTitle:@""];
         
         [[NSNotificationCenter defaultCenter]
          addObserver:self
@@ -73,7 +73,6 @@
     [statusItemView setTitle:currentSong];
 
     [statusItemView setImagesForStatus:currentStatus];
-     
 }
 
 @end

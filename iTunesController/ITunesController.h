@@ -8,12 +8,8 @@
 @property (nonatomic, strong) ImageController *imageController;
 @property (nonatomic, strong) iTunesApplication *iTunes;
 @property (nonatomic, strong) SBElementArray *artworks;
-@property (nonatomic, strong) NSString *currentStatus;
-@property (nonatomic, strong) NSString *currentSong;
-@property (nonatomic, strong) NSString *currentArtist;
-@property (nonatomic, strong) NSString *currentAlbum;
 @property (nonatomic, retain) NSImage  *currentArtwork;
-@property (nonatomic, retain) NSDictionary* iTunesTags;
+@property (nonatomic, retain) NSMutableDictionary* iTunesTags;
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic) NSNumber* currentProgress;
 @property (nonatomic) double currentProgressDouble;

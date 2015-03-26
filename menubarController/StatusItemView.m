@@ -187,6 +187,8 @@
 //##############################################################################
 - (void)setImagesForStatus:(NSString *)statusFromController
 {
+    NSLog(@"Images being set: %@", statusFromController);
+    
     currentStatus = statusFromController;
     //Setting up the image
     NSImage *imageFromController = [NSImage imageNamed:currentStatus];
