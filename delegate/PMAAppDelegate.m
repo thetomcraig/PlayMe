@@ -35,6 +35,7 @@
     _preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
     _menubarController = [[MenubarController alloc] init];
     _iTunesController = [[ITunesController alloc] init];
+
 }
 
 @end

@@ -126,7 +126,7 @@
 //tag information.  Calls the updating window elements method
 //##############################################################################
 - (void)receivedTagsNotification:(NSNotification *)note
-{
+{   
     [self updateWindowElements:[note.userInfo objectForKey:@"CurrentSong"]
                               :[note.userInfo objectForKey:@"CurrentArtist"]
                               :[note.userInfo objectForKey:@"CurrentAlbum"]
