@@ -49,7 +49,9 @@
         [menu setDelegate:self];
         
         [[NSDistributedNotificationCenter defaultCenter] addObserver:self
-                                                            selector:@selector(darkModeChanged:) name:@"AppleInterfaceThemeChangedNotification"object:nil];
+                                                            selector:@selector(darkModeChanged:)
+                                                                name:@"AppleInterfaceThemeChangedNotification"
+                                                              object:nil];
     }
     return self;
 }
@@ -159,7 +161,7 @@
 {
     if (![title isEqual:newTitle])
     {
-
+        NSLog(@"%@", title);
         title = newTitle;
         
         // Update status item size (which will also update this view's bounds)

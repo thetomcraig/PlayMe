@@ -7,7 +7,9 @@
 
 @property (nonatomic, strong) ImageController *imageController;
 @property (nonatomic, strong) iTunesApplication *iTunes;
-@property (nonatomic, retain) NSMutableDictionary* iTunesTags;
+@property (nonatomic) NSMutableDictionary* iTunesTags;
+@property (nonatomic) NSSize artworkSize;
+@property (nonatomic, retain) NSImage *blankArtwork;
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic) NSNumber* currentProgress;
 @property (nonatomic) double currentProgressDouble;
