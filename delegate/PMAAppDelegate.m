@@ -35,7 +35,40 @@
     _preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
     _menubarController = [[MenubarController alloc] init];
     _iTunesController = [[ITunesController alloc] init];
+    
+    /**
+     - (void)updateTagsPoll;
+     - (void)updateArtwork:(BOOL)getNewArt;
+     - (void)updateWithNill;
+     - (void)receivedStatusNotification:(NSNotification *)note;
+     - (void)receivedCommandNotification:(NSNotification *)note;
+     - (void)sendTagsNotification;
+     - (void)playingUpdate:(NSDictionary *)dict;
+     - (void)pausedUpdate;
+     - (void)stoppedUpdate;
+     */
+    /**
+    NSDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:
+                                            @{
+                                              @"Name": @" ",
+                                              @"Artist": @"",
+                                              @"Album": @"",
+                                              @"CurrentLength": @"",
+                                              @"CurrentArtwork": @"",
+                                              @"CurrentProgress": @"",
+                                              @"CurrentStatus": @""
+                                              }];
+     
+    for (int i = 0; i < 500; i++)
+    {
+        
+        [_iTunesController playingUpdate:dict];
+        [_iTunesController sendTagsNotification];
+    }
 
+    usleep(1000000);
+    */
+    
 }
 
 @end

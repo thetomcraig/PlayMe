@@ -5,8 +5,6 @@
 
 @interface ITunesController :NSObject
 
-@property (nonatomic, strong) ImageController *imageController;
-@property (nonatomic, strong) iTunesApplication *iTunes;
 @property (nonatomic) NSMutableDictionary* iTunesTags;
 @property (nonatomic) NSSize artworkSize;
 @property (nonatomic, retain) NSImage *blankArtwork;
@@ -19,5 +17,13 @@
 
 
 - (void)updateTagsPoll;
+- (void)updateArtwork:(BOOL)getNewArt;
+- (void)updateWithNill;
+- (void)receivedStatusNotification:(NSNotification *)note;
+- (void)receivedCommandNotification:(NSNotification *)note;
+- (void)sendTagsNotification;
+- (void)playingUpdate:(NSDictionary *)dict;
+- (void)pausedUpdate;
+- (void)stoppedUpdate;
 
 @end
