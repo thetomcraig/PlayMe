@@ -12,8 +12,8 @@
 @property (nonatomic, retain) NSString *lastArtCalculated;
 
 -(BOOL)findColorsOpSeperateThread :(NSImage *)albumArt forSong:(NSString *)songTitle;
--(NSImage *)resizeArt :(NSImage *) bigArt forSize:(NSSize)targetSize;
--(NSImage *)resizeNothingPlaying:(NSSize)targetSize;
+-(NSImage *)resizeArt :(NSImage *) bigArt;
+-(NSImage *)resizeNothingPlaying;
 -(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize;
 -(NSImage *)putOnPausedMask :(NSImage *)unmaskedArt;
 -(NSImage *)roundCorners: (NSImage *)squareArt;

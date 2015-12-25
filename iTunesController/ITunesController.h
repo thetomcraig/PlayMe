@@ -6,7 +6,6 @@
 @interface ITunesController :NSObject
 
 @property (nonatomic) NSMutableDictionary* iTunesTags;
-@property (nonatomic) NSSize artworkSize;
 @property (nonatomic, retain) NSImage *blankArtwork;
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic) NSNumber* currentProgress;

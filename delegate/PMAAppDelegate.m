@@ -47,27 +47,28 @@
      - (void)pausedUpdate;
      - (void)stoppedUpdate;
      */
-    /**
+    ///Stress test - pass many itunes notifications
     NSDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:
-                                            @{
-                                              @"Name": @" ",
-                                              @"Artist": @"",
-                                              @"Album": @"",
-                                              @"CurrentLength": @"",
-                                              @"CurrentArtwork": @"",
-                                              @"CurrentProgress": @"",
-                                              @"CurrentStatus": @""
-                                              }];
-     
-    for (int i = 0; i < 500; i++)
-    {
-        
-        [_iTunesController playingUpdate:dict];
-        [_iTunesController sendTagsNotification];
-    }
+                          @{
+                            @"Display Line 1" : @"The Acid — Liminal",
+                            @"Track Count" : @"11",
+                            @"Name" : @"Fame",
+                            @"Album Artist" : @"The Acid"
+                            }];
 
-    usleep(1000000);
+    /**
+    usleep(10000000);
+    for (int i = 0; i < 10000; i++)
+    {
+        [[NSDistributedNotificationCenter defaultCenter]
+         postNotificationName:@"com.apple.iTunes.playerInfo"
+         object:nil
+         userInfo:dict];
+    }
     */
+     
+    
+    
     
 }
 

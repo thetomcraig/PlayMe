@@ -1,5 +1,9 @@
 #import "ImageController.h"
 
+#define ARTWORK_WIDTH 400
+#define ARTWORK_HEIGHT 400
+#define WINDOW_HEIGHT 500
+
 @implementation ImageController
 
 @synthesize bgBlack;
@@ -102,12 +106,12 @@
 //the image is clipped and made square.  I think iTunes does this too, and it
 //is hardly noticable on irregular album arts
 //############################################################################
--(NSImage *)resizeArt :(NSImage *) bigArt forSize:(NSSize)targetSize
+-(NSImage *)resizeArt :(NSImage *) bigArt
 {
     [bigArt setScalesWhenResized:YES];
     [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
     
-    double targetWidth = targetSize.width;
+    double targetWidth = ARTWORK_WIDTH;
     double targetHeight = 0.0;
     
     //-------------------------------------------------------------------------
@@ -116,7 +120,7 @@
     //instead it is zoomed in until square,
     //This just makes the image square, it still needs to be resized
     //-------------------------------------------------------------------------
-    threshold = targetSize.width*.075;
+    threshold = ARTWORK_WIDTH*.075;
     if (0 < abs(bigArt.size.height - bigArt.size.width) &&
         abs(bigArt.size.height - bigArt.size.width) < threshold)
     {
@@ -237,9 +241,10 @@
 //This is a stripped down version of the resizeArt function, and it resized
 //the nothing playing resource image
 //############################################################################
--(NSImage *)resizeNothingPlaying: (NSSize)targetSize;
+-(NSImage *)resizeNothingPlaying
 {
     NSImage *bigArt = [NSImage imageNamed:@"NothingPlaying"];
+    NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
     [bigArt setSize:targetSize];
 
     [bigArt setScalesWhenResized:YES];

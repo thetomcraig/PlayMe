@@ -1,15 +1,8 @@
 #import "ITunesController.h"
 
-#define ARTWORK_WIDTH 400
-#define ARTWORK_HEIGHT 400
-#define WINDOW_HEIGHT 500
-
-
 @implementation ITunesController
 
-
 @synthesize iTunesTags = _iTunesTags;
-@synthesize artworkSize = _artworkSize;
 @synthesize blankArtwork = _blankArtwork;
 @synthesize countDownTimer = _countDownTimer;
 @synthesize currentProgress = _currentProgress;
@@ -36,27 +29,30 @@
       @"CurrentProgress": _currentProgress,
       @"CurrentStatus": @""
       }];
-    
-    _artworkSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
+
     
     _blankArtwork = [NSImage imageNamed:@"BlankArtwork"];
+    /**
+    @autoreleasepool {
+        iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+        if([iTunes isRunning])
+        {
+            [self updateTagsPoll];
+            
+        }
+        else
+        {
+            //iTunes is not open
+            [self updateWithNill];
+        }
+    }
     
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    if([iTunes isRunning])
-    {
-        [self updateTagsPoll];
-        
-    }
-    else
-    {
-        //iTunes is not open
-        [self updateWithNill];
-    }
     
     if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Playing"])
     {
         ///[self startTimer];
     }
+     */
     
     //Send a notification to get the AC updated
     [self sendTagsNotification];
@@ -146,9 +142,8 @@
     [_iTunesTags setObject:@" " forKey:@"CurrentStatus"];
     
     //Taking the nothing playingartwork and pretending its itunes artwork
-    NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
     NSImage *nothingPlaying = [NSImage imageNamed:@"NothingPlaying"];
-    nothingPlaying = [imageController resizeArt:nothingPlaying forSize:targetSize];
+    nothingPlaying = [imageController resizeArt:nothingPlaying];
     nothingPlaying = [imageController roundCorners:nothingPlaying];
     [_iTunesTags setObject:[NSImage imageNamed:@"NothingPlaying"] forKey:@"CurrentArtwork"];
 }
@@ -171,29 +166,19 @@
          [_iTunesTags setObject:currentArtwork forKey:@"CurrentArtwork"];
     }
 
-    
-    /**
     ImageController *imageController = [[ImageController alloc] init];
-
-
-    //If there is nothing playing, grab the resource image for this instead
-    if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Stopped"])
-    {
-        [_iTunesTags setObject:[imageController resizeNothingPlaying: _artworkSize] forKey:@"CurrentArtwork"];
-    }
     
-    //There was no artwork :(
-    //Get the blank resource image
-    
+    //Nothing playing, or something is playing with no artwork
     NSImage *current_artwork = [_iTunesTags objectForKey:@"CurrentArtwork"];
-    if (current_artwork.size.width == 0.0)
+    if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Stopped"] ||
+        (current_artwork.size.width == 0.0))
     {
-        [_iTunesTags setObject:_blankArtwork forKey:@"CurrentArtwork"];
+        [_iTunesTags setObject:[imageController resizeNothingPlaying] forKey:@"CurrentArtwork"];
     }
-
+    
     //Resize the image
-    current_artwork = [imageController resizeArt:current_artwork forSize:_artworkSize];
-
+    current_artwork = [imageController resizeArt:current_artwork];
+    /**
     //Make sure to mask it if the song is paused
     if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Paused"])
     {
@@ -202,8 +187,7 @@
     
     //Finalize and put in the image
    current_artwork = [imageController roundCorners:current_artwork];
-     */
-    
+    */
 }
 
 //Update the progress of the current track
@@ -219,10 +203,13 @@
 #
 - (void)receivedStatusNotification:(NSNotification *)note
 {
-    //for(NSString *key in [note.userInfo allKeys]) {
-        //NSLog(@"%@ : %@", key, [note.userInfo objectForKey:key]);
-        //NSLog(@"--");
-    //}
+    /*
+    for(NSString *key in [note.userInfo allKeys]) {
+        NSLog(@"%@ : %@", key, [note.userInfo objectForKey:key]);
+        NSLog(@"--");
+    }
+     */
+    NSLog(@"ALPHA");
     
     NSString *incomingPlayerState =[note.userInfo objectForKey:@"Player State"];
 
