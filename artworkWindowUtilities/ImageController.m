@@ -97,6 +97,29 @@
     return true;
 }
 
+//Take the art from the iTunes object and get it ready for the window
+-(NSImage *)prepareNewArt :(NSImage *)resourceImage :(NSString *)status
+{
+    if ([status isEqualToString:@"Playing"])
+    {
+        NSImage *small_art = [self resizeArt:resourceImage];
+        small_art = [self roundCorners:small_art];
+    }
+
+    else if ([status isEqualToString:@"Paused"])
+    {
+        NSImage *small_art = [self resizeArt:resourceImage];
+        small_art = [self putOnPausedMask:small_art];
+        small_art = [self roundCorners:small_art];
+    }
+    else
+    {
+        NSImage *small_art = [self resizeNothingPlaying];
+        small_art = [self roundCorners:small_art];
+    }
+    
+    return resourceImage;
+}
 //############################################################################
 //Resize the the iTunes art to the size of the window.
 //Most of the time it is shrunk
@@ -234,7 +257,8 @@
                fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
     [smallArt unlockFocus];
     
-    return smallArt;
+    NSImage *rounded_image = [self roundCorners:smallArt];
+    return rounded_image;
 }
 
 //############################################################################
@@ -290,7 +314,8 @@
                fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
     [smallImage unlockFocus];
     
-    return smallImage;
+    NSImage *rounded_image = [self roundCorners:smallImage];
+    return rounded_image;
 }
 
 //############################################################################

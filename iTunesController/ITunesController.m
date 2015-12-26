@@ -154,47 +154,34 @@
 //is true we update from itunes, if not, we retain the current artwork.
 - (void)updateArtwork:(BOOL)getNewArt
 {
+    NSImage *current_artwork = [_iTunesTags objectForKey:@"CurrentArtwork"];
+    NSString *current_status = [_iTunesTags objectForKey:@"CurrentStatus"];
+    ImageController *image_controller = [[ImageController alloc] init];
+    
     if (getNewArt)
     {
-        NSImage  *currentArtwork = [[NSImage alloc] init];
-        @autoreleasepool {
+        NSImage  *new_artwork = [[NSImage alloc] init];
+        @autoreleasepool
+        {
             iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
             SBElementArray *artworks = [[iTunes currentTrack] artworks];
-            currentArtwork = [[NSImage alloc] initWithData:[artworks[0] rawData]];
+            NSImage *raw_artwork = [[NSImage alloc] initWithData:[artworks[0] rawData]];
+            new_artwork = [image_controller prepareNewArt:raw_artwork :current_status];
         }
-        
-         [_iTunesTags setObject:currentArtwork forKey:@"CurrentArtwork"];
+        [_iTunesTags setObject:new_artwork forKey:@"CurrentArtwork"];
     }
 
-    ImageController *imageController = [[ImageController alloc] init];
-    
     //Nothing playing, or something is playing with no artwork
-    NSImage *current_artwork = [_iTunesTags objectForKey:@"CurrentArtwork"];
-    if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Stopped"] ||
-        (current_artwork.size.width == 0.0))
+    if ([current_status isEqualToString:@"Stopped"] || (current_artwork.size.width == 0.0))
     {
-        [_iTunesTags setObject:[imageController resizeNothingPlaying] forKey:@"CurrentArtwork"];
+        [_iTunesTags setObject:[image_controller resizeNothingPlaying] forKey:@"CurrentArtwork"];
     }
-    
-    //Resize the image
-    current_artwork = [imageController resizeArt:current_artwork];
-    /**
-    //Make sure to mask it if the song is paused
-    if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Paused"])
-    {
-        current_artwork = [imageController putOnPausedMask:current_artwork];
-    }
-    
-    //Finalize and put in the image
-   current_artwork = [imageController roundCorners:current_artwork];
-    */
 }
 
 //Update the progress of the current track
 - (void)updateProgress
 {
     _currentProgressDouble = _currentProgressDouble + 1;
-    
 }
 
 
