@@ -103,19 +103,22 @@
     if ([status isEqualToString:@"Playing"])
     {
         NSImage *small_art = [self resizeArt:resourceImage];
-        small_art = [self roundCorners:small_art];
+        NSImage *rounded_art = [self roundCorners:small_art];
+        return rounded_art;
     }
 
     else if ([status isEqualToString:@"Paused"])
     {
         NSImage *small_art = [self resizeArt:resourceImage];
         small_art = [self putOnPausedMask:small_art];
-        small_art = [self roundCorners:small_art];
+        NSImage *rounded_art = [self roundCorners:small_art];
+        return rounded_art;
     }
     else
     {
         NSImage *small_art = [self resizeNothingPlaying];
-        small_art = [self roundCorners:small_art];
+        NSImage *rounded_art = [self roundCorners:small_art];
+        return rounded_art;
     }
     
     return resourceImage;
@@ -257,8 +260,7 @@
                fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
     [smallArt unlockFocus];
     
-    NSImage *rounded_image = [self roundCorners:smallArt];
-    return rounded_image;
+    return smallArt;
 }
 
 //############################################################################
@@ -314,8 +316,7 @@
                fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
     [smallImage unlockFocus];
     
-    NSImage *rounded_image = [self roundCorners:smallImage];
-    return rounded_image;
+    return smallImage;
 }
 
 //############################################################################

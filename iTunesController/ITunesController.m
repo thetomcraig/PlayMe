@@ -32,7 +32,7 @@
 
     
     _blankArtwork = [NSImage imageNamed:@"BlankArtwork"];
-    /**
+    
     @autoreleasepool {
         iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
         if([iTunes isRunning])
@@ -47,18 +47,13 @@
         }
     }
     
-    
     if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Playing"])
     {
         ///[self startTimer];
     }
-     */
     
     //Send a notification to get the AC updated
     [self sendTagsNotification];
-    
-    
-    
     
     //For when iTunes plays/pauses/stops
     [[NSDistributedNotificationCenter defaultCenter]
@@ -196,7 +191,6 @@
         NSLog(@"--");
     }
      */
-    NSLog(@"ALPHA");
     
     NSString *incomingPlayerState =[note.userInfo objectForKey:@"Player State"];
 
