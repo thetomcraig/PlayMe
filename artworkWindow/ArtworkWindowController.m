@@ -30,7 +30,7 @@
 
 @synthesize currentSong;
 @synthesize currentArtistAndAlbum;
-@synthesize currentLyrics;
+
 
 @synthesize songSlider;
 @synthesize songSliderCell;
@@ -126,7 +126,7 @@
 //tag information.  Calls the updating window elements method
 //##############################################################################
 - (void)receivedTagsNotification:(NSNotification *)note
-{
+{   
     [self updateWindowElements:[note.userInfo objectForKey:@"CurrentSong"]
                               :[note.userInfo objectForKey:@"CurrentArtist"]
                               :[note.userInfo objectForKey:@"CurrentAlbum"]
