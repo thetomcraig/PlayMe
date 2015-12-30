@@ -231,35 +231,9 @@
 //the nothing playing resource image
 -(NSImage *)setupNothingPlaying
 {
-    NSImage *bigArt = [NSImage imageNamed:@"NothingPlaying"];
-    NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
-    [bigArt setSize:targetSize];
-
-    [bigArt setScalesWhenResized:YES];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    
-    //Here we find out what size the new image needs to be
-    double targetHeight = targetSize.height;
-    double targetWidth = bigArt.size.width/(bigArt.size.height/targetHeight);
-    NSPoint centerPoint = NSMakePoint(0.0, 0.0);
-    
-    //Creating the rect that is the new size for the image
-    NSSize newImageSize = NSMakeSize(targetWidth, targetHeight);
-    NSRect smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
-    
-    NSImage *smallImage = [[NSImage alloc] initWithSize: newImageSize];
-    
-    [smallImage lockFocus];
-    [bigArt setSize: newImageSize];
-
-    [bigArt drawAtPoint:centerPoint
-               fromRect:smallRect
-              operation:NSCompositeSourceOver
-               fraction:1.0];
-    [smallImage unlockFocus];
-    
-   NSImage *smallRoundImage = [self roundCorners:smallImage];
-    return smallRoundImage;
+    //Don't need any of that fancy shit
+    NSImage *artwork = [NSImage imageNamed:@"icon"];
+    return artwork;
 }
 
 //############################################################################
