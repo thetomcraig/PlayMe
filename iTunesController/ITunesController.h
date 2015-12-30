@@ -5,8 +5,8 @@
 
 @interface ITunesController :NSObject
 
+@property (nonatomic) ImageController *imageController;
 @property (nonatomic) NSMutableDictionary* iTunesTags;
-@property (nonatomic, retain) NSImage *nothingPlaying;
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic) NSNumber* currentProgress;
 @property (nonatomic) double currentProgressDouble;

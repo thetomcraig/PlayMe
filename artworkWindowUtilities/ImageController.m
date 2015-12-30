@@ -28,10 +28,7 @@
                             nil, nil, nil, nil, nil];
 
         self.lastArtCalculated = @"";
-        
-        nothingPlaying = [NSImage imageNamed:@"NothingPlaying"];
-        nothingPlaying = [self resizeNothingPlaying];
-        nothingPlaying = [self roundCorners:nothingPlaying];
+        nothingPlaying = [self setupNothingPlaying];
     }
     return self;
 }
@@ -230,11 +227,9 @@
     return smallArt;
 }
 
-//############################################################################
 //This is a stripped down version of the resizeArt function, and it resized
 //the nothing playing resource image
-//############################################################################
--(NSImage *)resizeNothingPlaying
+-(NSImage *)setupNothingPlaying
 {
     NSImage *bigArt = [NSImage imageNamed:@"NothingPlaying"];
     NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
@@ -252,38 +247,19 @@
     NSSize newImageSize = NSMakeSize(targetWidth, targetHeight);
     NSRect smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
     
-    bgBlack = [[NSImage alloc] initWithSize:newImageSize];
-    [bgBlack lockFocus];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    NSColor *back = [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    [back set];
-    NSBezierPath* blackPath = [NSBezierPath bezierPathWithRect
-                               :NSMakeRect(0.0, 0.0,
-                                           newImageSize.width,
-                                           newImageSize.height)];
-    [blackPath setWindingRule:NSEvenOddWindingRule];
-    [blackPath addClip];
-    [blackPath fill];
-    [bgBlack unlockFocus];
-    
     NSImage *smallImage = [[NSImage alloc] initWithSize: newImageSize];
     
     [smallImage lockFocus];
     [bigArt setSize: newImageSize];
 
-    if (bgBlack)
-    {
-        [bgBlack drawAtPoint:NSZeroPoint
-                    fromRect:NSZeroRect
-                   operation:NSCompositeSourceOver
-                    fraction:1.0];
-    }
-    
     [bigArt drawAtPoint:centerPoint
-               fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
+               fromRect:smallRect
+              operation:NSCompositeSourceOver
+               fraction:1.0];
     [smallImage unlockFocus];
     
-    return smallImage;
+   NSImage *smallRoundImage = [self roundCorners:smallImage];
+    return smallRoundImage;
 }
 
 //############################################################################

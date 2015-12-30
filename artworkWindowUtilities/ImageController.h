@@ -16,7 +16,7 @@
 -(NSImage *)prepareNewArt :(NSImage *)resourceImage :(NSString *)status;
 -(NSImage *)clipArtToSquare :(NSImage *)nonSquareArt;
 -(NSImage *)resizeArt :(NSImage *)bigArt;
--(NSImage *)resizeNothingPlaying;
+-(NSImage *)setupNothingPlaying;
 -(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize;
 -(void)putOnPausedMask :(NSImage *)unmaskedArt;
 -(NSImage*)roundCorners: (NSImage *)squareArt;

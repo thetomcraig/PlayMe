@@ -2,8 +2,8 @@
 
 @implementation ITunesController
 
+@synthesize imageController = _imageController;
 @synthesize iTunesTags = _iTunesTags;
-@synthesize nothingPlaying = _nothingPlaying;
 @synthesize countDownTimer = _countDownTimer;
 @synthesize currentProgress = _currentProgress;
 @synthesize currentProgressDouble = _currentProgressDouble;
@@ -18,10 +18,7 @@
     _currentLength = [NSNumber numberWithDouble:_currentLengthDouble];
     _currentProgress = [NSNumber numberWithDouble:_currentLengthDouble];
     
-    ImageController *imageController = [[ImageController alloc] init];
-    _nothingPlaying = [NSImage imageNamed:@"NothingPlaying"];
-    _nothingPlaying = [imageController resizeNothingPlaying];
-    _nothingPlaying = [imageController roundCorners:_nothingPlaying];
+    _imageController = [[ImageController alloc] init];
     
     _iTunesTags = [NSMutableDictionary dictionaryWithDictionary:
     @{
@@ -29,7 +26,7 @@
       @"CurrentArtist": @" ",
       @"CurrentAlbum": @" ",
       @"CurrentLength": _currentLength,
-      @"CurrentArtwork": _nothingPlaying,
+      @"CurrentArtwork": [_imageController nothingPlaying],
       @"CurrentProgress": _currentProgress,
       @"CurrentStatus": @"Stopped"
       }];
@@ -139,7 +136,7 @@
     [_iTunesTags setObject:@"Stopped" forKey:@"CurrentStatus"];
     
     //Taking the nothing playingartwork and pretending its itunes artwork
-    [_iTunesTags setObject:_nothingPlaying forKey:@"CurrentArtwork"];
+    [_iTunesTags setObject:[_imageController nothingPlaying ] forKey:@"CurrentArtwork"];
 }
 
 
@@ -156,7 +153,7 @@
     //There is nothing playing, or something is playing with no artwork
     if ([current_status isEqualToString:@"Stopped"] || (current_artwork.size.width == 0.0))
     {
-        [_iTunesTags setObject:_nothingPlaying forKey:@"CurrentArtwork"];
+        [_iTunesTags setObject:[_imageController nothingPlaying] forKey:@"CurrentArtwork"];
         return;
     }
     
