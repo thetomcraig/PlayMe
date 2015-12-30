@@ -128,7 +128,7 @@
 
 //Check is difference between width and height is under the threshold;
 //it's then considered 'square' and just clipped.  It it's above the threshold,
-//It's just resized and letterboxed
+//It's just resized 
 -(NSImage *)clipArtToSquare :(NSImage *)nonSquareArt
 {
     [nonSquareArt setScalesWhenResized:YES];
@@ -212,7 +212,8 @@
         centerPoint = NSMakePoint(0.0, targetWidth/2 - targetHeight/2);
     }
     
-    //Finally, resizing and letterboxing if needed
+
+    NSSize newSquareSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_WIDTH);
     NSRect smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
     NSImage *smallArt = [[NSImage alloc] initWithSize: newSquareSize];
     
