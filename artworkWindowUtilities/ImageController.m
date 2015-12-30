@@ -110,7 +110,7 @@
     else if ([status isEqualToString:@"Paused"])
     {
         NSImage *small_art = [self resizeArt:resourceImage];
-        small_art = [self putOnPausedMask:small_art];
+        [self putOnPausedMask:small_art];
         NSImage *rounded_art = [self roundCorners:small_art];
         return rounded_art;
     }
@@ -132,7 +132,7 @@
 //the image is clipped and made square.  I think iTunes does this too, and it
 //is hardly noticable on irregular album arts
 //############################################################################
--(NSImage *)resizeArt :(NSImage *) bigArt
+-(NSImage *)resizeArt :(NSImage *)bigArt
 {
     [bigArt setScalesWhenResized:YES];
     [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
@@ -169,8 +169,10 @@
         [bigArt setSize: zoomedSize];
         [bigArt drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
         [zoomedArt unlockFocus];
-        bigArt = zoomedArt ;
+        bigArt = nil;
+        bigArt = zoomedArt;
     }
+    
     
     //-------------------------------------------------------------------------
     //Putting these here for clairity, used below...
@@ -330,7 +332,7 @@
 //############################################################################
 //If iTunes is paused, we want to show semi-transparent mask over the artwork.
 //############################################################################
--(NSImage *)putOnPausedMask :(NSImage *)art
+-(void)putOnPausedMask :(NSImage *)art
 {
     NSImage *mask = [NSImage imageNamed:@"PausedMask"];
     NSSize smallSize = NSMakeSize(art.size.width, art.size.height);
@@ -340,8 +342,6 @@
     [mask drawAtPoint:NSZeroPoint fromRect:NSZeroRect
             operation:NSCompositeSourceOver fraction:.65];
     [art unlockFocus];
-    
-    return art;
 }
 
 //############################################################################

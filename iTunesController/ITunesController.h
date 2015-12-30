@@ -6,7 +6,7 @@
 @interface ITunesController :NSObject
 
 @property (nonatomic) NSMutableDictionary* iTunesTags;
-@property (nonatomic, retain) NSImage *blankArtwork;
+@property (nonatomic, retain) NSImage *nothingPlaying;
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic) NSNumber* currentProgress;
 @property (nonatomic) double currentProgressDouble;
@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *currentTimeLeft;
 
 
-- (void)updateTagsPoll;
+- (void)updateTagsPoll:(iTunesApplication *)iTunes;
 - (void)updateArtwork:(BOOL)getNewArt;
 - (void)updateWithNill;
 - (void)receivedStatusNotification:(NSNotification *)note;
