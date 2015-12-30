@@ -212,35 +212,12 @@
         centerPoint = NSMakePoint(0.0, targetWidth/2 - targetHeight/2);
     }
     
-    //Black square background, that goes behind the artwork
-    //This letterboxes nonsquare artwork
-    NSSize newSquareSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_WIDTH);
-    bgBlack = [[NSImage alloc] initWithSize:newSquareSize];
-    [bgBlack lockFocus];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    NSColor *back = [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    [back set];
-    NSBezierPath* blackPath = [NSBezierPath bezierPathWithRect
-                               :NSMakeRect(0.0, 0.0,
-                                newSquareSize.width,
-                                newSquareSize.height)];
-    [blackPath setWindingRule:NSEvenOddWindingRule];
-    [blackPath addClip];
-    [blackPath fill];
-    [bgBlack unlockFocus];
-    
     //Finally, resizing and letterboxing if needed
     NSRect smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
     NSImage *smallArt = [[NSImage alloc] initWithSize: newSquareSize];
     
     [smallArt lockFocus];
     [bigArt setSize: newRectangularSize];
-    
-    [bgBlack drawAtPoint:NSZeroPoint
-                fromRect:NSZeroRect
-               operation:NSCompositeSourceOver
-                fraction:1.0];
-    
     
     [bigArt drawAtPoint:centerPoint
                fromRect:smallRect
