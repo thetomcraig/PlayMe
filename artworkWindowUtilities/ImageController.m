@@ -128,7 +128,7 @@
 
 //Check is difference between width and height is under the threshold;
 //it's then considered 'square' and just clipped.  It it's above the threshold,
-//It's just resized 
+//It's just resized
 -(NSImage *)clipArtToSquare :(NSImage *)nonSquareArt
 {
     [nonSquareArt setScalesWhenResized:YES];
