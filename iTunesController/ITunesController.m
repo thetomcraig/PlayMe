@@ -20,7 +20,7 @@
     
     ImageController *imageController = [[ImageController alloc] init];
     _nothingPlaying = [NSImage imageNamed:@"NothingPlaying"];
-    _nothingPlaying = [imageController resizeArt:_nothingPlaying];
+    _nothingPlaying = [imageController resizeNothingPlaying];
     _nothingPlaying = [imageController roundCorners:_nothingPlaying];
     
     _iTunesTags = [NSMutableDictionary dictionaryWithDictionary:
@@ -152,9 +152,17 @@
     NSString *current_status = [_iTunesTags objectForKey:@"CurrentStatus"];
     ImageController *image_controller = [[ImageController alloc] init];
     
+    //Override.
+    //There is nothing playing, or something is playing with no artwork
+    if ([current_status isEqualToString:@"Stopped"] || (current_artwork.size.width == 0.0))
+    {
+        [_iTunesTags setObject:_nothingPlaying forKey:@"CurrentArtwork"];
+        return;
+    }
+    
     if (getNewArt)
     {
-        NSImage  *new_artwork = [[NSImage alloc] init];
+        NSImage *new_artwork;
         @autoreleasepool
         {
             iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
@@ -163,12 +171,6 @@
             new_artwork = [image_controller prepareNewArt:raw_artwork :current_status];
         }
         [_iTunesTags setObject:new_artwork forKey:@"CurrentArtwork"];
-    }
-
-    //Nothing playing, or something is playing with no artwork
-    if ([current_status isEqualToString:@"Stopped"] || (current_artwork.size.width == 0.0))
-    {
-        [_iTunesTags setObject:[image_controller resizeNothingPlaying] forKey:@"CurrentArtwork"];
     }
 }
 
