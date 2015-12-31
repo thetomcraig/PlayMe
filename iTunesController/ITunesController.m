@@ -136,7 +136,7 @@
     [_iTunesTags setObject:@"Stopped" forKey:@"CurrentStatus"];
     
     //Taking the nothing playingartwork and pretending its itunes artwork
-    [_iTunesTags setObject:[_imageController nothingPlaying ] forKey:@"CurrentArtwork"];
+    [_iTunesTags setObject:[_imageController nothingPlaying] forKey:@"CurrentArtwork"];
 }
 
 

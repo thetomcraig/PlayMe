@@ -236,17 +236,13 @@
     return artwork;
 }
 
-//############################################################################
 //This is used to resize resource images, so they don't look shitty on retina
-//############################################################################
 -(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize
 {
     return origImage;
 }
 
-//############################################################################
 //If iTunes is paused, we want to show semi-transparent mask over the artwork.
-//############################################################################
 -(void)putOnPausedMask :(NSImage *)art
 {
     NSImage *mask = [NSImage imageNamed:@"PausedMask"];
@@ -259,11 +255,9 @@
     [art unlockFocus];
 }
 
-//############################################################################
 //Round the corners of the artwork because it looks pretty.  We only want to
 //round the top two corners, so we do the top and bottom half independently.
 //The overlap is where they meet.
-//############################################################################
 -(NSImage *)roundCorners:(NSImage *)squareArt
 {
     int overlap = 10;
