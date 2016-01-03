@@ -38,6 +38,7 @@
 
 @synthesize buttonsBackdrop;
 @synthesize playPauseButton;
+@synthesize playPauseButtonOverlay;
 @synthesize playPauseButtonCell;
 @synthesize nextButton;
 @synthesize nextButtonCell;
@@ -229,7 +230,8 @@
     //--------------------------------------------------------------------------
     //Repositioning everything
     //--------------------------------------------------------------------------
-    //Making sure that the slider is the same height as the knob, so it is seemless
+    //Making sure that the slider is the same height as the knob,
+    //so it is seemless
     songSlider.frame = CGRectMake(-[songSliderCell knobRectFlipped:NO].size.width/2, bottomOfArt - sliderBuffer,
                                   ARTWORK_WIDTH + [songSliderCell knobRectFlipped:NO].size.width,
                                   sliderBuffer);
@@ -262,8 +264,10 @@
                                       [previousButton frame].size.width,
                                       [previousButton frame].size.height);
     
-    //Using the edge buffer in both dimensions because we want the art to be the same distance in x and y from the bottom of the art
-    //Note: NOT the same as being in line with the botton of the button images, that would look weird
+    //Using the edge buffer in both dimensions because we want the art to be the
+    //same distance in x and y from the bottom of the art
+    //Note: NOT the same as being in line with the botton of the button images,
+    //that would look weird
     NSDictionary *attributes = [NSDictionary
                                 dictionaryWithObjectsAndKeys:currentSong.font,
                                 NSFontAttributeName, nil];

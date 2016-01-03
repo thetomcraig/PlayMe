@@ -41,6 +41,7 @@
 //Buttons and tracking area
 @property (weak) IBOutlet ButtonsBackdrop *buttonsBackdrop;
 @property (weak) IBOutlet NSButton *playPauseButton;
+@property (weak) IBOutlet NSButton *playPauseButtonOverlay;
 @property (weak) IBOutlet ControlButtonsCell *playPauseButtonCell;
 @property (weak) IBOutlet NSButton *nextButton;
 @property (weak) IBOutlet ControlButtonsCell *nextButtonCell;
