@@ -2,8 +2,8 @@
 
 @implementation ITunesController
 
+@synthesize imageController = _imageController;
 @synthesize iTunesTags = _iTunesTags;
-@synthesize blankArtwork = _blankArtwork;
 @synthesize countDownTimer = _countDownTimer;
 @synthesize currentProgress = _currentProgress;
 @synthesize currentProgressDouble = _currentProgressDouble;
@@ -15,29 +15,30 @@
 {
     _currentLengthDouble = 0.0;
     _currentProgressDouble = 0.0;
-    
     _currentLength = [NSNumber numberWithDouble:_currentLengthDouble];
     _currentProgress = [NSNumber numberWithDouble:_currentLengthDouble];
+    
+    _imageController = [[ImageController alloc] init];
     
     _iTunesTags = [NSMutableDictionary dictionaryWithDictionary:
     @{
       @"CurrentSong": @" ",
-      @"CurrentArtist": @"",
-      @"CurrentAlbum": @"",
+      @"CurrentArtist": @" ",
+      @"CurrentAlbum": @" ",
       @"CurrentLength": _currentLength,
-      @"CurrentArtwork": [NSImage imageNamed:@"NothingPlaying"],
+      @"CurrentArtwork": [_imageController nothingPlaying],
       @"CurrentProgress": _currentProgress,
-      @"CurrentStatus": @""
+      @"CurrentStatus": @"Stopped"
       }];
-
-    
-    _blankArtwork = [NSImage imageNamed:@"BlankArtwork"];
     
     @autoreleasepool {
         iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
         if([iTunes isRunning])
         {
-            [self updateTagsPoll];
+            if ([[iTunes currentTrack] name])
+            {
+                [self updateTagsPoll:iTunes];
+            }
             
         }
         else
@@ -87,9 +88,8 @@
 #pragma mark - Updating Methods
 #
 //Poll iTunes to get the info
-- (void)updateTagsPoll
+- (void)updateTagsPoll:(iTunesApplication *)iTunes
 {
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     [_iTunesTags setObject:[[iTunes currentTrack] name] forKey:@"CurrentSong"];
     [_iTunesTags setObject:[[iTunes currentTrack] artist] forKey:@"CurrentArtist"];
     [_iTunesTags setObject:[[iTunes currentTrack] album] forKey:@"CurrentAlbum"];
@@ -128,19 +128,15 @@
 //"Updates" everything with zeroed out tags.  It wipes everything.
 - (void)updateWithNill
 {
-    ImageController *imageController = [[ImageController alloc] init];
     [_iTunesTags setObject:@" " forKey:@"CurrentSong"];
     [_iTunesTags setObject:@" " forKey:@"CurrentArtist"];
     [_iTunesTags setObject:@" " forKey:@"CurrentAlbum"];
     _currentLength = 0;
     _currentProgress = 0;
-    [_iTunesTags setObject:@" " forKey:@"CurrentStatus"];
+    [_iTunesTags setObject:@"Stopped" forKey:@"CurrentStatus"];
     
     //Taking the nothing playingartwork and pretending its itunes artwork
-    NSImage *nothingPlaying = [NSImage imageNamed:@"NothingPlaying"];
-    nothingPlaying = [imageController resizeArt:nothingPlaying];
-    nothingPlaying = [imageController roundCorners:nothingPlaying];
-    [_iTunesTags setObject:[NSImage imageNamed:@"NothingPlaying"] forKey:@"CurrentArtwork"];
+    [_iTunesTags setObject:[_imageController nothingPlaying] forKey:@"CurrentArtwork"];
 }
 
 
@@ -153,9 +149,17 @@
     NSString *current_status = [_iTunesTags objectForKey:@"CurrentStatus"];
     ImageController *image_controller = [[ImageController alloc] init];
     
+    //Override.
+    //There is nothing playing, or something is playing with no artwork
+    if ([current_status isEqualToString:@"Stopped"] || (current_artwork.size.width == 0.0))
+    {
+        [_iTunesTags setObject:[_imageController nothingPlaying] forKey:@"CurrentArtwork"];
+        return;
+    }
+    
     if (getNewArt)
     {
-        NSImage  *new_artwork = [[NSImage alloc] init];
+        NSImage *new_artwork;
         @autoreleasepool
         {
             iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
@@ -164,12 +168,6 @@
             new_artwork = [image_controller prepareNewArt:raw_artwork :current_status];
         }
         [_iTunesTags setObject:new_artwork forKey:@"CurrentArtwork"];
-    }
-
-    //Nothing playing, or something is playing with no artwork
-    if ([current_status isEqualToString:@"Stopped"] || (current_artwork.size.width == 0.0))
-    {
-        [_iTunesTags setObject:[image_controller resizeNothingPlaying] forKey:@"CurrentArtwork"];
     }
 }
 

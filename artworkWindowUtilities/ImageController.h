@@ -10,13 +10,15 @@
 @property (nonatomic, retain) AlbumColorPicker *albumColorPicker;
 @property (nonatomic, retain) NSDictionary *albumColors;
 @property (nonatomic, retain) NSString *lastArtCalculated;
+@property (nonatomic, retain) NSImage *nothingPlaying;
 
 -(BOOL)findColorsOpSeperateThread :(NSImage *)albumArt forSong:(NSString *)songTitle;
 -(NSImage *)prepareNewArt :(NSImage *)resourceImage :(NSString *)status;
--(NSImage *)resizeArt :(NSImage *) bigArt;
--(NSImage *)resizeNothingPlaying;
+-(NSImage *)clipArtToSquare :(NSImage *)nonSquareArt;
+-(NSImage *)resizeArt :(NSImage *)bigArt;
+-(NSImage *)setupNothingPlaying;
 -(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize;
--(NSImage *)putOnPausedMask :(NSImage *)unmaskedArt;
--(NSImage *)roundCorners: (NSImage *)squareArt;
+-(void)putOnPausedMask :(NSImage *)unmaskedArt;
+-(NSImage*)roundCorners: (NSImage *)squareArt;
 
 @end

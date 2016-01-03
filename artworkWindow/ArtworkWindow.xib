@@ -16,6 +16,7 @@
                 <outlet property="nextButtonCell" destination="m7t-aJ-uQy" id="0cb-x7-dYB"/>
                 <outlet property="playPauseButton" destination="cnl-OF-8DX" id="Q33-VH-LMY"/>
                 <outlet property="playPauseButtonCell" destination="weP-ze-7e4" id="q7H-Xm-Wjk"/>
+                <outlet property="playPauseButtonOverlay" destination="bRa-6G-fpm" id="axa-2Q-OJT"/>
                 <outlet property="previousButton" destination="uj6-Q8-eeU" id="Z21-3R-cJS"/>
                 <outlet property="previousButtonCell" destination="Yj6-zz-hvd" id="OVM-8a-5bt"/>
                 <outlet property="songSlider" destination="GMW-14-vys" id="00x-cJ-4yX"/>
@@ -43,6 +44,9 @@
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGh-M1-qI9">
                                 <rect key="frame" x="0.0" y="50" width="400" height="400"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="qNi-YW-peQ"/>
+                                <connections>
+                                    <action selector="playpause:" target="-2" id="lqC-xg-K2b"/>
+                                </connections>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGI-89-g56" customClass="ButtonsBackdrop">
                                 <rect key="frame" x="0.0" y="75" width="400" height="82"/>
@@ -109,11 +113,21 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-6G-fpm">
+                                <rect key="frame" x="0.0" y="76" width="399" height="399"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="47G-ZS-lbF" customClass="ControlButtonsCell">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="playpause:" target="-2" id="gqz-PJ-fvF"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </customView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="505" y="146.5"/>
+            <point key="canvasLocation" x="436" y="249.5"/>
         </window>
     </objects>
 </document>

@@ -10,6 +10,7 @@
 @synthesize albumColorPicker;
 @synthesize albumColors;
 @synthesize lastArtCalculated;
+@synthesize nothingPlaying;
 
 //############################################################################
 //The threshold is used for clipping nonsquare images
@@ -27,7 +28,7 @@
                             nil, nil, nil, nil, nil];
 
         self.lastArtCalculated = @"";
-
+        nothingPlaying = [self setupNothingPlaying];
     }
     return self;
 }
@@ -102,92 +103,83 @@
 {
     if ([status isEqualToString:@"Playing"])
     {
-        NSImage *small_art = [self resizeArt:resourceImage];
+        NSImage *square_art = [self clipArtToSquare:resourceImage];
+        NSImage *small_art = [self resizeArt:square_art];
         NSImage *rounded_art = [self roundCorners:small_art];
         return rounded_art;
     }
 
     else if ([status isEqualToString:@"Paused"])
     {
-        NSImage *small_art = [self resizeArt:resourceImage];
-        small_art = [self putOnPausedMask:small_art];
+        NSImage *square_art = [self clipArtToSquare:resourceImage];
+        NSImage *small_art = [self resizeArt:square_art];
+        [self putOnPausedMask:small_art];
         NSImage *rounded_art = [self roundCorners:small_art];
         return rounded_art;
     }
-    else
-    {
-        NSImage *small_art = [self resizeNothingPlaying];
-        NSImage *rounded_art = [self roundCorners:small_art];
-        return rounded_art;
-    }
+    
+    //Stopepd case should not be passed to this fn.
     
     return resourceImage;
 }
-//############################################################################
-//Resize the the iTunes art to the size of the window.
-//Most of the time it is shrunk
-//If given a nonsquare artwork, this algorithm checks for the difference
-//between the height and width.  If this difference is over a given threshold,
-//the image is letterboxed.  If the difference is under thisthreshold,
-//the image is clipped and made square.  I think iTunes does this too, and it
-//is hardly noticable on irregular album arts
-//############################################################################
--(NSImage *)resizeArt :(NSImage *) bigArt
+
+//Check is difference between width and height is under the threshold;
+//it's then considered 'square' and just clipped.  It it's above the threshold,
+//It's just resized
+-(NSImage *)clipArtToSquare :(NSImage *)nonSquareArt
 {
-    [bigArt setScalesWhenResized:YES];
+    [nonSquareArt setScalesWhenResized:YES];
     [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    
-    double targetWidth = ARTWORK_WIDTH;
-    double targetHeight = 0.0;
-    
-    //-------------------------------------------------------------------------
-    //If the difference between the original length and height is any less
-    //than the threshold, it's considered "square", so no letterbox is applied,
-    //instead it is zoomed in until square,
-    //This just makes the image square, it still needs to be resized
-    //-------------------------------------------------------------------------
+ 
     threshold = ARTWORK_WIDTH*.075;
-    if (0 < abs(bigArt.size.height - bigArt.size.width) &&
-        abs(bigArt.size.height - bigArt.size.width) < threshold)
+    if (0 < abs((int)nonSquareArt.size.height -(int)nonSquareArt.size.width) &&
+        abs((int)nonSquareArt.size.height - (int)nonSquareArt.size.width) < threshold)
     {
         NSSize zoomedSize = NSMakeSize(0.0, 0.0);
         
-        if (bigArt.size.width < bigArt.size.height)
+        if (nonSquareArt.size.width < nonSquareArt.size.height)
         {
-            zoomedSize.height = bigArt.size.width;
-            zoomedSize.width = bigArt.size.width;
+            zoomedSize.height = nonSquareArt.size.width;
+            zoomedSize.width = nonSquareArt.size.width;
         }
-        else if (bigArt.size.height < bigArt.size.width)
+        else if (nonSquareArt.size.height < nonSquareArt.size.width)
         {
-            zoomedSize.height = bigArt.size.height;
-            zoomedSize.width = bigArt.size.height;
+            zoomedSize.height = nonSquareArt.size.height;
+            zoomedSize.width = nonSquareArt.size.height;
         }
-
+        
         NSImage *zoomedArt = [[NSImage alloc] initWithSize: zoomedSize];
         
         [zoomedArt lockFocus];
-        [bigArt setSize: zoomedSize];
-        [bigArt drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+        [nonSquareArt setSize: zoomedSize];
+        [nonSquareArt drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
         [zoomedArt unlockFocus];
-        bigArt = zoomedArt ;
+        return zoomedArt;
     }
     
-    //-------------------------------------------------------------------------
-    //Putting these here for clairity, used below...
-    //-------------------------------------------------------------------------
-    //The size that will be used for the back background
-    NSSize newSquareSize = NSMakeSize(targetWidth, targetWidth);
-    //The new size of a non-square artwork
-    NSSize newRectangularSize;// = NSMakeSize(0.0, 0.0);
-    //The new rectangle in which to draw the artwork
-    NSRect smallRect;// = NSMakeRect(0.0, 0.0, 0.0, 0.0);
-    //The new point at which to draw the artwork
-    NSPoint centerPoint;// = NSMakePoint(0.0, 0.0);
+    //Fallback, didn't need to do anything
+    return nonSquareArt;
+}
+
+//make it the target size
+-(NSImage *)resizeArt :(NSImage *)bigArt
+{
+    double targetWidth = ARTWORK_WIDTH;
+    double targetHeight = 0.0;
     
-    //-------------------------------------------------------------------------
-    //There are three main cases to worry about with "square" images.
-    //W > H & W < H & and W == H.  This first case handles W < H
-    //-------------------------------------------------------------------------
+    //Set all these values properly based on relationship between h and w of
+    //the bigArt
+    //The new size of a non-square artwork
+    NSSize newRectangularSize;
+    //The new point at which to draw the artwork
+    NSPoint centerPoint;
+    
+    //CASE 1: W < H
+    // _____
+    // |   |
+    // |   |
+    // |___|
+    //  
     if (bigArt.size.height > bigArt.size.width)
     {
         //the target width in the width of the view in the xib
@@ -201,136 +193,57 @@
         centerPoint = NSMakePoint(targetHeight/2 - targetWidth/2, 0.0);
     }
     
-    //-------------------------------------------------------------------------
-    //This case handles W > H and W == H
-    //-------------------------------------------------------------------------
+    //CASE 2: W > H and W == H
+    //                _______
+    // ----------     |     |
+    // |        | OR  |     |
+    // |________|     |_____|
+    //
     else
     {
-        //the target width in the width of the view in the xib
         //If it's square, we make it this size
         double divisionFactor = [bigArt size].width/targetWidth;
         //If it's not square, we use this to resize
         targetHeight = [bigArt size].height/divisionFactor;
-        newSquareSize = NSMakeSize(targetWidth, targetWidth);
         newRectangularSize = NSMakeSize(targetWidth, targetHeight);
         centerPoint = NSMakePoint(0.0, targetWidth/2 - targetHeight/2);
     }
     
-    //-------------------------------------------------------------------------
-    //If the art is not "square", (difference between W & H is above thresh),
-    //we want to letterbox it.
-    //So we create a black square background, that goes behind the artwork
-    //-------------------------------------------------------------------------
-    if (targetHeight != targetWidth)
-    {
-        bgBlack = [[NSImage alloc] initWithSize:newSquareSize];
-        [bgBlack lockFocus];
-        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-        NSColor *back = [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-        [back set];
-        NSBezierPath* blackPath = [NSBezierPath bezierPathWithRect
-                                   :NSMakeRect(0.0, 0.0,
-                                    newSquareSize.width,
-                                    newSquareSize.height)];
-        [blackPath setWindingRule:NSEvenOddWindingRule];
-        [blackPath addClip];
-        [blackPath fill];
-        [bgBlack unlockFocus];
-    }
-    
-    //-------------------------------------------------------------------------
-    //Finally, resizing and letterboxing if needed
-    //-------------------------------------------------------------------------
-    smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
+
+    NSSize newSquareSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_WIDTH);
+    NSRect smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
     NSImage *smallArt = [[NSImage alloc] initWithSize: newSquareSize];
     
     [smallArt lockFocus];
     [bigArt setSize: newRectangularSize];
     
-    //If the artwork is not square, we draw a black background
-    if (bgBlack)
-    {
-        [bgBlack drawAtPoint:NSZeroPoint
-                    fromRect:NSZeroRect
-                   operation:NSCompositeSourceOver
-                    fraction:1.0];
-    }
-    
     [bigArt drawAtPoint:centerPoint
-               fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
+               fromRect:smallRect
+              operation:NSCompositeSourceOver
+               fraction:1.0];
+    
     [smallArt unlockFocus];
     
     return smallArt;
 }
 
-//############################################################################
 //This is a stripped down version of the resizeArt function, and it resized
 //the nothing playing resource image
-//############################################################################
--(NSImage *)resizeNothingPlaying
+-(NSImage *)setupNothingPlaying
 {
-    NSImage *bigArt = [NSImage imageNamed:@"NothingPlaying"];
-    NSSize targetSize = NSMakeSize(ARTWORK_WIDTH, ARTWORK_HEIGHT);
-    [bigArt setSize:targetSize];
-
-    [bigArt setScalesWhenResized:YES];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    
-    //Here we find out what size the new image needs to be
-    double targetHeight = targetSize.height;
-    double targetWidth = bigArt.size.width/(bigArt.size.height/targetHeight);
-    NSPoint centerPoint = NSMakePoint(0.0, 0.0);
-    
-    //Creating the rect that is the new size for the image
-    NSSize newImageSize = NSMakeSize(targetWidth, targetHeight);
-    NSRect smallRect = NSMakeRect(0.0, 0.0, targetWidth, targetHeight);
-    
-    bgBlack = [[NSImage alloc] initWithSize:newImageSize];
-    [bgBlack lockFocus];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    NSColor *back = [NSColor colorWithCalibratedRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    [back set];
-    NSBezierPath* blackPath = [NSBezierPath bezierPathWithRect
-                               :NSMakeRect(0.0, 0.0,
-                                           newImageSize.width,
-                                           newImageSize.height)];
-    [blackPath setWindingRule:NSEvenOddWindingRule];
-    [blackPath addClip];
-    [blackPath fill];
-    [bgBlack unlockFocus];
-    
-    NSImage *smallImage = [[NSImage alloc] initWithSize: newImageSize];
-    
-    [smallImage lockFocus];
-    [bigArt setSize: newImageSize];
-
-    if (bgBlack)
-    {
-        [bgBlack drawAtPoint:NSZeroPoint
-                    fromRect:NSZeroRect
-                   operation:NSCompositeSourceOver
-                    fraction:1.0];
-    }
-    
-    [bigArt drawAtPoint:centerPoint
-               fromRect:smallRect operation:NSCompositeSourceOver fraction:1.0];
-    [smallImage unlockFocus];
-    
-    return smallImage;
+    //Don't need any of that fancy shit
+    NSImage *artwork = [NSImage imageNamed:@"icon"];
+    return artwork;
 }
 
-//############################################################################
 //This is used to resize resource images, so they don't look shitty on retina
-//############################################################################
 -(NSImage *)resizeResource :(NSImage *) origImage :(NSSize)targetSize
 {
     return origImage;
 }
 
-//############################################################################
 //If iTunes is paused, we want to show semi-transparent mask over the artwork.
-//############################################################################
--(NSImage *)putOnPausedMask :(NSImage *)art
+-(void)putOnPausedMask :(NSImage *)art
 {
     NSImage *mask = [NSImage imageNamed:@"PausedMask"];
     NSSize smallSize = NSMakeSize(art.size.width, art.size.height);
@@ -340,15 +253,11 @@
     [mask drawAtPoint:NSZeroPoint fromRect:NSZeroRect
             operation:NSCompositeSourceOver fraction:.65];
     [art unlockFocus];
-    
-    return art;
 }
 
-//############################################################################
 //Round the corners of the artwork because it looks pretty.  We only want to
 //round the top two corners, so we do the top and bottom half independently.
 //The overlap is where they meet.
-//############################################################################
 -(NSImage *)roundCorners:(NSImage *)squareArt
 {
     int overlap = 10;
