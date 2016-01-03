@@ -16,7 +16,7 @@
 
 
 - (void)updateTagsPoll:(iTunesApplication *)iTunes;
-- (void)updateArtwork:(BOOL)getNewArt;
+- (void)updateArtwork;
 - (void)updateWithNill;
 - (void)receivedStatusNotification:(NSNotification *)note;
 - (void)receivedCommandNotification:(NSNotification *)note;

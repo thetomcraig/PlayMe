@@ -101,12 +101,12 @@
             //Playing
         case 1800426320:
             [_iTunesTags setObject:@"Playing" forKey:@"CurrentStatus"];
-            [self updateArtwork:YES];
+            [self updateArtwork];
             break;
             //Paused
         case 1800426352:
             [_iTunesTags setObject:@"Paused" forKey:@"CurrentStatus"];
-            [self updateArtwork:YES];
+            [self updateArtwork];
             break;
             //Two cases for stopped
         default:
@@ -119,7 +119,7 @@
             else
             {
                 [_iTunesTags setObject:@"Paused" forKey:@"CurrentStatus"];
-                [self updateArtwork:YES];
+                [self updateArtwork];
             }
             //end default
     }//end switch
@@ -140,10 +140,8 @@
 }
 
 
-//Update the artwork from iTunes.  We don't want to poll iTunes when we don't
-//have to, so the boolean is telling us if we really want to do that.  When it
-//is true we update from itunes, if not, we retain the current artwork.
-- (void)updateArtwork:(BOOL)getNewArt
+//Update the artwork from iTunes.
+- (void)updateArtwork
 {
     NSImage *current_artwork = [_iTunesTags objectForKey:@"CurrentArtwork"];
     NSString *current_status = [_iTunesTags objectForKey:@"CurrentStatus"];
@@ -156,8 +154,7 @@
         [_iTunesTags setObject:[_imageController nothingPlaying] forKey:@"CurrentArtwork"];
         return;
     }
-    
-    if (getNewArt)
+    else
     {
         NSImage *new_artwork;
         @autoreleasepool
@@ -238,7 +235,7 @@
     
     [self updateProgress];
     
-    [self updateArtwork:YES];
+    [self updateArtwork];
 
     //Sending the notification that the ArtworkWindowController will pick up
     [self sendTagsNotification];
@@ -252,7 +249,7 @@
 - (void)pausedUpdate
 {
     [_iTunesTags setObject:@"Paused" forKey:@"CurrentStatus"];
-    [self updateArtwork:NO];
+    [self updateArtwork];
     [self sendTagsNotification];
     [self stopTimer];
      
