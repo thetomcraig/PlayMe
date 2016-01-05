@@ -114,7 +114,7 @@
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-6G-fpm">
-                                <rect key="frame" x="0.0" y="76" width="399" height="399"/>
+                                <rect key="frame" x="0.0" y="156" width="399" height="319"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="47G-ZS-lbF" customClass="ControlButtonsCell">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

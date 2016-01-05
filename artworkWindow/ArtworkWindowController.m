@@ -401,12 +401,11 @@
 
 //##############################################################################
 //This assigns all the state variables to the window elements.  Called at the
-//end of the updateWindwoElements method, but also in the windowDidLoad method
+//end of the updateWindowElements method, but also in the windowDidLoad method
 //this allows the variables to be assigned when iTunes is paused.
 //##############################################################################
 - (void)assignStateVariables
 {
-    NSLog(@"BETA");
     [currentSong setStringValue:currentSongState];
     
     [currentArtistAndAlbum setStringValue:currentArtistAndAlbumState];
@@ -420,7 +419,6 @@
     [songSlider setMaxValue: [currentLengthState doubleValue]];
     
     [songTimeLeft setStringValue: currentTimeLeftState];
-    
 }
 
 //##############################################################################

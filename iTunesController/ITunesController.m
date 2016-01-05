@@ -93,7 +93,14 @@
     [_iTunesTags setObject:[[iTunes currentTrack] name] forKey:@"CurrentSong"];
     [_iTunesTags setObject:[[iTunes currentTrack] artist] forKey:@"CurrentArtist"];
     [_iTunesTags setObject:[[iTunes currentTrack] album] forKey:@"CurrentAlbum"];
-    _currentLengthDouble  = [[iTunes currentTrack] duration];
+    
+    _currentLengthDouble = [[iTunes currentTrack] duration];
+    _currentLength = [NSNumber numberWithDouble:_currentLengthDouble];
+    [_iTunesTags setObject:_currentLength forKey:@"CurrentLength"];
+    
+    _currentProgressDouble = [iTunes playerPosition];
+    _currentProgress = [NSNumber numberWithDouble:_currentProgressDouble];
+    [_iTunesTags setObject:_currentProgress forKey:@"CurrentProgress"];
 
     //Update the status.  If nothing is playing, make sure to wipeout the tags
     switch ([iTunes playerState])
@@ -172,6 +179,8 @@
 - (void)updateProgress
 {
     _currentProgressDouble = _currentProgressDouble + 1;
+    _currentProgress = [NSNumber numberWithDouble:_currentProgressDouble];
+    [_iTunesTags setObject:_currentProgress forKey:@"CurrentProgress"];
 }
 
 
@@ -332,7 +341,6 @@
 //want to stop the timer when the window closes.
 - (void)startTimer
 {
-
      _countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
      target:self
      selector:@selector(advanceTimerProgress:)
