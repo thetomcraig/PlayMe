@@ -241,6 +241,11 @@
     [_iTunesTags setObject:[dict objectForKey:@"Album"] forKey:@"CurrentAlbum"];
     _currentLengthDouble = [[dict objectForKey:@"Total Time"] doubleValue];
     
+    @autoreleasepool
+    {
+        iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+        _currentProgressDouble = [iTunes playerPosition];
+    }
     
     [self updateProgress];
     
