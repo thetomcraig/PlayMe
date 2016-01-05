@@ -406,19 +406,20 @@
 //##############################################################################
 - (void)assignStateVariables
 {
-        [currentSong setStringValue:currentSongState];
-        
-        [currentArtistAndAlbum setStringValue:currentArtistAndAlbumState];
-        
-        [currentArtwork setImage: currentArtworkState];
+    NSLog(@"BETA");
+    [currentSong setStringValue:currentSongState];
     
-        [playPauseButton setImage:[NSImage imageNamed:currentButtonNameState]];
-        [playPauseButton setAlternateImage:[NSImage imageNamed:currentAltButtonNameState]];
-        
-        [songSlider setDoubleValue: [currentProgressState doubleValue]];
-        [songSlider setMaxValue: [currentLengthState doubleValue]];
-        
-        [songTimeLeft setStringValue: currentTimeLeftState];
+    [currentArtistAndAlbum setStringValue:currentArtistAndAlbumState];
+    
+    [currentArtwork setImage: currentArtworkState];
+
+    [playPauseButton setImage:[NSImage imageNamed:currentButtonNameState]];
+    [playPauseButton setAlternateImage:[NSImage imageNamed:currentAltButtonNameState]];
+    
+    [songSlider setDoubleValue: [currentProgressState doubleValue]];
+    [songSlider setMaxValue: [currentLengthState doubleValue]];
+    
+    [songTimeLeft setStringValue: currentTimeLeftState];
     
 }
 

@@ -50,7 +50,7 @@
     
     if ([[_iTunesTags objectForKey:@"CurrentStatus"] isEqualToString:@"Playing"])
     {
-        ///[self startTimer];
+        [self startTimer];
     }
     
     //Send a notification to get the AC updated
@@ -241,7 +241,7 @@
     [self sendTagsNotification];
     
     //Start the timer again
-    ///[self startTimer];
+    [self startTimer];
  }
 
 //The NO flag allows us to NOT poll iTunes because if we do it causes iTunes

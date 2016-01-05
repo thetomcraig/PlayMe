@@ -35,41 +35,6 @@
     _preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
     _menubarController = [[MenubarController alloc] init];
     _iTunesController = [[ITunesController alloc] init];
-    
-    /**
-     - (void)updateTagsPoll;
-     - (void)updateArtwork:(BOOL)getNewArt;
-     - (void)updateWithNill;
-     - (void)receivedStatusNotification:(NSNotification *)note;
-     - (void)receivedCommandNotification:(NSNotification *)note;
-     - (void)sendTagsNotification;
-     - (void)playingUpdate:(NSDictionary *)dict;
-     - (void)pausedUpdate;
-     - (void)stoppedUpdate;
-     */
-    ///Stress test - pass many itunes notifications
-    NSDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:
-                          @{
-                            @"Display Line 1" : @"The Acid — Liminal",
-                            @"Track Count" : @"11",
-                            @"Name" : @"Fame",
-                            @"Album Artist" : @"The Acid"
-                            }];
-
-    /**
-    usleep(10000000);
-    for (int i = 0; i < 10000; i++)
-    {
-        [[NSDistributedNotificationCenter defaultCenter]
-         postNotificationName:@"com.apple.iTunes.playerInfo"
-         object:nil
-         userInfo:dict];
-    }
-    */
-     
-    
-    
-    
 }
 
 @end
