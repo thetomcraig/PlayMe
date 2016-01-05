@@ -281,30 +281,36 @@
 
 - (void)receivedCommandNotification:(NSNotification *)note
 {
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    NSString *command = [note.userInfo objectForKey:@"Command"];
-    
-    if ([command isEqualToString:@"PlayPause"])
+    @autoreleasepool
     {
-        [iTunes playpause];
-    }
-    else if ([command isEqualToString:@"NextTrack"])
-    {
-        [iTunes nextTrack];
-    }
-    else if ([command isEqualToString:@"PreviousTrack"])
-    {
-        [iTunes previousTrack];
-    }
-    //Setting the position of the song, through the UI
-    else if ([command isEqualToString:@"SetPosition"])
-    {
-        double pos = [[note.userInfo objectForKey:@"Position"] doubleValue];
-        [iTunes setPlayerPosition:pos];
-    }
-    else if ([command isEqualToString:@"UpdateProgress"])
-    {
-        [self updateProgress];
+        iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+        NSString *command = [note.userInfo objectForKey:@"Command"];
+        
+        if ([command isEqualToString:@"PlayPause"])
+        {
+            [iTunes playpause];
+        }
+        else if ([command isEqualToString:@"NextTrack"])
+        {
+            [iTunes nextTrack];
+            _currentProgressDouble = 0.0;
+        }
+        else if ([command isEqualToString:@"PreviousTrack"])
+        {
+            [iTunes previousTrack];
+        }
+        //Setting the position of the song, through the UI
+        else if ([command isEqualToString:@"SetPosition"])
+        {
+            double pos = [[note.userInfo objectForKey:@"Position"] doubleValue];
+            [iTunes setPlayerPosition:pos];
+            [self updateTagsPoll:iTunes];
+
+        }
+        else if ([command isEqualToString:@"UpdateProgress"])
+        {
+            [self updateProgress];
+        }
     }
 }
 
